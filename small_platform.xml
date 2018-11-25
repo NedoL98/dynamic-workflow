@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<!DOCTYPE platform SYSTEM "http://simgrid.gforge.inria.fr/simgrid/simgrid.dtd">
+<platform version="4.1">
+    <zone id="zone0" routing="Full">
+        <host id="Alpha" speed="100.00Mf" core="8"/>
+        <host id="Beta" speed="100.00Mf" core="16"/>
+
+        <link id="link0" bandwidth="41.279125MBps" latency="59.904us"/>
+
+        <route src="Alpha" dst="Beta">
+            <link_ctn id="link0"/>
+        </route>
+    </zone>
+</platform>
