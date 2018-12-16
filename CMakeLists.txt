@@ -11,9 +11,11 @@ find_package(SimGrid 3.20 REQUIRED) # This template requires SimGrid v3.20
 include_directories(${SimGrid_INCLUDE_DIR})
 
 add_executable(
-    dynamic-workflow 
+    dynamic-workflow
     main.cpp
     scheduler.cpp
     task.cpp
+    tasks_graph.cpp
 )
-target_link_libraries(dynamic-workflow ${SimGrid_LIBRARY})
+
+target_link_libraries(dynamic-workflow ${SimGrid_LIBRARY} yaml-cpp)

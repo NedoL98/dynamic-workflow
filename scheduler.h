@@ -1,7 +1,9 @@
+#pragma once
+
 #include <string>
 #include <vector>
 
-#include "task.h"
+#include "tasks_graph.h"
 
 class Scheduler {
 public:

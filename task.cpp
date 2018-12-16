@@ -1,27 +1,72 @@
 #include "task.h"
 
+#include <exception>
+
 XBT_LOG_NEW_DEFAULT_CATEGORY(task, "Task log");
 
-Task::Task(long long flops, int cores, int ram) 
+Task::Task(double flops, int cores, int ram) 
     : Flops(flops)
     , Cores(cores)
     , Ram(ram)
     {}
 
-long long Task::GetFlops() {
-    return Flops;
+std::string Task::GetName() {
+    return Name;
+}
+
+std::map<std::string, std::string> Task::GetInputs() {
+    return Inputs;
+}
+
+std::map<std::string, double> Task::GetOutputs() {
+    return Outputs;
 }
 
 int Task::GetCores() {
     return Cores;
 }
 
-int Task::GetRam() {
+double Task::GetMemory() {
     return Ram;
 }
 
-void Task::DoExecute(long long flops) {
-    double timeStart = simgrid::s4u::Engine::get_clock();
+double Task::GetSize() {
+    return Flops;
+}
+
+void Task::SetName(const std::string& name) {
+    Name = std::move(name);
+}
+
+void Task::AppendInput(const std::string& name, const std::string& source) {
+    if (Inputs.count(name) > 0) {
+        XBT_WARN("Input name is not unique! Previous input will be deleted!");
+    }
+    Inputs[name] = source;
+}
+
+void Task::AppendOutput(const std::string& name, const std::string& size) {
+    if (Outputs.count(name) > 0) {
+        XBT_WARN("Output name is not unique! Previous output will be deleted!");
+    }
+    Outputs[name] = ParseNumber(size, SizeSuffixes);
+}
+
+void Task::SetCores(const std::string& cores) {
+    Cores = std::stoi(cores);
+}
+
+void Task::SetMemory(const std::string& memory) {
+    Ram = std::stod(memory);
+}
+
+void Task::SetSize(const std::string& size) {
+    Flops = ParseNumber(size, PerformanceSuffixes);
+}
+
+void Task::DoExecute(double flops) {
+    double timeStart = simgrid::s4u::
+    Engine::get_clock();
     simgrid::s4u::this_actor::execute(flops);
     double timeFinish = simgrid::s4u::Engine::get_clock();
 

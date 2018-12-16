@@ -44,3 +44,6 @@ Makefile
 
 # VS code
 .vscode
+
+#yml swap files
+*.yml.swp

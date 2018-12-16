@@ -16,8 +16,11 @@
 XBT_LOG_NEW_DEFAULT_CATEGORY(main, "Logging main");
 
 int main(int argc, char* argv[]) {
+    xbt_assert(argc > 3, "Usage: %s platform_file deployment_file tasks_graph_file\n", argv[0]);
     simgrid::s4u::Engine e(&argc, argv);
-    xbt_assert(argc > 2, "Usage: %s platform_file deployment_file\n", argv[0]);
+
+    TasksGraph tasksGraph(argv[3]);
+    tasksGraph.PrintGraph();
 
     // Register scheduler
     e.register_actor<Scheduler>("scheduler");

@@ -1,0 +1,67 @@
+#   A
+#  / \
+# B   C
+#  \ /
+#   D
+name: Diamond
+inputs:
+  - name: data1
+    size: 100MB
+  - name: data2
+    size: 10MB
+  - name: data3
+    size: 20MB
+outputs:
+  - name: result
+    source: D.result
+tasks:
+  - name: A
+    inputs:
+      - name: input
+        source: data1
+    outputs:
+      - name: result
+        size: 10MB
+    requirements:
+      cpu: 4
+      memory: 4GB
+    size: 500GF
+  - name: B
+    inputs:
+      - name: input1
+        source: data2
+      - name: input2
+        source: A.result
+    outputs:
+      - name: result
+        size: 5MB
+    requirements:
+      cpu: 1
+      memory: 2GB
+    size: 200GF
+  - name: C
+    inputs:
+      - name: input1
+        source: data3
+      - name: input2
+        source: A.result
+    outputs:
+      - name: result
+        size: 1MB
+    requirements:
+      cpu: 2
+      memory: 2GB
+    size: 300GF
+  - name: D
+    inputs:
+      - name: input1
+        source: B.result
+      - name: input2
+        source: C.result
+    outputs:
+      - name: result
+        size: 1MB
+    requirements:
+      cpu: 1
+      memory: 1GB
+    size: 100GF
