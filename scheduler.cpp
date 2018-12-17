@@ -6,24 +6,28 @@
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(scheduler, "Scheduler log");
 
-Scheduler::Scheduler(std::vector<std::string> args) {
-    xbt_assert(args.size() > 1, "Scheduler expects number of tasks and their descriptions");
-
-    TaskCount = std::stoi(args[1]);
-
-    XBT_INFO("Reading description of %d tasks...", TaskCount);
-
-    Tasks.resize(TaskCount);
-    for (int i = 0; i < TaskCount; ++i) {
-        Tasks[i] = Task(std::stoi(args[2 + i * 3]), std::stoi(args[3 + i * 3]), std::stoi(args[4 + i * 3]));
+Scheduler::Scheduler(int argc, char* argv[]) {
+    XBT_INFO("Loading tasks graphs...");
+    // should probably redo this
+    for (int i = 2; i < argc; ++i) {
+        tasksGraphs.push_back(TasksGraph(argv[i]));
     }
+    XBT_INFO("%d tasks graphs loaded", tasksGraphs.size());
+}
 
-    XBT_INFO("DONE!");
+void Scheduler::ProcessTasksGraph(const TasksGraph& tasksGraph) {
+    std::vector<simgrid::s4u::Host*> hosts = simgrid::s4u::Engine::get_instance()->get_all_hosts();
+    std::cout << hosts.size() << std::endl;
+    for (const auto& item: tasksGraph.Tasks) {
+        std::cout << item.first << std::endl;
+    }
 }
 
 void Scheduler::operator()() {
-    std::vector<simgrid::s4u::Host*> hosts = simgrid::s4u::Engine::get_instance()->get_all_hosts();
-
+    for (const TasksGraph& tasksGraph: tasksGraphs) {
+        ProcessTasksGraph(tasksGraph);
+    }
+    /*
     for (int i = 0; i < TaskCount; i++) {
         // It seems that storing current number of free cores is not implemented 
         // so we should handle it ourselves
@@ -33,4 +37,5 @@ void Scheduler::operator()() {
         vm->start();
         Tasks[i].Execute(host);
     }
+    */
 }

@@ -16,36 +16,15 @@
 XBT_LOG_NEW_DEFAULT_CATEGORY(main, "Logging main");
 
 int main(int argc, char* argv[]) {
-    xbt_assert(argc > 3, "Usage: %s platform_file deployment_file tasks_graph_file\n", argv[0]);
+    xbt_assert(argc > 2, "Usage: %s platform_file tasks_graph_file\n", argv[0]);
     simgrid::s4u::Engine e(&argc, argv);
 
-    TasksGraph tasksGraph(argv[3]);
-    tasksGraph.PrintGraph();
-
-    // Register scheduler
-    e.register_actor<Scheduler>("scheduler");
-    XBT_INFO("Scheduler registered");
-
-    // Load the platform description and then deploy the application
+    // Load the platform description
     e.load_platform(argv[1]);
-    e.load_deployment(argv[2]);
-    XBT_INFO("Platform and deployment files loaded");
+    XBT_INFO("Platform file loaded");
 
-    // Although we can't explicitly pass the amount of memory each host has
-    // we can declare it somewhere else and then parse it in the following fashion
-    /*
-    std::vector<simgrid::s4u::Host*> hosts = e.get_all_hosts();
-    int i = 1;
-    for (simgrid::s4u::Host* host : hosts) {
-        host->set_property("ram", std::to_string(i) + "Gb");
-        ++i;
-    }
-    ...
-    ...
-    ...
-    int hostRam = stoi(host->get_property("ram"));
-    */
-
+    // Load tasks graph description
+    simgrid::s4u::Actor::create("scheduler", simgrid::s4u::Host::by_name("Alpha"), Scheduler(argc, argv));
 
     XBT_INFO("Starting simulation");
     // Run the simulation

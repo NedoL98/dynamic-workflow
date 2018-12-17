@@ -4,11 +4,43 @@
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(task, "Task log");
 
-Task::Task(double flops, int cores, int ram) 
-    : Flops(flops)
-    , Cores(cores)
-    , Ram(ram)
-    {}
+Task::Task(const YAML::Node& taskDescription) {
+    xbt_assert(taskDescription["name"], "Task name is not specified!");
+    Name = taskDescription["name"].as<std::string>();
+
+    xbt_assert(taskDescription["inputs"], "Task inputs are not specified!");
+    for (const YAML::Node& inputDescription: taskDescription["inputs"]) {
+        xbt_assert(inputDescription["name"], "Input name is not specified!");
+        std::string inputName = inputDescription["name"].as<std::string>();
+
+        xbt_assert(inputDescription["source"], "Source for input is not specified!");
+        std::string sourceName = inputDescription["source"].as<std::string>();
+
+        AppendInput(inputName, sourceName);
+    }
+
+    xbt_assert(taskDescription["outputs"], "Task outputs are not specified!");
+    for (const YAML::Node& outputDescription: taskDescription["outputs"]) {
+        xbt_assert(outputDescription["name"], "Output name is not specified!");
+        std::string outputName = outputDescription["name"].as<std::string>();
+
+        xbt_assert(outputDescription["size"], "Output size is not specified!");
+        std::string outputSize = outputDescription["size"].as<std::string>();
+
+        AppendOutput(outputName, outputSize);
+    }
+
+    xbt_assert(taskDescription["requirements"], "Task requirements are not specified!");
+
+    xbt_assert(taskDescription["requirements"]["cpu"], "CPU usage is not specified for task!");
+    Cores = taskDescription["requirements"]["cpu"].as<int>();
+
+    xbt_assert(taskDescription["requirements"]["memory"], "Memory usage is not specified for task!");
+    Ram = ParseNumber(taskDescription["requirements"]["memory"].as<std::string>(), SizeSuffixes);
+
+    xbt_assert(taskDescription["size"], "Task size is not specified!");
+    Flops = ParseNumber(taskDescription["size"].as<std::string>(), PerformanceSuffixes);
+}
 
 std::string Task::GetName() {
     return Name;
@@ -34,10 +66,6 @@ double Task::GetSize() {
     return Flops;
 }
 
-void Task::SetName(const std::string& name) {
-    Name = std::move(name);
-}
-
 void Task::AppendInput(const std::string& name, const std::string& source) {
     if (Inputs.count(name) > 0) {
         XBT_WARN("Input name is not unique! Previous input will be deleted!");
@@ -50,18 +78,6 @@ void Task::AppendOutput(const std::string& name, const std::string& size) {
         XBT_WARN("Output name is not unique! Previous output will be deleted!");
     }
     Outputs[name] = ParseNumber(size, SizeSuffixes);
-}
-
-void Task::SetCores(const std::string& cores) {
-    Cores = std::stoi(cores);
-}
-
-void Task::SetMemory(const std::string& memory) {
-    Ram = std::stod(memory);
-}
-
-void Task::SetSize(const std::string& size) {
-    Flops = ParseNumber(size, PerformanceSuffixes);
 }
 
 void Task::DoExecute(double flops) {

@@ -8,11 +8,12 @@
 class Scheduler {
 public:
     Scheduler() = delete;
-    Scheduler(std::vector<std::string> args);
+    Scheduler(int argc, char* argv[]);
+
+    void ProcessTasksGraph(const TasksGraph& tasksGraph);
 
     void operator()();
 
 private:
-    int TaskCount;
-    std::vector<Task> Tasks;
+    std::vector<TasksGraph> tasksGraphs;
 };

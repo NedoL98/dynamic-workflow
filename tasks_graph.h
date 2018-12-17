@@ -3,8 +3,13 @@
 #include <iostream>
 
 #include "task.h"
+#include <yaml-cpp/yaml.h>
+
+class Scheduler;
 
 class TasksGraph {
+friend class Scheduler;
+
 public:
     TasksGraph(std::string filepath);
 

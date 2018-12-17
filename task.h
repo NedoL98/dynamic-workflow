@@ -1,6 +1,7 @@
 #pragma once
 
 #include <simgrid/s4u.hpp>
+#include <yaml-cpp/yaml.h>
 
 #include "common.h"
 
@@ -8,7 +9,7 @@ class Task {
 public:
     Task() = default;
     
-    Task(double flops, int cores, int ram);
+    Task(const YAML::Node& taskDescription);
 
     std::string GetName();
     std::map<std::string, std::string> GetInputs();
@@ -17,12 +18,8 @@ public:
     double GetMemory();
     double GetSize();
 
-    void SetName(const std::string& name);
     void AppendInput(const std::string& name, const std::string& source);
     void AppendOutput(const std::string& name, const std::string& size);
-    void SetCores(const std::string& cores);
-    void SetMemory(const std::string& memory);
-    void SetSize(const std::string& size);
 
     static void DoExecute(double flops);
     void Execute(simgrid::s4u::Host* host);

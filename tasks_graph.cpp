@@ -1,11 +1,11 @@
 #include "tasks_graph.h"
 
 #include <iostream>
-#include <yaml-cpp/yaml.h>
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(tasks_graph, "Logging tasks_graph");
 
 TasksGraph::TasksGraph(std::string filepath) {
+    XBT_INFO("Loading tasks graph from %s", filepath.c_str());
     YAML::Node tasksGraph = YAML::LoadFile(filepath);
 
     xbt_assert(tasksGraph["name"], "Tasks graph name is not specified!");
@@ -32,55 +32,19 @@ TasksGraph::TasksGraph(std::string filepath) {
         }
         Outputs[outputName] = outputDescription["source"].as<std::string>();
     }
-    
+
     xbt_assert(tasksGraph["tasks"], "No tasks are specified in input file!");
     for (const YAML::Node& taskDescription: tasksGraph["tasks"]) {
-        std::shared_ptr<Task> task(new Task);
-
-        xbt_assert(taskDescription["name"], "Task name is not specified!");
-        task->SetName(taskDescription["name"].as<std::string>());
-
-        xbt_assert(taskDescription["inputs"], "Task inputs are not specified!");
-        for (const YAML::Node& inputDescription: taskDescription["inputs"]) {
-            xbt_assert(inputDescription["name"], "Input name is not specified!");
-            std::string inputName = inputDescription["name"].as<std::string>();
-
-            xbt_assert(inputDescription["source"], "Source for input is not specified!");
-            std::string sourceName = inputDescription["source"].as<std::string>();
-
-            task->AppendInput(inputName, sourceName);
-        }
-
-        xbt_assert(taskDescription["outputs"], "Task outputs are not specified!");
-        for (const YAML::Node& outputDescription: taskDescription["outputs"]) {
-            xbt_assert(outputDescription["name"], "Output name is not specified!");
-            std::string outputName = outputDescription["name"].as<std::string>();
-
-            xbt_assert(outputDescription["size"], "Output size is not specified!");
-            std::string outputSize = outputDescription["size"].as<std::string>();
-
-            task->AppendOutput(outputName, outputSize);
-        }
-
-        xbt_assert(taskDescription["requirements"], "Task requirements are not specified!");
-        
-        xbt_assert(taskDescription["requirements"]["cpu"], "CPU usage is not specified for task!");
-        std::string cores = taskDescription["requirements"]["cpu"].as<std::string>();
-        task->SetCores(cores);
-        
-        xbt_assert(taskDescription["requirements"]["memory"], "Memory usage is not specified for task!");
-        std::string memory = taskDescription["requirements"]["memory"].as<std::string>();
-        task->SetMemory(memory);
-
-        xbt_assert(taskDescription["size"], "Task size is not specified!");
-        std::string size = taskDescription["size"].as<std::string>();
-        task->SetSize(size);
+        std::shared_ptr<Task> task(new Task(taskDescription));
 
         if (Tasks.count(task->GetName()) > 0) {
             XBT_WARN("Task name is not unique! Previous task will be deleted!");
         }
+
         Tasks[task->GetName()] = task;
     }
+
+    XBT_INFO("Done!");
 }
 
 void TasksGraph::PrintGraph() {
