@@ -13,13 +13,22 @@ friend class Scheduler;
 public:
     TasksGraph(std::string filepath);
 
-    void PrintGraph();
+    void MakeGraph();
+
+    void MakeOrderDFS(const std::string& vertex, std::vector<std::shared_ptr<Task>>& order, std::map<std::string, bool>& used) const;
+    std::vector<std::shared_ptr<Task>> MakeTasksOrder() const;
+
+    void PrintGraph() const;
 
 private:
     std::string Name;
 
+    //TODO: make appropriate interface
     std::map<std::string, double> Inputs;
     std::map<std::string, std::string> Outputs;
 
     std::map<std::string, std::shared_ptr<Task>> Tasks;
+
+    std::map<std::string, int> OutputDegree;
+    std::map<std::string, std::vector<std::string>> ReverseEdges;
 };

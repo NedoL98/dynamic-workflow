@@ -11,24 +11,30 @@ public:
     
     Task(const YAML::Node& taskDescription);
 
-    std::string GetName();
-    std::map<std::string, std::string> GetInputs();
-    std::map<std::string, double> GetOutputs();
-    int GetCores();
-    double GetMemory();
-    double GetSize();
+    const std::string& GetName() const;
+    const std::map<std::string, std::string>& GetRawInputs() const;
+    const std::vector<std::string>& GetInputs() const;
+    const std::map<std::string, double>& GetOutputs() const;
+    int GetCores() const;
+    double GetMemory() const;
+    double GetSize() const;
 
-    void AppendInput(const std::string& name, const std::string& source);
+    void AppendRawInput(const std::string& name, const std::string& source);
+    void AppendInput(const std::string& name);
     void AppendOutput(const std::string& name, const std::string& size);
+    void MarkAsDone();
 
-    static void DoExecute(double flops);
-    void Execute(simgrid::s4u::Host* host);
+    static void DoExecute(double flops, std::string name);
+    simgrid::s4u::ActorPtr Execute(simgrid::s4u::Host* host);
 
 private:
     std::string Name;
-    std::map<std::string, std::string> Inputs;
+    std::map<std::string, std::string> RawInputs;
+    std::vector<std::string> Inputs;
     std::map<std::string, double> Outputs;
     int Cores;
     double Ram;
     double Flops;
+
+    bool Done = false;
 };

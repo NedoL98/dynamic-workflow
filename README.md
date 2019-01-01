@@ -1,5 +1,9 @@
 # Dynamic workflow manager
 
+Requirements:
+
+* [yaml-cpp](https://github.com/jbeder/yaml-cpp) version 1.1 or above.
+
 How to launch:
 
 ```

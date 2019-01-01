@@ -13,6 +13,7 @@
 
 #include "scheduler.h"
 
+// TODO: make better logging
 XBT_LOG_NEW_DEFAULT_CATEGORY(main, "Logging main");
 
 int main(int argc, char* argv[]) {

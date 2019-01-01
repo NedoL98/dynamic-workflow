@@ -45,9 +45,65 @@ TasksGraph::TasksGraph(std::string filepath) {
     }
 
     XBT_INFO("Done!");
+
+    MakeGraph();
 }
 
-void TasksGraph::PrintGraph() {
+void TasksGraph::MakeGraph() {
+    XBT_INFO("Making graph");
+    for (const auto& item: Tasks) {
+        std::string taskName = item.first;
+        std::shared_ptr<Task> task = item.second;
+        for (const auto& input: task->GetRawInputs()) {
+            std::string inputSource = input.second;
+            int delimeterPos = inputSource.find('.');
+            if (delimeterPos != std::string::npos) {
+                std::string inputSourceName = inputSource.substr(0, delimeterPos);
+                xbt_assert(Tasks.count(inputSourceName),
+                           "Task with name \"%s\" is not presented, but its result is used as input!", 
+                           inputSourceName.c_str());
+                ReverseEdges[taskName].push_back(inputSourceName);
+                ++OutputDegree[inputSourceName];
+            }
+        }
+    }
+    XBT_INFO("Done!");
+}
+
+void TasksGraph::MakeOrderDFS(const std::string& vertex, 
+                              std::vector<std::shared_ptr<Task>>& order, 
+                              std::map<std::string, bool>& used) const {
+    used[vertex] = true;
+    if (ReverseEdges.count(vertex)) {
+        for (const std::string& neighbourVertex: ReverseEdges.at(vertex)) {
+            if (!used[neighbourVertex]) {
+                MakeOrderDFS(neighbourVertex, order, used);
+            }
+        }
+    }
+    order.push_back(Tasks.at(vertex));
+}
+
+std::vector<std::shared_ptr<Task>> TasksGraph::MakeTasksOrder() const {
+    std::vector<std::shared_ptr<Task>> result;
+
+    std::map<std::string, bool> used;
+    for (const auto& item: Tasks) {
+        std::string taskName = item.first;
+        int taskOutputDegree = 0;
+        if (OutputDegree.count(taskName)) {
+            taskOutputDegree = OutputDegree.at(taskName);
+        }
+        if (!used[taskName] && taskOutputDegree == 0) {
+            MakeOrderDFS(taskName, result, used);
+        }
+    }
+    xbt_assert(result.size() == Tasks.size(), "Something went wrong, not all tasks are included in tasks order!");
+    
+    return result;
+}
+
+void TasksGraph::PrintGraph() const {
     std::cout << "Printing tasks..." << std::endl;
     for (const auto& item: Tasks) {
         std::cout << "Task name: " << item.second->GetName() << std::endl;
@@ -57,7 +113,7 @@ void TasksGraph::PrintGraph() {
             std::cout << "Output size: " << output.second << std::endl;
         }
 
-        for (const auto& input: item.second->GetInputs()) {
+        for (const auto& input: item.second->GetRawInputs()) {
             std::cout << "Input name: " << input.first << std::endl;
             std::cout << "Input source: " << input.second << std::endl; 
         }

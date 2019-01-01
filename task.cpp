@@ -1,6 +1,7 @@
 #include "task.h"
 
 #include <exception>
+#include <iostream>
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(task, "Task log");
 
@@ -16,7 +17,12 @@ Task::Task(const YAML::Node& taskDescription) {
         xbt_assert(inputDescription["source"], "Source for input is not specified!");
         std::string sourceName = inputDescription["source"].as<std::string>();
 
-        AppendInput(inputName, sourceName);
+        AppendRawInput(inputName, sourceName);
+
+        std::size_t delimPosition = sourceName.find('.');
+        if (delimPosition != std::string::npos) {
+            AppendInput(sourceName.substr(0, delimPosition));
+        }
     }
 
     xbt_assert(taskDescription["outputs"], "Task outputs are not specified!");
@@ -42,35 +48,43 @@ Task::Task(const YAML::Node& taskDescription) {
     Flops = ParseNumber(taskDescription["size"].as<std::string>(), PerformanceSuffixes);
 }
 
-std::string Task::GetName() {
+const std::string& Task::GetName() const {
     return Name;
 }
 
-std::map<std::string, std::string> Task::GetInputs() {
+const std::map<std::string, std::string>& Task::GetRawInputs() const {
+    return RawInputs;
+}
+
+const std::vector<std::string>& Task::GetInputs() const {
     return Inputs;
 }
 
-std::map<std::string, double> Task::GetOutputs() {
+const std::map<std::string, double>& Task::GetOutputs() const {
     return Outputs;
 }
 
-int Task::GetCores() {
+int Task::GetCores() const {
     return Cores;
 }
 
-double Task::GetMemory() {
+double Task::GetMemory() const {
     return Ram;
 }
 
-double Task::GetSize() {
+double Task::GetSize() const {
     return Flops;
 }
 
-void Task::AppendInput(const std::string& name, const std::string& source) {
-    if (Inputs.count(name) > 0) {
+void Task::AppendRawInput(const std::string& name, const std::string& source) {
+    if (RawInputs.count(name) > 0) {
         XBT_WARN("Input name is not unique! Previous input will be deleted!");
     }
-    Inputs[name] = source;
+    RawInputs[name] = source;
+}
+
+void Task::AppendInput(const std::string& name) {
+    Inputs.push_back(name);
 }
 
 void Task::AppendOutput(const std::string& name, const std::string& size) {
@@ -80,16 +94,21 @@ void Task::AppendOutput(const std::string& name, const std::string& size) {
     Outputs[name] = ParseNumber(size, SizeSuffixes);
 }
 
-void Task::DoExecute(double flops) {
-    double timeStart = simgrid::s4u::
-    Engine::get_clock();
-    simgrid::s4u::this_actor::execute(flops);
-    double timeFinish = simgrid::s4u::Engine::get_clock();
-
-    XBT_INFO("%s:%s task executed %g", simgrid::s4u::this_actor::get_host()->get_cname(),
-            simgrid::s4u::this_actor::get_cname(), timeFinish - timeStart);
+void Task::MarkAsDone() {
+    Done = true;
 }
 
-void Task::Execute(simgrid::s4u::Host* host) {
-    simgrid::s4u::Actor::create("compute", host, DoExecute, Flops);
+void Task::DoExecute(double flops, std::string name) {
+    double timeStart = simgrid::s4u::Engine::get_clock();
+    simgrid::s4u::this_actor::get_host()->execute(flops);
+    double timeFinish = simgrid::s4u::Engine::get_clock();
+
+    XBT_INFO("%s: %s task %s executed %g", simgrid::s4u::this_actor::get_host()->get_cname(),
+            simgrid::s4u::this_actor::get_cname(), name.c_str(), timeFinish - timeStart);
+
+    simgrid::s4u::this_actor::exit();
+}
+
+simgrid::s4u::ActorPtr Task::Execute(simgrid::s4u::Host* host) {
+    return simgrid::s4u::Actor::create("compute", host, DoExecute, Flops, Name);
 }

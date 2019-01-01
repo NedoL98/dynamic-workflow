@@ -16,10 +16,16 @@ Scheduler::Scheduler(int argc, char* argv[]) {
 }
 
 void Scheduler::ProcessTasksGraph(const TasksGraph& tasksGraph) {
+    std::vector<std::shared_ptr<Task>> orderedTasks = tasksGraph.MakeTasksOrder();
     std::vector<simgrid::s4u::Host*> hosts = simgrid::s4u::Engine::get_instance()->get_all_hosts();
-    std::cout << hosts.size() << std::endl;
-    for (const auto& item: tasksGraph.Tasks) {
-        std::cout << item.first << std::endl;
+
+    std::map<std::string, simgrid::s4u::ActorPtr> actorPointers;
+
+    for (const auto& task: orderedTasks) {
+        for (auto elem: task->GetInputs()) {
+            actorPointers[elem]->join();    
+        }
+        actorPointers[task->GetName()] = task->Execute(hosts[0]);
     }
 }
 
