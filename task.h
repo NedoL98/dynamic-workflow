@@ -3,7 +3,7 @@
 #include <simgrid/s4u.hpp>
 #include <yaml-cpp/yaml.h>
 
-#include "common.h"
+#include "common/common.h"
 
 class Task {
 public:

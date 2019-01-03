@@ -12,6 +12,7 @@ include_directories(${SimGrid_INCLUDE_DIR})
 
 add_executable(
     dynamic-workflow
+    common/common.cpp
     main.cpp
     scheduler.cpp
     task.cpp

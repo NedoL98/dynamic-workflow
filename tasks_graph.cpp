@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-XBT_LOG_NEW_DEFAULT_CATEGORY(tasks_graph, "Logging tasks_graph");
+XBT_LOG_NEW_DEFAULT_CATEGORY(tasks_graph, "Tasks graph log");
 
 TasksGraph::TasksGraph(std::string filepath) {
     XBT_INFO("Loading tasks graph from %s", filepath.c_str());
@@ -19,7 +19,13 @@ TasksGraph::TasksGraph(std::string filepath) {
             XBT_WARN("Input name is not unique! Previous input will be deleted!");
         }
         xbt_assert(inputDescription["size"], "Input size is not specified!");
-        Inputs[inputName] = ParseNumber(inputDescription["size"].as<std::string>(), SizeSuffixes);
+        try {
+            Inputs[inputName] = ParseNumber(inputDescription["size"].as<std::string>(), SizeSuffixes);
+        } catch (std::exception& e) {
+            XBT_ERROR("Can't parse input size: %s", e.what());
+            XBT_WARN("Input size will be set to 0");
+            Inputs[inputName] = 0;
+        }
     }
 
     xbt_assert(tasksGraph["outputs"], "Tasks outputs are not specified!");

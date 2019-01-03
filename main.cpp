@@ -13,8 +13,7 @@
 
 #include "scheduler.h"
 
-// TODO: make better logging
-XBT_LOG_NEW_DEFAULT_CATEGORY(main, "Logging main");
+XBT_LOG_NEW_DEFAULT_CATEGORY(main, "Main log");
 
 int main(int argc, char* argv[]) {
     xbt_assert(argc > 2, "Usage: %s platform_file tasks_graph_file\n", argv[0]);

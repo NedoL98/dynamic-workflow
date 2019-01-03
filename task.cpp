@@ -42,10 +42,22 @@ Task::Task(const YAML::Node& taskDescription) {
     Cores = taskDescription["requirements"]["cpu"].as<int>();
 
     xbt_assert(taskDescription["requirements"]["memory"], "Memory usage is not specified for task!");
-    Ram = ParseNumber(taskDescription["requirements"]["memory"].as<std::string>(), SizeSuffixes);
+    try {
+        Ram = ParseNumber(taskDescription["requirements"]["memory"].as<std::string>(), SizeSuffixes);
+    } catch (std::exception& e) {
+        XBT_ERROR("Can't parse memory requirement: %s", e.what());
+        XBT_WARN("Memory requirement will be set to 0");
+        Ram = 0;
+    }
 
     xbt_assert(taskDescription["size"], "Task size is not specified!");
-    Flops = ParseNumber(taskDescription["size"].as<std::string>(), PerformanceSuffixes);
+    try {
+        Flops = ParseNumber(taskDescription["size"].as<std::string>(), PerformanceSuffixes);
+    } catch (std::exception& e) {
+        XBT_ERROR("Can't parse size requirement: %s", e.what());
+        XBT_WARN("Size requirement will be set to 0");
+        Flops = 0;
+    }
 }
 
 const std::string& Task::GetName() const {
@@ -91,7 +103,14 @@ void Task::AppendOutput(const std::string& name, const std::string& size) {
     if (Outputs.count(name) > 0) {
         XBT_WARN("Output name is not unique! Previous output will be deleted!");
     }
-    Outputs[name] = ParseNumber(size, SizeSuffixes);
+    
+    try {
+        Outputs[name] = ParseNumber(size, SizeSuffixes);
+    } catch (std::exception& e) {
+        XBT_ERROR("Can't parse output size: %s", e.what());
+        XBT_WARN("Output size will be set to default value");
+        Outputs[name] = 0;
+    }
 }
 
 void Task::MarkAsDone() {
