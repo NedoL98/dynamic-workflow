@@ -22,10 +22,14 @@ public:
     void AppendRawInput(const std::string& name, const std::string& source);
     void AppendInput(const std::string& name);
     void AppendOutput(const std::string& name, const std::string& size);
-    void MarkAsDone();
 
-    static void DoExecute(double flops, std::string name);
-    simgrid::s4u::ActorPtr Execute(simgrid::s4u::Host* host);
+    static void DoExecute(double flops, std::string name, int cores, double memory);
+    simgrid::s4u::ActorPtr Execute(simgrid::s4u::VirtualMachine* vm);
+
+    bool CanExecute(simgrid::s4u::Host* host);
+    simgrid::s4u::VirtualMachine* MakeVirtualMachine(simgrid::s4u::Host* host);
+    
+    void Finish(simgrid::s4u::ActorPtr vmPtr);
 
 private:
     std::string Name;
@@ -33,8 +37,9 @@ private:
     std::vector<std::string> Inputs;
     std::map<std::string, double> Outputs;
     int Cores;
-    double Ram;
+    double Memory;
     double Flops;
 
+    simgrid::s4u::Host* Host = nullptr;
     bool Done = false;
 };

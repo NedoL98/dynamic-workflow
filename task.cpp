@@ -2,6 +2,7 @@
 
 #include <exception>
 #include <iostream>
+#include <simgrid/s4u/VirtualMachine.hpp>
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(task, "Task log");
 
@@ -43,11 +44,11 @@ Task::Task(const YAML::Node& taskDescription) {
 
     xbt_assert(taskDescription["requirements"]["memory"], "Memory usage is not specified for task!");
     try {
-        Ram = ParseNumber(taskDescription["requirements"]["memory"].as<std::string>(), SizeSuffixes);
+        Memory = ParseNumber(taskDescription["requirements"]["memory"].as<std::string>(), SizeSuffixes);
     } catch (std::exception& e) {
         XBT_ERROR("Can't parse memory requirement: %s", e.what());
         XBT_WARN("Memory requirement will be set to 0");
-        Ram = 0;
+        Memory = 0;
     }
 
     xbt_assert(taskDescription["size"], "Task size is not specified!");
@@ -81,7 +82,7 @@ int Task::GetCores() const {
 }
 
 double Task::GetMemory() const {
-    return Ram;
+    return Memory;
 }
 
 double Task::GetSize() const {
@@ -113,21 +114,48 @@ void Task::AppendOutput(const std::string& name, const std::string& size) {
     }
 }
 
-void Task::MarkAsDone() {
-    Done = true;
-}
+void Task::DoExecute(double flops, std::string name, int cores, double memory) {
+    simgrid::s4u::Host* host = simgrid::s4u::this_actor::get_host();
 
-void Task::DoExecute(double flops, std::string name) {
     double timeStart = simgrid::s4u::Engine::get_clock();
-    simgrid::s4u::this_actor::get_host()->execute(flops);
+    host->execute(flops);
     double timeFinish = simgrid::s4u::Engine::get_clock();
 
-    XBT_INFO("%s: %s task %s executed %g", simgrid::s4u::this_actor::get_host()->get_cname(),
+    XBT_INFO("%s: %s task %s executed %g", host->get_cname(),
             simgrid::s4u::this_actor::get_cname(), name.c_str(), timeFinish - timeStart);
 
     simgrid::s4u::this_actor::exit();
 }
 
-simgrid::s4u::ActorPtr Task::Execute(simgrid::s4u::Host* host) {
-    return simgrid::s4u::Actor::create("compute", host, DoExecute, Flops, Name);
+simgrid::s4u::ActorPtr Task::Execute(simgrid::s4u::VirtualMachine* vm) {
+    return simgrid::s4u::Actor::create("compute", vm, DoExecute, Flops, Name, Cores, Memory);
+}
+
+bool Task::CanExecute(simgrid::s4u::Host* host) {
+    int availableCores = std::stoi(host->get_property("cores"));
+    double availableMemory = std::stod(host->get_property("memory"));
+
+    return availableCores >= Cores && availableMemory >= Memory;
+}
+
+simgrid::s4u::VirtualMachine* Task::MakeVirtualMachine(simgrid::s4u::Host* host) {
+    simgrid::s4u::VirtualMachine* vm = new simgrid::s4u::VirtualMachine(Name + "_VM", host, Cores, Memory);
+    host->set_property("cores", std::to_string(std::stoi(host->get_property("cores")) - Cores));
+    host->set_property("memory", std::to_string(std::stod(host->get_property("memory")) - Memory));
+    Host = host;
+    return vm;
+}
+
+void Task::Finish(simgrid::s4u::ActorPtr vmPtr) {
+    if (Host == nullptr) {
+        if (!Done) {
+            XBT_WARN("Trying to finish task %s, but it is not computing on any host!", Name.c_str());
+        }
+        return;
+    }
+    vmPtr->join();
+    Host->set_property("cores", std::to_string(std::stoi(Host->get_property("cores")) + Cores));
+    Host->set_property("memory", std::to_string(std::stod(Host->get_property("memory")) + Memory));
+    Host = nullptr;
+    Done = true;
 }

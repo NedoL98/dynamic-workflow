@@ -10,3 +10,5 @@ static const std::vector<std::string> SizeSuffixes = {"B", "KB", "MB", "GB", "TB
 static const std::vector<std::string> PerformanceSuffixes = {"F", "KF", "MF", "GF", "TF"};
 
 double ParseNumber(const std::string& size, const std::vector<std::string>& suffixes);
+
+void TransformHostsProps();

@@ -23,6 +23,9 @@ int main(int argc, char* argv[]) {
     e.load_platform(argv[1]);
     XBT_INFO("Platform file loaded");
 
+    // Transform human-readable platform description
+    TransformHostsProps();
+
     // Load tasks graph description
     simgrid::s4u::Actor::create("scheduler", simgrid::s4u::Host::by_name("Alpha"), Scheduler(argc, argv));
 

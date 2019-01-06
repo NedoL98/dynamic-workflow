@@ -10,38 +10,35 @@ Scheduler::Scheduler(int argc, char* argv[]) {
     XBT_INFO("Loading tasks graphs...");
     // should probably redo this
     for (int i = 2; i < argc; ++i) {
-        tasksGraphs.push_back(TasksGraph(argv[i]));
+        TasksGraphs.push_back(TasksGraph(argv[i]));
     }
-    XBT_INFO("%d tasks graphs loaded", tasksGraphs.size());
+    XBT_INFO("%d tasks graphs loaded", TasksGraphs.size());
 }
 
-void Scheduler::ProcessTasksGraph(const TasksGraph& tasksGraph) {
+void Scheduler::ProcessTasksGraph(TasksGraph& tasksGraph) {
     std::vector<std::shared_ptr<Task>> orderedTasks = tasksGraph.MakeTasksOrder();
     std::vector<simgrid::s4u::Host*> hosts = simgrid::s4u::Engine::get_instance()->get_all_hosts();
 
     std::map<std::string, simgrid::s4u::ActorPtr> actorPointers;
+    std::map<std::string, simgrid::s4u::VirtualMachine*> vmPointers;
 
-    for (const auto& task: orderedTasks) {
-        for (auto elem: task->GetInputs()) {
-            actorPointers[elem]->join();    
+    for (const std::shared_ptr<Task>& task: orderedTasks) {
+        for (std::string input: task->GetInputs()) {
+            tasksGraph.Tasks[input]->Finish(actorPointers[input]);
         }
-        actorPointers[task->GetName()] = task->Execute(hosts[0]);
+        for (simgrid::s4u::Host* host: hosts) {
+            if (task->CanExecute(host)) {
+                vmPointers[task->GetName()] = task->MakeVirtualMachine(host);
+                actorPointers[task->GetName()] = task->Execute(vmPointers[task->GetName()]);       
+                break;
+            }
+        }
+        xbt_assert(vmPointers[task->GetName()], "No host satisfies task %s requirements", task->GetName().c_str());
     }
 }
 
 void Scheduler::operator()() {
-    for (const TasksGraph& tasksGraph: tasksGraphs) {
+    for (TasksGraph& tasksGraph: TasksGraphs) {
         ProcessTasksGraph(tasksGraph);
     }
-    /*
-    for (int i = 0; i < TaskCount; i++) {
-        // It seems that storing current number of free cores is not implemented 
-        // so we should handle it ourselves
-        simgrid::s4u::Host* host = hosts[rand() % hosts.size()];
-
-        simgrid::s4u::VirtualMachine* vm = new simgrid::s4u::VirtualMachine("VM" + std::to_string(i), host, Tasks[i].GetCores());
-        vm->start();
-        Tasks[i].Execute(host);
-    }
-    */
 }

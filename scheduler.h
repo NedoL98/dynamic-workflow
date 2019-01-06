@@ -10,10 +10,10 @@ public:
     Scheduler() = delete;
     Scheduler(int argc, char* argv[]);
 
-    void ProcessTasksGraph(const TasksGraph& tasksGraph);
+    void ProcessTasksGraph(TasksGraph& tasksGraph);
 
     void operator()();
 
 private:
-    std::vector<TasksGraph> tasksGraphs;
+    std::vector<TasksGraph> TasksGraphs;
 };
