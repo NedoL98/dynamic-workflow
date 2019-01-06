@@ -14,7 +14,8 @@ add_executable(
     dynamic-workflow
     common/common.cpp
     main.cpp
-    scheduler.cpp
+    schedulers/scheduler_base.cpp
+    schedulers/naive_scheduler.cpp
     task.cpp
     tasks_graph.cpp
 )

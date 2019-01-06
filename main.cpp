@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-#include "scheduler.h"
+#include "schedulers/naive_scheduler.h"
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(main, "Main log");
 
@@ -27,7 +27,10 @@ int main(int argc, char* argv[]) {
     TransformHostsProps();
 
     // Load tasks graph description
-    simgrid::s4u::Actor::create("scheduler", simgrid::s4u::Host::by_name("Alpha"), Scheduler(argc, argv));
+    auto scheduler = NaiveScheduler(argc, argv);
+
+    // Make scheduler actor
+    simgrid::s4u::Actor::create("scheduler", simgrid::s4u::Host::by_name("Alpha"), scheduler);
 
     XBT_INFO("Starting simulation");
     // Run the simulation

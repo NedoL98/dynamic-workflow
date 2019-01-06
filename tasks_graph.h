@@ -8,7 +8,7 @@
 class Scheduler;
 
 class TasksGraph {
-friend class Scheduler;
+friend class NaiveScheduler;
 
 public:
     TasksGraph(std::string filepath);
