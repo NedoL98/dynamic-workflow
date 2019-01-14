@@ -1,13 +1,19 @@
 #include "common.h"
 
+#include <iostream>
+
 double ParseNumber(const std::string& size, const std::vector<std::string>& suffixes) {
     std::size_t suffixStart;
     double sizePrefix = std::stod(size, &suffixStart);
-    auto itSizeSuffix = std::find(suffixes.begin(), suffixes.end(), size.substr(suffixStart));
-    if (itSizeSuffix == suffixes.end()) {
-        throw std::invalid_argument("Size suffix is incorrect!");
+    if (suffixStart == size.size()) {
+        return sizePrefix;
+    } else {
+        auto itSizeSuffix = std::find(suffixes.begin(), suffixes.end(), size.substr(suffixStart));
+        if (itSizeSuffix == suffixes.end()) {
+            throw std::invalid_argument("Size suffix is incorrect!");
+        }
+        return sizePrefix * pow(Base, itSizeSuffix - suffixes.begin());
     }
-    return sizePrefix * pow(Base, itSizeSuffix - suffixes.begin());
 }
 
 void TransformHostsProps() {

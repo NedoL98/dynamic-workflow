@@ -37,27 +37,36 @@ Task::Task(const YAML::Node& taskDescription) {
         AppendOutput(outputName, outputSize);
     }
 
-    xbt_assert(taskDescription["requirements"], "Task requirements are not specified!");
+    if (!taskDescription["requirements"]) {
+        XBT_WARN("Task requirements are not specified, they will be set to default!");
+        SetDefaultRequirements();
+    } else {
+        if (!taskDescription["requirements"]["cpu"]) {
+            XBT_WARN("CPU usage is not specified for task, it will be set to default!");
+            Cores = DefaultCores;
+        } else {
+            Cores = taskDescription["requirements"]["cpu"].as<int>();
+        }
 
-    xbt_assert(taskDescription["requirements"]["cpu"], "CPU usage is not specified for task!");
-    Cores = taskDescription["requirements"]["cpu"].as<int>();
-
-    xbt_assert(taskDescription["requirements"]["memory"], "Memory usage is not specified for task!");
-    try {
-        Memory = ParseNumber(taskDescription["requirements"]["memory"].as<std::string>(), SizeSuffixes);
-    } catch (std::exception& e) {
-        XBT_ERROR("Can't parse memory requirement: %s", e.what());
-        XBT_WARN("Memory requirement will be set to 0");
-        Memory = 0;
+        if (!taskDescription["requirements"]["memory"]) {
+            XBT_WARN("Memory usage is not specified for task, it will be set to default!");
+            Memory = DefaultMemory;
+        } else {
+            try {
+                Memory = ParseNumber(taskDescription["requirements"]["memory"].as<std::string>(), SizeSuffixes);
+            } catch (std::exception& e) {
+                XBT_ERROR("Can't parse memory requirement: %s", e.what());
+                XBT_WARN("Memory requirement will be set to %d", DefaultMemory);
+                Memory = DefaultMemory;
+            }
+        }
     }
 
-    xbt_assert(taskDescription["size"], "Task size is not specified!");
+    xbt_assert(taskDescription["size"], "Task size must be specified!");
     try {
         Flops = ParseNumber(taskDescription["size"].as<std::string>(), PerformanceSuffixes);
     } catch (std::exception& e) {
-        XBT_ERROR("Can't parse size requirement: %s", e.what());
-        XBT_WARN("Size requirement will be set to 0");
-        Flops = 0;
+        xbt_assert("Can't parse size requirement: %s", e.what());
     }
 }
 
@@ -89,6 +98,11 @@ double Task::GetSize() const {
     return Flops;
 }
 
+void Task::SetDefaultRequirements() {
+    Cores = DefaultCores;
+    Memory = DefaultMemory;
+}
+
 void Task::AppendRawInput(const std::string& name, const std::string& source) {
     if (RawInputs.count(name) > 0) {
         XBT_WARN("Input name is not unique! Previous input will be deleted!");
@@ -114,7 +128,7 @@ void Task::AppendOutput(const std::string& name, const std::string& size) {
     }
 }
 
-void Task::DoExecute(double flops, std::string name, int cores, double memory) {
+void Task::DoExecute(double flops, std::string name) {
     simgrid::s4u::Host* host = simgrid::s4u::this_actor::get_host();
 
     double timeStart = simgrid::s4u::Engine::get_clock();
@@ -128,7 +142,9 @@ void Task::DoExecute(double flops, std::string name, int cores, double memory) {
 }
 
 simgrid::s4u::ActorPtr Task::Execute(simgrid::s4u::VirtualMachine* vm) {
-    return simgrid::s4u::Actor::create("compute", vm, DoExecute, Flops, Name, Cores, Memory);
+    simgrid::s4u::ActorPtr actor = simgrid::s4u::Actor::create("compute", vm, DoExecute, Flops, Name);
+    actor->set_property("size", std::to_string(Flops));
+    return actor;
 }
 
 bool Task::CanExecute(simgrid::s4u::Host* host) {

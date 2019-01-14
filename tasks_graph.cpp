@@ -62,7 +62,7 @@ void TasksGraph::MakeGraph() {
         std::shared_ptr<Task> task = item.second;
         for (const auto& input: task->GetRawInputs()) {
             std::string inputSource = input.second;
-            int delimeterPos = inputSource.find('.');
+            size_t delimeterPos = inputSource.find('.');
             if (delimeterPos != std::string::npos) {
                 std::string inputSourceName = inputSource.substr(0, delimeterPos);
                 xbt_assert(Tasks.count(inputSourceName),

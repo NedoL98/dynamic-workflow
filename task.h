@@ -19,11 +19,13 @@ public:
     double GetMemory() const;
     double GetSize() const;
 
+    void SetDefaultRequirements();
+
     void AppendRawInput(const std::string& name, const std::string& source);
     void AppendInput(const std::string& name);
     void AppendOutput(const std::string& name, const std::string& size);
 
-    static void DoExecute(double flops, std::string name, int cores, double memory);
+    static void DoExecute(double flops, std::string name);
     simgrid::s4u::ActorPtr Execute(simgrid::s4u::VirtualMachine* vm);
 
     bool CanExecute(simgrid::s4u::Host* host);
