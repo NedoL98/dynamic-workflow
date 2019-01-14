@@ -1,7 +1,5 @@
 #include "common.h"
 
-#include <iostream>
-
 double ParseNumber(const std::string& size, const std::vector<std::string>& suffixes) {
     std::size_t suffixStart;
     double sizePrefix = std::stod(size, &suffixStart);
