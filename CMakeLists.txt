@@ -24,6 +24,11 @@ add_executable(
 target_link_libraries(dynamic-workflow ${SimGrid_LIBRARY} ${YAML_LIBRARY})
 
 add_custom_target(
+    run_example
+    COMMAND dynamic-workflow ../small_platform.xml ../xml_yaml_parser/CyberShake_100.yml
+)
+
+add_custom_target(
     run_parser
     COMMAND python3.6 ../xml_yaml_parser/parser.py
 )
