@@ -79,7 +79,8 @@ def MakeYaml(xmlFileName):
         yaml.indent(offset = 2, sequence = 4)
         yaml.dump(outputYaml, outfile)
 
-for dirName, subDirList, fileList in os.walk("."):
+for dirName, subDirList, fileList in os.walk("./resources/workflows"):
     for fileName in fileList:
         if fileName.find(".xml") != -1:
-            MakeYaml(fileName)
+            print(dirName, fileName)
+            MakeYaml(dirName + '/' + fileName)

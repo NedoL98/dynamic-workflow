@@ -1,0 +1,1304 @@
+inputs:
+  - size: 5490684
+    name: FFI_0_1_txt_variation-s01870-h04205
+  - size: 3072119
+    name: FFI_0_2_txt_variation-s06145-h00281
+  - size: 5324584
+    name: FFI_0_2_txt_variation-s00853-h01852
+  - size: 3659562
+    name: FFI_0_2_txt_variation-s09614-h09513
+  - size: 3512409
+    name: FFI_0_1_txt_variation-s02408-h09354
+  - size: 5247816
+    name: FFI_0_1_txt_variation-s06719-h04173
+  - size: 3875934
+    name: FFI_0_2_txt_variation-s01884-h03415
+  - size: 4427133
+    name: FFI_0_2_txt_variation-s06402-h02227
+  - size: 3047923
+    name: FFI_0_2_txt_variation-s01095-h09747
+  - size: 5237642
+    name: FFI_0_2_txt_variation-s06799-h07438
+  - size: 5553890
+    name: FFI_0_2_txt_variation-s00691-h01726
+  - size: 1888540
+    name: FFI_0_1_txt_variation-s03440-h06995
+  - size: 5174800
+    name: FFI_0_2_txt_variation-s03936-h06688
+  - size: 4579645
+    name: FFI_0_1_txt_variation-s09265-h09011
+  - size: 4241406
+    name: FFI_0_2_txt_variation-s09269-h07526
+  - size: 20516952694
+    name: FFI_0_2_fy_sgt
+  - size: 4171486
+    name: FFI_0_1_txt_variation-s06296-h05599
+  - size: 2964001
+    name: FFI_0_1_txt_variation-s03071-h00361
+  - size: 4179599
+    name: FFI_0_1_txt_variation-s00793-h02126
+  - size: 3555858
+    name: FFI_0_1_txt_variation-s01650-h06220
+  - size: 4547692
+    name: FFI_0_2_txt_variation-s09258-h06967
+  - size: 2091402
+    name: FFI_0_1_txt_variation-s09609-h01909
+  - size: 3241768
+    name: FFI_0_1_txt_variation-s06016-h03616
+  - size: 3132935
+    name: FFI_0_2_txt_variation-s04946-h00030
+  - size: 3415880
+    name: FFI_0_2_txt_variation-s02933-h03704
+  - size: 2192732
+    name: FFI_0_1_txt_variation-s03550-h00041
+  - size: 2971945
+    name: FFI_0_1_txt_variation-s05578-h04657
+  - size: 5443004
+    name: FFI_0_1_txt_variation-s03498-h09280
+  - size: 4257166
+    name: FFI_0_1_txt_variation-s08788-h01100
+  - size: 3870422
+    name: FFI_0_2_txt_variation-s09973-h01755
+  - size: 2016250
+    name: FFI_0_2_txt_variation-s09172-h05356
+  - size: 4953752
+    name: FFI_0_2_txt_variation-s09852-h00079
+  - size: 20250656767
+    name: FFI_0_1_fy_sgt
+  - size: 5267432
+    name: FFI_0_1_txt_variation-s02494-h05895
+  - size: 2575428
+    name: FFI_0_1_txt_variation-s07367-h01561
+  - size: 4024988
+    name: FFI_0_1_txt_variation-s05007-h01024
+  - size: 2676948
+    name: FFI_0_2_txt_variation-s03613-h02723
+  - size: 4262213
+    name: FFI_0_2_txt_variation-s05030-h08343
+  - size: 3043801
+    name: FFI_0_2_txt_variation-s06320-h02103
+  - size: 4162459
+    name: FFI_0_1_txt_variation-s09570-h03346
+  - size: 4293456
+    name: FFI_0_2_txt_variation-s02360-h05632
+  - size: 5378773
+    name: FFI_0_2_txt_variation-s09948-h07733
+  - size: 2415375
+    name: FFI_0_1_txt_variation-s09668-h06261
+  - size: 20250656767
+    name: FFI_0_1_fx_sgt
+  - size: 20516952694
+    name: FFI_0_2_fx_sgt
+  - size: 5191492
+    name: FFI_0_2_txt_variation-s09369-h08483
+  - size: 4713544
+    name: FFI_0_2_txt_variation-s06184-h05000
+  - size: 3657272
+    name: FFI_0_2_txt_variation-s08426-h08692
+  - size: 2066807
+    name: FFI_0_2_txt_variation-s02047-h07883
+  - size: 2326255
+    name: FFI_0_2_txt_variation-s00186-h01843
+  - size: 4715480
+    name: FFI_0_1_txt_variation-s04129-h09001
+  - size: 3182035
+    name: FFI_0_1_txt_variation-s08237-h06632
+tasks:
+  - inputs:
+      - source: ID00004.PeakVals_FFI_0_1_ID00003_bsa
+        name: PeakVals_FFI_0_1_ID00003_bsa
+      - source: ID00006.PeakVals_FFI_0_1_ID00005_bsa
+        name: PeakVals_FFI_0_1_ID00005_bsa
+      - source: ID00008.PeakVals_FFI_0_1_ID00007_bsa
+        name: PeakVals_FFI_0_1_ID00007_bsa
+      - source: ID00010.PeakVals_FFI_0_1_ID00009_bsa
+        name: PeakVals_FFI_0_1_ID00009_bsa
+      - source: ID00012.PeakVals_FFI_0_1_ID00011_bsa
+        name: PeakVals_FFI_0_1_ID00011_bsa
+      - source: ID00014.PeakVals_FFI_0_1_ID00013_bsa
+        name: PeakVals_FFI_0_1_ID00013_bsa
+      - source: ID00016.PeakVals_FFI_0_1_ID00015_bsa
+        name: PeakVals_FFI_0_1_ID00015_bsa
+      - source: ID00018.PeakVals_FFI_0_1_ID00017_bsa
+        name: PeakVals_FFI_0_1_ID00017_bsa
+      - source: ID00020.PeakVals_FFI_0_1_ID00019_bsa
+        name: PeakVals_FFI_0_1_ID00019_bsa
+      - source: ID00022.PeakVals_FFI_0_1_ID00021_bsa
+        name: PeakVals_FFI_0_1_ID00021_bsa
+      - source: ID00024.PeakVals_FFI_0_1_ID00023_bsa
+        name: PeakVals_FFI_0_1_ID00023_bsa
+      - source: ID00026.PeakVals_FFI_0_1_ID00025_bsa
+        name: PeakVals_FFI_0_1_ID00025_bsa
+      - source: ID00028.PeakVals_FFI_0_1_ID00027_bsa
+        name: PeakVals_FFI_0_1_ID00027_bsa
+      - source: ID00030.PeakVals_FFI_0_1_ID00029_bsa
+        name: PeakVals_FFI_0_1_ID00029_bsa
+      - source: ID00032.PeakVals_FFI_0_1_ID00031_bsa
+        name: PeakVals_FFI_0_1_ID00031_bsa
+      - source: ID00034.PeakVals_FFI_0_1_ID00033_bsa
+        name: PeakVals_FFI_0_1_ID00033_bsa
+      - source: ID00036.PeakVals_FFI_0_1_ID00035_bsa
+        name: PeakVals_FFI_0_1_ID00035_bsa
+      - source: ID00038.PeakVals_FFI_0_1_ID00037_bsa
+        name: PeakVals_FFI_0_1_ID00037_bsa
+      - source: ID00040.PeakVals_FFI_0_1_ID00039_bsa
+        name: PeakVals_FFI_0_1_ID00039_bsa
+      - source: ID00042.PeakVals_FFI_0_1_ID00041_bsa
+        name: PeakVals_FFI_0_1_ID00041_bsa
+      - source: ID00044.PeakVals_FFI_0_1_ID00043_bsa
+        name: PeakVals_FFI_0_1_ID00043_bsa
+      - source: ID00046.PeakVals_FFI_0_1_ID00045_bsa
+        name: PeakVals_FFI_0_1_ID00045_bsa
+      - source: ID00049.PeakVals_FFI_0_2_ID00048_bsa
+        name: PeakVals_FFI_0_2_ID00048_bsa
+      - source: ID00051.PeakVals_FFI_0_2_ID00050_bsa
+        name: PeakVals_FFI_0_2_ID00050_bsa
+      - source: ID00053.PeakVals_FFI_0_2_ID00052_bsa
+        name: PeakVals_FFI_0_2_ID00052_bsa
+      - source: ID00055.PeakVals_FFI_0_2_ID00054_bsa
+        name: PeakVals_FFI_0_2_ID00054_bsa
+      - source: ID00057.PeakVals_FFI_0_2_ID00056_bsa
+        name: PeakVals_FFI_0_2_ID00056_bsa
+      - source: ID00059.PeakVals_FFI_0_2_ID00058_bsa
+        name: PeakVals_FFI_0_2_ID00058_bsa
+      - source: ID00061.PeakVals_FFI_0_2_ID00060_bsa
+        name: PeakVals_FFI_0_2_ID00060_bsa
+      - source: ID00063.PeakVals_FFI_0_2_ID00062_bsa
+        name: PeakVals_FFI_0_2_ID00062_bsa
+      - source: ID00065.PeakVals_FFI_0_2_ID00064_bsa
+        name: PeakVals_FFI_0_2_ID00064_bsa
+      - source: ID00067.PeakVals_FFI_0_2_ID00066_bsa
+        name: PeakVals_FFI_0_2_ID00066_bsa
+      - source: ID00069.PeakVals_FFI_0_2_ID00068_bsa
+        name: PeakVals_FFI_0_2_ID00068_bsa
+      - source: ID00071.PeakVals_FFI_0_2_ID00070_bsa
+        name: PeakVals_FFI_0_2_ID00070_bsa
+      - source: ID00073.PeakVals_FFI_0_2_ID00072_bsa
+        name: PeakVals_FFI_0_2_ID00072_bsa
+      - source: ID00075.PeakVals_FFI_0_2_ID00074_bsa
+        name: PeakVals_FFI_0_2_ID00074_bsa
+      - source: ID00077.PeakVals_FFI_0_2_ID00076_bsa
+        name: PeakVals_FFI_0_2_ID00076_bsa
+      - source: ID00079.PeakVals_FFI_0_2_ID00078_bsa
+        name: PeakVals_FFI_0_2_ID00078_bsa
+      - source: ID00081.PeakVals_FFI_0_2_ID00080_bsa
+        name: PeakVals_FFI_0_2_ID00080_bsa
+      - source: ID00083.PeakVals_FFI_0_2_ID00082_bsa
+        name: PeakVals_FFI_0_2_ID00082_bsa
+      - source: ID00085.PeakVals_FFI_0_2_ID00084_bsa
+        name: PeakVals_FFI_0_2_ID00084_bsa
+      - source: ID00087.PeakVals_FFI_0_2_ID00086_bsa
+        name: PeakVals_FFI_0_2_ID00086_bsa
+      - source: ID00089.PeakVals_FFI_0_2_ID00088_bsa
+        name: PeakVals_FFI_0_2_ID00088_bsa
+      - source: ID00091.PeakVals_FFI_0_2_ID00090_bsa
+        name: PeakVals_FFI_0_2_ID00090_bsa
+      - source: ID00093.PeakVals_FFI_0_2_ID00092_bsa
+        name: PeakVals_FFI_0_2_ID00092_bsa
+      - source: ID00095.PeakVals_FFI_0_2_ID00094_bsa
+        name: PeakVals_FFI_0_2_ID00094_bsa
+      - source: ID00097.PeakVals_FFI_0_2_ID00096_bsa
+        name: PeakVals_FFI_0_2_ID00096_bsa
+      - source: ID00099.PeakVals_FFI_0_2_ID00098_bsa
+        name: PeakVals_FFI_0_2_ID00098_bsa
+    size: 0.7
+    outputs:
+      - size: 1952
+        name: Cybershake_PSA_zip
+    name: ID00000
+  - inputs:
+      - source: ID00003.Seismogram_FFI_0_1_ID00003_grm
+        name: Seismogram_FFI_0_1_ID00003_grm
+      - source: ID00005.Seismogram_FFI_0_1_ID00005_grm
+        name: Seismogram_FFI_0_1_ID00005_grm
+      - source: ID00007.Seismogram_FFI_0_1_ID00007_grm
+        name: Seismogram_FFI_0_1_ID00007_grm
+      - source: ID00009.Seismogram_FFI_0_1_ID00009_grm
+        name: Seismogram_FFI_0_1_ID00009_grm
+      - source: ID00011.Seismogram_FFI_0_1_ID00011_grm
+        name: Seismogram_FFI_0_1_ID00011_grm
+      - source: ID00013.Seismogram_FFI_0_1_ID00013_grm
+        name: Seismogram_FFI_0_1_ID00013_grm
+      - source: ID00015.Seismogram_FFI_0_1_ID00015_grm
+        name: Seismogram_FFI_0_1_ID00015_grm
+      - source: ID00017.Seismogram_FFI_0_1_ID00017_grm
+        name: Seismogram_FFI_0_1_ID00017_grm
+      - source: ID00019.Seismogram_FFI_0_1_ID00019_grm
+        name: Seismogram_FFI_0_1_ID00019_grm
+      - source: ID00021.Seismogram_FFI_0_1_ID00021_grm
+        name: Seismogram_FFI_0_1_ID00021_grm
+      - source: ID00023.Seismogram_FFI_0_1_ID00023_grm
+        name: Seismogram_FFI_0_1_ID00023_grm
+      - source: ID00025.Seismogram_FFI_0_1_ID00025_grm
+        name: Seismogram_FFI_0_1_ID00025_grm
+      - source: ID00027.Seismogram_FFI_0_1_ID00027_grm
+        name: Seismogram_FFI_0_1_ID00027_grm
+      - source: ID00029.Seismogram_FFI_0_1_ID00029_grm
+        name: Seismogram_FFI_0_1_ID00029_grm
+      - source: ID00031.Seismogram_FFI_0_1_ID00031_grm
+        name: Seismogram_FFI_0_1_ID00031_grm
+      - source: ID00033.Seismogram_FFI_0_1_ID00033_grm
+        name: Seismogram_FFI_0_1_ID00033_grm
+      - source: ID00035.Seismogram_FFI_0_1_ID00035_grm
+        name: Seismogram_FFI_0_1_ID00035_grm
+      - source: ID00037.Seismogram_FFI_0_1_ID00037_grm
+        name: Seismogram_FFI_0_1_ID00037_grm
+      - source: ID00039.Seismogram_FFI_0_1_ID00039_grm
+        name: Seismogram_FFI_0_1_ID00039_grm
+      - source: ID00041.Seismogram_FFI_0_1_ID00041_grm
+        name: Seismogram_FFI_0_1_ID00041_grm
+      - source: ID00043.Seismogram_FFI_0_1_ID00043_grm
+        name: Seismogram_FFI_0_1_ID00043_grm
+      - source: ID00045.Seismogram_FFI_0_1_ID00045_grm
+        name: Seismogram_FFI_0_1_ID00045_grm
+      - source: ID00048.Seismogram_FFI_0_2_ID00048_grm
+        name: Seismogram_FFI_0_2_ID00048_grm
+      - source: ID00050.Seismogram_FFI_0_2_ID00050_grm
+        name: Seismogram_FFI_0_2_ID00050_grm
+      - source: ID00052.Seismogram_FFI_0_2_ID00052_grm
+        name: Seismogram_FFI_0_2_ID00052_grm
+      - source: ID00054.Seismogram_FFI_0_2_ID00054_grm
+        name: Seismogram_FFI_0_2_ID00054_grm
+      - source: ID00056.Seismogram_FFI_0_2_ID00056_grm
+        name: Seismogram_FFI_0_2_ID00056_grm
+      - source: ID00058.Seismogram_FFI_0_2_ID00058_grm
+        name: Seismogram_FFI_0_2_ID00058_grm
+      - source: ID00060.Seismogram_FFI_0_2_ID00060_grm
+        name: Seismogram_FFI_0_2_ID00060_grm
+      - source: ID00062.Seismogram_FFI_0_2_ID00062_grm
+        name: Seismogram_FFI_0_2_ID00062_grm
+      - source: ID00064.Seismogram_FFI_0_2_ID00064_grm
+        name: Seismogram_FFI_0_2_ID00064_grm
+      - source: ID00066.Seismogram_FFI_0_2_ID00066_grm
+        name: Seismogram_FFI_0_2_ID00066_grm
+      - source: ID00068.Seismogram_FFI_0_2_ID00068_grm
+        name: Seismogram_FFI_0_2_ID00068_grm
+      - source: ID00070.Seismogram_FFI_0_2_ID00070_grm
+        name: Seismogram_FFI_0_2_ID00070_grm
+      - source: ID00072.Seismogram_FFI_0_2_ID00072_grm
+        name: Seismogram_FFI_0_2_ID00072_grm
+      - source: ID00074.Seismogram_FFI_0_2_ID00074_grm
+        name: Seismogram_FFI_0_2_ID00074_grm
+      - source: ID00076.Seismogram_FFI_0_2_ID00076_grm
+        name: Seismogram_FFI_0_2_ID00076_grm
+      - source: ID00078.Seismogram_FFI_0_2_ID00078_grm
+        name: Seismogram_FFI_0_2_ID00078_grm
+      - source: ID00080.Seismogram_FFI_0_2_ID00080_grm
+        name: Seismogram_FFI_0_2_ID00080_grm
+      - source: ID00082.Seismogram_FFI_0_2_ID00082_grm
+        name: Seismogram_FFI_0_2_ID00082_grm
+      - source: ID00084.Seismogram_FFI_0_2_ID00084_grm
+        name: Seismogram_FFI_0_2_ID00084_grm
+      - source: ID00086.Seismogram_FFI_0_2_ID00086_grm
+        name: Seismogram_FFI_0_2_ID00086_grm
+      - source: ID00088.Seismogram_FFI_0_2_ID00088_grm
+        name: Seismogram_FFI_0_2_ID00088_grm
+      - source: ID00090.Seismogram_FFI_0_2_ID00090_grm
+        name: Seismogram_FFI_0_2_ID00090_grm
+      - source: ID00092.Seismogram_FFI_0_2_ID00092_grm
+        name: Seismogram_FFI_0_2_ID00092_grm
+      - source: ID00094.Seismogram_FFI_0_2_ID00094_grm
+        name: Seismogram_FFI_0_2_ID00094_grm
+      - source: ID00096.Seismogram_FFI_0_2_ID00096_grm
+        name: Seismogram_FFI_0_2_ID00096_grm
+      - source: ID00098.Seismogram_FFI_0_2_ID00098_grm
+        name: Seismogram_FFI_0_2_ID00098_grm
+    size: 0.64
+    outputs:
+      - size: 147070
+        name: Cybershake_Seismograms_zip
+    name: ID00001
+  - inputs:
+      - source: FFI_0_1_fx_sgt
+        name: FFI_0_1_fx_sgt
+      - source: FFI_0_1_fy_sgt
+        name: FFI_0_1_fy_sgt
+      - source: FFI_0_1_txt_variation-s03550-h00041
+        name: FFI_0_1_txt_variation-s03550-h00041
+    size: 164.74
+    outputs:
+      - size: 307881638
+        name: FFI_0_1_subfx_sgt
+      - size: 307881638
+        name: FFI_0_1_subfy_sgt
+    name: ID00002
+  - inputs:
+      - source: FFI_0_1_txt_variation-s02494-h05895
+        name: FFI_0_1_txt_variation-s02494-h05895
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 37.67
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00003_grm
+    name: ID00003
+  - inputs:
+      - source: ID00003.Seismogram_FFI_0_1_ID00003_grm
+        name: Seismogram_FFI_0_1_ID00003_grm
+    size: 1.05
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00003_bsa
+    name: ID00004
+  - inputs:
+      - source: FFI_0_1_txt_variation-s09668-h06261
+        name: FFI_0_1_txt_variation-s09668-h06261
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 59.03
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00005_grm
+    name: ID00005
+  - inputs:
+      - source: ID00005.Seismogram_FFI_0_1_ID00005_grm
+        name: Seismogram_FFI_0_1_ID00005_grm
+    size: 0.57
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00005_bsa
+    name: ID00006
+  - inputs:
+      - source: FFI_0_1_txt_variation-s06296-h05599
+        name: FFI_0_1_txt_variation-s06296-h05599
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 39.91
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00007_grm
+    name: ID00007
+  - inputs:
+      - source: ID00007.Seismogram_FFI_0_1_ID00007_grm
+        name: Seismogram_FFI_0_1_ID00007_grm
+    size: 1.17
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00007_bsa
+    name: ID00008
+  - inputs:
+      - source: FFI_0_1_txt_variation-s01870-h04205
+        name: FFI_0_1_txt_variation-s01870-h04205
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 36.85
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00009_grm
+    name: ID00009
+  - inputs:
+      - source: ID00009.Seismogram_FFI_0_1_ID00009_grm
+        name: Seismogram_FFI_0_1_ID00009_grm
+    size: 1.61
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00009_bsa
+    name: ID00010
+  - inputs:
+      - source: FFI_0_1_txt_variation-s03440-h06995
+        name: FFI_0_1_txt_variation-s03440-h06995
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 23.88
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00011_grm
+    name: ID00011
+  - inputs:
+      - source: ID00011.Seismogram_FFI_0_1_ID00011_grm
+        name: Seismogram_FFI_0_1_ID00011_grm
+    size: 0.95
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00011_bsa
+    name: ID00012
+  - inputs:
+      - source: FFI_0_1_txt_variation-s05578-h04657
+        name: FFI_0_1_txt_variation-s05578-h04657
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 55.3
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00013_grm
+    name: ID00013
+  - inputs:
+      - source: ID00013.Seismogram_FFI_0_1_ID00013_grm
+        name: Seismogram_FFI_0_1_ID00013_grm
+    size: 1.02
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00013_bsa
+    name: ID00014
+  - inputs:
+      - source: FFI_0_1_txt_variation-s09609-h01909
+        name: FFI_0_1_txt_variation-s09609-h01909
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 56.56
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00015_grm
+    name: ID00015
+  - inputs:
+      - source: ID00015.Seismogram_FFI_0_1_ID00015_grm
+        name: Seismogram_FFI_0_1_ID00015_grm
+    size: 0.66
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00015_bsa
+    name: ID00016
+  - inputs:
+      - source: FFI_0_1_txt_variation-s03071-h00361
+        name: FFI_0_1_txt_variation-s03071-h00361
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 29.84
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00017_grm
+    name: ID00017
+  - inputs:
+      - source: ID00017.Seismogram_FFI_0_1_ID00017_grm
+        name: Seismogram_FFI_0_1_ID00017_grm
+    size: 0.57
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00017_bsa
+    name: ID00018
+  - inputs:
+      - source: FFI_0_1_txt_variation-s08788-h01100
+        name: FFI_0_1_txt_variation-s08788-h01100
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 29.85
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00019_grm
+    name: ID00019
+  - inputs:
+      - source: ID00019.Seismogram_FFI_0_1_ID00019_grm
+        name: Seismogram_FFI_0_1_ID00019_grm
+    size: 1.05
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00019_bsa
+    name: ID00020
+  - inputs:
+      - source: FFI_0_1_txt_variation-s09570-h03346
+        name: FFI_0_1_txt_variation-s09570-h03346
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 46.27
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00021_grm
+    name: ID00021
+  - inputs:
+      - source: ID00021.Seismogram_FFI_0_1_ID00021_grm
+        name: Seismogram_FFI_0_1_ID00021_grm
+    size: 0.84
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00021_bsa
+    name: ID00022
+  - inputs:
+      - source: FFI_0_1_txt_variation-s06016-h03616
+        name: FFI_0_1_txt_variation-s06016-h03616
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 35.34
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00023_grm
+    name: ID00023
+  - inputs:
+      - source: ID00023.Seismogram_FFI_0_1_ID00023_grm
+        name: Seismogram_FFI_0_1_ID00023_grm
+    size: 0.92
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00023_bsa
+    name: ID00024
+  - inputs:
+      - source: FFI_0_1_txt_variation-s05007-h01024
+        name: FFI_0_1_txt_variation-s05007-h01024
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 24.86
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00025_grm
+    name: ID00025
+  - inputs:
+      - source: ID00025.Seismogram_FFI_0_1_ID00025_grm
+        name: Seismogram_FFI_0_1_ID00025_grm
+    size: 1.39
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00025_bsa
+    name: ID00026
+  - inputs:
+      - source: FFI_0_1_txt_variation-s04129-h09001
+        name: FFI_0_1_txt_variation-s04129-h09001
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 61.38
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00027_grm
+    name: ID00027
+  - inputs:
+      - source: ID00027.Seismogram_FFI_0_1_ID00027_grm
+        name: Seismogram_FFI_0_1_ID00027_grm
+    size: 1.47
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00027_bsa
+    name: ID00028
+  - inputs:
+      - source: FFI_0_1_txt_variation-s00793-h02126
+        name: FFI_0_1_txt_variation-s00793-h02126
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 49.51
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00029_grm
+    name: ID00029
+  - inputs:
+      - source: ID00029.Seismogram_FFI_0_1_ID00029_grm
+        name: Seismogram_FFI_0_1_ID00029_grm
+    size: 0.71
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00029_bsa
+    name: ID00030
+  - inputs:
+      - source: FFI_0_1_txt_variation-s07367-h01561
+        name: FFI_0_1_txt_variation-s07367-h01561
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 33.07
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00031_grm
+    name: ID00031
+  - inputs:
+      - source: ID00031.Seismogram_FFI_0_1_ID00031_grm
+        name: Seismogram_FFI_0_1_ID00031_grm
+    size: 0.7
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00031_bsa
+    name: ID00032
+  - inputs:
+      - source: FFI_0_1_txt_variation-s03498-h09280
+        name: FFI_0_1_txt_variation-s03498-h09280
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 35.24
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00033_grm
+    name: ID00033
+  - inputs:
+      - source: ID00033.Seismogram_FFI_0_1_ID00033_grm
+        name: Seismogram_FFI_0_1_ID00033_grm
+    size: 1.48
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00033_bsa
+    name: ID00034
+  - inputs:
+      - source: FFI_0_1_txt_variation-s01650-h06220
+        name: FFI_0_1_txt_variation-s01650-h06220
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 30.35
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00035_grm
+    name: ID00035
+  - inputs:
+      - source: ID00035.Seismogram_FFI_0_1_ID00035_grm
+        name: Seismogram_FFI_0_1_ID00035_grm
+    size: 0.98
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00035_bsa
+    name: ID00036
+  - inputs:
+      - source: FFI_0_1_txt_variation-s08237-h06632
+        name: FFI_0_1_txt_variation-s08237-h06632
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 36.84
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00037_grm
+    name: ID00037
+  - inputs:
+      - source: ID00037.Seismogram_FFI_0_1_ID00037_grm
+        name: Seismogram_FFI_0_1_ID00037_grm
+    size: 1.41
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00037_bsa
+    name: ID00038
+  - inputs:
+      - source: FFI_0_1_txt_variation-s02408-h09354
+        name: FFI_0_1_txt_variation-s02408-h09354
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 46.39
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00039_grm
+    name: ID00039
+  - inputs:
+      - source: ID00039.Seismogram_FFI_0_1_ID00039_grm
+        name: Seismogram_FFI_0_1_ID00039_grm
+    size: 1.43
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00039_bsa
+    name: ID00040
+  - inputs:
+      - source: FFI_0_1_txt_variation-s06719-h04173
+        name: FFI_0_1_txt_variation-s06719-h04173
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 21.72
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00041_grm
+    name: ID00041
+  - inputs:
+      - source: ID00041.Seismogram_FFI_0_1_ID00041_grm
+        name: Seismogram_FFI_0_1_ID00041_grm
+    size: 1.42
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00041_bsa
+    name: ID00042
+  - inputs:
+      - source: FFI_0_1_txt_variation-s09265-h09011
+        name: FFI_0_1_txt_variation-s09265-h09011
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 36.15
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00043_grm
+    name: ID00043
+  - inputs:
+      - source: ID00043.Seismogram_FFI_0_1_ID00043_grm
+        name: Seismogram_FFI_0_1_ID00043_grm
+    size: 0.61
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00043_bsa
+    name: ID00044
+  - inputs:
+      - source: FFI_0_1_txt_variation-s03550-h00041
+        name: FFI_0_1_txt_variation-s03550-h00041
+      - source: ID00002.FFI_0_1_subfx_sgt
+        name: FFI_0_1_subfx_sgt
+      - source: ID00002.FFI_0_1_subfy_sgt
+        name: FFI_0_1_subfy_sgt
+    size: 50.93
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_1_ID00045_grm
+    name: ID00045
+  - inputs:
+      - source: ID00045.Seismogram_FFI_0_1_ID00045_grm
+        name: Seismogram_FFI_0_1_ID00045_grm
+    size: 0.8
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_1_ID00045_bsa
+    name: ID00046
+  - inputs:
+      - source: FFI_0_2_fx_sgt
+        name: FFI_0_2_fx_sgt
+      - source: FFI_0_2_fy_sgt
+        name: FFI_0_2_fy_sgt
+      - source: FFI_0_2_txt_variation-s00186-h01843
+        name: FFI_0_2_txt_variation-s00186-h01843
+    size: 90.75
+    outputs:
+      - size: 266173011
+        name: FFI_0_2_subfx_sgt
+      - size: 266173011
+        name: FFI_0_2_subfy_sgt
+    name: ID00047
+  - inputs:
+      - source: FFI_0_2_txt_variation-s01884-h03415
+        name: FFI_0_2_txt_variation-s01884-h03415
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 64.0
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00048_grm
+    name: ID00048
+  - inputs:
+      - source: ID00048.Seismogram_FFI_0_2_ID00048_grm
+        name: Seismogram_FFI_0_2_ID00048_grm
+    size: 1.0
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00048_bsa
+    name: ID00049
+  - inputs:
+      - source: FFI_0_2_txt_variation-s03613-h02723
+        name: FFI_0_2_txt_variation-s03613-h02723
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 57.66
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00050_grm
+    name: ID00050
+  - inputs:
+      - source: ID00050.Seismogram_FFI_0_2_ID00050_grm
+        name: Seismogram_FFI_0_2_ID00050_grm
+    size: 1.14
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00050_bsa
+    name: ID00051
+  - inputs:
+      - source: FFI_0_2_txt_variation-s09973-h01755
+        name: FFI_0_2_txt_variation-s09973-h01755
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 43.33
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00052_grm
+    name: ID00052
+  - inputs:
+      - source: ID00052.Seismogram_FFI_0_2_ID00052_grm
+        name: Seismogram_FFI_0_2_ID00052_grm
+    size: 0.95
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00052_bsa
+    name: ID00053
+  - inputs:
+      - source: FFI_0_2_txt_variation-s00853-h01852
+        name: FFI_0_2_txt_variation-s00853-h01852
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 50.55
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00054_grm
+    name: ID00054
+  - inputs:
+      - source: ID00054.Seismogram_FFI_0_2_ID00054_grm
+        name: Seismogram_FFI_0_2_ID00054_grm
+    size: 1.32
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00054_bsa
+    name: ID00055
+  - inputs:
+      - source: FFI_0_2_txt_variation-s02360-h05632
+        name: FFI_0_2_txt_variation-s02360-h05632
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 35.84
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00056_grm
+    name: ID00056
+  - inputs:
+      - source: ID00056.Seismogram_FFI_0_2_ID00056_grm
+        name: Seismogram_FFI_0_2_ID00056_grm
+    size: 0.77
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00056_bsa
+    name: ID00057
+  - inputs:
+      - source: FFI_0_2_txt_variation-s02933-h03704
+        name: FFI_0_2_txt_variation-s02933-h03704
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 31.79
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00058_grm
+    name: ID00058
+  - inputs:
+      - source: ID00058.Seismogram_FFI_0_2_ID00058_grm
+        name: Seismogram_FFI_0_2_ID00058_grm
+    size: 1.58
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00058_bsa
+    name: ID00059
+  - inputs:
+      - source: FFI_0_2_txt_variation-s06320-h02103
+        name: FFI_0_2_txt_variation-s06320-h02103
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 39.21
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00060_grm
+    name: ID00060
+  - inputs:
+      - source: ID00060.Seismogram_FFI_0_2_ID00060_grm
+        name: Seismogram_FFI_0_2_ID00060_grm
+    size: 0.92
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00060_bsa
+    name: ID00061
+  - inputs:
+      - source: FFI_0_2_txt_variation-s09852-h00079
+        name: FFI_0_2_txt_variation-s09852-h00079
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 30.44
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00062_grm
+    name: ID00062
+  - inputs:
+      - source: ID00062.Seismogram_FFI_0_2_ID00062_grm
+        name: Seismogram_FFI_0_2_ID00062_grm
+    size: 1.47
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00062_bsa
+    name: ID00063
+  - inputs:
+      - source: FFI_0_2_txt_variation-s01095-h09747
+        name: FFI_0_2_txt_variation-s01095-h09747
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 22.29
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00064_grm
+    name: ID00064
+  - inputs:
+      - source: ID00064.Seismogram_FFI_0_2_ID00064_grm
+        name: Seismogram_FFI_0_2_ID00064_grm
+    size: 0.78
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00064_bsa
+    name: ID00065
+  - inputs:
+      - source: FFI_0_2_txt_variation-s09369-h08483
+        name: FFI_0_2_txt_variation-s09369-h08483
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 29.44
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00066_grm
+    name: ID00066
+  - inputs:
+      - source: ID00066.Seismogram_FFI_0_2_ID00066_grm
+        name: Seismogram_FFI_0_2_ID00066_grm
+    size: 0.61
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00066_bsa
+    name: ID00067
+  - inputs:
+      - source: FFI_0_2_txt_variation-s06799-h07438
+        name: FFI_0_2_txt_variation-s06799-h07438
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 23.02
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00068_grm
+    name: ID00068
+  - inputs:
+      - source: ID00068.Seismogram_FFI_0_2_ID00068_grm
+        name: Seismogram_FFI_0_2_ID00068_grm
+    size: 1.44
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00068_bsa
+    name: ID00069
+  - inputs:
+      - source: FFI_0_2_txt_variation-s09172-h05356
+        name: FFI_0_2_txt_variation-s09172-h05356
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 26.94
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00070_grm
+    name: ID00070
+  - inputs:
+      - source: ID00070.Seismogram_FFI_0_2_ID00070_grm
+        name: Seismogram_FFI_0_2_ID00070_grm
+    size: 1.08
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00070_bsa
+    name: ID00071
+  - inputs:
+      - source: FFI_0_2_txt_variation-s08426-h08692
+        name: FFI_0_2_txt_variation-s08426-h08692
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 63.09
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00072_grm
+    name: ID00072
+  - inputs:
+      - source: ID00072.Seismogram_FFI_0_2_ID00072_grm
+        name: Seismogram_FFI_0_2_ID00072_grm
+    size: 0.59
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00072_bsa
+    name: ID00073
+  - inputs:
+      - source: FFI_0_2_txt_variation-s06402-h02227
+        name: FFI_0_2_txt_variation-s06402-h02227
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 22.48
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00074_grm
+    name: ID00074
+  - inputs:
+      - source: ID00074.Seismogram_FFI_0_2_ID00074_grm
+        name: Seismogram_FFI_0_2_ID00074_grm
+    size: 0.85
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00074_bsa
+    name: ID00075
+  - inputs:
+      - source: FFI_0_2_txt_variation-s04946-h00030
+        name: FFI_0_2_txt_variation-s04946-h00030
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 43.56
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00076_grm
+    name: ID00076
+  - inputs:
+      - source: ID00076.Seismogram_FFI_0_2_ID00076_grm
+        name: Seismogram_FFI_0_2_ID00076_grm
+    size: 0.85
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00076_bsa
+    name: ID00077
+  - inputs:
+      - source: FFI_0_2_txt_variation-s02047-h07883
+        name: FFI_0_2_txt_variation-s02047-h07883
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 48.47
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00078_grm
+    name: ID00078
+  - inputs:
+      - source: ID00078.Seismogram_FFI_0_2_ID00078_grm
+        name: Seismogram_FFI_0_2_ID00078_grm
+    size: 1.55
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00078_bsa
+    name: ID00079
+  - inputs:
+      - source: FFI_0_2_txt_variation-s09614-h09513
+        name: FFI_0_2_txt_variation-s09614-h09513
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 35.34
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00080_grm
+    name: ID00080
+  - inputs:
+      - source: ID00080.Seismogram_FFI_0_2_ID00080_grm
+        name: Seismogram_FFI_0_2_ID00080_grm
+    size: 0.72
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00080_bsa
+    name: ID00081
+  - inputs:
+      - source: FFI_0_2_txt_variation-s09269-h07526
+        name: FFI_0_2_txt_variation-s09269-h07526
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 21.79
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00082_grm
+    name: ID00082
+  - inputs:
+      - source: ID00082.Seismogram_FFI_0_2_ID00082_grm
+        name: Seismogram_FFI_0_2_ID00082_grm
+    size: 1.55
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00082_bsa
+    name: ID00083
+  - inputs:
+      - source: FFI_0_2_txt_variation-s03936-h06688
+        name: FFI_0_2_txt_variation-s03936-h06688
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 62.64
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00084_grm
+    name: ID00084
+  - inputs:
+      - source: ID00084.Seismogram_FFI_0_2_ID00084_grm
+        name: Seismogram_FFI_0_2_ID00084_grm
+    size: 0.65
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00084_bsa
+    name: ID00085
+  - inputs:
+      - source: FFI_0_2_txt_variation-s09258-h06967
+        name: FFI_0_2_txt_variation-s09258-h06967
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 58.81
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00086_grm
+    name: ID00086
+  - inputs:
+      - source: ID00086.Seismogram_FFI_0_2_ID00086_grm
+        name: Seismogram_FFI_0_2_ID00086_grm
+    size: 1.49
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00086_bsa
+    name: ID00087
+  - inputs:
+      - source: FFI_0_2_txt_variation-s06184-h05000
+        name: FFI_0_2_txt_variation-s06184-h05000
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 55.66
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00088_grm
+    name: ID00088
+  - inputs:
+      - source: ID00088.Seismogram_FFI_0_2_ID00088_grm
+        name: Seismogram_FFI_0_2_ID00088_grm
+    size: 0.71
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00088_bsa
+    name: ID00089
+  - inputs:
+      - source: FFI_0_2_txt_variation-s05030-h08343
+        name: FFI_0_2_txt_variation-s05030-h08343
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 27.64
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00090_grm
+    name: ID00090
+  - inputs:
+      - source: ID00090.Seismogram_FFI_0_2_ID00090_grm
+        name: Seismogram_FFI_0_2_ID00090_grm
+    size: 1.19
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00090_bsa
+    name: ID00091
+  - inputs:
+      - source: FFI_0_2_txt_variation-s00691-h01726
+        name: FFI_0_2_txt_variation-s00691-h01726
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 21.92
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00092_grm
+    name: ID00092
+  - inputs:
+      - source: ID00092.Seismogram_FFI_0_2_ID00092_grm
+        name: Seismogram_FFI_0_2_ID00092_grm
+    size: 1.13
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00092_bsa
+    name: ID00093
+  - inputs:
+      - source: FFI_0_2_txt_variation-s06145-h00281
+        name: FFI_0_2_txt_variation-s06145-h00281
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 45.25
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00094_grm
+    name: ID00094
+  - inputs:
+      - source: ID00094.Seismogram_FFI_0_2_ID00094_grm
+        name: Seismogram_FFI_0_2_ID00094_grm
+    size: 0.75
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00094_bsa
+    name: ID00095
+  - inputs:
+      - source: FFI_0_2_txt_variation-s09948-h07733
+        name: FFI_0_2_txt_variation-s09948-h07733
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 42.5
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00096_grm
+    name: ID00096
+  - inputs:
+      - source: ID00096.Seismogram_FFI_0_2_ID00096_grm
+        name: Seismogram_FFI_0_2_ID00096_grm
+    size: 0.89
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00096_bsa
+    name: ID00097
+  - inputs:
+      - source: FFI_0_2_txt_variation-s00186-h01843
+        name: FFI_0_2_txt_variation-s00186-h01843
+      - source: ID00047.FFI_0_2_subfx_sgt
+        name: FFI_0_2_subfx_sgt
+      - source: ID00047.FFI_0_2_subfy_sgt
+        name: FFI_0_2_subfy_sgt
+    size: 49.8
+    outputs:
+      - size: 24000
+        name: Seismogram_FFI_0_2_ID00098_grm
+    name: ID00098
+  - inputs:
+      - source: ID00098.Seismogram_FFI_0_2_ID00098_grm
+        name: Seismogram_FFI_0_2_ID00098_grm
+    size: 0.59
+    outputs:
+      - size: 216
+        name: PeakVals_FFI_0_2_ID00098_bsa
+    name: ID00099
+outputs:
+  - source: ID00000.Cybershake_PSA_zip
+    name: Cybershake_PSA_zip
+  - source: ID00001.Cybershake_Seismograms_zip
+    name: Cybershake_Seismograms_zip
+name: ./resources/workflows/CyberShake_100.xml

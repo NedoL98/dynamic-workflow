@@ -1,0 +1,1682 @@
+inputs:
+  - size: 4222080
+    name: 2mass-atlas-ID00011s-jID00011_fits
+  - size: 4222080
+    name: 2mass-atlas-ID00015s-jID00015_fits
+  - size: 4222080
+    name: 2mass-atlas-ID00002s-jID00002_fits
+  - size: 4222080
+    name: 2mass-atlas-ID00014s-jID00014_fits
+  - size: 4222080
+    name: 2mass-atlas-ID00003s-jID00003_fits
+  - size: 4222080
+    name: 2mass-atlas-ID00013s-jID00013_fits
+  - size: 2680
+    name: cimages_tbl
+  - size: 4222080
+    name: 2mass-atlas-ID00009s-jID00009_fits
+  - size: 4222080
+    name: 2mass-atlas-ID00005s-jID00005_fits
+  - size: 4222080
+    name: 2mass-atlas-ID00010s-jID00010_fits
+  - size: 4222080
+    name: 2mass-atlas-ID00000s-jID00000_fits
+  - size: 4222080
+    name: 2mass-atlas-ID00006s-jID00006_fits
+  - size: 4222080
+    name: 2mass-atlas-ID00001s-jID00001_fits
+  - size: 4222080
+    name: 2mass-atlas-ID00012s-jID00012_fits
+  - size: 304
+    name: region_hdr
+  - size: 2680
+    name: pimages_tbl
+  - size: 1690
+    name: fits_list_tbl
+  - size: 4222080
+    name: 2mass-atlas-ID00007s-jID00007_fits
+  - size: 4222080
+    name: 2mass-atlas-ID00004s-jID00004_fits
+  - size: 4222080
+    name: 2mass-atlas-ID00008s-jID00008_fits
+tasks:
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: 2mass-atlas-ID00000s-jID00000_fits
+        name: 2mass-atlas-ID00000s-jID00000_fits
+    size: 13.85
+    outputs:
+      - size: 4157716
+        name: p2mass-atlas-ID00000s-jID00000_fits
+      - size: 4157716
+        name: p2mass-atlas-ID00000s-jID00000_area_fits
+    name: ID00000
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: 2mass-atlas-ID00001s-jID00001_fits
+        name: 2mass-atlas-ID00001s-jID00001_fits
+    size: 13.11
+    outputs:
+      - size: 4183167
+        name: p2mass-atlas-ID00001s-jID00001_fits
+      - size: 4183167
+        name: p2mass-atlas-ID00001s-jID00001_area_fits
+    name: ID00001
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: 2mass-atlas-ID00002s-jID00002_fits
+        name: 2mass-atlas-ID00002s-jID00002_fits
+    size: 13.42
+    outputs:
+      - size: 4163104
+        name: p2mass-atlas-ID00002s-jID00002_fits
+      - size: 4163104
+        name: p2mass-atlas-ID00002s-jID00002_area_fits
+    name: ID00002
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: 2mass-atlas-ID00003s-jID00003_fits
+        name: 2mass-atlas-ID00003s-jID00003_fits
+    size: 13.3
+    outputs:
+      - size: 4160478
+        name: p2mass-atlas-ID00003s-jID00003_fits
+      - size: 4160478
+        name: p2mass-atlas-ID00003s-jID00003_area_fits
+    name: ID00003
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: 2mass-atlas-ID00004s-jID00004_fits
+        name: 2mass-atlas-ID00004s-jID00004_fits
+    size: 13.16
+    outputs:
+      - size: 4146308
+        name: p2mass-atlas-ID00004s-jID00004_fits
+      - size: 4146308
+        name: p2mass-atlas-ID00004s-jID00004_area_fits
+    name: ID00004
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: 2mass-atlas-ID00005s-jID00005_fits
+        name: 2mass-atlas-ID00005s-jID00005_fits
+    size: 13.57
+    outputs:
+      - size: 4157375
+        name: p2mass-atlas-ID00005s-jID00005_fits
+      - size: 4157375
+        name: p2mass-atlas-ID00005s-jID00005_area_fits
+    name: ID00005
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: 2mass-atlas-ID00006s-jID00006_fits
+        name: 2mass-atlas-ID00006s-jID00006_fits
+    size: 13.25
+    outputs:
+      - size: 4149715
+        name: p2mass-atlas-ID00006s-jID00006_fits
+      - size: 4149715
+        name: p2mass-atlas-ID00006s-jID00006_area_fits
+    name: ID00006
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: 2mass-atlas-ID00007s-jID00007_fits
+        name: 2mass-atlas-ID00007s-jID00007_fits
+    size: 13.65
+    outputs:
+      - size: 4151438
+        name: p2mass-atlas-ID00007s-jID00007_fits
+      - size: 4151438
+        name: p2mass-atlas-ID00007s-jID00007_area_fits
+    name: ID00007
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: 2mass-atlas-ID00008s-jID00008_fits
+        name: 2mass-atlas-ID00008s-jID00008_fits
+    size: 13.63
+    outputs:
+      - size: 4158069
+        name: p2mass-atlas-ID00008s-jID00008_fits
+      - size: 4158069
+        name: p2mass-atlas-ID00008s-jID00008_area_fits
+    name: ID00008
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: 2mass-atlas-ID00009s-jID00009_fits
+        name: 2mass-atlas-ID00009s-jID00009_fits
+    size: 13.7
+    outputs:
+      - size: 4162206
+        name: p2mass-atlas-ID00009s-jID00009_fits
+      - size: 4162206
+        name: p2mass-atlas-ID00009s-jID00009_area_fits
+    name: ID00009
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: 2mass-atlas-ID00010s-jID00010_fits
+        name: 2mass-atlas-ID00010s-jID00010_fits
+    size: 13.55
+    outputs:
+      - size: 4156691
+        name: p2mass-atlas-ID00010s-jID00010_fits
+      - size: 4156691
+        name: p2mass-atlas-ID00010s-jID00010_area_fits
+    name: ID00010
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: 2mass-atlas-ID00011s-jID00011_fits
+        name: 2mass-atlas-ID00011s-jID00011_fits
+    size: 13.81
+    outputs:
+      - size: 4164317
+        name: p2mass-atlas-ID00011s-jID00011_fits
+      - size: 4164317
+        name: p2mass-atlas-ID00011s-jID00011_area_fits
+    name: ID00011
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: 2mass-atlas-ID00012s-jID00012_fits
+        name: 2mass-atlas-ID00012s-jID00012_fits
+    size: 13.62
+    outputs:
+      - size: 4165693
+        name: p2mass-atlas-ID00012s-jID00012_fits
+      - size: 4165693
+        name: p2mass-atlas-ID00012s-jID00012_area_fits
+    name: ID00012
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: 2mass-atlas-ID00013s-jID00013_fits
+        name: 2mass-atlas-ID00013s-jID00013_fits
+    size: 13.36
+    outputs:
+      - size: 4158003
+        name: p2mass-atlas-ID00013s-jID00013_fits
+      - size: 4158003
+        name: p2mass-atlas-ID00013s-jID00013_area_fits
+    name: ID00013
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: 2mass-atlas-ID00014s-jID00014_fits
+        name: 2mass-atlas-ID00014s-jID00014_fits
+    size: 13.17
+    outputs:
+      - size: 4160320
+        name: p2mass-atlas-ID00014s-jID00014_fits
+      - size: 4160320
+        name: p2mass-atlas-ID00014s-jID00014_area_fits
+    name: ID00014
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: 2mass-atlas-ID00015s-jID00015_fits
+        name: 2mass-atlas-ID00015s-jID00015_fits
+    size: 13.58
+    outputs:
+      - size: 4159619
+        name: p2mass-atlas-ID00015s-jID00015_fits
+      - size: 4159619
+        name: p2mass-atlas-ID00015s-jID00015_area_fits
+    name: ID00015
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00000.p2mass-atlas-ID00000s-jID00000_fits
+        name: p2mass-atlas-ID00000s-jID00000_fits
+      - source: ID00000.p2mass-atlas-ID00000s-jID00000_area_fits
+        name: p2mass-atlas-ID00000s-jID00000_area_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_fits
+        name: p2mass-atlas-ID00001s-jID00001_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_area_fits
+        name: p2mass-atlas-ID00001s-jID00001_area_fits
+    size: 10.57
+    outputs:
+      - size: 264
+        name: fit_txt
+      - size: 178931
+        name: diff_txt
+    name: ID00016
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00000.p2mass-atlas-ID00000s-jID00000_fits
+        name: p2mass-atlas-ID00000s-jID00000_fits
+      - source: ID00000.p2mass-atlas-ID00000s-jID00000_area_fits
+        name: p2mass-atlas-ID00000s-jID00000_area_fits
+      - source: ID00009.p2mass-atlas-ID00009s-jID00009_fits
+        name: p2mass-atlas-ID00009s-jID00009_fits
+      - source: ID00009.p2mass-atlas-ID00009s-jID00009_area_fits
+        name: p2mass-atlas-ID00009s-jID00009_area_fits
+    size: 10.6
+    outputs:
+      - size: 273
+        name: fit_txt
+      - size: 156550
+        name: diff_txt
+    name: ID00017
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00000.p2mass-atlas-ID00000s-jID00000_fits
+        name: p2mass-atlas-ID00000s-jID00000_fits
+      - source: ID00000.p2mass-atlas-ID00000s-jID00000_area_fits
+        name: p2mass-atlas-ID00000s-jID00000_area_fits
+      - source: ID00011.p2mass-atlas-ID00011s-jID00011_fits
+        name: p2mass-atlas-ID00011s-jID00011_fits
+      - source: ID00011.p2mass-atlas-ID00011s-jID00011_area_fits
+        name: p2mass-atlas-ID00011s-jID00011_area_fits
+    size: 10.58
+    outputs:
+      - size: 268
+        name: fit_txt
+      - size: 399793
+        name: diff_txt
+    name: ID00018
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00000.p2mass-atlas-ID00000s-jID00000_fits
+        name: p2mass-atlas-ID00000s-jID00000_fits
+      - source: ID00000.p2mass-atlas-ID00000s-jID00000_area_fits
+        name: p2mass-atlas-ID00000s-jID00000_area_fits
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_fits
+        name: p2mass-atlas-ID00013s-jID00013_fits
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_area_fits
+        name: p2mass-atlas-ID00013s-jID00013_area_fits
+    size: 10.64
+    outputs:
+      - size: 276
+        name: fit_txt
+      - size: 307002
+        name: diff_txt
+    name: ID00019
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_fits
+        name: p2mass-atlas-ID00001s-jID00001_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_area_fits
+        name: p2mass-atlas-ID00001s-jID00001_area_fits
+      - source: ID00000.p2mass-atlas-ID00000s-jID00000_fits
+        name: p2mass-atlas-ID00000s-jID00000_fits
+      - source: ID00000.p2mass-atlas-ID00000s-jID00000_area_fits
+        name: p2mass-atlas-ID00000s-jID00000_area_fits
+    size: 10.45
+    outputs:
+      - size: 273
+        name: fit_txt
+      - size: 368185
+        name: diff_txt
+    name: ID00020
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_fits
+        name: p2mass-atlas-ID00001s-jID00001_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_area_fits
+        name: p2mass-atlas-ID00001s-jID00001_area_fits
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_fits
+        name: p2mass-atlas-ID00003s-jID00003_fits
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_area_fits
+        name: p2mass-atlas-ID00003s-jID00003_area_fits
+    size: 10.64
+    outputs:
+      - size: 263
+        name: fit_txt
+      - size: 337755
+        name: diff_txt
+    name: ID00021
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_fits
+        name: p2mass-atlas-ID00001s-jID00001_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_area_fits
+        name: p2mass-atlas-ID00001s-jID00001_area_fits
+      - source: ID00006.p2mass-atlas-ID00006s-jID00006_fits
+        name: p2mass-atlas-ID00006s-jID00006_fits
+      - source: ID00006.p2mass-atlas-ID00006s-jID00006_area_fits
+        name: p2mass-atlas-ID00006s-jID00006_area_fits
+    size: 10.58
+    outputs:
+      - size: 260
+        name: fit_txt
+      - size: 198353
+        name: diff_txt
+    name: ID00022
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_fits
+        name: p2mass-atlas-ID00001s-jID00001_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_area_fits
+        name: p2mass-atlas-ID00001s-jID00001_area_fits
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_fits
+        name: p2mass-atlas-ID00007s-jID00007_fits
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_area_fits
+        name: p2mass-atlas-ID00007s-jID00007_area_fits
+    size: 10.74
+    outputs:
+      - size: 276
+        name: fit_txt
+      - size: 230511
+        name: diff_txt
+    name: ID00023
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_fits
+        name: p2mass-atlas-ID00001s-jID00001_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_area_fits
+        name: p2mass-atlas-ID00001s-jID00001_area_fits
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_fits
+        name: p2mass-atlas-ID00008s-jID00008_fits
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_area_fits
+        name: p2mass-atlas-ID00008s-jID00008_area_fits
+    size: 10.61
+    outputs:
+      - size: 266
+        name: fit_txt
+      - size: 400569
+        name: diff_txt
+    name: ID00024
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_fits
+        name: p2mass-atlas-ID00001s-jID00001_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_area_fits
+        name: p2mass-atlas-ID00001s-jID00001_area_fits
+      - source: ID00009.p2mass-atlas-ID00009s-jID00009_fits
+        name: p2mass-atlas-ID00009s-jID00009_fits
+      - source: ID00009.p2mass-atlas-ID00009s-jID00009_area_fits
+        name: p2mass-atlas-ID00009s-jID00009_area_fits
+    size: 10.58
+    outputs:
+      - size: 252
+        name: fit_txt
+      - size: 282709
+        name: diff_txt
+    name: ID00025
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_fits
+        name: p2mass-atlas-ID00001s-jID00001_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_area_fits
+        name: p2mass-atlas-ID00001s-jID00001_area_fits
+      - source: ID00012.p2mass-atlas-ID00012s-jID00012_fits
+        name: p2mass-atlas-ID00012s-jID00012_fits
+      - source: ID00012.p2mass-atlas-ID00012s-jID00012_area_fits
+        name: p2mass-atlas-ID00012s-jID00012_area_fits
+    size: 10.67
+    outputs:
+      - size: 259
+        name: fit_txt
+      - size: 351800
+        name: diff_txt
+    name: ID00026
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_fits
+        name: p2mass-atlas-ID00001s-jID00001_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_area_fits
+        name: p2mass-atlas-ID00001s-jID00001_area_fits
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_fits
+        name: p2mass-atlas-ID00013s-jID00013_fits
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_area_fits
+        name: p2mass-atlas-ID00013s-jID00013_area_fits
+    size: 10.67
+    outputs:
+      - size: 275
+        name: fit_txt
+      - size: 312503
+        name: diff_txt
+    name: ID00027
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_fits
+        name: p2mass-atlas-ID00001s-jID00001_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_area_fits
+        name: p2mass-atlas-ID00001s-jID00001_area_fits
+      - source: ID00015.p2mass-atlas-ID00015s-jID00015_fits
+        name: p2mass-atlas-ID00015s-jID00015_fits
+      - source: ID00015.p2mass-atlas-ID00015s-jID00015_area_fits
+        name: p2mass-atlas-ID00015s-jID00015_area_fits
+    size: 10.57
+    outputs:
+      - size: 275
+        name: fit_txt
+      - size: 373385
+        name: diff_txt
+    name: ID00028
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00002.p2mass-atlas-ID00002s-jID00002_fits
+        name: p2mass-atlas-ID00002s-jID00002_fits
+      - source: ID00002.p2mass-atlas-ID00002s-jID00002_area_fits
+        name: p2mass-atlas-ID00002s-jID00002_area_fits
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_fits
+        name: p2mass-atlas-ID00003s-jID00003_fits
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_area_fits
+        name: p2mass-atlas-ID00003s-jID00003_area_fits
+    size: 10.74
+    outputs:
+      - size: 265
+        name: fit_txt
+      - size: 249020
+        name: diff_txt
+    name: ID00029
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00002.p2mass-atlas-ID00002s-jID00002_fits
+        name: p2mass-atlas-ID00002s-jID00002_fits
+      - source: ID00002.p2mass-atlas-ID00002s-jID00002_area_fits
+        name: p2mass-atlas-ID00002s-jID00002_area_fits
+      - source: ID00006.p2mass-atlas-ID00006s-jID00006_fits
+        name: p2mass-atlas-ID00006s-jID00006_fits
+      - source: ID00006.p2mass-atlas-ID00006s-jID00006_area_fits
+        name: p2mass-atlas-ID00006s-jID00006_area_fits
+    size: 10.91
+    outputs:
+      - size: 256
+        name: fit_txt
+      - size: 378333
+        name: diff_txt
+    name: ID00030
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_fits
+        name: p2mass-atlas-ID00003s-jID00003_fits
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_area_fits
+        name: p2mass-atlas-ID00003s-jID00003_area_fits
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_fits
+        name: p2mass-atlas-ID00007s-jID00007_fits
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_area_fits
+        name: p2mass-atlas-ID00007s-jID00007_area_fits
+    size: 10.55
+    outputs:
+      - size: 276
+        name: fit_txt
+      - size: 386166
+        name: diff_txt
+    name: ID00031
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_fits
+        name: p2mass-atlas-ID00003s-jID00003_fits
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_area_fits
+        name: p2mass-atlas-ID00003s-jID00003_area_fits
+      - source: ID00012.p2mass-atlas-ID00012s-jID00012_fits
+        name: p2mass-atlas-ID00012s-jID00012_fits
+      - source: ID00012.p2mass-atlas-ID00012s-jID00012_area_fits
+        name: p2mass-atlas-ID00012s-jID00012_area_fits
+    size: 10.49
+    outputs:
+      - size: 271
+        name: fit_txt
+      - size: 236443
+        name: diff_txt
+    name: ID00032
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_fits
+        name: p2mass-atlas-ID00003s-jID00003_fits
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_area_fits
+        name: p2mass-atlas-ID00003s-jID00003_area_fits
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_fits
+        name: p2mass-atlas-ID00013s-jID00013_fits
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_area_fits
+        name: p2mass-atlas-ID00013s-jID00013_area_fits
+    size: 10.61
+    outputs:
+      - size: 275
+        name: fit_txt
+      - size: 350882
+        name: diff_txt
+    name: ID00033
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_fits
+        name: p2mass-atlas-ID00003s-jID00003_fits
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_area_fits
+        name: p2mass-atlas-ID00003s-jID00003_area_fits
+      - source: ID00015.p2mass-atlas-ID00015s-jID00015_fits
+        name: p2mass-atlas-ID00015s-jID00015_fits
+      - source: ID00015.p2mass-atlas-ID00015s-jID00015_area_fits
+        name: p2mass-atlas-ID00015s-jID00015_area_fits
+    size: 10.53
+    outputs:
+      - size: 285
+        name: fit_txt
+      - size: 221385
+        name: diff_txt
+    name: ID00034
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00004.p2mass-atlas-ID00004s-jID00004_fits
+        name: p2mass-atlas-ID00004s-jID00004_fits
+      - source: ID00004.p2mass-atlas-ID00004s-jID00004_area_fits
+        name: p2mass-atlas-ID00004s-jID00004_area_fits
+      - source: ID00002.p2mass-atlas-ID00002s-jID00002_fits
+        name: p2mass-atlas-ID00002s-jID00002_fits
+      - source: ID00002.p2mass-atlas-ID00002s-jID00002_area_fits
+        name: p2mass-atlas-ID00002s-jID00002_area_fits
+    size: 10.53
+    outputs:
+      - size: 269
+        name: fit_txt
+      - size: 344835
+        name: diff_txt
+    name: ID00035
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00004.p2mass-atlas-ID00004s-jID00004_fits
+        name: p2mass-atlas-ID00004s-jID00004_fits
+      - source: ID00004.p2mass-atlas-ID00004s-jID00004_area_fits
+        name: p2mass-atlas-ID00004s-jID00004_area_fits
+      - source: ID00012.p2mass-atlas-ID00012s-jID00012_fits
+        name: p2mass-atlas-ID00012s-jID00012_fits
+      - source: ID00012.p2mass-atlas-ID00012s-jID00012_area_fits
+        name: p2mass-atlas-ID00012s-jID00012_area_fits
+    size: 10.67
+    outputs:
+      - size: 289
+        name: fit_txt
+      - size: 358810
+        name: diff_txt
+    name: ID00036
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00004.p2mass-atlas-ID00004s-jID00004_fits
+        name: p2mass-atlas-ID00004s-jID00004_fits
+      - source: ID00004.p2mass-atlas-ID00004s-jID00004_area_fits
+        name: p2mass-atlas-ID00004s-jID00004_area_fits
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_fits
+        name: p2mass-atlas-ID00013s-jID00013_fits
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_area_fits
+        name: p2mass-atlas-ID00013s-jID00013_area_fits
+    size: 10.54
+    outputs:
+      - size: 273
+        name: fit_txt
+      - size: 349453
+        name: diff_txt
+    name: ID00037
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00005.p2mass-atlas-ID00005s-jID00005_fits
+        name: p2mass-atlas-ID00005s-jID00005_fits
+      - source: ID00005.p2mass-atlas-ID00005s-jID00005_area_fits
+        name: p2mass-atlas-ID00005s-jID00005_area_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_fits
+        name: p2mass-atlas-ID00001s-jID00001_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_area_fits
+        name: p2mass-atlas-ID00001s-jID00001_area_fits
+    size: 10.41
+    outputs:
+      - size: 266
+        name: fit_txt
+      - size: 183983
+        name: diff_txt
+    name: ID00038
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00006.p2mass-atlas-ID00006s-jID00006_fits
+        name: p2mass-atlas-ID00006s-jID00006_fits
+      - source: ID00006.p2mass-atlas-ID00006s-jID00006_area_fits
+        name: p2mass-atlas-ID00006s-jID00006_area_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_fits
+        name: p2mass-atlas-ID00001s-jID00001_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_area_fits
+        name: p2mass-atlas-ID00001s-jID00001_area_fits
+    size: 10.58
+    outputs:
+      - size: 266
+        name: fit_txt
+      - size: 227424
+        name: diff_txt
+    name: ID00039
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00006.p2mass-atlas-ID00006s-jID00006_fits
+        name: p2mass-atlas-ID00006s-jID00006_fits
+      - source: ID00006.p2mass-atlas-ID00006s-jID00006_area_fits
+        name: p2mass-atlas-ID00006s-jID00006_area_fits
+      - source: ID00004.p2mass-atlas-ID00004s-jID00004_fits
+        name: p2mass-atlas-ID00004s-jID00004_fits
+      - source: ID00004.p2mass-atlas-ID00004s-jID00004_area_fits
+        name: p2mass-atlas-ID00004s-jID00004_area_fits
+    size: 10.51
+    outputs:
+      - size: 275
+        name: fit_txt
+      - size: 345235
+        name: diff_txt
+    name: ID00040
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00006.p2mass-atlas-ID00006s-jID00006_fits
+        name: p2mass-atlas-ID00006s-jID00006_fits
+      - source: ID00006.p2mass-atlas-ID00006s-jID00006_area_fits
+        name: p2mass-atlas-ID00006s-jID00006_area_fits
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_fits
+        name: p2mass-atlas-ID00008s-jID00008_fits
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_area_fits
+        name: p2mass-atlas-ID00008s-jID00008_area_fits
+    size: 10.77
+    outputs:
+      - size: 257
+        name: fit_txt
+      - size: 356906
+        name: diff_txt
+    name: ID00041
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00006.p2mass-atlas-ID00006s-jID00006_fits
+        name: p2mass-atlas-ID00006s-jID00006_fits
+      - source: ID00006.p2mass-atlas-ID00006s-jID00006_area_fits
+        name: p2mass-atlas-ID00006s-jID00006_area_fits
+      - source: ID00009.p2mass-atlas-ID00009s-jID00009_fits
+        name: p2mass-atlas-ID00009s-jID00009_fits
+      - source: ID00009.p2mass-atlas-ID00009s-jID00009_area_fits
+        name: p2mass-atlas-ID00009s-jID00009_area_fits
+    size: 10.46
+    outputs:
+      - size: 263
+        name: fit_txt
+      - size: 411551
+        name: diff_txt
+    name: ID00042
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00006.p2mass-atlas-ID00006s-jID00006_fits
+        name: p2mass-atlas-ID00006s-jID00006_fits
+      - source: ID00006.p2mass-atlas-ID00006s-jID00006_area_fits
+        name: p2mass-atlas-ID00006s-jID00006_area_fits
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_fits
+        name: p2mass-atlas-ID00010s-jID00010_fits
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_area_fits
+        name: p2mass-atlas-ID00010s-jID00010_area_fits
+    size: 10.4
+    outputs:
+      - size: 275
+        name: fit_txt
+      - size: 249626
+        name: diff_txt
+    name: ID00043
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00006.p2mass-atlas-ID00006s-jID00006_fits
+        name: p2mass-atlas-ID00006s-jID00006_fits
+      - source: ID00006.p2mass-atlas-ID00006s-jID00006_area_fits
+        name: p2mass-atlas-ID00006s-jID00006_area_fits
+      - source: ID00012.p2mass-atlas-ID00012s-jID00012_fits
+        name: p2mass-atlas-ID00012s-jID00012_fits
+      - source: ID00012.p2mass-atlas-ID00012s-jID00012_area_fits
+        name: p2mass-atlas-ID00012s-jID00012_area_fits
+    size: 10.54
+    outputs:
+      - size: 273
+        name: fit_txt
+      - size: 336954
+        name: diff_txt
+    name: ID00044
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_fits
+        name: p2mass-atlas-ID00007s-jID00007_fits
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_area_fits
+        name: p2mass-atlas-ID00007s-jID00007_area_fits
+      - source: ID00000.p2mass-atlas-ID00000s-jID00000_fits
+        name: p2mass-atlas-ID00000s-jID00000_fits
+      - source: ID00000.p2mass-atlas-ID00000s-jID00000_area_fits
+        name: p2mass-atlas-ID00000s-jID00000_area_fits
+    size: 10.56
+    outputs:
+      - size: 272
+        name: fit_txt
+      - size: 211113
+        name: diff_txt
+    name: ID00045
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_fits
+        name: p2mass-atlas-ID00007s-jID00007_fits
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_area_fits
+        name: p2mass-atlas-ID00007s-jID00007_area_fits
+      - source: ID00002.p2mass-atlas-ID00002s-jID00002_fits
+        name: p2mass-atlas-ID00002s-jID00002_fits
+      - source: ID00002.p2mass-atlas-ID00002s-jID00002_area_fits
+        name: p2mass-atlas-ID00002s-jID00002_area_fits
+    size: 10.62
+    outputs:
+      - size: 281
+        name: fit_txt
+      - size: 227822
+        name: diff_txt
+    name: ID00046
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_fits
+        name: p2mass-atlas-ID00007s-jID00007_fits
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_area_fits
+        name: p2mass-atlas-ID00007s-jID00007_area_fits
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_fits
+        name: p2mass-atlas-ID00003s-jID00003_fits
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_area_fits
+        name: p2mass-atlas-ID00003s-jID00003_area_fits
+    size: 10.59
+    outputs:
+      - size: 268
+        name: fit_txt
+      - size: 321779
+        name: diff_txt
+    name: ID00047
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_fits
+        name: p2mass-atlas-ID00007s-jID00007_fits
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_area_fits
+        name: p2mass-atlas-ID00007s-jID00007_area_fits
+      - source: ID00011.p2mass-atlas-ID00011s-jID00011_fits
+        name: p2mass-atlas-ID00011s-jID00011_fits
+      - source: ID00011.p2mass-atlas-ID00011s-jID00011_area_fits
+        name: p2mass-atlas-ID00011s-jID00011_area_fits
+    size: 10.48
+    outputs:
+      - size: 288
+        name: fit_txt
+      - size: 385592
+        name: diff_txt
+    name: ID00048
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_fits
+        name: p2mass-atlas-ID00008s-jID00008_fits
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_area_fits
+        name: p2mass-atlas-ID00008s-jID00008_area_fits
+      - source: ID00004.p2mass-atlas-ID00004s-jID00004_fits
+        name: p2mass-atlas-ID00004s-jID00004_fits
+      - source: ID00004.p2mass-atlas-ID00004s-jID00004_area_fits
+        name: p2mass-atlas-ID00004s-jID00004_area_fits
+    size: 10.69
+    outputs:
+      - size: 275
+        name: fit_txt
+      - size: 193627
+        name: diff_txt
+    name: ID00049
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_fits
+        name: p2mass-atlas-ID00008s-jID00008_fits
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_area_fits
+        name: p2mass-atlas-ID00008s-jID00008_area_fits
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_fits
+        name: p2mass-atlas-ID00007s-jID00007_fits
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_area_fits
+        name: p2mass-atlas-ID00007s-jID00007_area_fits
+    size: 10.65
+    outputs:
+      - size: 271
+        name: fit_txt
+      - size: 334486
+        name: diff_txt
+    name: ID00050
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_fits
+        name: p2mass-atlas-ID00008s-jID00008_fits
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_area_fits
+        name: p2mass-atlas-ID00008s-jID00008_area_fits
+    size: 10.55
+    outputs:
+      - size: 282
+        name: fit_txt
+      - size: 418121
+        name: diff_txt
+    name: ID00051
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_fits
+        name: p2mass-atlas-ID00008s-jID00008_fits
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_area_fits
+        name: p2mass-atlas-ID00008s-jID00008_area_fits
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_fits
+        name: p2mass-atlas-ID00010s-jID00010_fits
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_area_fits
+        name: p2mass-atlas-ID00010s-jID00010_area_fits
+    size: 10.66
+    outputs:
+      - size: 259
+        name: fit_txt
+      - size: 158263
+        name: diff_txt
+    name: ID00052
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_fits
+        name: p2mass-atlas-ID00008s-jID00008_fits
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_area_fits
+        name: p2mass-atlas-ID00008s-jID00008_area_fits
+      - source: ID00011.p2mass-atlas-ID00011s-jID00011_fits
+        name: p2mass-atlas-ID00011s-jID00011_fits
+      - source: ID00011.p2mass-atlas-ID00011s-jID00011_area_fits
+        name: p2mass-atlas-ID00011s-jID00011_area_fits
+    size: 10.55
+    outputs:
+      - size: 284
+        name: fit_txt
+      - size: 360905
+        name: diff_txt
+    name: ID00053
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00009.p2mass-atlas-ID00009s-jID00009_fits
+        name: p2mass-atlas-ID00009s-jID00009_fits
+      - source: ID00009.p2mass-atlas-ID00009s-jID00009_area_fits
+        name: p2mass-atlas-ID00009s-jID00009_area_fits
+    size: 10.56
+    outputs:
+      - size: 262
+        name: fit_txt
+      - size: 371340
+        name: diff_txt
+    name: ID00054
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_fits
+        name: p2mass-atlas-ID00010s-jID00010_fits
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_area_fits
+        name: p2mass-atlas-ID00010s-jID00010_area_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_fits
+        name: p2mass-atlas-ID00001s-jID00001_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_area_fits
+        name: p2mass-atlas-ID00001s-jID00001_area_fits
+    size: 10.47
+    outputs:
+      - size: 270
+        name: fit_txt
+      - size: 143886
+        name: diff_txt
+    name: ID00055
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_fits
+        name: p2mass-atlas-ID00010s-jID00010_fits
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_area_fits
+        name: p2mass-atlas-ID00010s-jID00010_area_fits
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_fits
+        name: p2mass-atlas-ID00003s-jID00003_fits
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_area_fits
+        name: p2mass-atlas-ID00003s-jID00003_area_fits
+    size: 10.48
+    outputs:
+      - size: 258
+        name: fit_txt
+      - size: 353366
+        name: diff_txt
+    name: ID00056
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_fits
+        name: p2mass-atlas-ID00010s-jID00010_fits
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_area_fits
+        name: p2mass-atlas-ID00010s-jID00010_area_fits
+      - source: ID00005.p2mass-atlas-ID00005s-jID00005_fits
+        name: p2mass-atlas-ID00005s-jID00005_fits
+      - source: ID00005.p2mass-atlas-ID00005s-jID00005_area_fits
+        name: p2mass-atlas-ID00005s-jID00005_area_fits
+    size: 10.51
+    outputs:
+      - size: 250
+        name: fit_txt
+      - size: 321395
+        name: diff_txt
+    name: ID00057
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_fits
+        name: p2mass-atlas-ID00010s-jID00010_fits
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_area_fits
+        name: p2mass-atlas-ID00010s-jID00010_area_fits
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_fits
+        name: p2mass-atlas-ID00007s-jID00007_fits
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_area_fits
+        name: p2mass-atlas-ID00007s-jID00007_area_fits
+    size: 10.59
+    outputs:
+      - size: 286
+        name: fit_txt
+      - size: 225744
+        name: diff_txt
+    name: ID00058
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_fits
+        name: p2mass-atlas-ID00010s-jID00010_fits
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_area_fits
+        name: p2mass-atlas-ID00010s-jID00010_area_fits
+    size: 10.72
+    outputs:
+      - size: 281
+        name: fit_txt
+      - size: 352586
+        name: diff_txt
+    name: ID00059
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_fits
+        name: p2mass-atlas-ID00010s-jID00010_fits
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_area_fits
+        name: p2mass-atlas-ID00010s-jID00010_area_fits
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_fits
+        name: p2mass-atlas-ID00013s-jID00013_fits
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_area_fits
+        name: p2mass-atlas-ID00013s-jID00013_area_fits
+    size: 10.49
+    outputs:
+      - size: 273
+        name: fit_txt
+      - size: 198205
+        name: diff_txt
+    name: ID00060
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_fits
+        name: p2mass-atlas-ID00010s-jID00010_fits
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_area_fits
+        name: p2mass-atlas-ID00010s-jID00010_area_fits
+      - source: ID00014.p2mass-atlas-ID00014s-jID00014_fits
+        name: p2mass-atlas-ID00014s-jID00014_fits
+      - source: ID00014.p2mass-atlas-ID00014s-jID00014_area_fits
+        name: p2mass-atlas-ID00014s-jID00014_area_fits
+    size: 10.64
+    outputs:
+      - size: 275
+        name: fit_txt
+      - size: 168036
+        name: diff_txt
+    name: ID00061
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00011.p2mass-atlas-ID00011s-jID00011_fits
+        name: p2mass-atlas-ID00011s-jID00011_fits
+      - source: ID00011.p2mass-atlas-ID00011s-jID00011_area_fits
+        name: p2mass-atlas-ID00011s-jID00011_area_fits
+      - source: ID00000.p2mass-atlas-ID00000s-jID00000_fits
+        name: p2mass-atlas-ID00000s-jID00000_fits
+      - source: ID00000.p2mass-atlas-ID00000s-jID00000_area_fits
+        name: p2mass-atlas-ID00000s-jID00000_area_fits
+    size: 10.46
+    outputs:
+      - size: 285
+        name: fit_txt
+      - size: 344267
+        name: diff_txt
+    name: ID00062
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00011.p2mass-atlas-ID00011s-jID00011_fits
+        name: p2mass-atlas-ID00011s-jID00011_fits
+      - source: ID00011.p2mass-atlas-ID00011s-jID00011_area_fits
+        name: p2mass-atlas-ID00011s-jID00011_area_fits
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_fits
+        name: p2mass-atlas-ID00008s-jID00008_fits
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_area_fits
+        name: p2mass-atlas-ID00008s-jID00008_area_fits
+    size: 10.35
+    outputs:
+      - size: 266
+        name: fit_txt
+      - size: 213184
+        name: diff_txt
+    name: ID00063
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00011.p2mass-atlas-ID00011s-jID00011_fits
+        name: p2mass-atlas-ID00011s-jID00011_fits
+      - source: ID00011.p2mass-atlas-ID00011s-jID00011_area_fits
+        name: p2mass-atlas-ID00011s-jID00011_area_fits
+      - source: ID00014.p2mass-atlas-ID00014s-jID00014_fits
+        name: p2mass-atlas-ID00014s-jID00014_fits
+      - source: ID00014.p2mass-atlas-ID00014s-jID00014_area_fits
+        name: p2mass-atlas-ID00014s-jID00014_area_fits
+    size: 10.64
+    outputs:
+      - size: 272
+        name: fit_txt
+      - size: 368991
+        name: diff_txt
+    name: ID00064
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00012.p2mass-atlas-ID00012s-jID00012_fits
+        name: p2mass-atlas-ID00012s-jID00012_fits
+      - source: ID00012.p2mass-atlas-ID00012s-jID00012_area_fits
+        name: p2mass-atlas-ID00012s-jID00012_area_fits
+      - source: ID00004.p2mass-atlas-ID00004s-jID00004_fits
+        name: p2mass-atlas-ID00004s-jID00004_fits
+      - source: ID00004.p2mass-atlas-ID00004s-jID00004_area_fits
+        name: p2mass-atlas-ID00004s-jID00004_area_fits
+    size: 10.59
+    outputs:
+      - size: 278
+        name: fit_txt
+      - size: 157385
+        name: diff_txt
+    name: ID00065
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00012.p2mass-atlas-ID00012s-jID00012_fits
+        name: p2mass-atlas-ID00012s-jID00012_fits
+      - source: ID00012.p2mass-atlas-ID00012s-jID00012_area_fits
+        name: p2mass-atlas-ID00012s-jID00012_area_fits
+    size: 10.72
+    outputs:
+      - size: 268
+        name: fit_txt
+      - size: 316446
+        name: diff_txt
+    name: ID00066
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00012.p2mass-atlas-ID00012s-jID00012_fits
+        name: p2mass-atlas-ID00012s-jID00012_fits
+      - source: ID00012.p2mass-atlas-ID00012s-jID00012_area_fits
+        name: p2mass-atlas-ID00012s-jID00012_area_fits
+      - source: ID00015.p2mass-atlas-ID00015s-jID00015_fits
+        name: p2mass-atlas-ID00015s-jID00015_fits
+      - source: ID00015.p2mass-atlas-ID00015s-jID00015_area_fits
+        name: p2mass-atlas-ID00015s-jID00015_area_fits
+    size: 10.57
+    outputs:
+      - size: 292
+        name: fit_txt
+      - size: 274392
+        name: diff_txt
+    name: ID00067
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_fits
+        name: p2mass-atlas-ID00013s-jID00013_fits
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_area_fits
+        name: p2mass-atlas-ID00013s-jID00013_area_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_fits
+        name: p2mass-atlas-ID00001s-jID00001_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_area_fits
+        name: p2mass-atlas-ID00001s-jID00001_area_fits
+    size: 10.61
+    outputs:
+      - size: 271
+        name: fit_txt
+      - size: 251338
+        name: diff_txt
+    name: ID00068
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_fits
+        name: p2mass-atlas-ID00013s-jID00013_fits
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_area_fits
+        name: p2mass-atlas-ID00013s-jID00013_area_fits
+      - source: ID00005.p2mass-atlas-ID00005s-jID00005_fits
+        name: p2mass-atlas-ID00005s-jID00005_fits
+      - source: ID00005.p2mass-atlas-ID00005s-jID00005_area_fits
+        name: p2mass-atlas-ID00005s-jID00005_area_fits
+    size: 10.66
+    outputs:
+      - size: 258
+        name: fit_txt
+      - size: 259107
+        name: diff_txt
+    name: ID00069
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_fits
+        name: p2mass-atlas-ID00013s-jID00013_fits
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_area_fits
+        name: p2mass-atlas-ID00013s-jID00013_area_fits
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_fits
+        name: p2mass-atlas-ID00007s-jID00007_fits
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_area_fits
+        name: p2mass-atlas-ID00007s-jID00007_area_fits
+    size: 10.77
+    outputs:
+      - size: 274
+        name: fit_txt
+      - size: 420860
+        name: diff_txt
+    name: ID00070
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_fits
+        name: p2mass-atlas-ID00013s-jID00013_fits
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_area_fits
+        name: p2mass-atlas-ID00013s-jID00013_area_fits
+      - source: ID00012.p2mass-atlas-ID00012s-jID00012_fits
+        name: p2mass-atlas-ID00012s-jID00012_fits
+      - source: ID00012.p2mass-atlas-ID00012s-jID00012_area_fits
+        name: p2mass-atlas-ID00012s-jID00012_area_fits
+    size: 10.43
+    outputs:
+      - size: 280
+        name: fit_txt
+      - size: 165358
+        name: diff_txt
+    name: ID00071
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_fits
+        name: p2mass-atlas-ID00013s-jID00013_fits
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_area_fits
+        name: p2mass-atlas-ID00013s-jID00013_area_fits
+    size: 10.79
+    outputs:
+      - size: 270
+        name: fit_txt
+      - size: 254590
+        name: diff_txt
+    name: ID00072
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00015.p2mass-atlas-ID00015s-jID00015_fits
+        name: p2mass-atlas-ID00015s-jID00015_fits
+      - source: ID00015.p2mass-atlas-ID00015s-jID00015_area_fits
+        name: p2mass-atlas-ID00015s-jID00015_area_fits
+      - source: ID00002.p2mass-atlas-ID00002s-jID00002_fits
+        name: p2mass-atlas-ID00002s-jID00002_fits
+      - source: ID00002.p2mass-atlas-ID00002s-jID00002_area_fits
+        name: p2mass-atlas-ID00002s-jID00002_area_fits
+    size: 10.65
+    outputs:
+      - size: 278
+        name: fit_txt
+      - size: 308378
+        name: diff_txt
+    name: ID00073
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00015.p2mass-atlas-ID00015s-jID00015_fits
+        name: p2mass-atlas-ID00015s-jID00015_fits
+      - source: ID00015.p2mass-atlas-ID00015s-jID00015_area_fits
+        name: p2mass-atlas-ID00015s-jID00015_area_fits
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_fits
+        name: p2mass-atlas-ID00003s-jID00003_fits
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_area_fits
+        name: p2mass-atlas-ID00003s-jID00003_area_fits
+    size: 10.49
+    outputs:
+      - size: 274
+        name: fit_txt
+      - size: 377305
+        name: diff_txt
+    name: ID00074
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00015.p2mass-atlas-ID00015s-jID00015_fits
+        name: p2mass-atlas-ID00015s-jID00015_fits
+      - source: ID00015.p2mass-atlas-ID00015s-jID00015_area_fits
+        name: p2mass-atlas-ID00015s-jID00015_area_fits
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_fits
+        name: p2mass-atlas-ID00008s-jID00008_fits
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_area_fits
+        name: p2mass-atlas-ID00008s-jID00008_area_fits
+    size: 10.61
+    outputs:
+      - size: 265
+        name: fit_txt
+      - size: 286292
+        name: diff_txt
+    name: ID00075
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00015.p2mass-atlas-ID00015s-jID00015_fits
+        name: p2mass-atlas-ID00015s-jID00015_fits
+      - source: ID00015.p2mass-atlas-ID00015s-jID00015_area_fits
+        name: p2mass-atlas-ID00015s-jID00015_area_fits
+      - source: ID00011.p2mass-atlas-ID00011s-jID00011_fits
+        name: p2mass-atlas-ID00011s-jID00011_fits
+      - source: ID00011.p2mass-atlas-ID00011s-jID00011_area_fits
+        name: p2mass-atlas-ID00011s-jID00011_area_fits
+    size: 10.47
+    outputs:
+      - size: 276
+        name: fit_txt
+      - size: 161693
+        name: diff_txt
+    name: ID00076
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00015.p2mass-atlas-ID00015s-jID00015_fits
+        name: p2mass-atlas-ID00015s-jID00015_fits
+      - source: ID00015.p2mass-atlas-ID00015s-jID00015_area_fits
+        name: p2mass-atlas-ID00015s-jID00015_area_fits
+      - source: ID00014.p2mass-atlas-ID00014s-jID00014_fits
+        name: p2mass-atlas-ID00014s-jID00014_fits
+      - source: ID00014.p2mass-atlas-ID00014s-jID00014_area_fits
+        name: p2mass-atlas-ID00014s-jID00014_area_fits
+    size: 10.65
+    outputs:
+      - size: 263
+        name: fit_txt
+      - size: 309680
+        name: diff_txt
+    name: ID00077
+  - inputs:
+      - source: fits_list_tbl
+        name: fits_list_tbl
+      - source: ID00077.fit_txt
+        name: fit_txt
+      - source: ID00077.diff_txt
+        name: diff_txt
+    size: 4.96
+    outputs:
+      - size: 13017
+        name: fits_tbl
+    name: ID00078
+  - inputs:
+      - source: pimages_tbl
+        name: pimages_tbl
+      - source: ID00078.fits_tbl
+        name: fits_tbl
+    size: 5.34
+    outputs:
+      - size: 850
+        name: corrections_tbl
+    name: ID00079
+  - inputs:
+      - source: ID00079.corrections_tbl
+        name: corrections_tbl
+      - source: ID00000.p2mass-atlas-ID00000s-jID00000_fits
+        name: p2mass-atlas-ID00000s-jID00000_fits
+      - source: ID00000.p2mass-atlas-ID00000s-jID00000_area_fits
+        name: p2mass-atlas-ID00000s-jID00000_area_fits
+    size: 10.88
+    outputs:
+      - size: 4181573
+        name: c2mass-atlas-ID00000s-jID00000_area_fits
+      - size: 4181573
+        name: c2mass-atlas-ID00000s-jID00000_fits
+    name: ID00080
+  - inputs:
+      - source: ID00079.corrections_tbl
+        name: corrections_tbl
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_fits
+        name: p2mass-atlas-ID00001s-jID00001_fits
+      - source: ID00001.p2mass-atlas-ID00001s-jID00001_area_fits
+        name: p2mass-atlas-ID00001s-jID00001_area_fits
+    size: 10.96
+    outputs:
+      - size: 4145069
+        name: c2mass-atlas-ID00001s-jID00001_area_fits
+      - size: 4145069
+        name: c2mass-atlas-ID00001s-jID00001_fits
+    name: ID00081
+  - inputs:
+      - source: ID00079.corrections_tbl
+        name: corrections_tbl
+      - source: ID00002.p2mass-atlas-ID00002s-jID00002_fits
+        name: p2mass-atlas-ID00002s-jID00002_fits
+      - source: ID00002.p2mass-atlas-ID00002s-jID00002_area_fits
+        name: p2mass-atlas-ID00002s-jID00002_area_fits
+    size: 10.61
+    outputs:
+      - size: 4148062
+        name: c2mass-atlas-ID00002s-jID00002_area_fits
+      - size: 4148062
+        name: c2mass-atlas-ID00002s-jID00002_fits
+    name: ID00082
+  - inputs:
+      - source: ID00079.corrections_tbl
+        name: corrections_tbl
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_fits
+        name: p2mass-atlas-ID00003s-jID00003_fits
+      - source: ID00003.p2mass-atlas-ID00003s-jID00003_area_fits
+        name: p2mass-atlas-ID00003s-jID00003_area_fits
+    size: 10.73
+    outputs:
+      - size: 4168932
+        name: c2mass-atlas-ID00003s-jID00003_fits
+      - size: 4168932
+        name: c2mass-atlas-ID00003s-jID00003_area_fits
+    name: ID00083
+  - inputs:
+      - source: ID00079.corrections_tbl
+        name: corrections_tbl
+      - source: ID00004.p2mass-atlas-ID00004s-jID00004_fits
+        name: p2mass-atlas-ID00004s-jID00004_fits
+      - source: ID00004.p2mass-atlas-ID00004s-jID00004_area_fits
+        name: p2mass-atlas-ID00004s-jID00004_area_fits
+    size: 10.66
+    outputs:
+      - size: 4175052
+        name: c2mass-atlas-ID00004s-jID00004_fits
+      - size: 4175052
+        name: c2mass-atlas-ID00004s-jID00004_area_fits
+    name: ID00084
+  - inputs:
+      - source: ID00079.corrections_tbl
+        name: corrections_tbl
+      - source: ID00005.p2mass-atlas-ID00005s-jID00005_fits
+        name: p2mass-atlas-ID00005s-jID00005_fits
+      - source: ID00005.p2mass-atlas-ID00005s-jID00005_area_fits
+        name: p2mass-atlas-ID00005s-jID00005_area_fits
+    size: 10.49
+    outputs:
+      - size: 4168253
+        name: c2mass-atlas-ID00005s-jID00005_area_fits
+      - size: 4168253
+        name: c2mass-atlas-ID00005s-jID00005_fits
+    name: ID00085
+  - inputs:
+      - source: ID00079.corrections_tbl
+        name: corrections_tbl
+      - source: ID00006.p2mass-atlas-ID00006s-jID00006_fits
+        name: p2mass-atlas-ID00006s-jID00006_fits
+      - source: ID00006.p2mass-atlas-ID00006s-jID00006_area_fits
+        name: p2mass-atlas-ID00006s-jID00006_area_fits
+    size: 10.9
+    outputs:
+      - size: 4150555
+        name: c2mass-atlas-ID00006s-jID00006_area_fits
+      - size: 4150555
+        name: c2mass-atlas-ID00006s-jID00006_fits
+    name: ID00086
+  - inputs:
+      - source: ID00079.corrections_tbl
+        name: corrections_tbl
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_fits
+        name: p2mass-atlas-ID00007s-jID00007_fits
+      - source: ID00007.p2mass-atlas-ID00007s-jID00007_area_fits
+        name: p2mass-atlas-ID00007s-jID00007_area_fits
+    size: 10.75
+    outputs:
+      - size: 4167576
+        name: c2mass-atlas-ID00007s-jID00007_fits
+      - size: 4167576
+        name: c2mass-atlas-ID00007s-jID00007_area_fits
+    name: ID00087
+  - inputs:
+      - source: ID00079.corrections_tbl
+        name: corrections_tbl
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_fits
+        name: p2mass-atlas-ID00008s-jID00008_fits
+      - source: ID00008.p2mass-atlas-ID00008s-jID00008_area_fits
+        name: p2mass-atlas-ID00008s-jID00008_area_fits
+    size: 10.72
+    outputs:
+      - size: 4169285
+        name: c2mass-atlas-ID00008s-jID00008_fits
+      - size: 4169285
+        name: c2mass-atlas-ID00008s-jID00008_area_fits
+    name: ID00088
+  - inputs:
+      - source: ID00079.corrections_tbl
+        name: corrections_tbl
+      - source: ID00009.p2mass-atlas-ID00009s-jID00009_fits
+        name: p2mass-atlas-ID00009s-jID00009_fits
+      - source: ID00009.p2mass-atlas-ID00009s-jID00009_area_fits
+        name: p2mass-atlas-ID00009s-jID00009_area_fits
+    size: 10.86
+    outputs:
+      - size: 4163564
+        name: c2mass-atlas-ID00009s-jID00009_area_fits
+      - size: 4163564
+        name: c2mass-atlas-ID00009s-jID00009_fits
+    name: ID00089
+  - inputs:
+      - source: ID00079.corrections_tbl
+        name: corrections_tbl
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_fits
+        name: p2mass-atlas-ID00010s-jID00010_fits
+      - source: ID00010.p2mass-atlas-ID00010s-jID00010_area_fits
+        name: p2mass-atlas-ID00010s-jID00010_area_fits
+    size: 10.74
+    outputs:
+      - size: 4150193
+        name: c2mass-atlas-ID00010s-jID00010_area_fits
+      - size: 4150193
+        name: c2mass-atlas-ID00010s-jID00010_fits
+    name: ID00090
+  - inputs:
+      - source: ID00079.corrections_tbl
+        name: corrections_tbl
+      - source: ID00011.p2mass-atlas-ID00011s-jID00011_fits
+        name: p2mass-atlas-ID00011s-jID00011_fits
+      - source: ID00011.p2mass-atlas-ID00011s-jID00011_area_fits
+        name: p2mass-atlas-ID00011s-jID00011_area_fits
+    size: 10.69
+    outputs:
+      - size: 4171380
+        name: c2mass-atlas-ID00011s-jID00011_area_fits
+      - size: 4171380
+        name: c2mass-atlas-ID00011s-jID00011_fits
+    name: ID00091
+  - inputs:
+      - source: ID00079.corrections_tbl
+        name: corrections_tbl
+      - source: ID00012.p2mass-atlas-ID00012s-jID00012_fits
+        name: p2mass-atlas-ID00012s-jID00012_fits
+      - source: ID00012.p2mass-atlas-ID00012s-jID00012_area_fits
+        name: p2mass-atlas-ID00012s-jID00012_area_fits
+    size: 10.74
+    outputs:
+      - size: 4166972
+        name: c2mass-atlas-ID00012s-jID00012_area_fits
+      - size: 4166972
+        name: c2mass-atlas-ID00012s-jID00012_fits
+    name: ID00092
+  - inputs:
+      - source: ID00079.corrections_tbl
+        name: corrections_tbl
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_fits
+        name: p2mass-atlas-ID00013s-jID00013_fits
+      - source: ID00013.p2mass-atlas-ID00013s-jID00013_area_fits
+        name: p2mass-atlas-ID00013s-jID00013_area_fits
+    size: 10.69
+    outputs:
+      - size: 4176164
+        name: c2mass-atlas-ID00013s-jID00013_fits
+      - size: 4176164
+        name: c2mass-atlas-ID00013s-jID00013_area_fits
+    name: ID00093
+  - inputs:
+      - source: ID00079.corrections_tbl
+        name: corrections_tbl
+      - source: ID00014.p2mass-atlas-ID00014s-jID00014_fits
+        name: p2mass-atlas-ID00014s-jID00014_fits
+      - source: ID00014.p2mass-atlas-ID00014s-jID00014_area_fits
+        name: p2mass-atlas-ID00014s-jID00014_area_fits
+    size: 10.73
+    outputs:
+      - size: 4175565
+        name: c2mass-atlas-ID00014s-jID00014_fits
+      - size: 4175565
+        name: c2mass-atlas-ID00014s-jID00014_area_fits
+    name: ID00094
+  - inputs:
+      - source: ID00079.corrections_tbl
+        name: corrections_tbl
+      - source: ID00015.p2mass-atlas-ID00015s-jID00015_fits
+        name: p2mass-atlas-ID00015s-jID00015_fits
+      - source: ID00015.p2mass-atlas-ID00015s-jID00015_area_fits
+        name: p2mass-atlas-ID00015s-jID00015_area_fits
+    size: 10.78
+    outputs:
+      - size: 4165493
+        name: c2mass-atlas-ID00015s-jID00015_area_fits
+      - size: 4165493
+        name: c2mass-atlas-ID00015s-jID00015_fits
+    name: ID00095
+  - inputs:
+      - source: cimages_tbl
+        name: cimages_tbl
+      - source: ID00080.c2mass-atlas-ID00000s-jID00000_area_fits
+        name: c2mass-atlas-ID00000s-jID00000_area_fits
+      - source: ID00080.c2mass-atlas-ID00000s-jID00000_fits
+        name: c2mass-atlas-ID00000s-jID00000_fits
+      - source: ID00081.c2mass-atlas-ID00001s-jID00001_area_fits
+        name: c2mass-atlas-ID00001s-jID00001_area_fits
+      - source: ID00081.c2mass-atlas-ID00001s-jID00001_fits
+        name: c2mass-atlas-ID00001s-jID00001_fits
+      - source: ID00082.c2mass-atlas-ID00002s-jID00002_area_fits
+        name: c2mass-atlas-ID00002s-jID00002_area_fits
+      - source: ID00082.c2mass-atlas-ID00002s-jID00002_fits
+        name: c2mass-atlas-ID00002s-jID00002_fits
+      - source: ID00083.c2mass-atlas-ID00003s-jID00003_fits
+        name: c2mass-atlas-ID00003s-jID00003_fits
+      - source: ID00083.c2mass-atlas-ID00003s-jID00003_area_fits
+        name: c2mass-atlas-ID00003s-jID00003_area_fits
+      - source: ID00084.c2mass-atlas-ID00004s-jID00004_fits
+        name: c2mass-atlas-ID00004s-jID00004_fits
+      - source: ID00084.c2mass-atlas-ID00004s-jID00004_area_fits
+        name: c2mass-atlas-ID00004s-jID00004_area_fits
+      - source: ID00085.c2mass-atlas-ID00005s-jID00005_area_fits
+        name: c2mass-atlas-ID00005s-jID00005_area_fits
+      - source: ID00085.c2mass-atlas-ID00005s-jID00005_fits
+        name: c2mass-atlas-ID00005s-jID00005_fits
+      - source: ID00086.c2mass-atlas-ID00006s-jID00006_area_fits
+        name: c2mass-atlas-ID00006s-jID00006_area_fits
+      - source: ID00086.c2mass-atlas-ID00006s-jID00006_fits
+        name: c2mass-atlas-ID00006s-jID00006_fits
+      - source: ID00087.c2mass-atlas-ID00007s-jID00007_fits
+        name: c2mass-atlas-ID00007s-jID00007_fits
+      - source: ID00087.c2mass-atlas-ID00007s-jID00007_area_fits
+        name: c2mass-atlas-ID00007s-jID00007_area_fits
+      - source: ID00088.c2mass-atlas-ID00008s-jID00008_fits
+        name: c2mass-atlas-ID00008s-jID00008_fits
+      - source: ID00088.c2mass-atlas-ID00008s-jID00008_area_fits
+        name: c2mass-atlas-ID00008s-jID00008_area_fits
+      - source: ID00089.c2mass-atlas-ID00009s-jID00009_area_fits
+        name: c2mass-atlas-ID00009s-jID00009_area_fits
+      - source: ID00089.c2mass-atlas-ID00009s-jID00009_fits
+        name: c2mass-atlas-ID00009s-jID00009_fits
+      - source: ID00090.c2mass-atlas-ID00010s-jID00010_area_fits
+        name: c2mass-atlas-ID00010s-jID00010_area_fits
+      - source: ID00090.c2mass-atlas-ID00010s-jID00010_fits
+        name: c2mass-atlas-ID00010s-jID00010_fits
+      - source: ID00091.c2mass-atlas-ID00011s-jID00011_area_fits
+        name: c2mass-atlas-ID00011s-jID00011_area_fits
+      - source: ID00091.c2mass-atlas-ID00011s-jID00011_fits
+        name: c2mass-atlas-ID00011s-jID00011_fits
+      - source: ID00092.c2mass-atlas-ID00012s-jID00012_area_fits
+        name: c2mass-atlas-ID00012s-jID00012_area_fits
+      - source: ID00092.c2mass-atlas-ID00012s-jID00012_fits
+        name: c2mass-atlas-ID00012s-jID00012_fits
+      - source: ID00093.c2mass-atlas-ID00013s-jID00013_fits
+        name: c2mass-atlas-ID00013s-jID00013_fits
+      - source: ID00093.c2mass-atlas-ID00013s-jID00013_area_fits
+        name: c2mass-atlas-ID00013s-jID00013_area_fits
+      - source: ID00094.c2mass-atlas-ID00014s-jID00014_fits
+        name: c2mass-atlas-ID00014s-jID00014_fits
+      - source: ID00094.c2mass-atlas-ID00014s-jID00014_area_fits
+        name: c2mass-atlas-ID00014s-jID00014_area_fits
+      - source: ID00095.c2mass-atlas-ID00015s-jID00015_area_fits
+        name: c2mass-atlas-ID00015s-jID00015_area_fits
+      - source: ID00095.c2mass-atlas-ID00015s-jID00015_fits
+        name: c2mass-atlas-ID00015s-jID00015_fits
+    size: 7.63
+    outputs:
+      - size: 5734
+        name: newcimages_tbl
+    name: ID00096
+  - inputs:
+      - source: region_hdr
+        name: region_hdr
+      - source: ID00096.newcimages_tbl
+        name: newcimages_tbl
+    size: 9.6
+    outputs:
+      - size: 69432167
+        name: mosaic_ID00097_ID00097_fits
+      - size: 69432167
+        name: mosaic_ID00097_ID00097_area_fits
+    name: ID00097
+  - inputs:
+      - source: ID00097.mosaic_ID00097_ID00097_fits
+        name: mosaic_ID00097_ID00097_fits
+      - source: ID00097.mosaic_ID00097_ID00097_area_fits
+        name: mosaic_ID00097_ID00097_area_fits
+    size: 6.91
+    outputs:
+      - size: 2778398
+        name: shrunken_ID00098_ID00098_fits
+    name: ID00098
+  - inputs:
+      - source: ID00098.shrunken_ID00098_ID00098_fits
+        name: shrunken_ID00098_ID00098_fits
+    size: 0.83
+    outputs:
+      - size: 420195
+        name: shrunken_ID00098_ID00098_jpg
+    name: ID00099
+outputs:
+  - source: ID00099.shrunken_ID00098_ID00098_jpg
+    name: shrunken_ID00098_ID00098_jpg
+name: ./resources/workflows/Montage_100.xml

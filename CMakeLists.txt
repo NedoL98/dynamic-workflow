@@ -9,26 +9,26 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build")
 find_library(YAML_LIBRARY NAMES yaml-cpp)
 find_package(SimGrid 3.20 REQUIRED) # This template requires SimGrid v3.20
 
-include_directories(${SimGrid_INCLUDE_DIR})
+include_directories(${SimGrid_INCLUDE_DIR} src)
 
 add_executable(
     dynamic-workflow
-    common/common.cpp
-    main.cpp
-    schedulers/scheduler_base.cpp
-    schedulers/naive_scheduler.cpp
-    task.cpp
-    tasks_graph.cpp
+    src/common/common.cpp
+    src/main.cpp
+    src/schedulers/scheduler_base.cpp
+    src/schedulers/naive_scheduler.cpp
+    src/task.cpp
+    src/tasks_graph.cpp
 )
 
 target_link_libraries(dynamic-workflow ${SimGrid_LIBRARY} ${YAML_LIBRARY})
 
 add_custom_target(
     run_example
-    COMMAND dynamic-workflow ../small_platform.xml ../xml_yaml_parser/CyberShake_100.yml
+    COMMAND dynamic-workflow ${CMAKE_SOURCE_DIR}/resources/small_platform.xml ${CMAKE_SOURCE_DIR}/resources/workflows/CyberShake_100.yml
 )
 
 add_custom_target(
     run_parser
-    COMMAND python3.6 ../xml_yaml_parser/parser.py
+    COMMAND python3 ${CMAKE_SOURCE_DIR}/tools/xml_yaml_parser.py
 )
