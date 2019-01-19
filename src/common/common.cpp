@@ -1,6 +1,6 @@
 #include "common.h"
 
-double ParseNumber(const std::string& size, const std::vector<std::string>& suffixes) {
+double ParseSize(const std::string& size, const std::vector<std::string>& suffixes) {
     std::size_t suffixStart;
     double sizePrefix = std::stod(size, &suffixStart);
     if (suffixStart == size.size()) {
@@ -10,7 +10,7 @@ double ParseNumber(const std::string& size, const std::vector<std::string>& suff
         if (itSizeSuffix == suffixes.end()) {
             throw std::invalid_argument("Size suffix is incorrect!");
         }
-        return sizePrefix * pow(Base, itSizeSuffix - suffixes.begin());
+        return sizePrefix * pow(BASE, itSizeSuffix - suffixes.begin());
     }
 }
 
@@ -23,6 +23,6 @@ void TransformHostsProps() {
         if (!hostProps.count("memory")) {
             throw std::invalid_argument("No memory limit for host" + host->get_name() + "is specified");
         }
-        host->set_property("memory", std::to_string(ParseNumber(hostProps["memory"], SizeSuffixes)));
+        host->set_property("memory", std::to_string(ParseSize(hostProps["memory"], SizeSuffixes)));
     }
 }

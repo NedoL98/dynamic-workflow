@@ -20,7 +20,7 @@ TasksGraph::TasksGraph(std::string filepath) {
         }
         xbt_assert(inputDescription["size"], "Input size is not specified!");
         try {
-            Inputs[inputName] = ParseNumber(inputDescription["size"].as<std::string>(), SizeSuffixes);
+            Inputs[inputName] = ParseSize(inputDescription["size"].as<std::string>(), SizeSuffixes);
         } catch (std::exception& e) {
             XBT_ERROR("Can't parse input size: %s", e.what());
             XBT_WARN("Input size will be set to 0");

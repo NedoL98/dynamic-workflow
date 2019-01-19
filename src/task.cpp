@@ -53,7 +53,7 @@ Task::Task(const YAML::Node& taskDescription) {
             Memory = DefaultMemory;
         } else {
             try {
-                Memory = ParseNumber(taskDescription["requirements"]["memory"].as<std::string>(), SizeSuffixes);
+                Memory = ParseSize(taskDescription["requirements"]["memory"].as<std::string>(), SizeSuffixes);
             } catch (std::exception& e) {
                 XBT_ERROR("Can't parse memory requirement: %s", e.what());
                 XBT_WARN("Memory requirement will be set to %d", DefaultMemory);
@@ -64,7 +64,7 @@ Task::Task(const YAML::Node& taskDescription) {
 
     xbt_assert(taskDescription["size"], "Task size must be specified!");
     try {
-        Flops = ParseNumber(taskDescription["size"].as<std::string>(), PerformanceSuffixes);
+        Flops = ParseSize(taskDescription["size"].as<std::string>(), PerformanceSuffixes);
     } catch (std::exception& e) {
         xbt_assert("Can't parse size requirement: %s", e.what());
     }
@@ -120,7 +120,7 @@ void Task::AppendOutput(const std::string& name, const std::string& size) {
     }
     
     try {
-        Outputs[name] = ParseNumber(size, SizeSuffixes);
+        Outputs[name] = ParseSize(size, SizeSuffixes);
     } catch (std::exception& e) {
         XBT_ERROR("Can't parse output size: %s", e.what());
         XBT_WARN("Output size will be set to default value");

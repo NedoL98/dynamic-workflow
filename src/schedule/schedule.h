@@ -3,10 +3,12 @@
 #include <queue>
 #include <vector>
 using std::queue;
+using std::vector;
 
 
 class ScheduleItem {
     int taskId;
+    int priority;
 
 public:
     ScheduleItem();
@@ -35,5 +37,6 @@ class Schedule {
 public:
     Schedule(int hostsCount);
     void AddItem(int host, const ScheduleItem& item);
-    void GetItem(int host);
+    ScheduleItem GetItem(int host);
+    ScheduleItem PopItem(int host);
 };

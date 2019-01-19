@@ -1,3 +1,4 @@
+#include <cassert>
 #include <schedule/schedule.h>
 
 ScheduleItem::ScheduleItem():
@@ -37,17 +38,19 @@ bool ScheduleItem::operator<(const ScheduleItem& other) {
 
 HostSchedule::HostSchedule() {}
 void HostSchedule::AddItem(const ScheduleItem& item) {
-    plannedJobs.push_back(item);
+    plannedJobs.push(item);
 }
 
-ScheduleItem HostSchedule::GetItem() {
+ScheduleItem HostSchedule::GetItem() const {
     assert(plannedJobs.empty());
-    return plannedJobs.top();    
+    return plannedJobs.front();    
 }
 
-ScheduleItem HostSchedule::popItem() {
+ScheduleItem HostSchedule::PopItem() {
     assert(plannedJobs.empty());
-    return plannedJobs.pop_front();    
+    ScheduleItem result = plannedJobs.front();
+    plannedJobs.pop();    
+    return std::move(result);
 }
 
 bool HostSchedule::IsEmpty() const {
@@ -63,6 +66,10 @@ void Schedule::AddItem(int host, const ScheduleItem& item) {
     timeTable[host].AddItem(item);
 }
 
-void Schedule::GetItem(int host) {
+ScheduleItem Schedule::GetItem(int host) {
     return timeTable[host].GetItem();
+}
+
+ScheduleItem Schedule::PopItem(int host) {
+    return timeTable[host].PopItem();
 }
