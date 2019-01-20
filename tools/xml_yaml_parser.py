@@ -1,86 +1,98 @@
 from xml.etree import ElementTree
+from ruamel.yaml.comments import CommentedMap
 import ruamel.yaml
 import os
+import argparse
 
 yaml = ruamel.yaml.YAML()
 
-def MakeYaml(xmlFileName):
-    tree = ElementTree.parse(xmlFileName)
+def GetPreYaml(node, task_inputs, task_outputs, file_size, output_yaml):
+    if "id" in node.attrib:
+        task = {}
+        nodeId = node.attrib["id"]
+        task["name"] = nodeId
+        task["inputs"] = []
+        task["outputs"] = []
+        task["size"] = float(node.attrib["runtime"])
+        for child in node:
+            filename = child.attrib["file"].replace(".", "_")
+            if child.attrib["link"] == "input":
+                task["inputs"].append({"name": filename})
+                task_inputs.add(filename)
+            elif child.attrib["link"] == "output": 
+                task_outputs[filename] = nodeId
+                task["outputs"].append({"name": filename, "size": int(child.attrib["size"])})
+            file_size[filename] = int(child.attrib["size"])
+        output_yaml["tasks"].append(task)
+    else:
+        for child in node:
+            GetPreYaml(child, task_inputs, task_outputs, file_size, output_yaml)
 
-    outputYaml = {}
-    outputYaml["name"] = xmlFileName
-    outputYaml["tasks"] = []
+def GetTaskSources(workflow_inputs, task_outputs, output_yaml):
+    for task in output_yaml["tasks"]:
+        for input in task["inputs"]:
+            if input["name"] not in task_outputs:
+                input["source"] = input["name"]
+                workflow_inputs.add(input["name"])
+            else:
+                input["source"] = task_outputs[input["name"]] + "." + input["name"]
 
-    taskOutputs = {}
-    fileSize = {}
-    workflowInputs = set()
-    inputs = set()
+def InsertWorkflowInputs(workflow_inputs, file_size, output_yaml):
+    output_yaml.insert(1, "inputs", [])
+    for input_name in workflow_inputs:
+        output_yaml["inputs"].append({"name": input_name, "size": file_size[input_name]})
 
-    def GetPreYaml(node):
-        if "id" in node.attrib:
-            task = {}
-            nodeId = node.attrib["id"]
-            task["name"] = nodeId
-            task["inputs"] = []
-            task["outputs"] = []
-            task["size"] = float(node.attrib["runtime"])
-            for child in node:
-                filename = child.attrib["file"].replace(".", "_")
-                if child.attrib["link"] == "input":
-                    task["inputs"].append({"name": filename})
-                    inputs.add(filename)
-                elif child.attrib["link"] == "output": 
-                    taskOutputs[filename] = nodeId
-                    task["outputs"].append({"name": filename, "size": int(child.attrib["size"])})
-                fileSize[filename] = int(child.attrib["size"])
-            outputYaml["tasks"].append(task)
-        else:
-            for child in node:
-                GetPreYaml(child)
+def InsertWorkflowOutputs(workflow_inputs, task_outputs, output_yaml):
+    output_yaml.insert(2, "outputs", [])
+    for task in output_yaml["tasks"]:
+        for output in task["outputs"]:
+            output_name = output["name"]
+            if output_name not in workflow_inputs:
+                source = task_outputs[output_name] + "." + output_name
+                output_yaml["outputs"].append({"name": output_name, "source": source})
 
-    def GetSources():
-        for task in outputYaml["tasks"]:
-            for input in task["inputs"]:
-                if input["name"] not in taskOutputs:
-                    input["source"] = input["name"]
-                    workflowInputs.add(input["name"])
-                else:
-                    input["source"] = taskOutputs[input["name"]] + "." + input["name"]
+def MakeYaml(xml_filename, output_dir):
+    tree = ElementTree.parse(xml_filename)
 
-    def InsertInputs():
-        outputYaml["inputs"] = []
-        for inputName in workflowInputs:
-            outputYaml["inputs"].append({"name": inputName, "size": fileSize[inputName]})
+    output_yaml = CommentedMap()
+    output_yaml["name"] = xml_filename.split('/')[-1].replace("xml", "yml")
+    output_yaml["tasks"] = []
 
-    def InsertOutputs():
-        outputYaml["outputs"] = []
-        for task in outputYaml["tasks"]:
-            for output in task["outputs"]:
-                outputName = output["name"]
-                if outputName not in inputs:
-                    source = taskOutputs[outputName] + "." + outputName
-                    outputYaml["outputs"].append({"name": outputName, "source": source})
+    task_inputs = set()
+    task_outputs = CommentedMap()
+    file_size = CommentedMap()
 
-    def GetYaml(root):
-        GetPreYaml(root)
-        
-        # Set a source for each input file
-        GetSources()
-        
-        # Insert all workflow inputs
-        InsertInputs()
-        
-        # Insert all workflow outputs
-        InsertOutputs()
+    workflow_inputs = set()
 
-    GetYaml(tree.getroot())
+    GetPreYaml(tree.getroot(), task_inputs, task_outputs, file_size, output_yaml)
 
-    with open(xmlFileName.replace("xml", "yml"), 'w') as outfile:
+    GetTaskSources(workflow_inputs, task_outputs, output_yaml)
+
+    InsertWorkflowInputs(workflow_inputs, file_size, output_yaml)
+
+    InsertWorkflowOutputs(workflow_inputs, task_outputs, output_yaml)
+
+    with open(output_dir + output_yaml["name"], 'w+') as outfile:
         yaml.indent(offset = 2, sequence = 4)
-        yaml.dump(outputYaml, outfile)
+        yaml.dump(output_yaml, outfile)
 
-for dirName, subDirList, fileList in os.walk("./resources/workflows"):
-    for fileName in fileList:
-        if fileName.find(".xml") != -1:
-            print(dirName, fileName)
-            MakeYaml(dirName + '/' + fileName)
+parser = argparse.ArgumentParser(description = "xml to yml converter")
+parser.add_argument("output_dir", type = str, help = 'Path to output directory')
+parser.add_argument("filepaths", nargs = '+', help = 'Path to xml platform descriptions that should be converted')
+args = parser.parse_args()
+
+if args.output_dir is not None:
+    if not os.path.isdir(args.output_dir):
+        print(args.output_dir + ' is not a directory!')
+        exit(0)
+    if not args.output_dir.endswith('/'):
+        args.output_dir += '/'
+
+for filepath in args.filepaths:
+    if not os.path.isfile(filepath):
+        print(filepath + ' is not a file!')
+    else:
+        try:
+            MakeYaml(filepath, args.output_dir)
+        except:
+            print('Error while parsing ' + filepath)

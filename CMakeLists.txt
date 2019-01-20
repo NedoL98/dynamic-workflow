@@ -30,6 +30,11 @@ add_custom_target(
 )
 
 add_custom_target(
-    run_parser
+    parse_all_workflows
     COMMAND python3 ${CMAKE_SOURCE_DIR}/tools/xml_yaml_parser.py
+    ${CMAKE_SOURCE_DIR}/resources/workflows
+    ${CMAKE_SOURCE_DIR}/resources/workflows/CyberShake_100.xml
+    ${CMAKE_SOURCE_DIR}/resources/workflows/Epigenomics_100.xml
+    ${CMAKE_SOURCE_DIR}/resources/workflows/Inspiral_100.xml
+    ${CMAKE_SOURCE_DIR}/resources/workflows/Montage_100.xml
 )

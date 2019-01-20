@@ -1,1058 +1,1302 @@
+name: Epigenomics_100.yml
 inputs:
-  - size: 5300947649
-    name: chr21_BS_bfa
-  - size: 5300947649
-    name: chr21_BSnull_bfa
-  - size: 234967975
-    name: chr210_sfq
-tasks:
-  - inputs:
-      - source: chr210_sfq
-        name: chr210_sfq
-    size: 34.75
-    outputs:
-      - size: 10000151
-        name: chr21_0_0_sfq
-      - size: 9839168
-        name: chr21_0_1_sfq
-      - size: 10978017
-        name: chr21_0_2_sfq
-      - size: 9157455
-        name: chr21_0_3_sfq
-      - size: 8301394
-        name: chr21_0_4_sfq
-      - size: 11501637
-        name: chr21_0_5_sfq
-      - size: 5778890
-        name: chr21_0_6_sfq
-      - size: 9808718
-        name: chr21_0_7_sfq
-      - size: 13762219
-        name: chr21_0_8_sfq
-      - size: 8119148
-        name: chr21_0_9_sfq
-      - size: 11779594
-        name: chr21_0_10_sfq
-      - size: 9917603
-        name: chr21_0_11_sfq
-      - size: 3992794
-        name: chr21_0_12_sfq
-      - size: 7377438
-        name: chr21_0_13_sfq
-      - size: 21337820
-        name: chr21_0_14_sfq
-      - size: 9580355
-        name: chr21_0_15_sfq
-      - size: 4043586
-        name: chr21_0_16_sfq
-      - size: 15486347
-        name: chr21_0_17_sfq
-      - size: 3980517
-        name: chr21_0_18_sfq
-      - size: 12343158
-        name: chr21_0_19_sfq
-      - size: 17893018
-        name: chr21_0_20_sfq
-      - size: 5240501
-        name: chr21_0_21_sfq
-      - size: 8843218
-        name: chr21_0_22_sfq
-      - size: 5905229
-        name: chr21_0_23_sfq
-    name: ID00000
-  - inputs:
-      - source: ID00000.chr21_0_0_sfq
-        name: chr21_0_0_sfq
-    size: 1.1
-    outputs:
-      - size: 5029052
-        name: chr21_0_0_nocontam_sfq
-      - size: 4971099
-        name: chr21_0_0_contam_sfq
-    name: ID00001
-  - inputs:
-      - source: ID00000.chr21_0_1_sfq
-        name: chr21_0_1_sfq
-    size: 1.41
-    outputs:
-      - size: 4697919
-        name: chr21_0_1_nocontam_sfq
-      - size: 5141249
-        name: chr21_0_1_contam_sfq
-    name: ID00002
-  - inputs:
-      - source: ID00000.chr21_0_2_sfq
-        name: chr21_0_2_sfq
-    size: 1.4
-    outputs:
-      - size: 5754656
-        name: chr21_0_2_nocontam_sfq
-      - size: 5223361
-        name: chr21_0_2_contam_sfq
-    name: ID00003
-  - inputs:
-      - source: ID00000.chr21_0_3_sfq
-        name: chr21_0_3_sfq
-    size: 0.94
-    outputs:
-      - size: 4783471
-        name: chr21_0_3_nocontam_sfq
-      - size: 4373984
-        name: chr21_0_3_contam_sfq
-    name: ID00004
-  - inputs:
-      - source: ID00000.chr21_0_4_sfq
-        name: chr21_0_4_sfq
-    size: 0.83
-    outputs:
-      - size: 4104446
-        name: chr21_0_4_nocontam_sfq
-      - size: 4196948
-        name: chr21_0_4_contam_sfq
-    name: ID00005
-  - inputs:
-      - source: ID00000.chr21_0_5_sfq
-        name: chr21_0_5_sfq
-    size: 1.06
-    outputs:
-      - size: 5945419
-        name: chr21_0_5_nocontam_sfq
-      - size: 5556218
-        name: chr21_0_5_contam_sfq
-    name: ID00006
-  - inputs:
-      - source: ID00000.chr21_0_6_sfq
-        name: chr21_0_6_sfq
-    size: 0.51
-    outputs:
-      - size: 2886268
-        name: chr21_0_6_nocontam_sfq
-      - size: 2892622
-        name: chr21_0_6_contam_sfq
-    name: ID00007
-  - inputs:
-      - source: ID00000.chr21_0_7_sfq
-        name: chr21_0_7_sfq
-    size: 1.37
-    outputs:
-      - size: 4934631
-        name: chr21_0_7_nocontam_sfq
-      - size: 4874087
-        name: chr21_0_7_contam_sfq
-    name: ID00008
-  - inputs:
-      - source: ID00000.chr21_0_8_sfq
-        name: chr21_0_8_sfq
-    size: 1.9
-    outputs:
-      - size: 6899515
-        name: chr21_0_8_nocontam_sfq
-      - size: 6862704
-        name: chr21_0_8_contam_sfq
-    name: ID00009
-  - inputs:
-      - source: ID00000.chr21_0_9_sfq
-        name: chr21_0_9_sfq
-    size: 0.84
-    outputs:
-      - size: 3938375
-        name: chr21_0_9_nocontam_sfq
-      - size: 4180773
-        name: chr21_0_9_contam_sfq
-    name: ID00010
-  - inputs:
-      - source: ID00000.chr21_0_10_sfq
-        name: chr21_0_10_sfq
-    size: 1.06
-    outputs:
-      - size: 5983348
-        name: chr21_0_10_nocontam_sfq
-      - size: 5796246
-        name: chr21_0_10_contam_sfq
-    name: ID00011
-  - inputs:
-      - source: ID00000.chr21_0_11_sfq
-        name: chr21_0_11_sfq
-    size: 1.45
-    outputs:
-      - size: 5132883
-        name: chr21_0_11_nocontam_sfq
-      - size: 4784720
-        name: chr21_0_11_contam_sfq
-    name: ID00012
-  - inputs:
-      - source: ID00000.chr21_0_12_sfq
-        name: chr21_0_12_sfq
-    size: 0.53
-    outputs:
-      - size: 2078101
-        name: chr21_0_12_nocontam_sfq
-      - size: 1914693
-        name: chr21_0_12_contam_sfq
-    name: ID00013
-  - inputs:
-      - source: ID00000.chr21_0_13_sfq
-        name: chr21_0_13_sfq
-    size: 1.0
-    outputs:
-      - size: 3600467
-        name: chr21_0_13_nocontam_sfq
-      - size: 3776971
-        name: chr21_0_13_contam_sfq
-    name: ID00014
-  - inputs:
-      - source: ID00000.chr21_0_14_sfq
-        name: chr21_0_14_sfq
-    size: 2.36
-    outputs:
-      - size: 10809499
-        name: chr21_0_14_nocontam_sfq
-      - size: 10528321
-        name: chr21_0_14_contam_sfq
-    name: ID00015
-  - inputs:
-      - source: ID00000.chr21_0_15_sfq
-        name: chr21_0_15_sfq
-    size: 1.02
-    outputs:
-      - size: 4886871
-        name: chr21_0_15_nocontam_sfq
-      - size: 4693484
-        name: chr21_0_15_contam_sfq
-    name: ID00016
-  - inputs:
-      - source: ID00000.chr21_0_16_sfq
-        name: chr21_0_16_sfq
-    size: 0.45
-    outputs:
-      - size: 2094118
-        name: chr21_0_16_nocontam_sfq
-      - size: 1949468
-        name: chr21_0_16_contam_sfq
-    name: ID00017
-  - inputs:
-      - source: ID00000.chr21_0_17_sfq
-        name: chr21_0_17_sfq
-    size: 1.23
-    outputs:
-      - size: 7606608
-        name: chr21_0_17_nocontam_sfq
-      - size: 7879739
-        name: chr21_0_17_contam_sfq
-    name: ID00018
-  - inputs:
-      - source: ID00000.chr21_0_18_sfq
-        name: chr21_0_18_sfq
-    size: 0.41
-    outputs:
-      - size: 2086576
-        name: chr21_0_18_nocontam_sfq
-      - size: 1893941
-        name: chr21_0_18_contam_sfq
-    name: ID00019
-  - inputs:
-      - source: ID00000.chr21_0_19_sfq
-        name: chr21_0_19_sfq
-    size: 1.08
-    outputs:
-      - size: 6335995
-        name: chr21_0_19_nocontam_sfq
-      - size: 6007163
-        name: chr21_0_19_contam_sfq
-    name: ID00020
-  - inputs:
-      - source: ID00000.chr21_0_20_sfq
-        name: chr21_0_20_sfq
-    size: 3.26
-    outputs:
-      - size: 8511643
-        name: chr21_0_20_nocontam_sfq
-      - size: 9381375
-        name: chr21_0_20_contam_sfq
-    name: ID00021
-  - inputs:
-      - source: ID00000.chr21_0_21_sfq
-        name: chr21_0_21_sfq
-    size: 0.5
-    outputs:
-      - size: 2742329
-        name: chr21_0_21_nocontam_sfq
-      - size: 2498172
-        name: chr21_0_21_contam_sfq
-    name: ID00022
-  - inputs:
-      - source: ID00000.chr21_0_22_sfq
-        name: chr21_0_22_sfq
-    size: 0.95
-    outputs:
-      - size: 4561796
-        name: chr21_0_22_nocontam_sfq
-      - size: 4281422
-        name: chr21_0_22_contam_sfq
-    name: ID00023
-  - inputs:
-      - source: ID00000.chr21_0_23_sfq
-        name: chr21_0_23_sfq
-    size: 0.57
-    outputs:
-      - size: 3009433
-        name: chr21_0_23_nocontam_sfq
-      - size: 2895796
-        name: chr21_0_23_contam_sfq
-    name: ID00024
-  - inputs:
-      - source: ID00001.chr21_0_0_nocontam_sfq
-        name: chr21_0_0_nocontam_sfq
-    size: 0.57
-    outputs:
-      - size: 4274007
-        name: chr21_0_0_nocontam_fq
-    name: ID00025
-  - inputs:
-      - source: ID00002.chr21_0_1_nocontam_sfq
-        name: chr21_0_1_nocontam_sfq
-    size: 0.26
-    outputs:
-      - size: 4135379
-        name: chr21_0_1_nocontam_fq
-    name: ID00026
-  - inputs:
-      - source: ID00003.chr21_0_2_nocontam_sfq
-        name: chr21_0_2_nocontam_sfq
-    size: 0.4
-    outputs:
-      - size: 3447729
-        name: chr21_0_2_nocontam_fq
-    name: ID00027
-  - inputs:
-      - source: ID00004.chr21_0_3_nocontam_sfq
-        name: chr21_0_3_nocontam_sfq
-    size: 0.42
-    outputs:
-      - size: 5025458
-        name: chr21_0_3_nocontam_fq
-    name: ID00028
-  - inputs:
-      - source: ID00005.chr21_0_4_nocontam_sfq
-        name: chr21_0_4_nocontam_sfq
-    size: 0.27
-    outputs:
-      - size: 2581947
-        name: chr21_0_4_nocontam_fq
-    name: ID00029
-  - inputs:
-      - source: ID00006.chr21_0_5_nocontam_sfq
-        name: chr21_0_5_nocontam_sfq
-    size: 0.38
-    outputs:
-      - size: 3417515
-        name: chr21_0_5_nocontam_fq
-    name: ID00030
-  - inputs:
-      - source: ID00007.chr21_0_6_nocontam_sfq
-        name: chr21_0_6_nocontam_sfq
-    size: 0.13
-    outputs:
-      - size: 2264879
-        name: chr21_0_6_nocontam_fq
-    name: ID00031
-  - inputs:
-      - source: ID00008.chr21_0_7_nocontam_sfq
-        name: chr21_0_7_nocontam_sfq
-    size: 0.34
-    outputs:
-      - size: 3682859
-        name: chr21_0_7_nocontam_fq
-    name: ID00032
-  - inputs:
-      - source: ID00009.chr21_0_8_nocontam_sfq
-        name: chr21_0_8_nocontam_sfq
-    size: 0.46
-    outputs:
-      - size: 6626159
-        name: chr21_0_8_nocontam_fq
-    name: ID00033
-  - inputs:
-      - source: ID00010.chr21_0_9_nocontam_sfq
-        name: chr21_0_9_nocontam_sfq
-    size: 0.3
-    outputs:
-      - size: 4215607
-        name: chr21_0_9_nocontam_fq
-    name: ID00034
-  - inputs:
-      - source: ID00011.chr21_0_10_nocontam_sfq
-        name: chr21_0_10_nocontam_sfq
-    size: 0.43
-    outputs:
-      - size: 4445741
-        name: chr21_0_10_nocontam_fq
-    name: ID00035
-  - inputs:
-      - source: ID00012.chr21_0_11_nocontam_sfq
-        name: chr21_0_11_nocontam_sfq
-    size: 0.36
-    outputs:
-      - size: 3158171
-        name: chr21_0_11_nocontam_fq
-    name: ID00036
-  - inputs:
-      - source: ID00013.chr21_0_12_nocontam_sfq
-        name: chr21_0_12_nocontam_sfq
-    size: 0.18
-    outputs:
-      - size: 1378674
-        name: chr21_0_12_nocontam_fq
-    name: ID00037
-  - inputs:
-      - source: ID00014.chr21_0_13_nocontam_sfq
-        name: chr21_0_13_nocontam_sfq
-    size: 0.24
-    outputs:
-      - size: 2182546
-        name: chr21_0_13_nocontam_fq
-    name: ID00038
-  - inputs:
-      - source: ID00015.chr21_0_14_nocontam_sfq
-        name: chr21_0_14_nocontam_sfq
-    size: 0.73
-    outputs:
-      - size: 10051350
-        name: chr21_0_14_nocontam_fq
-    name: ID00039
-  - inputs:
-      - source: ID00016.chr21_0_15_nocontam_sfq
-        name: chr21_0_15_nocontam_sfq
-    size: 0.35
-    outputs:
-      - size: 3406402
-        name: chr21_0_15_nocontam_fq
-    name: ID00040
-  - inputs:
-      - source: ID00017.chr21_0_16_nocontam_sfq
-        name: chr21_0_16_nocontam_sfq
-    size: 0.24
-    outputs:
-      - size: 1466609
-        name: chr21_0_16_nocontam_fq
-    name: ID00041
-  - inputs:
-      - source: ID00018.chr21_0_17_nocontam_sfq
-        name: chr21_0_17_nocontam_sfq
-    size: 0.38
-    outputs:
-      - size: 4294239
-        name: chr21_0_17_nocontam_fq
-    name: ID00042
-  - inputs:
-      - source: ID00019.chr21_0_18_nocontam_sfq
-        name: chr21_0_18_nocontam_sfq
-    size: 0.13
-    outputs:
-      - size: 1763049
-        name: chr21_0_18_nocontam_fq
-    name: ID00043
-  - inputs:
-      - source: ID00020.chr21_0_19_nocontam_sfq
-        name: chr21_0_19_nocontam_sfq
-    size: 0.69
-    outputs:
-      - size: 4464001
-        name: chr21_0_19_nocontam_fq
-    name: ID00044
-  - inputs:
-      - source: ID00021.chr21_0_20_nocontam_sfq
-        name: chr21_0_20_nocontam_sfq
-    size: 0.53
-    outputs:
-      - size: 11558959
-        name: chr21_0_20_nocontam_fq
-    name: ID00045
-  - inputs:
-      - source: ID00022.chr21_0_21_nocontam_sfq
-        name: chr21_0_21_nocontam_sfq
-    size: 0.15
-    outputs:
-      - size: 2356177
-        name: chr21_0_21_nocontam_fq
-    name: ID00046
-  - inputs:
-      - source: ID00023.chr21_0_22_nocontam_sfq
-        name: chr21_0_22_nocontam_sfq
-    size: 0.33
-    outputs:
-      - size: 4481457
-        name: chr21_0_22_nocontam_fq
-    name: ID00047
-  - inputs:
-      - source: ID00024.chr21_0_23_nocontam_sfq
-        name: chr21_0_23_nocontam_sfq
-    size: 0.22
-    outputs:
-      - size: 2239230
-        name: chr21_0_23_nocontam_fq
-    name: ID00048
-  - inputs:
-      - source: ID00025.chr21_0_0_nocontam_fq
-        name: chr21_0_0_nocontam_fq
-    size: 0.88
-    outputs:
-      - size: 1026596
-        name: chr21_0_0_nocontam_bfq
-    name: ID00049
-  - inputs:
-      - source: ID00026.chr21_0_1_nocontam_fq
-        name: chr21_0_1_nocontam_fq
-    size: 0.55
-    outputs:
-      - size: 1030591
-        name: chr21_0_1_nocontam_bfq
-    name: ID00050
-  - inputs:
-      - source: ID00027.chr21_0_2_nocontam_fq
-        name: chr21_0_2_nocontam_fq
-    size: 0.42
-    outputs:
-      - size: 830621
-        name: chr21_0_2_nocontam_bfq
-    name: ID00051
-  - inputs:
-      - source: ID00028.chr21_0_3_nocontam_fq
-        name: chr21_0_3_nocontam_fq
-    size: 0.96
-    outputs:
-      - size: 996426
-        name: chr21_0_3_nocontam_bfq
-    name: ID00052
-  - inputs:
-      - source: ID00029.chr21_0_4_nocontam_fq
-        name: chr21_0_4_nocontam_fq
-    size: 0.26
-    outputs:
-      - size: 684915
-        name: chr21_0_4_nocontam_bfq
-    name: ID00053
-  - inputs:
-      - source: ID00030.chr21_0_5_nocontam_fq
-        name: chr21_0_5_nocontam_fq
-    size: 0.48
-    outputs:
-      - size: 816684
-        name: chr21_0_5_nocontam_bfq
-    name: ID00054
-  - inputs:
-      - source: ID00031.chr21_0_6_nocontam_fq
-        name: chr21_0_6_nocontam_fq
-    size: 0.42
-    outputs:
-      - size: 691546
-        name: chr21_0_6_nocontam_bfq
-    name: ID00055
-  - inputs:
-      - source: ID00032.chr21_0_7_nocontam_fq
-        name: chr21_0_7_nocontam_fq
-    size: 0.6
-    outputs:
-      - size: 914862
-        name: chr21_0_7_nocontam_bfq
-    name: ID00056
-  - inputs:
-      - source: ID00033.chr21_0_8_nocontam_fq
-        name: chr21_0_8_nocontam_fq
-    size: 1.02
-    outputs:
-      - size: 1426206
-        name: chr21_0_8_nocontam_bfq
-    name: ID00057
-  - inputs:
-      - source: ID00034.chr21_0_9_nocontam_fq
-        name: chr21_0_9_nocontam_fq
-    size: 0.8
-    outputs:
-      - size: 988955
-        name: chr21_0_9_nocontam_bfq
-    name: ID00058
-  - inputs:
-      - source: ID00035.chr21_0_10_nocontam_fq
-        name: chr21_0_10_nocontam_fq
-    size: 0.67
-    outputs:
-      - size: 1027764
-        name: chr21_0_10_nocontam_bfq
-    name: ID00059
-  - inputs:
-      - source: ID00036.chr21_0_11_nocontam_fq
-        name: chr21_0_11_nocontam_fq
-    size: 0.41
-    outputs:
-      - size: 725432
-        name: chr21_0_11_nocontam_bfq
-    name: ID00060
-  - inputs:
-      - source: ID00037.chr21_0_12_nocontam_fq
-        name: chr21_0_12_nocontam_fq
-    size: 0.2
-    outputs:
-      - size: 288629
-        name: chr21_0_12_nocontam_bfq
-    name: ID00061
-  - inputs:
-      - source: ID00038.chr21_0_13_nocontam_fq
-        name: chr21_0_13_nocontam_fq
-    size: 0.41
-    outputs:
-      - size: 406202
-        name: chr21_0_13_nocontam_bfq
-    name: ID00062
-  - inputs:
-      - source: ID00039.chr21_0_14_nocontam_fq
-        name: chr21_0_14_nocontam_fq
-    size: 1.29
-    outputs:
-      - size: 2244124
-        name: chr21_0_14_nocontam_bfq
-    name: ID00063
-  - inputs:
-      - source: ID00040.chr21_0_15_nocontam_fq
-        name: chr21_0_15_nocontam_fq
-    size: 0.43
-    outputs:
-      - size: 830606
-        name: chr21_0_15_nocontam_bfq
-    name: ID00064
-  - inputs:
-      - source: ID00041.chr21_0_16_nocontam_fq
-        name: chr21_0_16_nocontam_fq
-    size: 0.21
-    outputs:
-      - size: 365008
-        name: chr21_0_16_nocontam_bfq
-    name: ID00065
-  - inputs:
-      - source: ID00042.chr21_0_17_nocontam_fq
-        name: chr21_0_17_nocontam_fq
-    size: 0.57
-    outputs:
-      - size: 1111374
-        name: chr21_0_17_nocontam_bfq
-    name: ID00066
-  - inputs:
-      - source: ID00043.chr21_0_18_nocontam_fq
-        name: chr21_0_18_nocontam_fq
-    size: 0.28
-    outputs:
-      - size: 417622
-        name: chr21_0_18_nocontam_bfq
-    name: ID00067
-  - inputs:
-      - source: ID00044.chr21_0_19_nocontam_fq
-        name: chr21_0_19_nocontam_fq
-    size: 0.82
-    outputs:
-      - size: 1075654
-        name: chr21_0_19_nocontam_bfq
-    name: ID00068
-  - inputs:
-      - source: ID00045.chr21_0_20_nocontam_fq
-        name: chr21_0_20_nocontam_fq
-    size: 1.99
-    outputs:
-      - size: 3223136
-        name: chr21_0_20_nocontam_bfq
-    name: ID00069
-  - inputs:
-      - source: ID00046.chr21_0_21_nocontam_fq
-        name: chr21_0_21_nocontam_fq
-    size: 0.3
-    outputs:
-      - size: 509670
-        name: chr21_0_21_nocontam_bfq
-    name: ID00070
-  - inputs:
-      - source: ID00047.chr21_0_22_nocontam_fq
-        name: chr21_0_22_nocontam_fq
-    size: 0.74
-    outputs:
-      - size: 1084902
-        name: chr21_0_22_nocontam_bfq
-    name: ID00071
-  - inputs:
-      - source: ID00048.chr21_0_23_nocontam_fq
-        name: chr21_0_23_nocontam_fq
-    size: 0.25
-    outputs:
-      - size: 545816
-        name: chr21_0_23_nocontam_bfq
-    name: ID00072
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00049.chr21_0_0_nocontam_bfq
-        name: chr21_0_0_nocontam_bfq
-    size: 13132.42
-    outputs:
-      - size: 1115865
-        name: chr21_0_0_nocontam_map
-    name: ID00073
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00050.chr21_0_1_nocontam_bfq
-        name: chr21_0_1_nocontam_bfq
-    size: 16543.14
-    outputs:
-      - size: 1120207
-        name: chr21_0_1_nocontam_map
-    name: ID00074
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00051.chr21_0_2_nocontam_bfq
-        name: chr21_0_2_nocontam_bfq
-    size: 19949.8
-    outputs:
-      - size: 902848
-        name: chr21_0_2_nocontam_map
-    name: ID00075
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00052.chr21_0_3_nocontam_bfq
-        name: chr21_0_3_nocontam_bfq
-    size: 18058.05
-    outputs:
-      - size: 1083071
-        name: chr21_0_3_nocontam_map
-    name: ID00076
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00053.chr21_0_4_nocontam_bfq
-        name: chr21_0_4_nocontam_bfq
-    size: 20347.15
-    outputs:
-      - size: 744472
-        name: chr21_0_4_nocontam_map
-    name: ID00077
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00054.chr21_0_5_nocontam_bfq
-        name: chr21_0_5_nocontam_bfq
-    size: 14667.5
-    outputs:
-      - size: 887700
-        name: chr21_0_5_nocontam_map
-    name: ID00078
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00055.chr21_0_6_nocontam_bfq
-        name: chr21_0_6_nocontam_bfq
-    size: 23571.49
-    outputs:
-      - size: 751680
-        name: chr21_0_6_nocontam_map
-    name: ID00079
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00056.chr21_0_7_nocontam_bfq
-        name: chr21_0_7_nocontam_bfq
-    size: 18115.69
-    outputs:
-      - size: 994415
-        name: chr21_0_7_nocontam_map
-    name: ID00080
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00057.chr21_0_8_nocontam_bfq
-        name: chr21_0_8_nocontam_bfq
-    size: 13362.08
-    outputs:
-      - size: 1550223
-        name: chr21_0_8_nocontam_map
-    name: ID00081
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00058.chr21_0_9_nocontam_bfq
-        name: chr21_0_9_nocontam_bfq
-    size: 19854.08
-    outputs:
-      - size: 1074951
-        name: chr21_0_9_nocontam_map
-    name: ID00082
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00059.chr21_0_10_nocontam_bfq
-        name: chr21_0_10_nocontam_bfq
-    size: 13508.75
-    outputs:
-      - size: 1117134
-        name: chr21_0_10_nocontam_map
-    name: ID00083
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00060.chr21_0_11_nocontam_bfq
-        name: chr21_0_11_nocontam_bfq
-    size: 11553.88
-    outputs:
-      - size: 788513
-        name: chr21_0_11_nocontam_map
-    name: ID00084
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00061.chr21_0_12_nocontam_bfq
-        name: chr21_0_12_nocontam_bfq
-    size: 14189.02
-    outputs:
-      - size: 313727
-        name: chr21_0_12_nocontam_map
-    name: ID00085
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00062.chr21_0_13_nocontam_bfq
-        name: chr21_0_13_nocontam_bfq
-    size: 19348.23
-    outputs:
-      - size: 441523
-        name: chr21_0_13_nocontam_map
-    name: ID00086
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00063.chr21_0_14_nocontam_bfq
-        name: chr21_0_14_nocontam_bfq
-    size: 13683.86
-    outputs:
-      - size: 2439265
-        name: chr21_0_14_nocontam_map
-    name: ID00087
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00064.chr21_0_15_nocontam_bfq
-        name: chr21_0_15_nocontam_bfq
-    size: 10238.56
-    outputs:
-      - size: 902832
-        name: chr21_0_15_nocontam_map
-    name: ID00088
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00065.chr21_0_16_nocontam_bfq
-        name: chr21_0_16_nocontam_bfq
-    size: 21339.39
-    outputs:
-      - size: 396747
-        name: chr21_0_16_nocontam_map
-    name: ID00089
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00066.chr21_0_17_nocontam_bfq
-        name: chr21_0_17_nocontam_bfq
-    size: 14142.3
-    outputs:
-      - size: 1208015
-        name: chr21_0_17_nocontam_map
-    name: ID00090
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00067.chr21_0_18_nocontam_bfq
-        name: chr21_0_18_nocontam_bfq
-    size: 17499.21
-    outputs:
-      - size: 453936
-        name: chr21_0_18_nocontam_map
-    name: ID00091
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00068.chr21_0_19_nocontam_bfq
-        name: chr21_0_19_nocontam_bfq
-    size: 16134.19
-    outputs:
-      - size: 1169189
-        name: chr21_0_19_nocontam_map
-    name: ID00092
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00069.chr21_0_20_nocontam_bfq
-        name: chr21_0_20_nocontam_bfq
-    size: 15513.08
-    outputs:
-      - size: 3503408
-        name: chr21_0_20_nocontam_map
-    name: ID00093
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00070.chr21_0_21_nocontam_bfq
-        name: chr21_0_21_nocontam_bfq
-    size: 23456.09
-    outputs:
-      - size: 553989
-        name: chr21_0_21_nocontam_map
-    name: ID00094
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00071.chr21_0_22_nocontam_bfq
-        name: chr21_0_22_nocontam_bfq
-    size: 15840.58
-    outputs:
-      - size: 1179241
-        name: chr21_0_22_nocontam_map
-    name: ID00095
-  - inputs:
-      - source: chr21_BS_bfa
-        name: chr21_BS_bfa
-      - source: ID00072.chr21_0_23_nocontam_bfq
-        name: chr21_0_23_nocontam_bfq
-    size: 13000.28
-    outputs:
-      - size: 593278
-        name: chr21_0_23_nocontam_map
-    name: ID00096
-  - inputs:
-      - source: ID00073.chr21_0_0_nocontam_map
-        name: chr21_0_0_nocontam_map
-      - source: ID00074.chr21_0_1_nocontam_map
-        name: chr21_0_1_nocontam_map
-      - source: ID00075.chr21_0_2_nocontam_map
-        name: chr21_0_2_nocontam_map
-      - source: ID00076.chr21_0_3_nocontam_map
-        name: chr21_0_3_nocontam_map
-      - source: ID00077.chr21_0_4_nocontam_map
-        name: chr21_0_4_nocontam_map
-      - source: ID00078.chr21_0_5_nocontam_map
-        name: chr21_0_5_nocontam_map
-      - source: ID00079.chr21_0_6_nocontam_map
-        name: chr21_0_6_nocontam_map
-      - source: ID00080.chr21_0_7_nocontam_map
-        name: chr21_0_7_nocontam_map
-      - source: ID00081.chr21_0_8_nocontam_map
-        name: chr21_0_8_nocontam_map
-      - source: ID00082.chr21_0_9_nocontam_map
-        name: chr21_0_9_nocontam_map
-      - source: ID00083.chr21_0_10_nocontam_map
-        name: chr21_0_10_nocontam_map
-      - source: ID00084.chr21_0_11_nocontam_map
-        name: chr21_0_11_nocontam_map
-      - source: ID00085.chr21_0_12_nocontam_map
-        name: chr21_0_12_nocontam_map
-      - source: ID00086.chr21_0_13_nocontam_map
-        name: chr21_0_13_nocontam_map
-      - source: ID00087.chr21_0_14_nocontam_map
-        name: chr21_0_14_nocontam_map
-      - source: ID00088.chr21_0_15_nocontam_map
-        name: chr21_0_15_nocontam_map
-      - source: ID00089.chr21_0_16_nocontam_map
-        name: chr21_0_16_nocontam_map
-      - source: ID00090.chr21_0_17_nocontam_map
-        name: chr21_0_17_nocontam_map
-      - source: ID00091.chr21_0_18_nocontam_map
-        name: chr21_0_18_nocontam_map
-      - source: ID00092.chr21_0_19_nocontam_map
-        name: chr21_0_19_nocontam_map
-      - source: ID00093.chr21_0_20_nocontam_map
-        name: chr21_0_20_nocontam_map
-      - source: ID00094.chr21_0_21_nocontam_map
-        name: chr21_0_21_nocontam_map
-      - source: ID00095.chr21_0_22_nocontam_map
-        name: chr21_0_22_nocontam_map
-      - source: ID00096.chr21_0_23_nocontam_map
-        name: chr21_0_23_nocontam_map
-    size: 10.92
-    outputs:
-      - size: 23854933
-        name: chr21_nocontam_map
-      - size: 621933
-        name: chr21_nocontam_map_zr
-      - size: 113723
-        name: chr21_nocontam_map_vm
-    name: ID00097
-  - inputs:
-      - source: ID00097.chr21_nocontam_map
-        name: chr21_nocontam_map
-    size: 0.02
-    outputs:
-      - size: 422973
-        name: chr21_nocontam_chr_map
-    name: ID00098
-  - inputs:
-      - source: chr21_BSnull_bfa
-        name: chr21_BSnull_bfa
-      - source: ID00098.chr21_nocontam_chr_map
-        name: chr21_nocontam_chr_map
-    size: 6255.01
-    outputs:
-      - size: 3007950
-        name: chr21_nocontam_chr_pileup
-    name: ID00099
+  - name: chr210_sfq
+    size: 234967975
+  - name: chr21_BSnull_bfa
+    size: 5300947649
+  - name: chr21_BS_bfa
+    size: 5300947649
 outputs:
-  - source: ID00001.chr21_0_0_contam_sfq
-    name: chr21_0_0_contam_sfq
-  - source: ID00002.chr21_0_1_contam_sfq
-    name: chr21_0_1_contam_sfq
-  - source: ID00003.chr21_0_2_contam_sfq
-    name: chr21_0_2_contam_sfq
-  - source: ID00004.chr21_0_3_contam_sfq
-    name: chr21_0_3_contam_sfq
-  - source: ID00005.chr21_0_4_contam_sfq
-    name: chr21_0_4_contam_sfq
-  - source: ID00006.chr21_0_5_contam_sfq
-    name: chr21_0_5_contam_sfq
-  - source: ID00007.chr21_0_6_contam_sfq
-    name: chr21_0_6_contam_sfq
-  - source: ID00008.chr21_0_7_contam_sfq
-    name: chr21_0_7_contam_sfq
-  - source: ID00009.chr21_0_8_contam_sfq
-    name: chr21_0_8_contam_sfq
-  - source: ID00010.chr21_0_9_contam_sfq
-    name: chr21_0_9_contam_sfq
-  - source: ID00011.chr21_0_10_contam_sfq
-    name: chr21_0_10_contam_sfq
-  - source: ID00012.chr21_0_11_contam_sfq
-    name: chr21_0_11_contam_sfq
-  - source: ID00013.chr21_0_12_contam_sfq
-    name: chr21_0_12_contam_sfq
-  - source: ID00014.chr21_0_13_contam_sfq
-    name: chr21_0_13_contam_sfq
-  - source: ID00015.chr21_0_14_contam_sfq
-    name: chr21_0_14_contam_sfq
-  - source: ID00016.chr21_0_15_contam_sfq
-    name: chr21_0_15_contam_sfq
-  - source: ID00017.chr21_0_16_contam_sfq
-    name: chr21_0_16_contam_sfq
-  - source: ID00018.chr21_0_17_contam_sfq
-    name: chr21_0_17_contam_sfq
-  - source: ID00019.chr21_0_18_contam_sfq
-    name: chr21_0_18_contam_sfq
-  - source: ID00020.chr21_0_19_contam_sfq
-    name: chr21_0_19_contam_sfq
-  - source: ID00021.chr21_0_20_contam_sfq
-    name: chr21_0_20_contam_sfq
-  - source: ID00022.chr21_0_21_contam_sfq
-    name: chr21_0_21_contam_sfq
-  - source: ID00023.chr21_0_22_contam_sfq
-    name: chr21_0_22_contam_sfq
-  - source: ID00024.chr21_0_23_contam_sfq
-    name: chr21_0_23_contam_sfq
-  - source: ID00097.chr21_nocontam_map_zr
-    name: chr21_nocontam_map_zr
-  - source: ID00097.chr21_nocontam_map_vm
-    name: chr21_nocontam_map_vm
-  - source: ID00099.chr21_nocontam_chr_pileup
-    name: chr21_nocontam_chr_pileup
-name: ./resources/workflows/Epigenomics_100.xml
+  - name: chr21_0_0_sfq
+    source: ID00000.chr21_0_0_sfq
+  - name: chr21_0_1_sfq
+    source: ID00000.chr21_0_1_sfq
+  - name: chr21_0_2_sfq
+    source: ID00000.chr21_0_2_sfq
+  - name: chr21_0_3_sfq
+    source: ID00000.chr21_0_3_sfq
+  - name: chr21_0_4_sfq
+    source: ID00000.chr21_0_4_sfq
+  - name: chr21_0_5_sfq
+    source: ID00000.chr21_0_5_sfq
+  - name: chr21_0_6_sfq
+    source: ID00000.chr21_0_6_sfq
+  - name: chr21_0_7_sfq
+    source: ID00000.chr21_0_7_sfq
+  - name: chr21_0_8_sfq
+    source: ID00000.chr21_0_8_sfq
+  - name: chr21_0_9_sfq
+    source: ID00000.chr21_0_9_sfq
+  - name: chr21_0_10_sfq
+    source: ID00000.chr21_0_10_sfq
+  - name: chr21_0_11_sfq
+    source: ID00000.chr21_0_11_sfq
+  - name: chr21_0_12_sfq
+    source: ID00000.chr21_0_12_sfq
+  - name: chr21_0_13_sfq
+    source: ID00000.chr21_0_13_sfq
+  - name: chr21_0_14_sfq
+    source: ID00000.chr21_0_14_sfq
+  - name: chr21_0_15_sfq
+    source: ID00000.chr21_0_15_sfq
+  - name: chr21_0_16_sfq
+    source: ID00000.chr21_0_16_sfq
+  - name: chr21_0_17_sfq
+    source: ID00000.chr21_0_17_sfq
+  - name: chr21_0_18_sfq
+    source: ID00000.chr21_0_18_sfq
+  - name: chr21_0_19_sfq
+    source: ID00000.chr21_0_19_sfq
+  - name: chr21_0_20_sfq
+    source: ID00000.chr21_0_20_sfq
+  - name: chr21_0_21_sfq
+    source: ID00000.chr21_0_21_sfq
+  - name: chr21_0_22_sfq
+    source: ID00000.chr21_0_22_sfq
+  - name: chr21_0_23_sfq
+    source: ID00000.chr21_0_23_sfq
+  - name: chr21_0_0_nocontam_sfq
+    source: ID00001.chr21_0_0_nocontam_sfq
+  - name: chr21_0_0_contam_sfq
+    source: ID00001.chr21_0_0_contam_sfq
+  - name: chr21_0_1_nocontam_sfq
+    source: ID00002.chr21_0_1_nocontam_sfq
+  - name: chr21_0_1_contam_sfq
+    source: ID00002.chr21_0_1_contam_sfq
+  - name: chr21_0_2_nocontam_sfq
+    source: ID00003.chr21_0_2_nocontam_sfq
+  - name: chr21_0_2_contam_sfq
+    source: ID00003.chr21_0_2_contam_sfq
+  - name: chr21_0_3_nocontam_sfq
+    source: ID00004.chr21_0_3_nocontam_sfq
+  - name: chr21_0_3_contam_sfq
+    source: ID00004.chr21_0_3_contam_sfq
+  - name: chr21_0_4_nocontam_sfq
+    source: ID00005.chr21_0_4_nocontam_sfq
+  - name: chr21_0_4_contam_sfq
+    source: ID00005.chr21_0_4_contam_sfq
+  - name: chr21_0_5_nocontam_sfq
+    source: ID00006.chr21_0_5_nocontam_sfq
+  - name: chr21_0_5_contam_sfq
+    source: ID00006.chr21_0_5_contam_sfq
+  - name: chr21_0_6_nocontam_sfq
+    source: ID00007.chr21_0_6_nocontam_sfq
+  - name: chr21_0_6_contam_sfq
+    source: ID00007.chr21_0_6_contam_sfq
+  - name: chr21_0_7_nocontam_sfq
+    source: ID00008.chr21_0_7_nocontam_sfq
+  - name: chr21_0_7_contam_sfq
+    source: ID00008.chr21_0_7_contam_sfq
+  - name: chr21_0_8_nocontam_sfq
+    source: ID00009.chr21_0_8_nocontam_sfq
+  - name: chr21_0_8_contam_sfq
+    source: ID00009.chr21_0_8_contam_sfq
+  - name: chr21_0_9_nocontam_sfq
+    source: ID00010.chr21_0_9_nocontam_sfq
+  - name: chr21_0_9_contam_sfq
+    source: ID00010.chr21_0_9_contam_sfq
+  - name: chr21_0_10_nocontam_sfq
+    source: ID00011.chr21_0_10_nocontam_sfq
+  - name: chr21_0_10_contam_sfq
+    source: ID00011.chr21_0_10_contam_sfq
+  - name: chr21_0_11_nocontam_sfq
+    source: ID00012.chr21_0_11_nocontam_sfq
+  - name: chr21_0_11_contam_sfq
+    source: ID00012.chr21_0_11_contam_sfq
+  - name: chr21_0_12_nocontam_sfq
+    source: ID00013.chr21_0_12_nocontam_sfq
+  - name: chr21_0_12_contam_sfq
+    source: ID00013.chr21_0_12_contam_sfq
+  - name: chr21_0_13_nocontam_sfq
+    source: ID00014.chr21_0_13_nocontam_sfq
+  - name: chr21_0_13_contam_sfq
+    source: ID00014.chr21_0_13_contam_sfq
+  - name: chr21_0_14_nocontam_sfq
+    source: ID00015.chr21_0_14_nocontam_sfq
+  - name: chr21_0_14_contam_sfq
+    source: ID00015.chr21_0_14_contam_sfq
+  - name: chr21_0_15_nocontam_sfq
+    source: ID00016.chr21_0_15_nocontam_sfq
+  - name: chr21_0_15_contam_sfq
+    source: ID00016.chr21_0_15_contam_sfq
+  - name: chr21_0_16_nocontam_sfq
+    source: ID00017.chr21_0_16_nocontam_sfq
+  - name: chr21_0_16_contam_sfq
+    source: ID00017.chr21_0_16_contam_sfq
+  - name: chr21_0_17_nocontam_sfq
+    source: ID00018.chr21_0_17_nocontam_sfq
+  - name: chr21_0_17_contam_sfq
+    source: ID00018.chr21_0_17_contam_sfq
+  - name: chr21_0_18_nocontam_sfq
+    source: ID00019.chr21_0_18_nocontam_sfq
+  - name: chr21_0_18_contam_sfq
+    source: ID00019.chr21_0_18_contam_sfq
+  - name: chr21_0_19_nocontam_sfq
+    source: ID00020.chr21_0_19_nocontam_sfq
+  - name: chr21_0_19_contam_sfq
+    source: ID00020.chr21_0_19_contam_sfq
+  - name: chr21_0_20_nocontam_sfq
+    source: ID00021.chr21_0_20_nocontam_sfq
+  - name: chr21_0_20_contam_sfq
+    source: ID00021.chr21_0_20_contam_sfq
+  - name: chr21_0_21_nocontam_sfq
+    source: ID00022.chr21_0_21_nocontam_sfq
+  - name: chr21_0_21_contam_sfq
+    source: ID00022.chr21_0_21_contam_sfq
+  - name: chr21_0_22_nocontam_sfq
+    source: ID00023.chr21_0_22_nocontam_sfq
+  - name: chr21_0_22_contam_sfq
+    source: ID00023.chr21_0_22_contam_sfq
+  - name: chr21_0_23_nocontam_sfq
+    source: ID00024.chr21_0_23_nocontam_sfq
+  - name: chr21_0_23_contam_sfq
+    source: ID00024.chr21_0_23_contam_sfq
+  - name: chr21_0_0_nocontam_fq
+    source: ID00025.chr21_0_0_nocontam_fq
+  - name: chr21_0_1_nocontam_fq
+    source: ID00026.chr21_0_1_nocontam_fq
+  - name: chr21_0_2_nocontam_fq
+    source: ID00027.chr21_0_2_nocontam_fq
+  - name: chr21_0_3_nocontam_fq
+    source: ID00028.chr21_0_3_nocontam_fq
+  - name: chr21_0_4_nocontam_fq
+    source: ID00029.chr21_0_4_nocontam_fq
+  - name: chr21_0_5_nocontam_fq
+    source: ID00030.chr21_0_5_nocontam_fq
+  - name: chr21_0_6_nocontam_fq
+    source: ID00031.chr21_0_6_nocontam_fq
+  - name: chr21_0_7_nocontam_fq
+    source: ID00032.chr21_0_7_nocontam_fq
+  - name: chr21_0_8_nocontam_fq
+    source: ID00033.chr21_0_8_nocontam_fq
+  - name: chr21_0_9_nocontam_fq
+    source: ID00034.chr21_0_9_nocontam_fq
+  - name: chr21_0_10_nocontam_fq
+    source: ID00035.chr21_0_10_nocontam_fq
+  - name: chr21_0_11_nocontam_fq
+    source: ID00036.chr21_0_11_nocontam_fq
+  - name: chr21_0_12_nocontam_fq
+    source: ID00037.chr21_0_12_nocontam_fq
+  - name: chr21_0_13_nocontam_fq
+    source: ID00038.chr21_0_13_nocontam_fq
+  - name: chr21_0_14_nocontam_fq
+    source: ID00039.chr21_0_14_nocontam_fq
+  - name: chr21_0_15_nocontam_fq
+    source: ID00040.chr21_0_15_nocontam_fq
+  - name: chr21_0_16_nocontam_fq
+    source: ID00041.chr21_0_16_nocontam_fq
+  - name: chr21_0_17_nocontam_fq
+    source: ID00042.chr21_0_17_nocontam_fq
+  - name: chr21_0_18_nocontam_fq
+    source: ID00043.chr21_0_18_nocontam_fq
+  - name: chr21_0_19_nocontam_fq
+    source: ID00044.chr21_0_19_nocontam_fq
+  - name: chr21_0_20_nocontam_fq
+    source: ID00045.chr21_0_20_nocontam_fq
+  - name: chr21_0_21_nocontam_fq
+    source: ID00046.chr21_0_21_nocontam_fq
+  - name: chr21_0_22_nocontam_fq
+    source: ID00047.chr21_0_22_nocontam_fq
+  - name: chr21_0_23_nocontam_fq
+    source: ID00048.chr21_0_23_nocontam_fq
+  - name: chr21_0_0_nocontam_bfq
+    source: ID00049.chr21_0_0_nocontam_bfq
+  - name: chr21_0_1_nocontam_bfq
+    source: ID00050.chr21_0_1_nocontam_bfq
+  - name: chr21_0_2_nocontam_bfq
+    source: ID00051.chr21_0_2_nocontam_bfq
+  - name: chr21_0_3_nocontam_bfq
+    source: ID00052.chr21_0_3_nocontam_bfq
+  - name: chr21_0_4_nocontam_bfq
+    source: ID00053.chr21_0_4_nocontam_bfq
+  - name: chr21_0_5_nocontam_bfq
+    source: ID00054.chr21_0_5_nocontam_bfq
+  - name: chr21_0_6_nocontam_bfq
+    source: ID00055.chr21_0_6_nocontam_bfq
+  - name: chr21_0_7_nocontam_bfq
+    source: ID00056.chr21_0_7_nocontam_bfq
+  - name: chr21_0_8_nocontam_bfq
+    source: ID00057.chr21_0_8_nocontam_bfq
+  - name: chr21_0_9_nocontam_bfq
+    source: ID00058.chr21_0_9_nocontam_bfq
+  - name: chr21_0_10_nocontam_bfq
+    source: ID00059.chr21_0_10_nocontam_bfq
+  - name: chr21_0_11_nocontam_bfq
+    source: ID00060.chr21_0_11_nocontam_bfq
+  - name: chr21_0_12_nocontam_bfq
+    source: ID00061.chr21_0_12_nocontam_bfq
+  - name: chr21_0_13_nocontam_bfq
+    source: ID00062.chr21_0_13_nocontam_bfq
+  - name: chr21_0_14_nocontam_bfq
+    source: ID00063.chr21_0_14_nocontam_bfq
+  - name: chr21_0_15_nocontam_bfq
+    source: ID00064.chr21_0_15_nocontam_bfq
+  - name: chr21_0_16_nocontam_bfq
+    source: ID00065.chr21_0_16_nocontam_bfq
+  - name: chr21_0_17_nocontam_bfq
+    source: ID00066.chr21_0_17_nocontam_bfq
+  - name: chr21_0_18_nocontam_bfq
+    source: ID00067.chr21_0_18_nocontam_bfq
+  - name: chr21_0_19_nocontam_bfq
+    source: ID00068.chr21_0_19_nocontam_bfq
+  - name: chr21_0_20_nocontam_bfq
+    source: ID00069.chr21_0_20_nocontam_bfq
+  - name: chr21_0_21_nocontam_bfq
+    source: ID00070.chr21_0_21_nocontam_bfq
+  - name: chr21_0_22_nocontam_bfq
+    source: ID00071.chr21_0_22_nocontam_bfq
+  - name: chr21_0_23_nocontam_bfq
+    source: ID00072.chr21_0_23_nocontam_bfq
+  - name: chr21_0_0_nocontam_map
+    source: ID00073.chr21_0_0_nocontam_map
+  - name: chr21_0_1_nocontam_map
+    source: ID00074.chr21_0_1_nocontam_map
+  - name: chr21_0_2_nocontam_map
+    source: ID00075.chr21_0_2_nocontam_map
+  - name: chr21_0_3_nocontam_map
+    source: ID00076.chr21_0_3_nocontam_map
+  - name: chr21_0_4_nocontam_map
+    source: ID00077.chr21_0_4_nocontam_map
+  - name: chr21_0_5_nocontam_map
+    source: ID00078.chr21_0_5_nocontam_map
+  - name: chr21_0_6_nocontam_map
+    source: ID00079.chr21_0_6_nocontam_map
+  - name: chr21_0_7_nocontam_map
+    source: ID00080.chr21_0_7_nocontam_map
+  - name: chr21_0_8_nocontam_map
+    source: ID00081.chr21_0_8_nocontam_map
+  - name: chr21_0_9_nocontam_map
+    source: ID00082.chr21_0_9_nocontam_map
+  - name: chr21_0_10_nocontam_map
+    source: ID00083.chr21_0_10_nocontam_map
+  - name: chr21_0_11_nocontam_map
+    source: ID00084.chr21_0_11_nocontam_map
+  - name: chr21_0_12_nocontam_map
+    source: ID00085.chr21_0_12_nocontam_map
+  - name: chr21_0_13_nocontam_map
+    source: ID00086.chr21_0_13_nocontam_map
+  - name: chr21_0_14_nocontam_map
+    source: ID00087.chr21_0_14_nocontam_map
+  - name: chr21_0_15_nocontam_map
+    source: ID00088.chr21_0_15_nocontam_map
+  - name: chr21_0_16_nocontam_map
+    source: ID00089.chr21_0_16_nocontam_map
+  - name: chr21_0_17_nocontam_map
+    source: ID00090.chr21_0_17_nocontam_map
+  - name: chr21_0_18_nocontam_map
+    source: ID00091.chr21_0_18_nocontam_map
+  - name: chr21_0_19_nocontam_map
+    source: ID00092.chr21_0_19_nocontam_map
+  - name: chr21_0_20_nocontam_map
+    source: ID00093.chr21_0_20_nocontam_map
+  - name: chr21_0_21_nocontam_map
+    source: ID00094.chr21_0_21_nocontam_map
+  - name: chr21_0_22_nocontam_map
+    source: ID00095.chr21_0_22_nocontam_map
+  - name: chr21_0_23_nocontam_map
+    source: ID00096.chr21_0_23_nocontam_map
+  - name: chr21_nocontam_map
+    source: ID00097.chr21_nocontam_map
+  - name: chr21_nocontam_map_zr
+    source: ID00097.chr21_nocontam_map_zr
+  - name: chr21_nocontam_map_vm
+    source: ID00097.chr21_nocontam_map_vm
+  - name: chr21_nocontam_chr_map
+    source: ID00098.chr21_nocontam_chr_map
+  - name: chr21_nocontam_chr_pileup
+    source: ID00099.chr21_nocontam_chr_pileup
+tasks:
+  - name: ID00000
+    inputs:
+      - name: chr210_sfq
+        source: chr210_sfq
+    outputs:
+      - name: chr21_0_0_sfq
+        size: 10000151
+      - name: chr21_0_1_sfq
+        size: 9839168
+      - name: chr21_0_2_sfq
+        size: 10978017
+      - name: chr21_0_3_sfq
+        size: 9157455
+      - name: chr21_0_4_sfq
+        size: 8301394
+      - name: chr21_0_5_sfq
+        size: 11501637
+      - name: chr21_0_6_sfq
+        size: 5778890
+      - name: chr21_0_7_sfq
+        size: 9808718
+      - name: chr21_0_8_sfq
+        size: 13762219
+      - name: chr21_0_9_sfq
+        size: 8119148
+      - name: chr21_0_10_sfq
+        size: 11779594
+      - name: chr21_0_11_sfq
+        size: 9917603
+      - name: chr21_0_12_sfq
+        size: 3992794
+      - name: chr21_0_13_sfq
+        size: 7377438
+      - name: chr21_0_14_sfq
+        size: 21337820
+      - name: chr21_0_15_sfq
+        size: 9580355
+      - name: chr21_0_16_sfq
+        size: 4043586
+      - name: chr21_0_17_sfq
+        size: 15486347
+      - name: chr21_0_18_sfq
+        size: 3980517
+      - name: chr21_0_19_sfq
+        size: 12343158
+      - name: chr21_0_20_sfq
+        size: 17893018
+      - name: chr21_0_21_sfq
+        size: 5240501
+      - name: chr21_0_22_sfq
+        size: 8843218
+      - name: chr21_0_23_sfq
+        size: 5905229
+    size: 34.75
+  - name: ID00001
+    inputs:
+      - name: chr21_0_0_sfq
+        source: ID00000.chr21_0_0_sfq
+    outputs:
+      - name: chr21_0_0_nocontam_sfq
+        size: 5029052
+      - name: chr21_0_0_contam_sfq
+        size: 4971099
+    size: 1.1
+  - name: ID00002
+    inputs:
+      - name: chr21_0_1_sfq
+        source: ID00000.chr21_0_1_sfq
+    outputs:
+      - name: chr21_0_1_nocontam_sfq
+        size: 4697919
+      - name: chr21_0_1_contam_sfq
+        size: 5141249
+    size: 1.41
+  - name: ID00003
+    inputs:
+      - name: chr21_0_2_sfq
+        source: ID00000.chr21_0_2_sfq
+    outputs:
+      - name: chr21_0_2_nocontam_sfq
+        size: 5754656
+      - name: chr21_0_2_contam_sfq
+        size: 5223361
+    size: 1.4
+  - name: ID00004
+    inputs:
+      - name: chr21_0_3_sfq
+        source: ID00000.chr21_0_3_sfq
+    outputs:
+      - name: chr21_0_3_nocontam_sfq
+        size: 4783471
+      - name: chr21_0_3_contam_sfq
+        size: 4373984
+    size: 0.94
+  - name: ID00005
+    inputs:
+      - name: chr21_0_4_sfq
+        source: ID00000.chr21_0_4_sfq
+    outputs:
+      - name: chr21_0_4_nocontam_sfq
+        size: 4104446
+      - name: chr21_0_4_contam_sfq
+        size: 4196948
+    size: 0.83
+  - name: ID00006
+    inputs:
+      - name: chr21_0_5_sfq
+        source: ID00000.chr21_0_5_sfq
+    outputs:
+      - name: chr21_0_5_nocontam_sfq
+        size: 5945419
+      - name: chr21_0_5_contam_sfq
+        size: 5556218
+    size: 1.06
+  - name: ID00007
+    inputs:
+      - name: chr21_0_6_sfq
+        source: ID00000.chr21_0_6_sfq
+    outputs:
+      - name: chr21_0_6_nocontam_sfq
+        size: 2886268
+      - name: chr21_0_6_contam_sfq
+        size: 2892622
+    size: 0.51
+  - name: ID00008
+    inputs:
+      - name: chr21_0_7_sfq
+        source: ID00000.chr21_0_7_sfq
+    outputs:
+      - name: chr21_0_7_nocontam_sfq
+        size: 4934631
+      - name: chr21_0_7_contam_sfq
+        size: 4874087
+    size: 1.37
+  - name: ID00009
+    inputs:
+      - name: chr21_0_8_sfq
+        source: ID00000.chr21_0_8_sfq
+    outputs:
+      - name: chr21_0_8_nocontam_sfq
+        size: 6899515
+      - name: chr21_0_8_contam_sfq
+        size: 6862704
+    size: 1.9
+  - name: ID00010
+    inputs:
+      - name: chr21_0_9_sfq
+        source: ID00000.chr21_0_9_sfq
+    outputs:
+      - name: chr21_0_9_nocontam_sfq
+        size: 3938375
+      - name: chr21_0_9_contam_sfq
+        size: 4180773
+    size: 0.84
+  - name: ID00011
+    inputs:
+      - name: chr21_0_10_sfq
+        source: ID00000.chr21_0_10_sfq
+    outputs:
+      - name: chr21_0_10_nocontam_sfq
+        size: 5983348
+      - name: chr21_0_10_contam_sfq
+        size: 5796246
+    size: 1.06
+  - name: ID00012
+    inputs:
+      - name: chr21_0_11_sfq
+        source: ID00000.chr21_0_11_sfq
+    outputs:
+      - name: chr21_0_11_nocontam_sfq
+        size: 5132883
+      - name: chr21_0_11_contam_sfq
+        size: 4784720
+    size: 1.45
+  - name: ID00013
+    inputs:
+      - name: chr21_0_12_sfq
+        source: ID00000.chr21_0_12_sfq
+    outputs:
+      - name: chr21_0_12_nocontam_sfq
+        size: 2078101
+      - name: chr21_0_12_contam_sfq
+        size: 1914693
+    size: 0.53
+  - name: ID00014
+    inputs:
+      - name: chr21_0_13_sfq
+        source: ID00000.chr21_0_13_sfq
+    outputs:
+      - name: chr21_0_13_nocontam_sfq
+        size: 3600467
+      - name: chr21_0_13_contam_sfq
+        size: 3776971
+    size: 1.0
+  - name: ID00015
+    inputs:
+      - name: chr21_0_14_sfq
+        source: ID00000.chr21_0_14_sfq
+    outputs:
+      - name: chr21_0_14_nocontam_sfq
+        size: 10809499
+      - name: chr21_0_14_contam_sfq
+        size: 10528321
+    size: 2.36
+  - name: ID00016
+    inputs:
+      - name: chr21_0_15_sfq
+        source: ID00000.chr21_0_15_sfq
+    outputs:
+      - name: chr21_0_15_nocontam_sfq
+        size: 4886871
+      - name: chr21_0_15_contam_sfq
+        size: 4693484
+    size: 1.02
+  - name: ID00017
+    inputs:
+      - name: chr21_0_16_sfq
+        source: ID00000.chr21_0_16_sfq
+    outputs:
+      - name: chr21_0_16_nocontam_sfq
+        size: 2094118
+      - name: chr21_0_16_contam_sfq
+        size: 1949468
+    size: 0.45
+  - name: ID00018
+    inputs:
+      - name: chr21_0_17_sfq
+        source: ID00000.chr21_0_17_sfq
+    outputs:
+      - name: chr21_0_17_nocontam_sfq
+        size: 7606608
+      - name: chr21_0_17_contam_sfq
+        size: 7879739
+    size: 1.23
+  - name: ID00019
+    inputs:
+      - name: chr21_0_18_sfq
+        source: ID00000.chr21_0_18_sfq
+    outputs:
+      - name: chr21_0_18_nocontam_sfq
+        size: 2086576
+      - name: chr21_0_18_contam_sfq
+        size: 1893941
+    size: 0.41
+  - name: ID00020
+    inputs:
+      - name: chr21_0_19_sfq
+        source: ID00000.chr21_0_19_sfq
+    outputs:
+      - name: chr21_0_19_nocontam_sfq
+        size: 6335995
+      - name: chr21_0_19_contam_sfq
+        size: 6007163
+    size: 1.08
+  - name: ID00021
+    inputs:
+      - name: chr21_0_20_sfq
+        source: ID00000.chr21_0_20_sfq
+    outputs:
+      - name: chr21_0_20_nocontam_sfq
+        size: 8511643
+      - name: chr21_0_20_contam_sfq
+        size: 9381375
+    size: 3.26
+  - name: ID00022
+    inputs:
+      - name: chr21_0_21_sfq
+        source: ID00000.chr21_0_21_sfq
+    outputs:
+      - name: chr21_0_21_nocontam_sfq
+        size: 2742329
+      - name: chr21_0_21_contam_sfq
+        size: 2498172
+    size: 0.5
+  - name: ID00023
+    inputs:
+      - name: chr21_0_22_sfq
+        source: ID00000.chr21_0_22_sfq
+    outputs:
+      - name: chr21_0_22_nocontam_sfq
+        size: 4561796
+      - name: chr21_0_22_contam_sfq
+        size: 4281422
+    size: 0.95
+  - name: ID00024
+    inputs:
+      - name: chr21_0_23_sfq
+        source: ID00000.chr21_0_23_sfq
+    outputs:
+      - name: chr21_0_23_nocontam_sfq
+        size: 3009433
+      - name: chr21_0_23_contam_sfq
+        size: 2895796
+    size: 0.57
+  - name: ID00025
+    inputs:
+      - name: chr21_0_0_nocontam_sfq
+        source: ID00001.chr21_0_0_nocontam_sfq
+    outputs:
+      - name: chr21_0_0_nocontam_fq
+        size: 4274007
+    size: 0.57
+  - name: ID00026
+    inputs:
+      - name: chr21_0_1_nocontam_sfq
+        source: ID00002.chr21_0_1_nocontam_sfq
+    outputs:
+      - name: chr21_0_1_nocontam_fq
+        size: 4135379
+    size: 0.26
+  - name: ID00027
+    inputs:
+      - name: chr21_0_2_nocontam_sfq
+        source: ID00003.chr21_0_2_nocontam_sfq
+    outputs:
+      - name: chr21_0_2_nocontam_fq
+        size: 3447729
+    size: 0.4
+  - name: ID00028
+    inputs:
+      - name: chr21_0_3_nocontam_sfq
+        source: ID00004.chr21_0_3_nocontam_sfq
+    outputs:
+      - name: chr21_0_3_nocontam_fq
+        size: 5025458
+    size: 0.42
+  - name: ID00029
+    inputs:
+      - name: chr21_0_4_nocontam_sfq
+        source: ID00005.chr21_0_4_nocontam_sfq
+    outputs:
+      - name: chr21_0_4_nocontam_fq
+        size: 2581947
+    size: 0.27
+  - name: ID00030
+    inputs:
+      - name: chr21_0_5_nocontam_sfq
+        source: ID00006.chr21_0_5_nocontam_sfq
+    outputs:
+      - name: chr21_0_5_nocontam_fq
+        size: 3417515
+    size: 0.38
+  - name: ID00031
+    inputs:
+      - name: chr21_0_6_nocontam_sfq
+        source: ID00007.chr21_0_6_nocontam_sfq
+    outputs:
+      - name: chr21_0_6_nocontam_fq
+        size: 2264879
+    size: 0.13
+  - name: ID00032
+    inputs:
+      - name: chr21_0_7_nocontam_sfq
+        source: ID00008.chr21_0_7_nocontam_sfq
+    outputs:
+      - name: chr21_0_7_nocontam_fq
+        size: 3682859
+    size: 0.34
+  - name: ID00033
+    inputs:
+      - name: chr21_0_8_nocontam_sfq
+        source: ID00009.chr21_0_8_nocontam_sfq
+    outputs:
+      - name: chr21_0_8_nocontam_fq
+        size: 6626159
+    size: 0.46
+  - name: ID00034
+    inputs:
+      - name: chr21_0_9_nocontam_sfq
+        source: ID00010.chr21_0_9_nocontam_sfq
+    outputs:
+      - name: chr21_0_9_nocontam_fq
+        size: 4215607
+    size: 0.3
+  - name: ID00035
+    inputs:
+      - name: chr21_0_10_nocontam_sfq
+        source: ID00011.chr21_0_10_nocontam_sfq
+    outputs:
+      - name: chr21_0_10_nocontam_fq
+        size: 4445741
+    size: 0.43
+  - name: ID00036
+    inputs:
+      - name: chr21_0_11_nocontam_sfq
+        source: ID00012.chr21_0_11_nocontam_sfq
+    outputs:
+      - name: chr21_0_11_nocontam_fq
+        size: 3158171
+    size: 0.36
+  - name: ID00037
+    inputs:
+      - name: chr21_0_12_nocontam_sfq
+        source: ID00013.chr21_0_12_nocontam_sfq
+    outputs:
+      - name: chr21_0_12_nocontam_fq
+        size: 1378674
+    size: 0.18
+  - name: ID00038
+    inputs:
+      - name: chr21_0_13_nocontam_sfq
+        source: ID00014.chr21_0_13_nocontam_sfq
+    outputs:
+      - name: chr21_0_13_nocontam_fq
+        size: 2182546
+    size: 0.24
+  - name: ID00039
+    inputs:
+      - name: chr21_0_14_nocontam_sfq
+        source: ID00015.chr21_0_14_nocontam_sfq
+    outputs:
+      - name: chr21_0_14_nocontam_fq
+        size: 10051350
+    size: 0.73
+  - name: ID00040
+    inputs:
+      - name: chr21_0_15_nocontam_sfq
+        source: ID00016.chr21_0_15_nocontam_sfq
+    outputs:
+      - name: chr21_0_15_nocontam_fq
+        size: 3406402
+    size: 0.35
+  - name: ID00041
+    inputs:
+      - name: chr21_0_16_nocontam_sfq
+        source: ID00017.chr21_0_16_nocontam_sfq
+    outputs:
+      - name: chr21_0_16_nocontam_fq
+        size: 1466609
+    size: 0.24
+  - name: ID00042
+    inputs:
+      - name: chr21_0_17_nocontam_sfq
+        source: ID00018.chr21_0_17_nocontam_sfq
+    outputs:
+      - name: chr21_0_17_nocontam_fq
+        size: 4294239
+    size: 0.38
+  - name: ID00043
+    inputs:
+      - name: chr21_0_18_nocontam_sfq
+        source: ID00019.chr21_0_18_nocontam_sfq
+    outputs:
+      - name: chr21_0_18_nocontam_fq
+        size: 1763049
+    size: 0.13
+  - name: ID00044
+    inputs:
+      - name: chr21_0_19_nocontam_sfq
+        source: ID00020.chr21_0_19_nocontam_sfq
+    outputs:
+      - name: chr21_0_19_nocontam_fq
+        size: 4464001
+    size: 0.69
+  - name: ID00045
+    inputs:
+      - name: chr21_0_20_nocontam_sfq
+        source: ID00021.chr21_0_20_nocontam_sfq
+    outputs:
+      - name: chr21_0_20_nocontam_fq
+        size: 11558959
+    size: 0.53
+  - name: ID00046
+    inputs:
+      - name: chr21_0_21_nocontam_sfq
+        source: ID00022.chr21_0_21_nocontam_sfq
+    outputs:
+      - name: chr21_0_21_nocontam_fq
+        size: 2356177
+    size: 0.15
+  - name: ID00047
+    inputs:
+      - name: chr21_0_22_nocontam_sfq
+        source: ID00023.chr21_0_22_nocontam_sfq
+    outputs:
+      - name: chr21_0_22_nocontam_fq
+        size: 4481457
+    size: 0.33
+  - name: ID00048
+    inputs:
+      - name: chr21_0_23_nocontam_sfq
+        source: ID00024.chr21_0_23_nocontam_sfq
+    outputs:
+      - name: chr21_0_23_nocontam_fq
+        size: 2239230
+    size: 0.22
+  - name: ID00049
+    inputs:
+      - name: chr21_0_0_nocontam_fq
+        source: ID00025.chr21_0_0_nocontam_fq
+    outputs:
+      - name: chr21_0_0_nocontam_bfq
+        size: 1026596
+    size: 0.88
+  - name: ID00050
+    inputs:
+      - name: chr21_0_1_nocontam_fq
+        source: ID00026.chr21_0_1_nocontam_fq
+    outputs:
+      - name: chr21_0_1_nocontam_bfq
+        size: 1030591
+    size: 0.55
+  - name: ID00051
+    inputs:
+      - name: chr21_0_2_nocontam_fq
+        source: ID00027.chr21_0_2_nocontam_fq
+    outputs:
+      - name: chr21_0_2_nocontam_bfq
+        size: 830621
+    size: 0.42
+  - name: ID00052
+    inputs:
+      - name: chr21_0_3_nocontam_fq
+        source: ID00028.chr21_0_3_nocontam_fq
+    outputs:
+      - name: chr21_0_3_nocontam_bfq
+        size: 996426
+    size: 0.96
+  - name: ID00053
+    inputs:
+      - name: chr21_0_4_nocontam_fq
+        source: ID00029.chr21_0_4_nocontam_fq
+    outputs:
+      - name: chr21_0_4_nocontam_bfq
+        size: 684915
+    size: 0.26
+  - name: ID00054
+    inputs:
+      - name: chr21_0_5_nocontam_fq
+        source: ID00030.chr21_0_5_nocontam_fq
+    outputs:
+      - name: chr21_0_5_nocontam_bfq
+        size: 816684
+    size: 0.48
+  - name: ID00055
+    inputs:
+      - name: chr21_0_6_nocontam_fq
+        source: ID00031.chr21_0_6_nocontam_fq
+    outputs:
+      - name: chr21_0_6_nocontam_bfq
+        size: 691546
+    size: 0.42
+  - name: ID00056
+    inputs:
+      - name: chr21_0_7_nocontam_fq
+        source: ID00032.chr21_0_7_nocontam_fq
+    outputs:
+      - name: chr21_0_7_nocontam_bfq
+        size: 914862
+    size: 0.6
+  - name: ID00057
+    inputs:
+      - name: chr21_0_8_nocontam_fq
+        source: ID00033.chr21_0_8_nocontam_fq
+    outputs:
+      - name: chr21_0_8_nocontam_bfq
+        size: 1426206
+    size: 1.02
+  - name: ID00058
+    inputs:
+      - name: chr21_0_9_nocontam_fq
+        source: ID00034.chr21_0_9_nocontam_fq
+    outputs:
+      - name: chr21_0_9_nocontam_bfq
+        size: 988955
+    size: 0.8
+  - name: ID00059
+    inputs:
+      - name: chr21_0_10_nocontam_fq
+        source: ID00035.chr21_0_10_nocontam_fq
+    outputs:
+      - name: chr21_0_10_nocontam_bfq
+        size: 1027764
+    size: 0.67
+  - name: ID00060
+    inputs:
+      - name: chr21_0_11_nocontam_fq
+        source: ID00036.chr21_0_11_nocontam_fq
+    outputs:
+      - name: chr21_0_11_nocontam_bfq
+        size: 725432
+    size: 0.41
+  - name: ID00061
+    inputs:
+      - name: chr21_0_12_nocontam_fq
+        source: ID00037.chr21_0_12_nocontam_fq
+    outputs:
+      - name: chr21_0_12_nocontam_bfq
+        size: 288629
+    size: 0.2
+  - name: ID00062
+    inputs:
+      - name: chr21_0_13_nocontam_fq
+        source: ID00038.chr21_0_13_nocontam_fq
+    outputs:
+      - name: chr21_0_13_nocontam_bfq
+        size: 406202
+    size: 0.41
+  - name: ID00063
+    inputs:
+      - name: chr21_0_14_nocontam_fq
+        source: ID00039.chr21_0_14_nocontam_fq
+    outputs:
+      - name: chr21_0_14_nocontam_bfq
+        size: 2244124
+    size: 1.29
+  - name: ID00064
+    inputs:
+      - name: chr21_0_15_nocontam_fq
+        source: ID00040.chr21_0_15_nocontam_fq
+    outputs:
+      - name: chr21_0_15_nocontam_bfq
+        size: 830606
+    size: 0.43
+  - name: ID00065
+    inputs:
+      - name: chr21_0_16_nocontam_fq
+        source: ID00041.chr21_0_16_nocontam_fq
+    outputs:
+      - name: chr21_0_16_nocontam_bfq
+        size: 365008
+    size: 0.21
+  - name: ID00066
+    inputs:
+      - name: chr21_0_17_nocontam_fq
+        source: ID00042.chr21_0_17_nocontam_fq
+    outputs:
+      - name: chr21_0_17_nocontam_bfq
+        size: 1111374
+    size: 0.57
+  - name: ID00067
+    inputs:
+      - name: chr21_0_18_nocontam_fq
+        source: ID00043.chr21_0_18_nocontam_fq
+    outputs:
+      - name: chr21_0_18_nocontam_bfq
+        size: 417622
+    size: 0.28
+  - name: ID00068
+    inputs:
+      - name: chr21_0_19_nocontam_fq
+        source: ID00044.chr21_0_19_nocontam_fq
+    outputs:
+      - name: chr21_0_19_nocontam_bfq
+        size: 1075654
+    size: 0.82
+  - name: ID00069
+    inputs:
+      - name: chr21_0_20_nocontam_fq
+        source: ID00045.chr21_0_20_nocontam_fq
+    outputs:
+      - name: chr21_0_20_nocontam_bfq
+        size: 3223136
+    size: 1.99
+  - name: ID00070
+    inputs:
+      - name: chr21_0_21_nocontam_fq
+        source: ID00046.chr21_0_21_nocontam_fq
+    outputs:
+      - name: chr21_0_21_nocontam_bfq
+        size: 509670
+    size: 0.3
+  - name: ID00071
+    inputs:
+      - name: chr21_0_22_nocontam_fq
+        source: ID00047.chr21_0_22_nocontam_fq
+    outputs:
+      - name: chr21_0_22_nocontam_bfq
+        size: 1084902
+    size: 0.74
+  - name: ID00072
+    inputs:
+      - name: chr21_0_23_nocontam_fq
+        source: ID00048.chr21_0_23_nocontam_fq
+    outputs:
+      - name: chr21_0_23_nocontam_bfq
+        size: 545816
+    size: 0.25
+  - name: ID00073
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_0_nocontam_bfq
+        source: ID00049.chr21_0_0_nocontam_bfq
+    outputs:
+      - name: chr21_0_0_nocontam_map
+        size: 1115865
+    size: 13132.42
+  - name: ID00074
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_1_nocontam_bfq
+        source: ID00050.chr21_0_1_nocontam_bfq
+    outputs:
+      - name: chr21_0_1_nocontam_map
+        size: 1120207
+    size: 16543.14
+  - name: ID00075
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_2_nocontam_bfq
+        source: ID00051.chr21_0_2_nocontam_bfq
+    outputs:
+      - name: chr21_0_2_nocontam_map
+        size: 902848
+    size: 19949.8
+  - name: ID00076
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_3_nocontam_bfq
+        source: ID00052.chr21_0_3_nocontam_bfq
+    outputs:
+      - name: chr21_0_3_nocontam_map
+        size: 1083071
+    size: 18058.05
+  - name: ID00077
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_4_nocontam_bfq
+        source: ID00053.chr21_0_4_nocontam_bfq
+    outputs:
+      - name: chr21_0_4_nocontam_map
+        size: 744472
+    size: 20347.15
+  - name: ID00078
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_5_nocontam_bfq
+        source: ID00054.chr21_0_5_nocontam_bfq
+    outputs:
+      - name: chr21_0_5_nocontam_map
+        size: 887700
+    size: 14667.5
+  - name: ID00079
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_6_nocontam_bfq
+        source: ID00055.chr21_0_6_nocontam_bfq
+    outputs:
+      - name: chr21_0_6_nocontam_map
+        size: 751680
+    size: 23571.49
+  - name: ID00080
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_7_nocontam_bfq
+        source: ID00056.chr21_0_7_nocontam_bfq
+    outputs:
+      - name: chr21_0_7_nocontam_map
+        size: 994415
+    size: 18115.69
+  - name: ID00081
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_8_nocontam_bfq
+        source: ID00057.chr21_0_8_nocontam_bfq
+    outputs:
+      - name: chr21_0_8_nocontam_map
+        size: 1550223
+    size: 13362.08
+  - name: ID00082
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_9_nocontam_bfq
+        source: ID00058.chr21_0_9_nocontam_bfq
+    outputs:
+      - name: chr21_0_9_nocontam_map
+        size: 1074951
+    size: 19854.08
+  - name: ID00083
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_10_nocontam_bfq
+        source: ID00059.chr21_0_10_nocontam_bfq
+    outputs:
+      - name: chr21_0_10_nocontam_map
+        size: 1117134
+    size: 13508.75
+  - name: ID00084
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_11_nocontam_bfq
+        source: ID00060.chr21_0_11_nocontam_bfq
+    outputs:
+      - name: chr21_0_11_nocontam_map
+        size: 788513
+    size: 11553.88
+  - name: ID00085
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_12_nocontam_bfq
+        source: ID00061.chr21_0_12_nocontam_bfq
+    outputs:
+      - name: chr21_0_12_nocontam_map
+        size: 313727
+    size: 14189.02
+  - name: ID00086
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_13_nocontam_bfq
+        source: ID00062.chr21_0_13_nocontam_bfq
+    outputs:
+      - name: chr21_0_13_nocontam_map
+        size: 441523
+    size: 19348.23
+  - name: ID00087
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_14_nocontam_bfq
+        source: ID00063.chr21_0_14_nocontam_bfq
+    outputs:
+      - name: chr21_0_14_nocontam_map
+        size: 2439265
+    size: 13683.86
+  - name: ID00088
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_15_nocontam_bfq
+        source: ID00064.chr21_0_15_nocontam_bfq
+    outputs:
+      - name: chr21_0_15_nocontam_map
+        size: 902832
+    size: 10238.56
+  - name: ID00089
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_16_nocontam_bfq
+        source: ID00065.chr21_0_16_nocontam_bfq
+    outputs:
+      - name: chr21_0_16_nocontam_map
+        size: 396747
+    size: 21339.39
+  - name: ID00090
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_17_nocontam_bfq
+        source: ID00066.chr21_0_17_nocontam_bfq
+    outputs:
+      - name: chr21_0_17_nocontam_map
+        size: 1208015
+    size: 14142.3
+  - name: ID00091
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_18_nocontam_bfq
+        source: ID00067.chr21_0_18_nocontam_bfq
+    outputs:
+      - name: chr21_0_18_nocontam_map
+        size: 453936
+    size: 17499.21
+  - name: ID00092
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_19_nocontam_bfq
+        source: ID00068.chr21_0_19_nocontam_bfq
+    outputs:
+      - name: chr21_0_19_nocontam_map
+        size: 1169189
+    size: 16134.19
+  - name: ID00093
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_20_nocontam_bfq
+        source: ID00069.chr21_0_20_nocontam_bfq
+    outputs:
+      - name: chr21_0_20_nocontam_map
+        size: 3503408
+    size: 15513.08
+  - name: ID00094
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_21_nocontam_bfq
+        source: ID00070.chr21_0_21_nocontam_bfq
+    outputs:
+      - name: chr21_0_21_nocontam_map
+        size: 553989
+    size: 23456.09
+  - name: ID00095
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_22_nocontam_bfq
+        source: ID00071.chr21_0_22_nocontam_bfq
+    outputs:
+      - name: chr21_0_22_nocontam_map
+        size: 1179241
+    size: 15840.58
+  - name: ID00096
+    inputs:
+      - name: chr21_BS_bfa
+        source: chr21_BS_bfa
+      - name: chr21_0_23_nocontam_bfq
+        source: ID00072.chr21_0_23_nocontam_bfq
+    outputs:
+      - name: chr21_0_23_nocontam_map
+        size: 593278
+    size: 13000.28
+  - name: ID00097
+    inputs:
+      - name: chr21_0_0_nocontam_map
+        source: ID00073.chr21_0_0_nocontam_map
+      - name: chr21_0_1_nocontam_map
+        source: ID00074.chr21_0_1_nocontam_map
+      - name: chr21_0_2_nocontam_map
+        source: ID00075.chr21_0_2_nocontam_map
+      - name: chr21_0_3_nocontam_map
+        source: ID00076.chr21_0_3_nocontam_map
+      - name: chr21_0_4_nocontam_map
+        source: ID00077.chr21_0_4_nocontam_map
+      - name: chr21_0_5_nocontam_map
+        source: ID00078.chr21_0_5_nocontam_map
+      - name: chr21_0_6_nocontam_map
+        source: ID00079.chr21_0_6_nocontam_map
+      - name: chr21_0_7_nocontam_map
+        source: ID00080.chr21_0_7_nocontam_map
+      - name: chr21_0_8_nocontam_map
+        source: ID00081.chr21_0_8_nocontam_map
+      - name: chr21_0_9_nocontam_map
+        source: ID00082.chr21_0_9_nocontam_map
+      - name: chr21_0_10_nocontam_map
+        source: ID00083.chr21_0_10_nocontam_map
+      - name: chr21_0_11_nocontam_map
+        source: ID00084.chr21_0_11_nocontam_map
+      - name: chr21_0_12_nocontam_map
+        source: ID00085.chr21_0_12_nocontam_map
+      - name: chr21_0_13_nocontam_map
+        source: ID00086.chr21_0_13_nocontam_map
+      - name: chr21_0_14_nocontam_map
+        source: ID00087.chr21_0_14_nocontam_map
+      - name: chr21_0_15_nocontam_map
+        source: ID00088.chr21_0_15_nocontam_map
+      - name: chr21_0_16_nocontam_map
+        source: ID00089.chr21_0_16_nocontam_map
+      - name: chr21_0_17_nocontam_map
+        source: ID00090.chr21_0_17_nocontam_map
+      - name: chr21_0_18_nocontam_map
+        source: ID00091.chr21_0_18_nocontam_map
+      - name: chr21_0_19_nocontam_map
+        source: ID00092.chr21_0_19_nocontam_map
+      - name: chr21_0_20_nocontam_map
+        source: ID00093.chr21_0_20_nocontam_map
+      - name: chr21_0_21_nocontam_map
+        source: ID00094.chr21_0_21_nocontam_map
+      - name: chr21_0_22_nocontam_map
+        source: ID00095.chr21_0_22_nocontam_map
+      - name: chr21_0_23_nocontam_map
+        source: ID00096.chr21_0_23_nocontam_map
+    outputs:
+      - name: chr21_nocontam_map
+        size: 23854933
+      - name: chr21_nocontam_map_zr
+        size: 621933
+      - name: chr21_nocontam_map_vm
+        size: 113723
+    size: 10.92
+  - name: ID00098
+    inputs:
+      - name: chr21_nocontam_map
+        source: ID00097.chr21_nocontam_map
+    outputs:
+      - name: chr21_nocontam_chr_map
+        size: 422973
+    size: 0.02
+  - name: ID00099
+    inputs:
+      - name: chr21_BSnull_bfa
+        source: chr21_BSnull_bfa
+      - name: chr21_nocontam_chr_map
+        source: ID00098.chr21_nocontam_chr_map
+    outputs:
+      - name: chr21_nocontam_chr_pileup
+        size: 3007950
+    size: 6255.01
