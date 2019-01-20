@@ -2,9 +2,9 @@ name: Epigenomics_100.yml
 inputs:
   - name: chr210_sfq
     size: 234967975
-  - name: chr21_BSnull_bfa
-    size: 5300947649
   - name: chr21_BS_bfa
+    size: 5300947649
+  - name: chr21_BSnull_bfa
     size: 5300947649
 outputs:
   - name: chr21_0_0_sfq
@@ -359,7 +359,7 @@ tasks:
         size: 8843218
       - name: chr21_0_23_sfq
         size: 5905229
-    size: 34.75
+    size: 34.75GF
   - name: ID00001
     inputs:
       - name: chr21_0_0_sfq
@@ -369,7 +369,7 @@ tasks:
         size: 5029052
       - name: chr21_0_0_contam_sfq
         size: 4971099
-    size: 1.1
+    size: 1.10GF
   - name: ID00002
     inputs:
       - name: chr21_0_1_sfq
@@ -379,7 +379,7 @@ tasks:
         size: 4697919
       - name: chr21_0_1_contam_sfq
         size: 5141249
-    size: 1.41
+    size: 1.41GF
   - name: ID00003
     inputs:
       - name: chr21_0_2_sfq
@@ -389,7 +389,7 @@ tasks:
         size: 5754656
       - name: chr21_0_2_contam_sfq
         size: 5223361
-    size: 1.4
+    size: 1.40GF
   - name: ID00004
     inputs:
       - name: chr21_0_3_sfq
@@ -399,7 +399,7 @@ tasks:
         size: 4783471
       - name: chr21_0_3_contam_sfq
         size: 4373984
-    size: 0.94
+    size: 0.94GF
   - name: ID00005
     inputs:
       - name: chr21_0_4_sfq
@@ -409,7 +409,7 @@ tasks:
         size: 4104446
       - name: chr21_0_4_contam_sfq
         size: 4196948
-    size: 0.83
+    size: 0.83GF
   - name: ID00006
     inputs:
       - name: chr21_0_5_sfq
@@ -419,7 +419,7 @@ tasks:
         size: 5945419
       - name: chr21_0_5_contam_sfq
         size: 5556218
-    size: 1.06
+    size: 1.06GF
   - name: ID00007
     inputs:
       - name: chr21_0_6_sfq
@@ -429,7 +429,7 @@ tasks:
         size: 2886268
       - name: chr21_0_6_contam_sfq
         size: 2892622
-    size: 0.51
+    size: 0.51GF
   - name: ID00008
     inputs:
       - name: chr21_0_7_sfq
@@ -439,7 +439,7 @@ tasks:
         size: 4934631
       - name: chr21_0_7_contam_sfq
         size: 4874087
-    size: 1.37
+    size: 1.37GF
   - name: ID00009
     inputs:
       - name: chr21_0_8_sfq
@@ -449,7 +449,7 @@ tasks:
         size: 6899515
       - name: chr21_0_8_contam_sfq
         size: 6862704
-    size: 1.9
+    size: 1.90GF
   - name: ID00010
     inputs:
       - name: chr21_0_9_sfq
@@ -459,7 +459,7 @@ tasks:
         size: 3938375
       - name: chr21_0_9_contam_sfq
         size: 4180773
-    size: 0.84
+    size: 0.84GF
   - name: ID00011
     inputs:
       - name: chr21_0_10_sfq
@@ -469,7 +469,7 @@ tasks:
         size: 5983348
       - name: chr21_0_10_contam_sfq
         size: 5796246
-    size: 1.06
+    size: 1.06GF
   - name: ID00012
     inputs:
       - name: chr21_0_11_sfq
@@ -479,7 +479,7 @@ tasks:
         size: 5132883
       - name: chr21_0_11_contam_sfq
         size: 4784720
-    size: 1.45
+    size: 1.45GF
   - name: ID00013
     inputs:
       - name: chr21_0_12_sfq
@@ -489,7 +489,7 @@ tasks:
         size: 2078101
       - name: chr21_0_12_contam_sfq
         size: 1914693
-    size: 0.53
+    size: 0.53GF
   - name: ID00014
     inputs:
       - name: chr21_0_13_sfq
@@ -499,7 +499,7 @@ tasks:
         size: 3600467
       - name: chr21_0_13_contam_sfq
         size: 3776971
-    size: 1.0
+    size: 1.00GF
   - name: ID00015
     inputs:
       - name: chr21_0_14_sfq
@@ -509,7 +509,7 @@ tasks:
         size: 10809499
       - name: chr21_0_14_contam_sfq
         size: 10528321
-    size: 2.36
+    size: 2.36GF
   - name: ID00016
     inputs:
       - name: chr21_0_15_sfq
@@ -519,7 +519,7 @@ tasks:
         size: 4886871
       - name: chr21_0_15_contam_sfq
         size: 4693484
-    size: 1.02
+    size: 1.02GF
   - name: ID00017
     inputs:
       - name: chr21_0_16_sfq
@@ -529,7 +529,7 @@ tasks:
         size: 2094118
       - name: chr21_0_16_contam_sfq
         size: 1949468
-    size: 0.45
+    size: 0.45GF
   - name: ID00018
     inputs:
       - name: chr21_0_17_sfq
@@ -539,7 +539,7 @@ tasks:
         size: 7606608
       - name: chr21_0_17_contam_sfq
         size: 7879739
-    size: 1.23
+    size: 1.23GF
   - name: ID00019
     inputs:
       - name: chr21_0_18_sfq
@@ -549,7 +549,7 @@ tasks:
         size: 2086576
       - name: chr21_0_18_contam_sfq
         size: 1893941
-    size: 0.41
+    size: 0.41GF
   - name: ID00020
     inputs:
       - name: chr21_0_19_sfq
@@ -559,7 +559,7 @@ tasks:
         size: 6335995
       - name: chr21_0_19_contam_sfq
         size: 6007163
-    size: 1.08
+    size: 1.08GF
   - name: ID00021
     inputs:
       - name: chr21_0_20_sfq
@@ -569,7 +569,7 @@ tasks:
         size: 8511643
       - name: chr21_0_20_contam_sfq
         size: 9381375
-    size: 3.26
+    size: 3.26GF
   - name: ID00022
     inputs:
       - name: chr21_0_21_sfq
@@ -579,7 +579,7 @@ tasks:
         size: 2742329
       - name: chr21_0_21_contam_sfq
         size: 2498172
-    size: 0.5
+    size: 0.50GF
   - name: ID00023
     inputs:
       - name: chr21_0_22_sfq
@@ -589,7 +589,7 @@ tasks:
         size: 4561796
       - name: chr21_0_22_contam_sfq
         size: 4281422
-    size: 0.95
+    size: 0.95GF
   - name: ID00024
     inputs:
       - name: chr21_0_23_sfq
@@ -599,7 +599,7 @@ tasks:
         size: 3009433
       - name: chr21_0_23_contam_sfq
         size: 2895796
-    size: 0.57
+    size: 0.57GF
   - name: ID00025
     inputs:
       - name: chr21_0_0_nocontam_sfq
@@ -607,7 +607,7 @@ tasks:
     outputs:
       - name: chr21_0_0_nocontam_fq
         size: 4274007
-    size: 0.57
+    size: 0.57GF
   - name: ID00026
     inputs:
       - name: chr21_0_1_nocontam_sfq
@@ -615,7 +615,7 @@ tasks:
     outputs:
       - name: chr21_0_1_nocontam_fq
         size: 4135379
-    size: 0.26
+    size: 0.26GF
   - name: ID00027
     inputs:
       - name: chr21_0_2_nocontam_sfq
@@ -623,7 +623,7 @@ tasks:
     outputs:
       - name: chr21_0_2_nocontam_fq
         size: 3447729
-    size: 0.4
+    size: 0.40GF
   - name: ID00028
     inputs:
       - name: chr21_0_3_nocontam_sfq
@@ -631,7 +631,7 @@ tasks:
     outputs:
       - name: chr21_0_3_nocontam_fq
         size: 5025458
-    size: 0.42
+    size: 0.42GF
   - name: ID00029
     inputs:
       - name: chr21_0_4_nocontam_sfq
@@ -639,7 +639,7 @@ tasks:
     outputs:
       - name: chr21_0_4_nocontam_fq
         size: 2581947
-    size: 0.27
+    size: 0.27GF
   - name: ID00030
     inputs:
       - name: chr21_0_5_nocontam_sfq
@@ -647,7 +647,7 @@ tasks:
     outputs:
       - name: chr21_0_5_nocontam_fq
         size: 3417515
-    size: 0.38
+    size: 0.38GF
   - name: ID00031
     inputs:
       - name: chr21_0_6_nocontam_sfq
@@ -655,7 +655,7 @@ tasks:
     outputs:
       - name: chr21_0_6_nocontam_fq
         size: 2264879
-    size: 0.13
+    size: 0.13GF
   - name: ID00032
     inputs:
       - name: chr21_0_7_nocontam_sfq
@@ -663,7 +663,7 @@ tasks:
     outputs:
       - name: chr21_0_7_nocontam_fq
         size: 3682859
-    size: 0.34
+    size: 0.34GF
   - name: ID00033
     inputs:
       - name: chr21_0_8_nocontam_sfq
@@ -671,7 +671,7 @@ tasks:
     outputs:
       - name: chr21_0_8_nocontam_fq
         size: 6626159
-    size: 0.46
+    size: 0.46GF
   - name: ID00034
     inputs:
       - name: chr21_0_9_nocontam_sfq
@@ -679,7 +679,7 @@ tasks:
     outputs:
       - name: chr21_0_9_nocontam_fq
         size: 4215607
-    size: 0.3
+    size: 0.30GF
   - name: ID00035
     inputs:
       - name: chr21_0_10_nocontam_sfq
@@ -687,7 +687,7 @@ tasks:
     outputs:
       - name: chr21_0_10_nocontam_fq
         size: 4445741
-    size: 0.43
+    size: 0.43GF
   - name: ID00036
     inputs:
       - name: chr21_0_11_nocontam_sfq
@@ -695,7 +695,7 @@ tasks:
     outputs:
       - name: chr21_0_11_nocontam_fq
         size: 3158171
-    size: 0.36
+    size: 0.36GF
   - name: ID00037
     inputs:
       - name: chr21_0_12_nocontam_sfq
@@ -703,7 +703,7 @@ tasks:
     outputs:
       - name: chr21_0_12_nocontam_fq
         size: 1378674
-    size: 0.18
+    size: 0.18GF
   - name: ID00038
     inputs:
       - name: chr21_0_13_nocontam_sfq
@@ -711,7 +711,7 @@ tasks:
     outputs:
       - name: chr21_0_13_nocontam_fq
         size: 2182546
-    size: 0.24
+    size: 0.24GF
   - name: ID00039
     inputs:
       - name: chr21_0_14_nocontam_sfq
@@ -719,7 +719,7 @@ tasks:
     outputs:
       - name: chr21_0_14_nocontam_fq
         size: 10051350
-    size: 0.73
+    size: 0.73GF
   - name: ID00040
     inputs:
       - name: chr21_0_15_nocontam_sfq
@@ -727,7 +727,7 @@ tasks:
     outputs:
       - name: chr21_0_15_nocontam_fq
         size: 3406402
-    size: 0.35
+    size: 0.35GF
   - name: ID00041
     inputs:
       - name: chr21_0_16_nocontam_sfq
@@ -735,7 +735,7 @@ tasks:
     outputs:
       - name: chr21_0_16_nocontam_fq
         size: 1466609
-    size: 0.24
+    size: 0.24GF
   - name: ID00042
     inputs:
       - name: chr21_0_17_nocontam_sfq
@@ -743,7 +743,7 @@ tasks:
     outputs:
       - name: chr21_0_17_nocontam_fq
         size: 4294239
-    size: 0.38
+    size: 0.38GF
   - name: ID00043
     inputs:
       - name: chr21_0_18_nocontam_sfq
@@ -751,7 +751,7 @@ tasks:
     outputs:
       - name: chr21_0_18_nocontam_fq
         size: 1763049
-    size: 0.13
+    size: 0.13GF
   - name: ID00044
     inputs:
       - name: chr21_0_19_nocontam_sfq
@@ -759,7 +759,7 @@ tasks:
     outputs:
       - name: chr21_0_19_nocontam_fq
         size: 4464001
-    size: 0.69
+    size: 0.69GF
   - name: ID00045
     inputs:
       - name: chr21_0_20_nocontam_sfq
@@ -767,7 +767,7 @@ tasks:
     outputs:
       - name: chr21_0_20_nocontam_fq
         size: 11558959
-    size: 0.53
+    size: 0.53GF
   - name: ID00046
     inputs:
       - name: chr21_0_21_nocontam_sfq
@@ -775,7 +775,7 @@ tasks:
     outputs:
       - name: chr21_0_21_nocontam_fq
         size: 2356177
-    size: 0.15
+    size: 0.15GF
   - name: ID00047
     inputs:
       - name: chr21_0_22_nocontam_sfq
@@ -783,7 +783,7 @@ tasks:
     outputs:
       - name: chr21_0_22_nocontam_fq
         size: 4481457
-    size: 0.33
+    size: 0.33GF
   - name: ID00048
     inputs:
       - name: chr21_0_23_nocontam_sfq
@@ -791,7 +791,7 @@ tasks:
     outputs:
       - name: chr21_0_23_nocontam_fq
         size: 2239230
-    size: 0.22
+    size: 0.22GF
   - name: ID00049
     inputs:
       - name: chr21_0_0_nocontam_fq
@@ -799,7 +799,7 @@ tasks:
     outputs:
       - name: chr21_0_0_nocontam_bfq
         size: 1026596
-    size: 0.88
+    size: 0.88GF
   - name: ID00050
     inputs:
       - name: chr21_0_1_nocontam_fq
@@ -807,7 +807,7 @@ tasks:
     outputs:
       - name: chr21_0_1_nocontam_bfq
         size: 1030591
-    size: 0.55
+    size: 0.55GF
   - name: ID00051
     inputs:
       - name: chr21_0_2_nocontam_fq
@@ -815,7 +815,7 @@ tasks:
     outputs:
       - name: chr21_0_2_nocontam_bfq
         size: 830621
-    size: 0.42
+    size: 0.42GF
   - name: ID00052
     inputs:
       - name: chr21_0_3_nocontam_fq
@@ -823,7 +823,7 @@ tasks:
     outputs:
       - name: chr21_0_3_nocontam_bfq
         size: 996426
-    size: 0.96
+    size: 0.96GF
   - name: ID00053
     inputs:
       - name: chr21_0_4_nocontam_fq
@@ -831,7 +831,7 @@ tasks:
     outputs:
       - name: chr21_0_4_nocontam_bfq
         size: 684915
-    size: 0.26
+    size: 0.26GF
   - name: ID00054
     inputs:
       - name: chr21_0_5_nocontam_fq
@@ -839,7 +839,7 @@ tasks:
     outputs:
       - name: chr21_0_5_nocontam_bfq
         size: 816684
-    size: 0.48
+    size: 0.48GF
   - name: ID00055
     inputs:
       - name: chr21_0_6_nocontam_fq
@@ -847,7 +847,7 @@ tasks:
     outputs:
       - name: chr21_0_6_nocontam_bfq
         size: 691546
-    size: 0.42
+    size: 0.42GF
   - name: ID00056
     inputs:
       - name: chr21_0_7_nocontam_fq
@@ -855,7 +855,7 @@ tasks:
     outputs:
       - name: chr21_0_7_nocontam_bfq
         size: 914862
-    size: 0.6
+    size: 0.60GF
   - name: ID00057
     inputs:
       - name: chr21_0_8_nocontam_fq
@@ -863,7 +863,7 @@ tasks:
     outputs:
       - name: chr21_0_8_nocontam_bfq
         size: 1426206
-    size: 1.02
+    size: 1.02GF
   - name: ID00058
     inputs:
       - name: chr21_0_9_nocontam_fq
@@ -871,7 +871,7 @@ tasks:
     outputs:
       - name: chr21_0_9_nocontam_bfq
         size: 988955
-    size: 0.8
+    size: 0.80GF
   - name: ID00059
     inputs:
       - name: chr21_0_10_nocontam_fq
@@ -879,7 +879,7 @@ tasks:
     outputs:
       - name: chr21_0_10_nocontam_bfq
         size: 1027764
-    size: 0.67
+    size: 0.67GF
   - name: ID00060
     inputs:
       - name: chr21_0_11_nocontam_fq
@@ -887,7 +887,7 @@ tasks:
     outputs:
       - name: chr21_0_11_nocontam_bfq
         size: 725432
-    size: 0.41
+    size: 0.41GF
   - name: ID00061
     inputs:
       - name: chr21_0_12_nocontam_fq
@@ -895,7 +895,7 @@ tasks:
     outputs:
       - name: chr21_0_12_nocontam_bfq
         size: 288629
-    size: 0.2
+    size: 0.20GF
   - name: ID00062
     inputs:
       - name: chr21_0_13_nocontam_fq
@@ -903,7 +903,7 @@ tasks:
     outputs:
       - name: chr21_0_13_nocontam_bfq
         size: 406202
-    size: 0.41
+    size: 0.41GF
   - name: ID00063
     inputs:
       - name: chr21_0_14_nocontam_fq
@@ -911,7 +911,7 @@ tasks:
     outputs:
       - name: chr21_0_14_nocontam_bfq
         size: 2244124
-    size: 1.29
+    size: 1.29GF
   - name: ID00064
     inputs:
       - name: chr21_0_15_nocontam_fq
@@ -919,7 +919,7 @@ tasks:
     outputs:
       - name: chr21_0_15_nocontam_bfq
         size: 830606
-    size: 0.43
+    size: 0.43GF
   - name: ID00065
     inputs:
       - name: chr21_0_16_nocontam_fq
@@ -927,7 +927,7 @@ tasks:
     outputs:
       - name: chr21_0_16_nocontam_bfq
         size: 365008
-    size: 0.21
+    size: 0.21GF
   - name: ID00066
     inputs:
       - name: chr21_0_17_nocontam_fq
@@ -935,7 +935,7 @@ tasks:
     outputs:
       - name: chr21_0_17_nocontam_bfq
         size: 1111374
-    size: 0.57
+    size: 0.57GF
   - name: ID00067
     inputs:
       - name: chr21_0_18_nocontam_fq
@@ -943,7 +943,7 @@ tasks:
     outputs:
       - name: chr21_0_18_nocontam_bfq
         size: 417622
-    size: 0.28
+    size: 0.28GF
   - name: ID00068
     inputs:
       - name: chr21_0_19_nocontam_fq
@@ -951,7 +951,7 @@ tasks:
     outputs:
       - name: chr21_0_19_nocontam_bfq
         size: 1075654
-    size: 0.82
+    size: 0.82GF
   - name: ID00069
     inputs:
       - name: chr21_0_20_nocontam_fq
@@ -959,7 +959,7 @@ tasks:
     outputs:
       - name: chr21_0_20_nocontam_bfq
         size: 3223136
-    size: 1.99
+    size: 1.99GF
   - name: ID00070
     inputs:
       - name: chr21_0_21_nocontam_fq
@@ -967,7 +967,7 @@ tasks:
     outputs:
       - name: chr21_0_21_nocontam_bfq
         size: 509670
-    size: 0.3
+    size: 0.30GF
   - name: ID00071
     inputs:
       - name: chr21_0_22_nocontam_fq
@@ -975,7 +975,7 @@ tasks:
     outputs:
       - name: chr21_0_22_nocontam_bfq
         size: 1084902
-    size: 0.74
+    size: 0.74GF
   - name: ID00072
     inputs:
       - name: chr21_0_23_nocontam_fq
@@ -983,7 +983,7 @@ tasks:
     outputs:
       - name: chr21_0_23_nocontam_bfq
         size: 545816
-    size: 0.25
+    size: 0.25GF
   - name: ID00073
     inputs:
       - name: chr21_BS_bfa
@@ -993,7 +993,7 @@ tasks:
     outputs:
       - name: chr21_0_0_nocontam_map
         size: 1115865
-    size: 13132.42
+    size: 13132.42GF
   - name: ID00074
     inputs:
       - name: chr21_BS_bfa
@@ -1003,7 +1003,7 @@ tasks:
     outputs:
       - name: chr21_0_1_nocontam_map
         size: 1120207
-    size: 16543.14
+    size: 16543.14GF
   - name: ID00075
     inputs:
       - name: chr21_BS_bfa
@@ -1013,7 +1013,7 @@ tasks:
     outputs:
       - name: chr21_0_2_nocontam_map
         size: 902848
-    size: 19949.8
+    size: 19949.80GF
   - name: ID00076
     inputs:
       - name: chr21_BS_bfa
@@ -1023,7 +1023,7 @@ tasks:
     outputs:
       - name: chr21_0_3_nocontam_map
         size: 1083071
-    size: 18058.05
+    size: 18058.05GF
   - name: ID00077
     inputs:
       - name: chr21_BS_bfa
@@ -1033,7 +1033,7 @@ tasks:
     outputs:
       - name: chr21_0_4_nocontam_map
         size: 744472
-    size: 20347.15
+    size: 20347.15GF
   - name: ID00078
     inputs:
       - name: chr21_BS_bfa
@@ -1043,7 +1043,7 @@ tasks:
     outputs:
       - name: chr21_0_5_nocontam_map
         size: 887700
-    size: 14667.5
+    size: 14667.50GF
   - name: ID00079
     inputs:
       - name: chr21_BS_bfa
@@ -1053,7 +1053,7 @@ tasks:
     outputs:
       - name: chr21_0_6_nocontam_map
         size: 751680
-    size: 23571.49
+    size: 23571.49GF
   - name: ID00080
     inputs:
       - name: chr21_BS_bfa
@@ -1063,7 +1063,7 @@ tasks:
     outputs:
       - name: chr21_0_7_nocontam_map
         size: 994415
-    size: 18115.69
+    size: 18115.69GF
   - name: ID00081
     inputs:
       - name: chr21_BS_bfa
@@ -1073,7 +1073,7 @@ tasks:
     outputs:
       - name: chr21_0_8_nocontam_map
         size: 1550223
-    size: 13362.08
+    size: 13362.08GF
   - name: ID00082
     inputs:
       - name: chr21_BS_bfa
@@ -1083,7 +1083,7 @@ tasks:
     outputs:
       - name: chr21_0_9_nocontam_map
         size: 1074951
-    size: 19854.08
+    size: 19854.08GF
   - name: ID00083
     inputs:
       - name: chr21_BS_bfa
@@ -1093,7 +1093,7 @@ tasks:
     outputs:
       - name: chr21_0_10_nocontam_map
         size: 1117134
-    size: 13508.75
+    size: 13508.75GF
   - name: ID00084
     inputs:
       - name: chr21_BS_bfa
@@ -1103,7 +1103,7 @@ tasks:
     outputs:
       - name: chr21_0_11_nocontam_map
         size: 788513
-    size: 11553.88
+    size: 11553.88GF
   - name: ID00085
     inputs:
       - name: chr21_BS_bfa
@@ -1113,7 +1113,7 @@ tasks:
     outputs:
       - name: chr21_0_12_nocontam_map
         size: 313727
-    size: 14189.02
+    size: 14189.02GF
   - name: ID00086
     inputs:
       - name: chr21_BS_bfa
@@ -1123,7 +1123,7 @@ tasks:
     outputs:
       - name: chr21_0_13_nocontam_map
         size: 441523
-    size: 19348.23
+    size: 19348.23GF
   - name: ID00087
     inputs:
       - name: chr21_BS_bfa
@@ -1133,7 +1133,7 @@ tasks:
     outputs:
       - name: chr21_0_14_nocontam_map
         size: 2439265
-    size: 13683.86
+    size: 13683.86GF
   - name: ID00088
     inputs:
       - name: chr21_BS_bfa
@@ -1143,7 +1143,7 @@ tasks:
     outputs:
       - name: chr21_0_15_nocontam_map
         size: 902832
-    size: 10238.56
+    size: 10238.56GF
   - name: ID00089
     inputs:
       - name: chr21_BS_bfa
@@ -1153,7 +1153,7 @@ tasks:
     outputs:
       - name: chr21_0_16_nocontam_map
         size: 396747
-    size: 21339.39
+    size: 21339.39GF
   - name: ID00090
     inputs:
       - name: chr21_BS_bfa
@@ -1163,7 +1163,7 @@ tasks:
     outputs:
       - name: chr21_0_17_nocontam_map
         size: 1208015
-    size: 14142.3
+    size: 14142.30GF
   - name: ID00091
     inputs:
       - name: chr21_BS_bfa
@@ -1173,7 +1173,7 @@ tasks:
     outputs:
       - name: chr21_0_18_nocontam_map
         size: 453936
-    size: 17499.21
+    size: 17499.21GF
   - name: ID00092
     inputs:
       - name: chr21_BS_bfa
@@ -1183,7 +1183,7 @@ tasks:
     outputs:
       - name: chr21_0_19_nocontam_map
         size: 1169189
-    size: 16134.19
+    size: 16134.19GF
   - name: ID00093
     inputs:
       - name: chr21_BS_bfa
@@ -1193,7 +1193,7 @@ tasks:
     outputs:
       - name: chr21_0_20_nocontam_map
         size: 3503408
-    size: 15513.08
+    size: 15513.08GF
   - name: ID00094
     inputs:
       - name: chr21_BS_bfa
@@ -1203,7 +1203,7 @@ tasks:
     outputs:
       - name: chr21_0_21_nocontam_map
         size: 553989
-    size: 23456.09
+    size: 23456.09GF
   - name: ID00095
     inputs:
       - name: chr21_BS_bfa
@@ -1213,7 +1213,7 @@ tasks:
     outputs:
       - name: chr21_0_22_nocontam_map
         size: 1179241
-    size: 15840.58
+    size: 15840.58GF
   - name: ID00096
     inputs:
       - name: chr21_BS_bfa
@@ -1223,7 +1223,7 @@ tasks:
     outputs:
       - name: chr21_0_23_nocontam_map
         size: 593278
-    size: 13000.28
+    size: 13000.28GF
   - name: ID00097
     inputs:
       - name: chr21_0_0_nocontam_map
@@ -1281,7 +1281,7 @@ tasks:
         size: 621933
       - name: chr21_nocontam_map_vm
         size: 113723
-    size: 10.92
+    size: 10.92GF
   - name: ID00098
     inputs:
       - name: chr21_nocontam_map
@@ -1289,7 +1289,7 @@ tasks:
     outputs:
       - name: chr21_nocontam_chr_map
         size: 422973
-    size: 0.02
+    size: 0.02GF
   - name: ID00099
     inputs:
       - name: chr21_BSnull_bfa
@@ -1299,4 +1299,4 @@ tasks:
     outputs:
       - name: chr21_nocontam_chr_pileup
         size: 3007950
-    size: 6255.01
+    size: 6255.01GF

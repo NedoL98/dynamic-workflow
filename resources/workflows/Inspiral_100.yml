@@ -1,107 +1,107 @@
 name: Inspiral_100.yml
 inputs:
-  - name: HL-INJECTIONS_100-845878994-8011301_xml
-    size: 2421423
-  - name: H-H1_RDS_L4-809526501-1024_gwf
-    size: 15593853
-  - name: H-H1_RDS_L4-809526500-1024_gwf
-    size: 15616146
-  - name: H-H1_RDS_L4-809526516-1024_gwf
-    size: 15571826
-  - name: H-H1_RDS_L4-809526514-1024_gwf
-    size: 15598159
-  - name: H-H2_RDS_L4-809526520-1024_gwf
-    size: 15569725
-  - name: H-H1_RDS_L4-809526503-1024_gwf
-    size: 15605074
-  - name: H-H1_RDS_L4-755925764-1024_gwf
-    size: 15622182
-  - name: H-H1_RDS_L4-809526519-1024_gwf
-    size: 15608758
-  - name: H-H1_RDS_L4-755925774-1024_gwf
-    size: 15620394
-  - name: H-H1_RDS_L4-755925759-1024_gwf
-    size: 15555343
-  - name: H-H1_RDS_L4-755925763-1024_gwf
-    size: 15578075
-  - name: H-H1_RDS_L4-755925753-1024_gwf
-    size: 15559161
-  - name: H-H1_RDS_L4-809526502-1024_gwf
-    size: 15595622
-  - name: H-H1_RDS_L4-809526508-1024_gwf
-    size: 15604072
-  - name: H-H1_RDS_L4-809526506-1024_gwf
-    size: 15595332
-  - name: H-H1_RDS_L4-809526507-1024_gwf
-    size: 15603688
   - name: H-CAL_REF_DARM_ERR_H1_S5_V1-858019967-8_gwf
     size: 902334
-  - name: H-H1_RDS_L4-755925754-1024_gwf
-    size: 15607915
-  - name: H-H1_RDS_L4-809526509-1024_gwf
-    size: 15615482
-  - name: H-H1_RDS_L4-809526510-1024_gwf
-    size: 15589028
-  - name: H-H1_RDS_L4-755925761-1024_gwf
-    size: 15612099
+  - name: H-CAL_FAC_DARM_ERR_H1_S5_U_060-733362041-281969354_gwf
+    size: 8415922
   - name: H-H1_RDS_L4-755925752-1024_gwf
     size: 15565623
   - name: H-H1_RDS_L4-809526497-1024_gwf
     size: 15584493
-  - name: H-H1_RDS_L4-755925757-1024_gwf
-    size: 15592409
-  - name: H-H1_RDS_L4-755925755-1024_gwf
-    size: 15601513
-  - name: H-CAL_FAC_DARM_ERR_H1_S5_U_060-733362041-281969354_gwf
-    size: 8415922
-  - name: H-H1_RDS_L4-809526511-1024_gwf
-    size: 15595845
-  - name: H-H1_RDS_L4-809526504-1024_gwf
-    size: 15572243
-  - name: H-H1_RDS_L4-755925772-1024_gwf
-    size: 15599053
-  - name: H-H1_RDS_L4-809526512-1024_gwf
-    size: 15616575
-  - name: H-H1_RDS_L4-809526513-1024_gwf
-    size: 15599396
-  - name: H-H1_RDS_L4-755925762-1024_gwf
-    size: 15604546
   - name: H-H1_RDS_L4-809526498-1024_gwf
     size: 15575129
-  - name: H-H1_RDS_L4-755925756-1024_gwf
-    size: 15623173
-  - name: H-H1_RDS_L4-755925758-1024_gwf
-    size: 15604139
-  - name: H-H1_RDS_L4-755925765-1024_gwf
-    size: 15606091
-  - name: H-H1_RDS_L4-755925769-1024_gwf
-    size: 15596567
-  - name: H-H1_RDS_L4-755925760-1024_gwf
-    size: 15606731
-  - name: H-H1_RDS_L4-755925767-1024_gwf
-    size: 15615397
-  - name: H-H1_RDS_L4-755925773-1024_gwf
-    size: 15597323
-  - name: H-H1_RDS_L4-755925766-1024_gwf
-    size: 15575260
-  - name: H-H1_RDS_L4-809526515-1024_gwf
-    size: 15632985
-  - name: H-H1_RDS_L4-809526518-1024_gwf
-    size: 15532832
-  - name: H-H1_RDS_L4-809526505-1024_gwf
-    size: 15576797
-  - name: H-H2_RDS_L4-755925775-1024_gwf
-    size: 15613972
-  - name: H-H1_RDS_L4-755925768-1024_gwf
-    size: 15594504
-  - name: H-H1_RDS_L4-755925771-1024_gwf
-    size: 15601318
+  - name: H-H1_RDS_L4-755925753-1024_gwf
+    size: 15559161
   - name: H-H1_RDS_L4-809526499-1024_gwf
     size: 15617436
+  - name: H-H1_RDS_L4-755925754-1024_gwf
+    size: 15607915
+  - name: H-H1_RDS_L4-755925755-1024_gwf
+    size: 15601513
+  - name: H-H1_RDS_L4-809526500-1024_gwf
+    size: 15616146
+  - name: H-H1_RDS_L4-755925756-1024_gwf
+    size: 15623173
+  - name: H-H1_RDS_L4-809526501-1024_gwf
+    size: 15593853
+  - name: H-H1_RDS_L4-755925757-1024_gwf
+    size: 15592409
+  - name: H-H1_RDS_L4-809526502-1024_gwf
+    size: 15595622
+  - name: H-H1_RDS_L4-809526503-1024_gwf
+    size: 15605074
+  - name: H-H1_RDS_L4-755925758-1024_gwf
+    size: 15604139
+  - name: H-H1_RDS_L4-755925759-1024_gwf
+    size: 15555343
+  - name: H-H1_RDS_L4-809526504-1024_gwf
+    size: 15572243
+  - name: H-H1_RDS_L4-755925760-1024_gwf
+    size: 15606731
+  - name: H-H1_RDS_L4-809526505-1024_gwf
+    size: 15576797
+  - name: H-H1_RDS_L4-809526506-1024_gwf
+    size: 15595332
+  - name: H-H1_RDS_L4-755925761-1024_gwf
+    size: 15612099
+  - name: H-H1_RDS_L4-755925762-1024_gwf
+    size: 15604546
+  - name: H-H1_RDS_L4-809526507-1024_gwf
+    size: 15603688
+  - name: H-H1_RDS_L4-755925763-1024_gwf
+    size: 15578075
+  - name: H-H1_RDS_L4-809526508-1024_gwf
+    size: 15604072
+  - name: H-H1_RDS_L4-809526509-1024_gwf
+    size: 15615482
+  - name: H-H1_RDS_L4-755925764-1024_gwf
+    size: 15622182
+  - name: H-H1_RDS_L4-755925765-1024_gwf
+    size: 15606091
+  - name: H-H1_RDS_L4-809526510-1024_gwf
+    size: 15589028
+  - name: H-H1_RDS_L4-755925766-1024_gwf
+    size: 15575260
+  - name: H-H1_RDS_L4-809526511-1024_gwf
+    size: 15595845
+  - name: H-H1_RDS_L4-809526512-1024_gwf
+    size: 15616575
+  - name: H-H1_RDS_L4-755925767-1024_gwf
+    size: 15615397
+  - name: H-H1_RDS_L4-755925768-1024_gwf
+    size: 15594504
+  - name: H-H1_RDS_L4-809526513-1024_gwf
+    size: 15599396
+  - name: H-H1_RDS_L4-809526514-1024_gwf
+    size: 15598159
+  - name: H-H1_RDS_L4-755925769-1024_gwf
+    size: 15596567
   - name: H-H1_RDS_L4-755925770-1024_gwf
     size: 15616383
+  - name: H-H1_RDS_L4-809526515-1024_gwf
+    size: 15632985
+  - name: H-H1_RDS_L4-755925771-1024_gwf
+    size: 15601318
+  - name: H-H1_RDS_L4-809526516-1024_gwf
+    size: 15571826
+  - name: H-H1_RDS_L4-755925772-1024_gwf
+    size: 15599053
   - name: H-H1_RDS_L4-809526517-1024_gwf
     size: 15613901
+  - name: H-H1_RDS_L4-809526518-1024_gwf
+    size: 15532832
+  - name: H-H1_RDS_L4-755925773-1024_gwf
+    size: 15597323
+  - name: H-H1_RDS_L4-755925774-1024_gwf
+    size: 15620394
+  - name: H-H1_RDS_L4-809526519-1024_gwf
+    size: 15608758
+  - name: HL-INJECTIONS_100-845878994-8011301_xml
+    size: 2421423
+  - name: H-H2_RDS_L4-755925775-1024_gwf
+    size: 15613972
+  - name: H-H2_RDS_L4-809526520-1024_gwf
+    size: 15569725
 outputs:
   - name: H1-TMPLTBANK-835964716-2048_xml
     source: ID00000.H1-TMPLTBANK-835964716-2048_xml
@@ -317,7 +317,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-835964716-2048_xml
         size: 1004121
-    size: 17.72
+    size: 17.72GF
   - name: ID00001
     inputs:
       - name: H-CAL_REF_DARM_ERR_H1_S5_V1-858019967-8_gwf
@@ -331,7 +331,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-744549666-2048_xml
         size: 976415
-    size: 18.41
+    size: 18.41GF
   - name: ID00002
     inputs:
       - name: H-H1_RDS_L4-809526499-1024_gwf
@@ -345,7 +345,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-823343034-2048_xml
         size: 968090
-    size: 18.29
+    size: 18.29GF
   - name: ID00003
     inputs:
       - name: H-CAL_REF_DARM_ERR_H1_S5_V1-858019967-8_gwf
@@ -359,7 +359,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-741912439-2048_xml
         size: 998458
-    size: 18.36
+    size: 18.36GF
   - name: ID00004
     inputs:
       - name: H-CAL_REF_DARM_ERR_H1_S5_V1-858019967-8_gwf
@@ -373,7 +373,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-809144983-2048_xml
         size: 963553
-    size: 18.73
+    size: 18.73GF
   - name: ID00005
     inputs:
       - name: H-H1_RDS_L4-755925757-1024_gwf
@@ -387,7 +387,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-836189434-2048_xml
         size: 986203
-    size: 17.99
+    size: 17.99GF
   - name: ID00006
     inputs:
       - name: H-H1_RDS_L4-809526503-1024_gwf
@@ -401,7 +401,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-858489096-2048_xml
         size: 973847
-    size: 18.06
+    size: 18.06GF
   - name: ID00007
     inputs:
       - name: H-H1_RDS_L4-755925759-1024_gwf
@@ -415,7 +415,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-760817748-2048_xml
         size: 1008807
-    size: 18.96
+    size: 18.96GF
   - name: ID00008
     inputs:
       - name: H-H1_RDS_L4-755925760-1024_gwf
@@ -429,7 +429,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-786708039-2048_xml
         size: 994951
-    size: 18.18
+    size: 18.18GF
   - name: ID00009
     inputs:
       - name: H-CAL_REF_DARM_ERR_H1_S5_V1-858019967-8_gwf
@@ -443,7 +443,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-807149602-2048_xml
         size: 983246
-    size: 18.24
+    size: 18.24GF
   - name: ID00010
     inputs:
       - name: H-CAL_REF_DARM_ERR_H1_S5_V1-858019967-8_gwf
@@ -457,7 +457,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-763113234-2048_xml
         size: 985623
-    size: 18.84
+    size: 18.84GF
   - name: ID00011
     inputs:
       - name: H-CAL_REF_DARM_ERR_H1_S5_V1-858019967-8_gwf
@@ -471,7 +471,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-745133414-2048_xml
         size: 995582
-    size: 17.34
+    size: 17.34GF
   - name: ID00012
     inputs:
       - name: H-H1_RDS_L4-809526509-1024_gwf
@@ -485,7 +485,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-728318595-2048_xml
         size: 999506
-    size: 17.91
+    size: 17.91GF
   - name: ID00013
     inputs:
       - name: H-CAL_REF_DARM_ERR_H1_S5_V1-858019967-8_gwf
@@ -499,7 +499,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-721503732-2048_xml
         size: 1012059
-    size: 18.0
+    size: 18.00GF
   - name: ID00014
     inputs:
       - name: H-CAL_REF_DARM_ERR_H1_S5_V1-858019967-8_gwf
@@ -513,7 +513,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-870167898-2048_xml
         size: 964333
-    size: 19.09
+    size: 19.09GF
   - name: ID00015
     inputs:
       - name: H-H1_RDS_L4-809526512-1024_gwf
@@ -527,7 +527,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-731014892-2048_xml
         size: 978312
-    size: 18.68
+    size: 18.68GF
   - name: ID00016
     inputs:
       - name: H-H1_RDS_L4-755925768-1024_gwf
@@ -541,7 +541,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-862535858-2048_xml
         size: 998548
-    size: 18.73
+    size: 18.73GF
   - name: ID00017
     inputs:
       - name: H-CAL_REF_DARM_ERR_H1_S5_V1-858019967-8_gwf
@@ -555,7 +555,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-840913643-2048_xml
         size: 974827
-    size: 18.1
+    size: 18.10GF
   - name: ID00018
     inputs:
       - name: H-CAL_REF_DARM_ERR_H1_S5_V1-858019967-8_gwf
@@ -569,7 +569,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-828966002-2048_xml
         size: 996995
-    size: 17.85
+    size: 17.85GF
   - name: ID00019
     inputs:
       - name: H-H1_RDS_L4-755925771-1024_gwf
@@ -583,7 +583,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-844284474-2048_xml
         size: 988084
-    size: 18.35
+    size: 18.35GF
   - name: ID00020
     inputs:
       - name: H-CAL_REF_DARM_ERR_H1_S5_V1-858019967-8_gwf
@@ -597,7 +597,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-846119879-2048_xml
         size: 977696
-    size: 18.35
+    size: 18.35GF
   - name: ID00021
     inputs:
       - name: H-CAL_REF_DARM_ERR_H1_S5_V1-858019967-8_gwf
@@ -611,7 +611,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-875604209-2048_xml
         size: 981285
-    size: 19.17
+    size: 19.17GF
   - name: ID00022
     inputs:
       - name: H-CAL_REF_DARM_ERR_H1_S5_V1-858019967-8_gwf
@@ -625,7 +625,7 @@ tasks:
     outputs:
       - name: H1-TMPLTBANK-852635443-2048_xml
         size: 952738
-    size: 18.46
+    size: 18.46GF
   - name: ID00023
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -643,7 +643,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-835964716-2048_xml
         size: 340334
-    size: 472.07
+    size: 472.07GF
   - name: ID00024
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -661,7 +661,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-744549666-2048_xml
         size: 279653
-    size: 322.5
+    size: 322.50GF
   - name: ID00025
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -679,7 +679,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-823343034-2048_xml
         size: 432813
-    size: 564.17
+    size: 564.17GF
   - name: ID00026
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -697,7 +697,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-741912439-2048_xml
         size: 248290
-    size: 443.95
+    size: 443.95GF
   - name: ID00027
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -715,7 +715,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-809144983-2048_xml
         size: 294114
-    size: 344.22
+    size: 344.22GF
   - name: ID00028
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -733,7 +733,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-836189434-2048_xml
         size: 261711
-    size: 237.67
+    size: 237.67GF
   - name: ID00029
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -751,7 +751,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-858489096-2048_xml
         size: 177226
-    size: 234.71
+    size: 234.71GF
   - name: ID00030
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -769,7 +769,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-760817748-2048_xml
         size: 377039
-    size: 482.75
+    size: 482.75GF
   - name: ID00031
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -787,7 +787,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-786708039-2048_xml
         size: 328713
-    size: 246.94
+    size: 246.94GF
   - name: ID00032
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -805,7 +805,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-807149602-2048_xml
         size: 461090
-    size: 425.01
+    size: 425.01GF
   - name: ID00033
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -823,7 +823,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-763113234-2048_xml
         size: 283529
-    size: 297.13
+    size: 297.13GF
   - name: ID00034
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -841,7 +841,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-745133414-2048_xml
         size: 195890
-    size: 343.57
+    size: 343.57GF
   - name: ID00035
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -859,7 +859,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-728318595-2048_xml
         size: 431124
-    size: 338.02
+    size: 338.02GF
   - name: ID00036
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -877,7 +877,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-721503732-2048_xml
         size: 324818
-    size: 546.64
+    size: 546.64GF
   - name: ID00037
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -895,7 +895,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-870167898-2048_xml
         size: 436496
-    size: 525.94
+    size: 525.94GF
   - name: ID00038
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -913,7 +913,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-731014892-2048_xml
         size: 352593
-    size: 356.63
+    size: 356.63GF
   - name: ID00039
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -931,7 +931,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-862535858-2048_xml
         size: 296519
-    size: 670.45
+    size: 670.45GF
   - name: ID00040
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -949,7 +949,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-840913643-2048_xml
         size: 325831
-    size: 342.18
+    size: 342.18GF
   - name: ID00041
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -967,7 +967,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-828966002-2048_xml
         size: 412154
-    size: 450.21
+    size: 450.21GF
   - name: ID00042
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -985,7 +985,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-844284474-2048_xml
         size: 466512
-    size: 552.33
+    size: 552.33GF
   - name: ID00043
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1003,7 +1003,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-846119879-2048_xml
         size: 402892
-    size: 545.41
+    size: 545.41GF
   - name: ID00044
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1021,7 +1021,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-875604209-2048_xml
         size: 316636
-    size: 418.11
+    size: 418.11GF
   - name: ID00045
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1039,7 +1039,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL-852635443-2048_xml
         size: 371471
-    size: 516.87
+    size: 516.87GF
   - name: ID00046
     inputs:
       - name: H1-INSPIRAL-835964716-2048_xml
@@ -1067,7 +1067,7 @@ tasks:
     outputs:
       - name: H1-THINCA-786708039-2048_xml
         size: 17378
-    size: 5.46
+    size: 5.46GF
   - name: ID00047
     inputs:
       - name: H1-INSPIRAL-745133414-2048_xml
@@ -1091,7 +1091,7 @@ tasks:
     outputs:
       - name: H1-THINCA-721503732-2048_xml
         size: 27408
-    size: 5.68
+    size: 5.68GF
   - name: ID00048
     inputs:
       - name: H1-INSPIRAL-844284474-2048_xml
@@ -1105,7 +1105,7 @@ tasks:
     outputs:
       - name: H1-THINCA-875604209-2048_xml
         size: 29796
-    size: 4.61
+    size: 4.61GF
   - name: ID00049
     inputs:
       - name: H1-THINCA-786708039-2048_xml
@@ -1113,7 +1113,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-796265635-2914_xml
         size: 11776
-    size: 4.92
+    size: 4.92GF
   - name: ID00050
     inputs:
       - name: H1-THINCA-786708039-2048_xml
@@ -1121,7 +1121,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-838387084-8753_xml
         size: 12445
-    size: 5.82
+    size: 5.82GF
   - name: ID00051
     inputs:
       - name: H1-THINCA-786708039-2048_xml
@@ -1129,7 +1129,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-833938207-628_xml
         size: 15297
-    size: 5.38
+    size: 5.38GF
   - name: ID00052
     inputs:
       - name: H1-THINCA-786708039-2048_xml
@@ -1137,7 +1137,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-732931681-8069_xml
         size: 13656
-    size: 5.21
+    size: 5.21GF
   - name: ID00053
     inputs:
       - name: H1-THINCA-786708039-2048_xml
@@ -1145,7 +1145,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-848300716-6748_xml
         size: 9428
-    size: 4.52
+    size: 4.52GF
   - name: ID00054
     inputs:
       - name: H1-THINCA-786708039-2048_xml
@@ -1153,7 +1153,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-829719516-4609_xml
         size: 13258
-    size: 4.66
+    size: 4.66GF
   - name: ID00055
     inputs:
       - name: H1-THINCA-786708039-2048_xml
@@ -1161,7 +1161,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-724534479-7069_xml
         size: 9638
-    size: 5.06
+    size: 5.06GF
   - name: ID00056
     inputs:
       - name: H1-THINCA-786708039-2048_xml
@@ -1169,7 +1169,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-840942705-4971_xml
         size: 10103
-    size: 5.44
+    size: 5.44GF
   - name: ID00057
     inputs:
       - name: H1-THINCA-786708039-2048_xml
@@ -1177,7 +1177,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-759755144-207_xml
         size: 16857
-    size: 5.25
+    size: 5.25GF
   - name: ID00058
     inputs:
       - name: H1-THINCA-786708039-2048_xml
@@ -1185,7 +1185,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-809511208-3560_xml
         size: 7681
-    size: 4.25
+    size: 4.25GF
   - name: ID00059
     inputs:
       - name: H1-THINCA-786708039-2048_xml
@@ -1193,7 +1193,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-759137286-4655_xml
         size: 10352
-    size: 5.27
+    size: 5.27GF
   - name: ID00060
     inputs:
       - name: H1-THINCA-721503732-2048_xml
@@ -1201,7 +1201,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-737110381-485_xml
         size: 16701
-    size: 4.91
+    size: 4.91GF
   - name: ID00061
     inputs:
       - name: H1-THINCA-721503732-2048_xml
@@ -1209,7 +1209,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-854481635-4153_xml
         size: 11283
-    size: 4.27
+    size: 4.27GF
   - name: ID00062
     inputs:
       - name: H1-THINCA-721503732-2048_xml
@@ -1217,7 +1217,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-792268228-1662_xml
         size: 8347
-    size: 4.35
+    size: 4.35GF
   - name: ID00063
     inputs:
       - name: H1-THINCA-721503732-2048_xml
@@ -1225,7 +1225,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-870755332-1011_xml
         size: 12088
-    size: 5.34
+    size: 5.34GF
   - name: ID00064
     inputs:
       - name: H1-THINCA-721503732-2048_xml
@@ -1233,7 +1233,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-839647575-7614_xml
         size: 14657
-    size: 4.71
+    size: 4.71GF
   - name: ID00065
     inputs:
       - name: H1-THINCA-721503732-2048_xml
@@ -1241,7 +1241,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-854801512-8052_xml
         size: 14945
-    size: 5.16
+    size: 5.16GF
   - name: ID00066
     inputs:
       - name: H1-THINCA-721503732-2048_xml
@@ -1249,7 +1249,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-879307932-4392_xml
         size: 9398
-    size: 4.67
+    size: 4.67GF
   - name: ID00067
     inputs:
       - name: H1-THINCA-721503732-2048_xml
@@ -1257,7 +1257,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-817872113-9266_xml
         size: 18870
-    size: 5.14
+    size: 5.14GF
   - name: ID00068
     inputs:
       - name: H1-THINCA-721503732-2048_xml
@@ -1265,7 +1265,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-860599419-571_xml
         size: 7563
-    size: 5.65
+    size: 5.65GF
   - name: ID00069
     inputs:
       - name: H1-THINCA-875604209-2048_xml
@@ -1273,7 +1273,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-810666954-4381_xml
         size: 7943
-    size: 5.48
+    size: 5.48GF
   - name: ID00070
     inputs:
       - name: H1-THINCA-875604209-2048_xml
@@ -1281,7 +1281,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-877494186-3973_xml
         size: 17623
-    size: 5.2
+    size: 5.20GF
   - name: ID00071
     inputs:
       - name: H1-THINCA-875604209-2048_xml
@@ -1289,7 +1289,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-829294753-9471_xml
         size: 18614
-    size: 5.14
+    size: 5.14GF
   - name: ID00072
     inputs:
       - name: H1-THINCA-875604209-2048_xml
@@ -1297,7 +1297,7 @@ tasks:
     outputs:
       - name: H1-TRIGBANK_H1-865386717-8448_xml
         size: 11549
-    size: 5.32
+    size: 5.32GF
   - name: ID00073
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1315,7 +1315,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-796265635-2914_xml
         size: 413145
-    size: 451.46
+    size: 451.46GF
   - name: ID00074
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1333,7 +1333,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-838387084-8753_xml
         size: 303583
-    size: 587.36
+    size: 587.36GF
   - name: ID00075
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1351,7 +1351,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-833938207-628_xml
         size: 262489
-    size: 616.79
+    size: 616.79GF
   - name: ID00076
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1369,7 +1369,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-732931681-8069_xml
         size: 368061
-    size: 476.75
+    size: 476.75GF
   - name: ID00077
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1387,7 +1387,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-848300716-6748_xml
         size: 309371
-    size: 424.61
+    size: 424.61GF
   - name: ID00078
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1405,7 +1405,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-829719516-4609_xml
         size: 253407
-    size: 500.55
+    size: 500.55GF
   - name: ID00079
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1423,7 +1423,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-724534479-7069_xml
         size: 223154
-    size: 297.36
+    size: 297.36GF
   - name: ID00080
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1441,7 +1441,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-840942705-4971_xml
         size: 369500
-    size: 280.43
+    size: 280.43GF
   - name: ID00081
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1459,7 +1459,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-759755144-207_xml
         size: 287393
-    size: 531.85
+    size: 531.85GF
   - name: ID00082
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1477,7 +1477,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-809511208-3560_xml
         size: 213927
-    size: 369.43
+    size: 369.43GF
   - name: ID00083
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1495,7 +1495,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-759137286-4655_xml
         size: 257884
-    size: 421.58
+    size: 421.58GF
   - name: ID00084
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1513,7 +1513,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-737110381-485_xml
         size: 313844
-    size: 501.11
+    size: 501.11GF
   - name: ID00085
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1531,7 +1531,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-854481635-4153_xml
         size: 248892
-    size: 628.17
+    size: 628.17GF
   - name: ID00086
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1549,7 +1549,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-792268228-1662_xml
         size: 162445
-    size: 614.49
+    size: 614.49GF
   - name: ID00087
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1567,7 +1567,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-870755332-1011_xml
         size: 436956
-    size: 451.08
+    size: 451.08GF
   - name: ID00088
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1585,7 +1585,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-839647575-7614_xml
         size: 282000
-    size: 325.35
+    size: 325.35GF
   - name: ID00089
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1603,7 +1603,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-854801512-8052_xml
         size: 235298
-    size: 436.36
+    size: 436.36GF
   - name: ID00090
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1621,7 +1621,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-879307932-4392_xml
         size: 190974
-    size: 509.46
+    size: 509.46GF
   - name: ID00091
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1639,7 +1639,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-817872113-9266_xml
         size: 175908
-    size: 307.28
+    size: 307.28GF
   - name: ID00092
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1657,7 +1657,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-860599419-571_xml
         size: 387986
-    size: 341.89
+    size: 341.89GF
   - name: ID00093
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1675,7 +1675,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-810666954-4381_xml
         size: 416786
-    size: 502.1
+    size: 502.10GF
   - name: ID00094
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1693,7 +1693,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-877494186-3973_xml
         size: 366809
-    size: 441.36
+    size: 441.36GF
   - name: ID00095
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1711,7 +1711,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-829294753-9471_xml
         size: 211933
-    size: 256.49
+    size: 256.49GF
   - name: ID00096
     inputs:
       - name: HL-INJECTIONS_100-845878994-8011301_xml
@@ -1729,7 +1729,7 @@ tasks:
     outputs:
       - name: H1-INSPIRAL_H1-865386717-8448_xml
         size: 233564
-    size: 498.93
+    size: 498.93GF
   - name: ID00097
     inputs:
       - name: H1-INSPIRAL_H1-796265635-2914_xml
@@ -1757,7 +1757,7 @@ tasks:
     outputs:
       - name: H1-THINCA_H1-759137286-4655_xml
         size: 46265
-    size: 5.21
+    size: 5.21GF
   - name: ID00098
     inputs:
       - name: H1-INSPIRAL_H1-737110381-485_xml
@@ -1781,7 +1781,7 @@ tasks:
     outputs:
       - name: H1-THINCA_H1-817872113-9266_xml
         size: 32824
-    size: 5.46
+    size: 5.46GF
   - name: ID00099
     inputs:
       - name: H1-INSPIRAL_H1-810666954-4381_xml
@@ -1795,4 +1795,4 @@ tasks:
     outputs:
       - name: H1-THINCA_H1-829294753-9471_xml
         size: 26629
-    size: 4.89
+    size: 4.89GF

@@ -2,10 +2,10 @@
 <!DOCTYPE platform SYSTEM "http://simgrid.gforge.inria.fr/simgrid/simgrid.dtd">
 <platform version="4.1">
     <zone id="zone0" routing="Full">
-        <host id="Alpha" speed="100.00f" core="4">
+        <host id="Alpha" speed="100.00Gf" core="4">
             <prop id="memory" value="4GB"/>
         </host>
-        <host id="Beta" speed="100.00f" core="1">
+        <host id="Beta" speed="100.00Gf" core="1">
             <prop id="memory" value="8GB"/>
         </host>
 

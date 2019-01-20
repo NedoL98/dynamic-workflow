@@ -1,5 +1,5 @@
 from xml.etree import ElementTree
-from ruamel.yaml.comments import CommentedMap
+from ruamel.yaml.comments import CommentedMap, CommentedSet
 import ruamel.yaml
 import os
 import argparse
@@ -8,12 +8,12 @@ yaml = ruamel.yaml.YAML()
 
 def GetPreYaml(node, task_inputs, task_outputs, file_size, output_yaml):
     if "id" in node.attrib:
-        task = {}
+        task = CommentedMap()
         nodeId = node.attrib["id"]
         task["name"] = nodeId
         task["inputs"] = []
         task["outputs"] = []
-        task["size"] = float(node.attrib["runtime"])
+        task["size"] = node.attrib["runtime"] + "GF"
         for child in node:
             filename = child.attrib["file"].replace(".", "_")
             if child.attrib["link"] == "input":
@@ -58,11 +58,11 @@ def MakeYaml(xml_filename, output_dir):
     output_yaml["name"] = xml_filename.split('/')[-1].replace("xml", "yml")
     output_yaml["tasks"] = []
 
-    task_inputs = set()
+    task_inputs = CommentedSet()
     task_outputs = CommentedMap()
     file_size = CommentedMap()
 
-    workflow_inputs = set()
+    workflow_inputs = CommentedSet()
 
     GetPreYaml(tree.getroot(), task_inputs, task_outputs, file_size, output_yaml)
 
