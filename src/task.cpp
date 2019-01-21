@@ -4,24 +4,32 @@
 #include <iostream>
 #include <simgrid/s4u/VirtualMachine.hpp>
 
+#include <map>
+#include <string>
+#include <vector>
+using std::map;
+using std::string;
+using std::vector;
+
+
 XBT_LOG_NEW_DEFAULT_CATEGORY(task, "Task log");
 
 Task::Task(const YAML::Node& taskDescription) {
     xbt_assert(taskDescription["name"], "Task name is not specified!");
-    Name = taskDescription["name"].as<std::string>();
+    Name = taskDescription["name"].as<string>();
 
     xbt_assert(taskDescription["inputs"], "Task inputs are not specified!");
     for (const YAML::Node& inputDescription: taskDescription["inputs"]) {
         xbt_assert(inputDescription["name"], "Input name is not specified!");
-        std::string inputName = inputDescription["name"].as<std::string>();
+        string inputName = inputDescription["name"].as<string>();
 
         xbt_assert(inputDescription["source"], "Source for input is not specified!");
-        std::string sourceName = inputDescription["source"].as<std::string>();
+        string sourceName = inputDescription["source"].as<string>();
 
         AppendRawInput(inputName, sourceName);
 
-        std::size_t delimPosition = sourceName.find('.');
-        if (delimPosition != std::string::npos) {
+        size_t delimPosition = sourceName.find('.');
+        if (delimPosition != string::npos) {
             AppendInput(sourceName.substr(0, delimPosition));
         }
     }
@@ -29,10 +37,10 @@ Task::Task(const YAML::Node& taskDescription) {
     xbt_assert(taskDescription["outputs"], "Task outputs are not specified!");
     for (const YAML::Node& outputDescription: taskDescription["outputs"]) {
         xbt_assert(outputDescription["name"], "Output name is not specified!");
-        std::string outputName = outputDescription["name"].as<std::string>();
+        string outputName = outputDescription["name"].as<string>();
 
         xbt_assert(outputDescription["size"], "Output size is not specified!");
-        std::string outputSize = outputDescription["size"].as<std::string>();
+        string outputSize = outputDescription["size"].as<string>();
 
         AppendOutput(outputName, outputSize);
     }
@@ -53,7 +61,7 @@ Task::Task(const YAML::Node& taskDescription) {
             Memory = DefaultMemory;
         } else {
             try {
-                Memory = ParseSize(taskDescription["requirements"]["memory"].as<std::string>(), SizeSuffixes);
+                Memory = ParseSize(taskDescription["requirements"]["memory"].as<string>(), SizeSuffixes);
             } catch (std::exception& e) {
                 XBT_ERROR("Can't parse memory requirement: %s", e.what());
                 XBT_WARN("Memory requirement will be set to %d", DefaultMemory);
@@ -64,25 +72,25 @@ Task::Task(const YAML::Node& taskDescription) {
 
     xbt_assert(taskDescription["size"], "Task size must be specified!");
     try {
-        Flops = ParseSize(taskDescription["size"].as<std::string>(), PerformanceSuffixes);
+        Flops = ParseSize(taskDescription["size"].as<string>(), PerformanceSuffixes);
     } catch (std::exception& e) {
         xbt_assert("Can't parse size requirement: %s", e.what());
     }
 }
 
-const std::string& Task::GetName() const {
+const string& Task::GetName() const {
     return Name;
 }
 
-const std::map<std::string, std::string>& Task::GetRawInputs() const {
+const map<string, string>& Task::GetRawInputs() const {
     return RawInputs;
 }
 
-const std::vector<std::string>& Task::GetInputs() const {
+const vector<string>& Task::GetInputs() const {
     return Inputs;
 }
 
-const std::map<std::string, double>& Task::GetOutputs() const {
+const map<string, double>& Task::GetOutputs() const {
     return Outputs;
 }
 
@@ -103,18 +111,18 @@ void Task::SetDefaultRequirements() {
     Memory = DefaultMemory;
 }
 
-void Task::AppendRawInput(const std::string& name, const std::string& source) {
+void Task::AppendRawInput(const string& name, const string& source) {
     if (RawInputs.count(name) > 0) {
         XBT_WARN("Input name is not unique! Previous input will be deleted!");
     }
     RawInputs[name] = source;
 }
 
-void Task::AppendInput(const std::string& name) {
+void Task::AppendInput(const string& name) {
     Inputs.push_back(name);
 }
 
-void Task::AppendOutput(const std::string& name, const std::string& size) {
+void Task::AppendOutput(const string& name, const string& size) {
     if (Outputs.count(name) > 0) {
         XBT_WARN("Output name is not unique! Previous output will be deleted!");
     }
@@ -128,7 +136,7 @@ void Task::AppendOutput(const std::string& name, const std::string& size) {
     }
 }
 
-void Task::DoExecute(double flops, std::string name) {
+void Task::DoExecute(double flops, string name) {
     simgrid::s4u::Host* host = simgrid::s4u::this_actor::get_host();
 
     double timeStart = simgrid::s4u::Engine::get_clock();

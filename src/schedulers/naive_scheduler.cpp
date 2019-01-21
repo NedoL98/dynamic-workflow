@@ -1,18 +1,28 @@
 #include "naive_scheduler.h"
 
+#include <set>
+#include <map>
+#include <string>
+#include <vector>
+
+using std::set;
+using std::map;
+using std::string;
+using std::vector;
+
 NaiveScheduler::NaiveScheduler(int argc, char* argv[]) : BaseScheduler(argc, argv) {}
 
 void NaiveScheduler::ProcessTasksGraph(TasksGraph& tasksGraph) {
-    std::vector<std::shared_ptr<Task>> orderedTasks = tasksGraph.MakeTasksOrder();
-    std::vector<simgrid::s4u::Host*> hosts = simgrid::s4u::Engine::get_instance()->get_all_hosts();
+    vector<std::shared_ptr<Task>> orderedTasks = tasksGraph.MakeTasksOrder();
+    vector<simgrid::s4u::Host*> hosts = simgrid::s4u::Engine::get_instance()->get_all_hosts();
 
-    std::map<std::string, simgrid::s4u::ActorPtr> actorPointers;
-    std::map<std::string, simgrid::s4u::VirtualMachine*> vmPointers;
+    map<string, simgrid::s4u::ActorPtr> actorPointers;
+    map<string, simgrid::s4u::VirtualMachine*> vmPointers;
 
-    std::set<std::string> processingTasks;
+    set<string> processingTasks;
 
     for (const std::shared_ptr<Task>& task: orderedTasks) {
-        for (std::string input: task->GetInputs()) {
+        for (string input: task->GetInputs()) {
             tasksGraph.Tasks[input]->Finish(actorPointers[input]);
             processingTasks.erase(input);
         }
@@ -31,8 +41,8 @@ void NaiveScheduler::ProcessTasksGraph(TasksGraph& tasksGraph) {
             }
 
             double minLoad = -1;
-            std::string earliestToFinish;
-            for (std::string processingTask: processingTasks) {
+            string earliestToFinish;
+            for (string processingTask: processingTasks) {
                 double load = std::stod(actorPointers[processingTask]->get_property("size"));
                 if (minLoad == -1 || load < minLoad) {
                     minLoad = load;
