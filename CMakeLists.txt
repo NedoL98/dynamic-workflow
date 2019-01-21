@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.8)
 
 project(DynamicWorkflow)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -Wshadow")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Wextra -Wshadow")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build")
 
@@ -17,6 +17,7 @@ add_executable(
     src/main.cpp
     src/schedulers/scheduler_base.cpp
     src/schedulers/naive_scheduler.cpp
+    src/platform_generator.cpp
     src/prototypes/scheduler.cpp
     src/schedule/schedule.cpp
     src/task.cpp

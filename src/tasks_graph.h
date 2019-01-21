@@ -18,6 +18,10 @@ public:
     void MakeOrderDFS(const std::string& vertex, std::vector<std::shared_ptr<Task>>& order, std::map<std::string, bool>& used) const;
     std::vector<std::shared_ptr<Task>> MakeTasksOrder() const;
 
+    int Size() const;
+    int MaxCores() const;
+    double MaxMemory() const;
+
     void PrintGraph() const;
 
 private:

@@ -117,6 +117,24 @@ vector<shared_ptr<Task>> TasksGraph::MakeTasksOrder() const {
     return result;
 }
 
+int TasksGraph::Size() const {
+    return Tasks.size();
+}
+
+int TasksGraph::MaxCores() const {
+    return std::max_element(Tasks.begin(), Tasks.end(), 
+        [] (const auto& lhs, const auto& rhs) {
+            return lhs.second->GetCores() < rhs.second->GetCores();
+        })->second->GetCores();
+}
+
+double TasksGraph::MaxMemory() const {
+    return std::max_element(Tasks.begin(), Tasks.end(), 
+        [] (const auto& lhs, const auto& rhs) {
+            return lhs.second->GetMemory() < rhs.second->GetMemory();
+        })->second->GetMemory();
+}
+
 void TasksGraph::PrintGraph() const {
 
     using namespace std;

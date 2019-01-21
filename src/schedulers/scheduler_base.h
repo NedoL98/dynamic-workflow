@@ -12,6 +12,8 @@ public:
 
     virtual void ProcessTasksGraph(TasksGraph& tasksGraph) = 0;
 
+    void GetMaxParams(int& hostCnt, int& maxCoresCnt, double& maxMemory);
+
     void operator()();
 
 private:

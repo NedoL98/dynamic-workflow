@@ -11,26 +11,33 @@
 #include <string>
 #include <vector>
 
+#include "platform_generator.h"
 #include "schedulers/naive_scheduler.h"
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(main, "Main log");
 
 int main(int argc, char* argv[]) {
-    xbt_assert(argc > 2, "Usage: %s platform_file tasks_graph_file\n", argv[0]);
+    // TODO: make argument parser
+    xbt_assert(argc > 1, "Usage: %s tasks_graph_file [platform_file]\n", argv[0]);
+
+    // Load tasks graph description
+    NaiveScheduler scheduler = NaiveScheduler(argc, argv);
+
+    // Make suitable platform for workflow 
+    string platformPath = GeneratePlatform(scheduler);
+    std::cout << platformPath << std::endl;
+
     simgrid::s4u::Engine e(&argc, argv);
 
     // Load the platform description
-    e.load_platform(argv[1]);
+    e.load_platform(platformPath);
     XBT_INFO("Platform file loaded");
 
     // Transform human-readable platform description
     TransformHostsProps();
 
-    // Load tasks graph description
-    auto scheduler = NaiveScheduler(argc, argv);
-
     // Make scheduler actor
-    simgrid::s4u::Actor::create("scheduler", simgrid::s4u::Host::by_name("Alpha"), scheduler);
+    simgrid::s4u::Actor::create("scheduler", e.get_all_hosts()[0], scheduler);
 
     XBT_INFO("Starting simulation");
     // Run the simulation

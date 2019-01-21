@@ -7,12 +7,21 @@
 XBT_LOG_NEW_DEFAULT_CATEGORY(scheduler, "Scheduler log");
 
 BaseScheduler::BaseScheduler(int argc, char* argv[]) {
-    XBT_INFO("Loading tasks graphs...");
+    XBT_INFO("Loading tasks graph...");
     // should probably redo this
-    for (int i = 2; i < argc; ++i) {
-        TasksGraphs.push_back(TasksGraph(argv[i]));
-    }
+    TasksGraphs.push_back(TasksGraph(argv[1]));
     XBT_INFO("%d tasks graphs loaded", TasksGraphs.size());
+}
+
+void BaseScheduler::GetMaxParams(int& hostCnt, int& maxCoresCnt, double& maxMemory) {
+    hostCnt = 0;
+    maxCoresCnt = 0;
+    maxMemory = 0;
+    for (const auto& tasksGraph: TasksGraphs) {
+        hostCnt = std::max(hostCnt, tasksGraph.Size());
+        maxCoresCnt = std::max(maxCoresCnt, tasksGraph.MaxCores());
+        maxMemory = std::max(maxMemory, tasksGraph.MaxMemory());
+    }
 }
 
 void BaseScheduler::operator()() {

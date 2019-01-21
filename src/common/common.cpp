@@ -8,6 +8,8 @@ using std::string;
 using std::unordered_map;
 using std::vector;
 
+XBT_LOG_NEW_DEFAULT_CATEGORY(common, "Common log");
+
 double ParseSize(const string& size, const vector<string>& suffixes) {
     size_t suffixStart;
     double sizePrefix = std::stod(size, &suffixStart);
@@ -29,8 +31,10 @@ void TransformHostsProps() {
 
         unordered_map<string, string> hostProps = *(host->get_properties());
         if (!hostProps.count("memory")) {
-            throw std::invalid_argument("No memory limit for host" + host->get_name() + "is specified");
+            XBT_WARN("No memory limit for host %s is specified, it will be set to default!", host->get_name().c_str());
+            host->set_property("memory", std::to_string(DefaultMemory));
+        } else {
+            host->set_property("memory", std::to_string(ParseSize(hostProps["memory"], SizeSuffixes)));
         }
-        host->set_property("memory", std::to_string(ParseSize(hostProps["memory"], SizeSuffixes)));
     }
 }
