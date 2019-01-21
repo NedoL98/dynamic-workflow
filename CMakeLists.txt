@@ -28,7 +28,7 @@ target_link_libraries(dynamic-workflow ${SimGrid_LIBRARY} ${YAML_LIBRARY})
 
 add_custom_target(
     run_example
-    COMMAND dynamic-workflow ${CMAKE_SOURCE_DIR}/resources/small_platform.xml ${CMAKE_SOURCE_DIR}/resources/workflows/CyberShake_100.yml
+    COMMAND dynamic-workflow ${CMAKE_SOURCE_DIR}/resources/workflows/CyberShake_100.yml
 )
 
 add_custom_target(
