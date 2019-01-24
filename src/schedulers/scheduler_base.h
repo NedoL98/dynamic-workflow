@@ -8,7 +8,7 @@
 class BaseScheduler {
 public:
     BaseScheduler() = delete;
-    BaseScheduler(int argc, char* argv[]);
+    BaseScheduler(const std::string& workflowPath);
 
     virtual void ProcessTasksGraph(TasksGraph& tasksGraph) = 0;
 

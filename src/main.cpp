@@ -11,21 +11,25 @@
 #include <string>
 #include <vector>
 
+#include "argument_parser.h"
 #include "platform_generator.h"
 #include "schedulers/naive_scheduler.h"
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(main, "Main log");
 
 int main(int argc, char* argv[]) {
-    // TODO: make argument parser
-    xbt_assert(argc > 1, "Usage: %s tasks_graph_file [platform_file]\n", argv[0]);
+    cxxopts::ParseResult parseResult = ParseArguments(argc, argv);
 
     // Load tasks graph description
-    NaiveScheduler scheduler = NaiveScheduler(argc, argv);
+    NaiveScheduler scheduler = NaiveScheduler(parseResult["workflow"].as<string>());
 
-    // Make suitable platform for workflow 
-    string platformPath = GeneratePlatform(scheduler);
-    std::cout << platformPath << std::endl;
+    // Make suitable platform for workflow
+    string platformPath;
+    if (!parseResult.count("platform")) {
+        platformPath = GeneratePlatform(scheduler);
+    } else {
+        platformPath = parseResult["platform"].as<string>();
+    }
 
     simgrid::s4u::Engine e(&argc, argv);
 
@@ -44,4 +48,8 @@ int main(int argc, char* argv[]) {
     e.run();
 
     XBT_INFO("Simulation is over");
+
+    if (!parseResult.count("platform") && parseResult["save_platform"].as<bool>() == false) {
+        remove(platformPath.c_str());
+    }
 }

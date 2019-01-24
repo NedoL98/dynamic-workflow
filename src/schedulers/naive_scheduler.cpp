@@ -10,7 +10,7 @@ using std::map;
 using std::string;
 using std::vector;
 
-NaiveScheduler::NaiveScheduler(int argc, char* argv[]) : BaseScheduler(argc, argv) {}
+NaiveScheduler::NaiveScheduler(const string& workflowPath) : BaseScheduler(workflowPath) {}
 
 void NaiveScheduler::ProcessTasksGraph(TasksGraph& tasksGraph) {
     vector<std::shared_ptr<Task>> orderedTasks = tasksGraph.MakeTasksOrder();

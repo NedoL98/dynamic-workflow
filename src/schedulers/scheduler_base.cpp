@@ -4,12 +4,14 @@
 
 #include "scheduler_base.h"
 
+using std::string;
+
 XBT_LOG_NEW_DEFAULT_CATEGORY(scheduler, "Scheduler log");
 
-BaseScheduler::BaseScheduler(int argc, char* argv[]) {
+BaseScheduler::BaseScheduler(const string& workflowPath) {
     XBT_INFO("Loading tasks graph...");
     // should probably redo this
-    TasksGraphs.push_back(TasksGraph(argv[1]));
+    TasksGraphs.push_back(TasksGraph(workflowPath));
     XBT_INFO("%d tasks graphs loaded", TasksGraphs.size());
 }
 
