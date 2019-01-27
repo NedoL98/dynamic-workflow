@@ -1,8 +1,12 @@
 #include "prototypes/scheduler.h"
 
-AbstractScheduler::Actions StaticScheduler::OnJobComplete(int /* jobId */) {
+AbstractScheduler::Actions StaticScheduler::OnJobComplete(const JobFinishedEvent& /*e*/) {
     return AbstractScheduler::Actions();
 }
-AbstractScheduler::Actions StaticScheduler::OnJobFail(int /* jobId */) {
+AbstractScheduler::Actions StaticScheduler::OnJobFail(const JobFinishedEvent& /*e*/) {
+    return AbstractScheduler::Actions();
+}
+
+AbstractScheduler::Actions StaticScheduler::OnActionComplete(const ActionCompletedEvent& /*e*/) {
     return AbstractScheduler::Actions();
 }

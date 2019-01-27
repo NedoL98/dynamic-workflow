@@ -1,9 +1,18 @@
 #pragma once
-#include "schedule/schedule.h"
+#include "prototypes/simulator.h"
+
+enum ActionType {
+    Abstract,
+    AssignJob,
+    ResetSchedule
+};
 
 class AbstractAction {
 public:
-    virtual void MakeAction(Schedule& s) = 0;
+    virtual void MakeAction(SimulatorInterface& interface) = 0;
+    virtual ActionType GetActionType() const {
+        return ActionType::Abstract;
+    }
 };
 
 class AssignJobAction : AbstractAction {
@@ -12,7 +21,8 @@ class AssignJobAction : AbstractAction {
 
 public:
     AssignJobAction(int hostId, int taskId);
-    virtual void MakeAction(Schedule& s) override;
+    virtual void MakeAction(SimulatorInterface& interface) override;
+    virtual ActionType GetActionType() const override;
 };
 
 class ResetScheduleAction : AbstractAction {
@@ -20,5 +30,6 @@ class ResetScheduleAction : AbstractAction {
 
 public:
     ResetScheduleAction(const Schedule& s);
-    virtual void MakeAction(Schedule& s) override;
+    virtual void MakeAction(SimulatorInterface& interface) override;
+    virtual ActionType GetActionType() const override;
 };
