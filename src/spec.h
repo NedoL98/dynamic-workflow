@@ -1,4 +1,5 @@
 #pragma once
-struct VMStats {
+struct ComputeSpec {
     long long Memory, Speed;
+    int Cores;
 };

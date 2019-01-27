@@ -17,6 +17,8 @@ add_executable(
     src/common/common.cpp
     src/main.cpp
     src/platform_generator.cpp
+    src/platform/host.cpp
+    src/platform/platform.cpp
     src/prototypes/scheduler.cpp
     src/schedule/schedule.cpp
     src/schedule/schedule_action.cpp
