@@ -16,11 +16,12 @@ add_executable(
     src/argument_parser.cpp
     src/common/common.cpp
     src/main.cpp
-    src/schedulers/scheduler_base.cpp
-    src/schedulers/naive_scheduler.cpp
     src/platform_generator.cpp
     src/prototypes/scheduler.cpp
     src/schedule/schedule.cpp
+    src/schedule/schedule_action.cpp
+    src/schedulers/naive_scheduler.cpp
+    src/schedulers/scheduler_base.cpp
     src/task.cpp
     src/tasks_graph.cpp
 )

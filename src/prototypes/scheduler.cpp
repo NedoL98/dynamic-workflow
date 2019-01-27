@@ -1,11 +1,8 @@
 #include "prototypes/scheduler.h"
 
-Schedule AbstractScheduler::GetSchedule() const {
-    return schedule;
+AbstractScheduler::Actions StaticScheduler::OnJobComplete(int /* jobId */) {
+    return AbstractScheduler::Actions();
 }
-
-
-void StaticScheduler::OnJobComplete(int /* jobId */) {
-}
-void StaticScheduler::OnJobFail(int /* jobId */) {
+AbstractScheduler::Actions StaticScheduler::OnJobFail(int /* jobId */) {
+    return AbstractScheduler::Actions();
 }

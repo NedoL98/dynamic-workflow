@@ -1,75 +1,87 @@
 #include <cassert>
 #include <schedule/schedule.h>
 
+int GetUniqueScheduleItemId() {
+    static int counter = 0;
+    return counter++;
+}
+
 ScheduleItem::ScheduleItem():
-    taskId(0),
-    priority(-1)
-{}
+    TaskId(0),
+    Priority(-1) {
+    ItemId = GetUniqueScheduleItemId();
+}
 
 ScheduleItem::ScheduleItem(int id):
-    taskId(id),
-    priority(-1)
-{}
+    TaskId(id),
+    Priority(-1) {
+    ItemId = GetUniqueScheduleItemId();
+}
 
 ScheduleItem::ScheduleItem(int id, int p):
-    taskId(id),
-    priority(p)
-{}
+    TaskId(id),
+    Priority(p) {
+    ItemId = GetUniqueScheduleItemId();
+}
 
 void ScheduleItem::SetPriority(int p) {
-    priority = p;
+    Priority = p;
 }
 
 int ScheduleItem::GetPriority() const {
-    return priority;
+    return Priority;
 }
 
 
-int ScheduleItem::GetId() const {
-    return taskId;
+int ScheduleItem::GetItemId() const {
+    return ItemId;
+}
+
+int ScheduleItem::GetTaskId() const {
+    return TaskId;
 }
 
 bool ScheduleItem::operator<(const ScheduleItem& other) {
-    if (priority == other.priority) {
-        return taskId < other.taskId;
+    if (Priority == other.Priority) {
+        return TaskId < other.TaskId;
     }
-    return priority < other.priority;
+    return Priority < other.Priority;
 }
 
 HostSchedule::HostSchedule() {}
 void HostSchedule::AddItem(const ScheduleItem& item) {
-    plannedJobs.push(item);
+    PlannedJobs.push(item);
 }
 
 ScheduleItem HostSchedule::GetItem() const {
-    assert(plannedJobs.empty());
-    return plannedJobs.front();    
+    assert(PlannedJobs.empty());
+    return PlannedJobs.front();    
 }
 
 ScheduleItem HostSchedule::PopItem() {
-    assert(plannedJobs.empty());
-    ScheduleItem result = plannedJobs.front();
-    plannedJobs.pop();    
+    assert(PlannedJobs.empty());
+    ScheduleItem result = PlannedJobs.front();
+    PlannedJobs.pop();    
     return std::move(result);
 }
 
 bool HostSchedule::IsEmpty() const {
-    return plannedJobs.empty();
+    return PlannedJobs.empty();
 }
 
 
 Schedule::Schedule(int hostsCount):
-    timeTable(hostsCount)
+    TimeTable(hostsCount)
     {}
 
 void Schedule::AddItem(int host, const ScheduleItem& item) {
-    timeTable[host].AddItem(item);
+    TimeTable[host].AddItem(item);
 }
 
 ScheduleItem Schedule::GetItem(int host) {
-    return timeTable[host].GetItem();
+    return TimeTable[host].GetItem();
 }
 
 ScheduleItem Schedule::PopItem(int host) {
-    return timeTable[host].PopItem();
+    return TimeTable[host].PopItem();
 }

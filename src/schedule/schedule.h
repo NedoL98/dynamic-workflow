@@ -7,8 +7,9 @@ using std::vector;
 
 
 class ScheduleItem {
-    int taskId;
-    int priority;
+    int TaskId;
+    int Priority;
+    int ItemId;
 
 public:
     ScheduleItem();
@@ -16,12 +17,14 @@ public:
     ScheduleItem(int i, int p);
     void SetPriority(int p);
     int GetPriority() const;
-    int GetId() const;
+    int GetTaskId() const;
+    int GetItemId() const;
     bool operator<(const ScheduleItem& other);
 };
 
+
 class HostSchedule {
-    queue<ScheduleItem> plannedJobs;
+    queue<ScheduleItem> PlannedJobs;
     
 public:
     HostSchedule();
@@ -32,7 +35,7 @@ public:
 };
 
 class Schedule {
-    vector<HostSchedule> timeTable;
+    vector<HostSchedule> TimeTable;
 
 public:
     Schedule(int hostsCount);
