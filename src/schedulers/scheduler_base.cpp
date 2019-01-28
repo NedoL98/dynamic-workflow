@@ -8,11 +8,15 @@ using std::string;
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(scheduler, "Scheduler log");
 
-BaseScheduler::BaseScheduler(const string& workflowPath) {
+BaseScheduler::BaseScheduler(const string& workflowPath, const string& vmListPath) {
     XBT_INFO("Loading tasks graph...");
     // should probably redo this
     TasksGraphs.push_back(TasksGraph(workflowPath));
     XBT_INFO("%d tasks graphs loaded", TasksGraphs.size());
+
+    XBT_INFO("Loading VM list...");
+    vmList = VMList(vmListPath);
+    XBT_INFO("VM list loaded");
 }
 
 void BaseScheduler::GetMaxParams(int& hostCnt, int& maxCoresCnt, double& maxMemory) {

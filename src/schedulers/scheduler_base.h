@@ -4,11 +4,12 @@
 #include <vector>
 
 #include "../tasks_graph.h"
+#include "../vm_list.h"
 
 class BaseScheduler {
 public:
     BaseScheduler() = delete;
-    BaseScheduler(const std::string& workflowPath);
+    BaseScheduler(const std::string& workflowPath, const std::string& vmListPath);
 
     virtual void ProcessTasksGraph(TasksGraph& tasksGraph) = 0;
 
@@ -17,5 +18,6 @@ public:
     void operator()();
 
 private:
+    VMList vmList;
     std::vector<TasksGraph> TasksGraphs;
 };

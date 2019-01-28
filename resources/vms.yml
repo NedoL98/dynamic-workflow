@@ -1,0 +1,10 @@
+- name: VM1
+  cpu: 1
+  memory: 4GB
+  speed: 10F
+  price: 100
+- name: VM2
+  cpu: 2
+  memory: 8GB
+  speed: 20F
+  price: 180

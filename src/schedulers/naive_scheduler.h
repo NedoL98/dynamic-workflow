@@ -5,7 +5,7 @@
 class NaiveScheduler: public BaseScheduler {
 public:
     NaiveScheduler() = delete;
-    NaiveScheduler(const std::string& workflowPath);
+    NaiveScheduler(const std::string& workflowPath, const std::string& vmListPath);
 
     void ProcessTasksGraph(TasksGraph& tasksGraph) override;
 };
