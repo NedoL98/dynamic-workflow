@@ -3,6 +3,7 @@
 #include <simgrid/s4u.hpp>
 #include <yaml-cpp/yaml.h>
 
+#include "vm_list.h"
 #include "common/common.h"
 
 class Task {
@@ -28,7 +29,8 @@ public:
     static void DoExecute(double flops, std::string name);
     simgrid::s4u::ActorPtr Execute(simgrid::s4u::VirtualMachine* vm);
 
-    bool CanExecute(simgrid::s4u::Host* host);
+    bool CanExecute(const simgrid::s4u::Host* host) const;
+    bool CanExecute(const VMDescription& vmDescr) const;
     simgrid::s4u::VirtualMachine* MakeVirtualMachine(simgrid::s4u::Host* host);
     
     void Finish(simgrid::s4u::ActorPtr vmPtr);

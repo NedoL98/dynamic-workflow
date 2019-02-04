@@ -12,8 +12,8 @@ using std::vector;
 
 NaiveScheduler::NaiveScheduler(const string& workflowPath, const string& vmListPath) : BaseScheduler(workflowPath, vmListPath) {}
 
-void NaiveScheduler::ProcessTasksGraph(TasksGraph& tasksGraph) {
-    vector<std::shared_ptr<Task>> orderedTasks = tasksGraph.MakeTasksOrder();
+void NaiveScheduler::ProcessTasksGraph() {
+    vector<std::shared_ptr<Task>> orderedTasks = Workflow.MakeTasksOrder(true);
     vector<simgrid::s4u::Host*> hosts = simgrid::s4u::Engine::get_instance()->get_all_hosts();
 
     map<string, simgrid::s4u::ActorPtr> actorPointers;
@@ -23,7 +23,7 @@ void NaiveScheduler::ProcessTasksGraph(TasksGraph& tasksGraph) {
 
     for (const std::shared_ptr<Task>& task: orderedTasks) {
         for (string input: task->GetInputs()) {
-            tasksGraph.Tasks[input]->Finish(actorPointers[input]);
+            Workflow.Tasks[input]->Finish(actorPointers[input]);
             processingTasks.erase(input);
         }
         do {
@@ -50,7 +50,7 @@ void NaiveScheduler::ProcessTasksGraph(TasksGraph& tasksGraph) {
                 }
             }
 
-            tasksGraph.Tasks[earliestToFinish]->Finish(actorPointers[earliestToFinish]);
+            Workflow.Tasks[earliestToFinish]->Finish(actorPointers[earliestToFinish]);
             processingTasks.erase(earliestToFinish);
         } while (!processingTasks.empty());
         xbt_assert(vmPointers[task->GetName()], "No host satisfies task %s requirements", task->GetName().c_str());

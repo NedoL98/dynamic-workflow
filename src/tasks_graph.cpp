@@ -80,36 +80,41 @@ void TasksGraph::MakeGraph() {
                 ++OutputDegree[inputSourceName];
             }
         }
+        if (!OutputDegree.count(taskName)) {
+            OutputDegree[taskName] = 0;
+        }
     }
     XBT_INFO("Done!");
 }
 
 void TasksGraph::MakeOrderDFS(const string& vertex, 
                               vector<shared_ptr<Task>>& order, 
-                              map<string, bool>& used) const {
+                              map<string, bool>& used, 
+                              bool reverse) const {
+    if (!reverse) {
+        order.push_back(Tasks.at(vertex));
+    }
     used[vertex] = true;
     if (ReverseEdges.count(vertex)) {
         for (const string& neighbourVertex: ReverseEdges.at(vertex)) {
             if (!used[neighbourVertex]) {
-                MakeOrderDFS(neighbourVertex, order, used);
+                MakeOrderDFS(neighbourVertex, order, used, reverse);
             }
         }
     }
-    order.push_back(Tasks.at(vertex));
+    if (reverse) {
+        order.push_back(Tasks.at(vertex));
+    }
 }
 
-vector<shared_ptr<Task>> TasksGraph::MakeTasksOrder() const {
+vector<shared_ptr<Task>> TasksGraph::MakeTasksOrder(bool reverse) const {
     vector<shared_ptr<Task>> result;
 
     map<string, bool> used;
     for (const auto& item: Tasks) {
         string taskName = item.first;
-        int taskOutputDegree = 0;
-        if (OutputDegree.count(taskName)) {
-            taskOutputDegree = OutputDegree.at(taskName);
-        }
-        if (!used[taskName] && taskOutputDegree == 0) {
-            MakeOrderDFS(taskName, result, used);
+        if (!used[taskName] && OutputDegree.at(taskName) == 0) {
+            MakeOrderDFS(taskName, result, used, reverse);
         }
     }
     xbt_assert(result.size() == Tasks.size(), "Something went wrong, not all tasks are included in tasks order!");
@@ -133,6 +138,20 @@ double TasksGraph::MaxMemory() const {
         [] (const auto& lhs, const auto& rhs) {
             return lhs.second->GetMemory() < rhs.second->GetMemory();
         })->second->GetMemory();
+}
+
+std::map<std::string, VMDescription> TasksGraph::GetCheapestVMs(const VMList& vmList) const {
+    std::map<std::string, VMDescription> cheapestVM;
+    for (const auto& elem: Tasks) {
+        int bestPrice = -1;
+        for (VMDescription vmDescr: vmList) {
+            if (elem.second->CanExecute(vmDescr) && (bestPrice == -1 || vmDescr.GetPrice() < bestPrice)) {
+                bestPrice = vmDescr.GetPrice();
+                cheapestVM.insert({elem.first, vmDescr});
+            }
+        }
+    }
+    return cheapestVM;
 }
 
 void TasksGraph::PrintGraph() const {

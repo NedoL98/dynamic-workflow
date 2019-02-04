@@ -23,6 +23,7 @@ add_executable(
     src/schedule/schedule.cpp
     src/schedule/schedule_action.cpp
     src/schedulers/naive_scheduler.cpp
+    src/schedulers/mao_scheduler.cpp
     src/schedulers/scheduler_base.cpp
     src/task.cpp
     src/tasks_graph.cpp

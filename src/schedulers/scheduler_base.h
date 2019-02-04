@@ -8,16 +8,15 @@
 
 class BaseScheduler {
 public:
-    BaseScheduler() = delete;
     BaseScheduler(const std::string& workflowPath, const std::string& vmListPath);
 
-    virtual void ProcessTasksGraph(TasksGraph& tasksGraph) = 0;
+    virtual void ProcessTasksGraph() = 0;
 
     void GetMaxParams(int& hostCnt, int& maxCoresCnt, double& maxMemory);
 
     void operator()();
 
-private:
+protected:
     VMList vmList;
-    std::vector<TasksGraph> TasksGraphs;
+    TasksGraph Workflow;
 };

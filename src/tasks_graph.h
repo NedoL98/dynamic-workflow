@@ -3,24 +3,32 @@
 #include <iostream>
 
 #include "task.h"
+#include "vm_list.h"
 #include <yaml-cpp/yaml.h>
 
 class Scheduler;
 
 class TasksGraph {
 friend class NaiveScheduler;
+friend class MaoScheduler;
 
 public:
+    TasksGraph() = default;
     TasksGraph(std::string filepath);
 
     void MakeGraph();
 
-    void MakeOrderDFS(const std::string& vertex, std::vector<std::shared_ptr<Task>>& order, std::map<std::string, bool>& used) const;
-    std::vector<std::shared_ptr<Task>> MakeTasksOrder() const;
+    void MakeOrderDFS(const std::string& vertex, 
+                      std::vector<std::shared_ptr<Task>>& order, 
+                      std::map<std::string, bool>& used, 
+                      bool reverse = false) const;
+    std::vector<std::shared_ptr<Task>> MakeTasksOrder(bool reverse = false) const;
 
     int Size() const;
     int MaxCores() const;
     double MaxMemory() const;
+
+    std::map<std::string, VMDescription> GetCheapestVMs(const VMList& vmList) const;
 
     void PrintGraph() const;
 

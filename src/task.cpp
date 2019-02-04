@@ -155,11 +155,15 @@ simgrid::s4u::ActorPtr Task::Execute(simgrid::s4u::VirtualMachine* vm) {
     return actor;
 }
 
-bool Task::CanExecute(simgrid::s4u::Host* host) {
+bool Task::CanExecute(const simgrid::s4u::Host* host) const {
     int availableCores = std::stoi(host->get_property("cores"));
     double availableMemory = std::stod(host->get_property("memory"));
 
     return availableCores >= Cores && availableMemory >= Memory;
+}
+
+bool Task::CanExecute(const VMDescription& vmDescr) const {
+    return vmDescr.GetCores() >= Cores && vmDescr.GetMemory() >= Memory;
 }
 
 simgrid::s4u::VirtualMachine* Task::MakeVirtualMachine(simgrid::s4u::Host* host) {

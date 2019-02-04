@@ -13,7 +13,7 @@
 
 #include "argument_parser.h"
 #include "platform_generator.h"
-#include "schedulers/naive_scheduler.h"
+#include "schedulers/mao_scheduler.h"
 #include "vm_list.h"
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(main, "Main log");
@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
     cxxopts::ParseResult parseResult = ParseArguments(argc, argv);
 
     // Load tasks graph description
-    NaiveScheduler scheduler = NaiveScheduler(parseResult["workflow"].as<string>(), parseResult["vm_list"].as<string>());
+    MaoScheduler scheduler = MaoScheduler(parseResult["workflow"].as<string>(), parseResult["vm_list"].as<string>());
 
     // Make suitable platform for workflow
     string platformPath;

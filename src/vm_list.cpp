@@ -16,6 +16,22 @@ VMDescription::VMDescription(int cores, double memory, double flops, int price):
     Price(price)
 {}
 
+int VMDescription::GetCores() const {
+    return Cores;
+}
+
+double VMDescription::GetMemory() const {
+    return Memory;
+}
+
+double VMDescription::GetFlops() const {
+    return Flops;
+}
+
+int VMDescription::GetPrice() const {
+    return Price;
+}
+
 VMList::VMList(const string& vmConfig) {
     XBT_INFO("Loading VM list from %s", vmConfig.c_str());
     YAML::Node vmList = YAML::LoadFile(vmConfig);
