@@ -17,10 +17,12 @@ public:
     TasksGraph(std::string filepath);
 
     void MakeGraph();
+    void RemakeGraph(const std::vector<std::shared_ptr<Task>>& tasks);
 
     void MakeOrderDFS(const std::string& vertex, 
                       std::vector<std::shared_ptr<Task>>& order, 
-                      std::map<std::string, bool>& used, 
+                      std::map<std::string, bool>& used,
+                      const std::map<std::string, std::vector<std::string>>& edges,
                       bool reverse = false) const;
     std::vector<std::shared_ptr<Task>> MakeTasksOrder(bool reverse = false) const;
 
@@ -29,6 +31,9 @@ public:
     double MaxMemory() const;
 
     std::map<std::string, VMDescription> GetCheapestVMs(const VMList& vmList) const;
+
+    int GetInputDegree(const std::string& taskName) const;
+    int GetOutputDegree(const std::string& taskName) const;
 
     void PrintGraph() const;
 
@@ -41,6 +46,9 @@ private:
 
     std::map<std::string, std::shared_ptr<Task>> Tasks;
 
+    std::map<std::string, int> InputDegree;
     std::map<std::string, int> OutputDegree;
+
+    std::map<std::string, std::vector<std::string>> Edges;
     std::map<std::string, std::vector<std::string>> ReverseEdges;
 };

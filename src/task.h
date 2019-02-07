@@ -33,6 +33,8 @@ public:
     bool CanExecute(const VMDescription& vmDescr) const;
     simgrid::s4u::VirtualMachine* MakeVirtualMachine(simgrid::s4u::Host* host);
     
+    void ConsolidateTask(const Task& other);
+
     void Finish(simgrid::s4u::ActorPtr vmPtr);
 
 private:

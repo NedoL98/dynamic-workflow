@@ -76,29 +76,53 @@ void TasksGraph::MakeGraph() {
                 xbt_assert(Tasks.count(inputSourceName),
                            "Task with name \"%s\" is not presented, but its result is used as input!", 
                            inputSourceName.c_str());
+                Edges[inputSourceName].push_back(taskName);
                 ReverseEdges[taskName].push_back(inputSourceName);
+                ++InputDegree[taskName];
                 ++OutputDegree[inputSourceName];
             }
         }
         if (!OutputDegree.count(taskName)) {
             OutputDegree[taskName] = 0;
         }
+        if (!InputDegree.count(taskName)) {
+            InputDegree[taskName] = 0;
+        }
     }
+    XBT_INFO("Done!");
+}
+
+void TasksGraph::RemakeGraph(const vector<shared_ptr<Task>>& tasks) {
+    XBT_INFO("Remaking graph...");
+
+    Tasks.clear();
+    Edges.clear();
+    ReverseEdges.clear();
+    OutputDegree.clear();
+    InputDegree.clear();
+
+    for (const auto& task: tasks) {
+        Tasks[task->GetName()] = task;
+    }
+
+    MakeGraph();
+
     XBT_INFO("Done!");
 }
 
 void TasksGraph::MakeOrderDFS(const string& vertex, 
                               vector<shared_ptr<Task>>& order, 
-                              map<string, bool>& used, 
+                              map<string, bool>& used,
+                              const map<string, vector<string>>& edges,
                               bool reverse) const {
     if (!reverse) {
         order.push_back(Tasks.at(vertex));
     }
     used[vertex] = true;
-    if (ReverseEdges.count(vertex)) {
-        for (const string& neighbourVertex: ReverseEdges.at(vertex)) {
+    if (edges.count(vertex)) {
+        for (const string& neighbourVertex: edges.at(vertex)) {
             if (!used[neighbourVertex]) {
-                MakeOrderDFS(neighbourVertex, order, used, reverse);
+                MakeOrderDFS(neighbourVertex, order, used, edges, reverse);
             }
         }
     }
@@ -113,8 +137,13 @@ vector<shared_ptr<Task>> TasksGraph::MakeTasksOrder(bool reverse) const {
     map<string, bool> used;
     for (const auto& item: Tasks) {
         string taskName = item.first;
-        if (!used[taskName] && OutputDegree.at(taskName) == 0) {
-            MakeOrderDFS(taskName, result, used, reverse);
+        if (!used[taskName]) {
+            if (reverse && OutputDegree.at(taskName) == 0) {
+                MakeOrderDFS(taskName, result, used, ReverseEdges, reverse);
+            }
+            if (!reverse && InputDegree.at(taskName) == 0) {
+                MakeOrderDFS(taskName, result, used, Edges, reverse);
+            }
         }
     }
     xbt_assert(result.size() == Tasks.size(), "Something went wrong, not all tasks are included in tasks order!");
@@ -152,6 +181,14 @@ std::map<std::string, VMDescription> TasksGraph::GetCheapestVMs(const VMList& vm
         }
     }
     return cheapestVM;
+}
+
+int TasksGraph::GetInputDegree(const std::string& taskName) const {
+    return InputDegree.at(taskName);
+}
+
+int TasksGraph::GetOutputDegree(const std::string& taskName) const {
+    return OutputDegree.at(taskName);
 }
 
 void TasksGraph::PrintGraph() const {

@@ -12,6 +12,8 @@ public:
     double GetFlops() const;
     int GetPrice() const;
 
+    bool operator ==(const VMDescription& other) const;
+
 private:
     int Cores;
     double Memory;

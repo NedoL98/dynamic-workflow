@@ -174,6 +174,20 @@ simgrid::s4u::VirtualMachine* Task::MakeVirtualMachine(simgrid::s4u::Host* host)
     return vm;
 }
 
+void Task::ConsolidateTask(const Task& other) {
+    Cores = std::max(Cores, other.Cores);
+    Memory = std::max(Memory, other.Memory);
+    Flops += other.Flops;
+
+    for (const auto& elem: other.RawInputs) {
+        if (elem.second.find('.') == string::npos && RawInputs.count(elem.first) == 0) {
+            RawInputs[elem.first] = elem.second;
+        }
+    }
+
+    Outputs = other.Outputs;
+}
+
 void Task::Finish(simgrid::s4u::ActorPtr vmPtr) {
     if (Host == nullptr) {
         if (!Done) {

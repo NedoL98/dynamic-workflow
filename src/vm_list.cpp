@@ -32,6 +32,13 @@ int VMDescription::GetPrice() const {
     return Price;
 }
 
+bool VMDescription::operator ==(const VMDescription& other) const {
+    return Cores == other.Cores &&
+           Memory == other.Memory &&
+           Flops == other.Flops &&
+           Price == other.Price;           
+}
+
 VMList::VMList(const string& vmConfig) {
     XBT_INFO("Loading VM list from %s", vmConfig.c_str());
     YAML::Node vmList = YAML::LoadFile(vmConfig);
