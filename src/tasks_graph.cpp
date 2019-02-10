@@ -97,6 +97,7 @@ void TasksGraph::RemakeGraph(const vector<shared_ptr<Task>>& tasks) {
     Tasks.clear();
     ReverseEdges.clear();
     OutputDegree.clear();
+    InputDegree.clear();
 
     for (const auto& task: tasks) {
         Tasks[task->GetName()] = task;
