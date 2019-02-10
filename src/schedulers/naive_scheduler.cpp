@@ -13,7 +13,7 @@ using std::vector;
 NaiveScheduler::NaiveScheduler(const string& workflowPath, const string& vmListPath) : BaseScheduler(workflowPath, vmListPath) {}
 
 void NaiveScheduler::ProcessTasksGraph() {
-    vector<std::shared_ptr<Task>> orderedTasks = Workflow.MakeTasksOrder(true);
+    vector<std::shared_ptr<Task>> orderedTasks = Workflow.MakeTasksOrder();
     vector<simgrid::s4u::Host*> hosts = simgrid::s4u::Engine::get_instance()->get_all_hosts();
 
     map<string, simgrid::s4u::ActorPtr> actorPointers;

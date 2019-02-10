@@ -22,9 +22,8 @@ public:
     void MakeOrderDFS(const std::string& vertex, 
                       std::vector<std::shared_ptr<Task>>& order, 
                       std::map<std::string, bool>& used,
-                      const std::map<std::string, std::vector<std::string>>& edges,
-                      bool reverse = false) const;
-    std::vector<std::shared_ptr<Task>> MakeTasksOrder(bool reverse = false) const;
+                      const std::map<std::string, std::vector<std::string>>& edges) const;
+    std::vector<std::shared_ptr<Task>> MakeTasksOrder() const;
 
     int Size() const;
     int MaxCores() const;
@@ -49,6 +48,5 @@ private:
     std::map<std::string, int> InputDegree;
     std::map<std::string, int> OutputDegree;
 
-    std::map<std::string, std::vector<std::string>> Edges;
     std::map<std::string, std::vector<std::string>> ReverseEdges;
 };

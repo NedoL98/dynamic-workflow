@@ -76,7 +76,6 @@ void TasksGraph::MakeGraph() {
                 xbt_assert(Tasks.count(inputSourceName),
                            "Task with name \"%s\" is not presented, but its result is used as input!", 
                            inputSourceName.c_str());
-                Edges[inputSourceName].push_back(taskName);
                 ReverseEdges[taskName].push_back(inputSourceName);
                 ++InputDegree[taskName];
                 ++OutputDegree[inputSourceName];
@@ -96,10 +95,8 @@ void TasksGraph::RemakeGraph(const vector<shared_ptr<Task>>& tasks) {
     XBT_INFO("Remaking graph...");
 
     Tasks.clear();
-    Edges.clear();
     ReverseEdges.clear();
     OutputDegree.clear();
-    InputDegree.clear();
 
     for (const auto& task: tasks) {
         Tasks[task->GetName()] = task;
@@ -113,37 +110,26 @@ void TasksGraph::RemakeGraph(const vector<shared_ptr<Task>>& tasks) {
 void TasksGraph::MakeOrderDFS(const string& vertex, 
                               vector<shared_ptr<Task>>& order, 
                               map<string, bool>& used,
-                              const map<string, vector<string>>& edges,
-                              bool reverse) const {
-    if (!reverse) {
-        order.push_back(Tasks.at(vertex));
-    }
+                              const map<string, vector<string>>& edges) const {
     used[vertex] = true;
     if (edges.count(vertex)) {
         for (const string& neighbourVertex: edges.at(vertex)) {
             if (!used[neighbourVertex]) {
-                MakeOrderDFS(neighbourVertex, order, used, edges, reverse);
+                MakeOrderDFS(neighbourVertex, order, used, edges);
             }
         }
     }
-    if (reverse) {
-        order.push_back(Tasks.at(vertex));
-    }
+    order.push_back(Tasks.at(vertex));
 }
 
-vector<shared_ptr<Task>> TasksGraph::MakeTasksOrder(bool reverse) const {
+vector<shared_ptr<Task>> TasksGraph::MakeTasksOrder() const {
     vector<shared_ptr<Task>> result;
 
     map<string, bool> used;
     for (const auto& item: Tasks) {
         string taskName = item.first;
-        if (!used[taskName]) {
-            if (reverse && OutputDegree.at(taskName) == 0) {
-                MakeOrderDFS(taskName, result, used, ReverseEdges, reverse);
-            }
-            if (!reverse && InputDegree.at(taskName) == 0) {
-                MakeOrderDFS(taskName, result, used, Edges, reverse);
-            }
+        if (!used[taskName] && OutputDegree.at(taskName) == 0) {
+            MakeOrderDFS(taskName, result, used, ReverseEdges);
         }
     }
     xbt_assert(result.size() == Tasks.size(), "Something went wrong, not all tasks are included in tasks order!");
