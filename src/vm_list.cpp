@@ -39,6 +39,26 @@ bool VMDescription::operator ==(const VMDescription& other) const {
            Price == other.Price;           
 }
 
+bool VMDescription::operator !=(const VMDescription& other) const {
+    return !(*this == other);
+}
+
+bool VMDescription::operator <(const VMDescription& other) const {
+    return Flops < other.Flops;
+}
+
+bool VMDescription::operator >(const VMDescription& other) const {
+    return Flops > other.Flops;
+}
+
+bool VMDescription::operator <=(const VMDescription& other) const {
+    return !(*this > other);
+}
+
+bool VMDescription::operator >=(const VMDescription& other) const {
+    return !(*this < other);
+}
+
 VMList::VMList(const string& vmConfig) {
     XBT_INFO("Loading VM list from %s", vmConfig.c_str());
     YAML::Node vmList = YAML::LoadFile(vmConfig);

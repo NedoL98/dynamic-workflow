@@ -8,6 +8,8 @@ using std::shared_ptr;
 using std::string;
 using std::vector;
 
+XBT_LOG_NEW_DEFAULT_CATEGORY(mao_scheduler, "Mao scheduler log");
+
 MaoScheduler::MaoScheduler(const string& workflowPath, const string& vmListPath) : BaseScheduler(workflowPath, vmListPath) {}
 
 void MaoScheduler::TasksBundling(const std::map<std::string, VMDescription>& taskVM) {
@@ -33,9 +35,8 @@ void MaoScheduler::TasksBundling(const std::map<std::string, VMDescription>& tas
     Workflow.RemakeGraph(newTasks);
 }
 
-double MaoScheduler::CalculateMakespan(const map<string, VMDescription>& taskVM) {
-    vector<shared_ptr<Task>> taskOrder = Workflow.MakeTasksOrder();
-
+// we should enhance this in future so that data transer time is considered
+double MaoScheduler::CalculateMakespan(const map<string, VMDescription>& taskVM, const vector<shared_ptr<Task>>& taskOrder) {
     double makespan = 0;
 
     map<string, double> endTime;
@@ -53,13 +54,64 @@ double MaoScheduler::CalculateMakespan(const map<string, VMDescription>& taskVM)
     return makespan;
 }
 
-void MaoScheduler::ProcessTasksGraph() {
-    map<string, VMDescription> cheapestVM = Workflow.GetCheapestVMs(vmList);
+void MaoScheduler::ReduceMakespan(map<string, VMDescription>& taskVM, 
+                                  const vector<shared_ptr<Task>>& taskOrder, 
+                                  double currentMakespan) {
+    XBT_INFO("Reducing makespan...");
+    double maxSpeedup = 0;
+    shared_ptr<Task> taskToSpeedup;
+    VMDescription vmToBuy;
 
-    TasksBundling(cheapestVM);
+    for (auto& elem: Workflow.Tasks) {
+        const string taskName = elem.first;
+        shared_ptr<Task> task = elem.second;
+        VMDescription oldVM = taskVM.at(taskName); 
+        VMDescription newVM = taskVM.at(taskName);
+        for (const auto& vm: vmList) {
+            if (task->CanExecute(vm) && vm > oldVM && (newVM == oldVM || vm.GetPrice() <= newVM.GetPrice())) {
+                newVM = vm;
+            }
+        }
+
+        if (newVM != oldVM) {
+            taskVM[taskName] = newVM;
+
+            double priceDiff = newVM.GetPrice() - oldVM.GetPrice();
+            // priceDiff <= 0?
+            double curSpeedup = (currentMakespan - CalculateMakespan(taskVM, taskOrder)) / priceDiff;
+
+            if (curSpeedup > maxSpeedup) {
+                maxSpeedup = curSpeedup;
+                taskToSpeedup = task;
+                vmToBuy = newVM;
+            }
+
+            taskVM[taskName] = oldVM;
+        }
+    }
+
+    xbt_assert(maxSpeedup != 0, "Can't speedup current plan!");
+    taskVM[taskToSpeedup->GetName()] = vmToBuy;
+    
+    XBT_INFO("Done!");
+}
+
+void MaoScheduler::ProcessTasksGraph() {
+    map<string, VMDescription> taskVM = Workflow.GetCheapestVMs(vmList);
+
+    TasksBundling(taskVM);
+
+    vector<shared_ptr<Task>> taskOrder = Workflow.MakeTasksOrder();
 
     while (true) {
-        double makespan = CalculateMakespan(cheapestVM);
-        return;
+        double makespan = CalculateMakespan(taskVM, taskOrder);
+
+        if (makespan <= Workflow.GetDeadline()) {
+            break;
+        }
+
+        XBT_INFO("Old makespan: %f", makespan);
+        ReduceMakespan(taskVM, taskOrder, makespan);
+        XBT_INFO("New makespan: %f", CalculateMakespan(taskVM, taskOrder));
     }
 }

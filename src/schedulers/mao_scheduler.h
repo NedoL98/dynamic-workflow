@@ -7,7 +7,11 @@ public:
 
     void ProcessTasksGraph() override;
 
-    double CalculateMakespan(const std::map<std::string, VMDescription>& taskVM);
+    double CalculateMakespan(const std::map<std::string, VMDescription>& taskVM, const std::vector<std::shared_ptr<Task>>& taskOrder);
+
+    void ReduceMakespan(std::map<std::string, VMDescription>& taskVM, 
+                        const std::vector<std::shared_ptr<Task>>& taskOrder,
+                        double currentMakespan);
 
     void TasksBundling(const std::map<std::string, VMDescription>& taskVM);
 };

@@ -5,6 +5,7 @@
 
 class VMDescription {
 public:
+    VMDescription() = default;
     VMDescription(int cores, double memory, double flops, int price);
 
     int GetCores() const;
@@ -13,6 +14,11 @@ public:
     int GetPrice() const;
 
     bool operator ==(const VMDescription& other) const;
+    bool operator !=(const VMDescription& other) const;
+    bool operator <(const VMDescription& other) const;
+    bool operator >(const VMDescription& other) const;
+    bool operator <=(const VMDescription& other) const;
+    bool operator >=(const VMDescription& other) const;
 
 private:
     int Cores;

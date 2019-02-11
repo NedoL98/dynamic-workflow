@@ -19,6 +19,9 @@ TasksGraph::TasksGraph(string filepath) {
     xbt_assert(tasksGraph["name"], "Tasks graph name is not specified!");
     Name = tasksGraph["name"].as<string>();
 
+    xbt_assert(tasksGraph["deadline"], "Task deadline is not specified!");
+    Deadline = tasksGraph["deadline"].as<double>();
+
     xbt_assert(tasksGraph["inputs"], "Tasks inputs are not specified!");
     for (const YAML::Node& inputDescription: tasksGraph["inputs"]) {
         xbt_assert(inputDescription["name"], "Input name is not specified!");
@@ -136,6 +139,10 @@ vector<shared_ptr<Task>> TasksGraph::MakeTasksOrder() const {
     xbt_assert(result.size() == Tasks.size(), "Something went wrong, not all tasks are included in tasks order!");
     
     return result;
+}
+
+double TasksGraph::GetDeadline() const {
+    return Deadline;
 }
 
 int TasksGraph::Size() const {

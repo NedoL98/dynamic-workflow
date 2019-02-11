@@ -25,6 +25,7 @@ public:
                       const std::map<std::string, std::vector<std::string>>& edges) const;
     std::vector<std::shared_ptr<Task>> MakeTasksOrder() const;
 
+    double GetDeadline() const;
     int Size() const;
     int MaxCores() const;
     double MaxMemory() const;
@@ -38,6 +39,7 @@ public:
 
 private:
     std::string Name;
+    double Deadline;
 
     //TODO: make appropriate interface
     std::map<std::string, double> Inputs;
