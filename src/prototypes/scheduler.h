@@ -5,10 +5,13 @@
 #include <vector>
 #include <memory>
 
+class Viewer;
+
 class AbstractScheduler {
+    std::shared_ptr<Viewer> viewer;
 public:
     typedef std::vector<std::shared_ptr<AbstractAction> > Actions;
-    virtual Actions PrepareForRun() = 0;
+    virtual Actions PrepareForRun(Viewer *v) = 0;
     virtual Actions OnJobComplete(const JobFinishedEvent &e) = 0;
     virtual Actions OnJobFail(const JobFinishedEvent &e) = 0;
     virtual Actions OnActionComplete(const ActionCompletedEvent &event) = 0;

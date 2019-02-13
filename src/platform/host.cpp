@@ -17,7 +17,7 @@ int Host::CreateVM(const ComputeSpec& c) {
     if (AvailiableCores < c.Cores || AvailiableMemory < c.Memory) {
         return -1;
     }
-    simgrid::s4u::VirtualMachine* vm = new simgrid::s4u::VirtualMachine("_VM", Unit, c.Cores, c.Memory);
+    simgrid::s4u::VirtualMachine* vm = new simgrid::s4u::VirtualMachine(std::to_string(Id) + std::to_string(VirtualMachines.size()) + "_VM", Unit, c.Cores, c.Memory);
     AvailiableCores -= c.Cores;
     AvailiableMemory -= c.Memory;
     VirtualMachines.emplace_back(vm);

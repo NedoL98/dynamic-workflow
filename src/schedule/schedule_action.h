@@ -1,10 +1,11 @@
 #pragma once
-#include "prototypes/simulator.h"
+#include "prototypes/interface.h"
 
 enum ActionType {
     Abstract,
     AssignJob,
-    ResetSchedule
+    ResetSchedule,
+    BuyVM
 };
 
 class AbstractAction {
@@ -33,3 +34,14 @@ public:
     virtual void MakeAction(SimulatorInterface& interface) override;
     virtual ActionType GetActionType() const override;
 };
+
+class BuyVMAction : AbstractAction {
+    VMSpec Spec;
+    BuyVMAction(VMSpec s):
+        Spec(s)
+        {}
+
+    virtual void MakeAction(SimulatorInterface& interface) override;
+    virtual ActionType GetActionType() const override;
+}; 
+

@@ -24,3 +24,11 @@ void ResetScheduleAction::MakeAction(SimulatorInterface& interface) {
 ActionType ResetScheduleAction::GetActionType() const {
     return ActionType::ResetSchedule;
 }
+
+void BuyVMAction::MakeAction(SimulatorInterface& interface) {
+    interface.RegisterVirtualMachine(Spec);
+}
+
+ActionType BuyVMAction::GetActionType() const {
+    return ActionType::BuyVM;
+}

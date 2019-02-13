@@ -19,7 +19,9 @@ add_executable(
     src/platform_generator.cpp
     src/platform/host.cpp
     src/platform/platform.cpp
+    src/platform/cloud_platform.cpp
     src/prototypes/scheduler.cpp
+    src/prototypes/simulator.cpp
     src/schedule/schedule.cpp
     src/schedule/schedule_action.cpp
     src/schedulers/naive_scheduler.cpp
@@ -27,6 +29,7 @@ add_executable(
     src/schedulers/scheduler_base.cpp
     src/task.cpp
     src/tasks_graph.cpp
+    src/viewer.cpp
     src/vm_list.cpp
 )
 
