@@ -21,11 +21,11 @@ public:
 };
 
 
-class JobFinishedEvent : public AbstractEvent {
+class TaskFinishedEvent : public AbstractEvent {
     ScheduleItem Data;
 
 public:
-    JobFinishedEvent(ScheduleItem data, EventStatus s):
+    TaskFinishedEvent(ScheduleItem data, EventStatus s):
         AbstractEvent(s),
         Data(data) {
     }

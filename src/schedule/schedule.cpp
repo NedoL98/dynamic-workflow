@@ -50,23 +50,23 @@ bool ScheduleItem::operator<(const ScheduleItem& other) {
 
 HostSchedule::HostSchedule() {}
 void HostSchedule::AddItem(const ScheduleItem& item) {
-    PlannedJobs.push(item);
+    PlannedTasks.push(item);
 }
 
 ScheduleItem HostSchedule::GetItem() const {
-    assert(PlannedJobs.empty());
-    return PlannedJobs.front();    
+    assert(PlannedTasks.empty());
+    return PlannedTasks.front();    
 }
 
 ScheduleItem HostSchedule::PopItem() {
-    assert(PlannedJobs.empty());
-    ScheduleItem result = PlannedJobs.front();
-    PlannedJobs.pop();    
+    assert(PlannedTasks.empty());
+    ScheduleItem result = PlannedTasks.front();
+    PlannedTasks.pop();    
     return std::move(result);
 }
 
 bool HostSchedule::IsEmpty() const {
-    return PlannedJobs.empty();
+    return PlannedTasks.empty();
 }
 
 

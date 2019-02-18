@@ -24,7 +24,7 @@ public:
 
 
 class HostSchedule {
-    queue<ScheduleItem> PlannedJobs;
+    queue<ScheduleItem> PlannedTasks;
     
 public:
     HostSchedule();

@@ -1,16 +1,16 @@
 #include "schedule/schedule_action.h"
 
-AssignJobAction::AssignJobAction(int hostId, int taskId):
+AssignTaskAction::AssignTaskAction(int hostId, int taskId):
     Task(taskId),
     HostId(hostId)
 {}
     
-void AssignJobAction::MakeAction(SimulatorInterface& interface) {
-    interface.AssignJob(HostId, Task);
+void AssignTaskAction::MakeAction(SimulatorInterface& interface) {
+    interface.AssignTask(HostId, Task);
 }
 
-ActionType AssignJobAction::GetActionType() const {
-    return ActionType::AssignJob;
+ActionType AssignTaskAction::GetActionType() const {
+    return ActionType::AssignTask;
 }
 
 ResetScheduleAction::ResetScheduleAction(const Schedule& s):

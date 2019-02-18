@@ -12,15 +12,15 @@ class AbstractScheduler {
 public:
     typedef std::vector<std::shared_ptr<AbstractAction> > Actions;
     virtual Actions PrepareForRun(Viewer *v) = 0;
-    virtual Actions OnJobComplete(const JobFinishedEvent &e) = 0;
-    virtual Actions OnJobFail(const JobFinishedEvent &e) = 0;
+    virtual Actions OnTaskComplete(const TaskFinishedEvent &e) = 0;
+    virtual Actions OnTaskFail(const TaskFinishedEvent &e) = 0;
     virtual Actions OnActionComplete(const ActionCompletedEvent &event) = 0;
 };
 
 class StaticScheduler : public AbstractScheduler {
 
 public:
-    virtual Actions OnJobComplete(const JobFinishedEvent &e) override final;
-    virtual Actions OnJobFail(const JobFinishedEvent &e) override final;
+    virtual Actions OnTaskComplete(const TaskFinishedEvent &e) override final;
+    virtual Actions OnTaskFail(const TaskFinishedEvent &e) override final;
     virtual Actions OnActionComplete(const ActionCompletedEvent &event) override final;
 };

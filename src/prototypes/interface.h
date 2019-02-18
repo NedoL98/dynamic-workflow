@@ -10,7 +10,7 @@ public:
     SimulatorInterface& operator=(const SimulatorInterface& other) = delete;
 
     virtual bool RegisterVirtualMachine(const VMSpec &stats) = 0;
-    virtual bool AssignJob(int hostId, const ScheduleItem &item) = 0;
-    virtual bool CancelJob(int hostId, const ScheduleItem &item) = 0;
+    virtual bool AssignTask(int hostId, const ScheduleItem &item) = 0;
+    virtual bool CancelTask(int hostId, const ScheduleItem &item) = 0;
     virtual bool ResetSchedule(const Schedule &s) = 0;
 };

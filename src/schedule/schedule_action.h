@@ -3,7 +3,7 @@
 
 enum ActionType {
     Abstract,
-    AssignJob,
+    AssignTask,
     ResetSchedule,
     BuyVM
 };
@@ -16,12 +16,12 @@ public:
     }
 };
 
-class AssignJobAction : AbstractAction {
+class AssignTaskAction : AbstractAction {
     ScheduleItem Task;
     int HostId;
 
 public:
-    AssignJobAction(int hostId, int taskId);
+    AssignTaskAction(int hostId, int taskId);
     virtual void MakeAction(SimulatorInterface& interface) override;
     virtual ActionType GetActionType() const override;
 };
