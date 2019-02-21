@@ -50,5 +50,6 @@ private:
     std::map<std::string, int> InputDegree;
     std::map<std::string, int> OutputDegree;
 
+    std::map<std::string, std::vector<std::string>> Edges;
     std::map<std::string, std::vector<std::string>> ReverseEdges;
 };

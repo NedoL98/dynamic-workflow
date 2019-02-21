@@ -79,6 +79,7 @@ void TasksGraph::MakeGraph() {
                 xbt_assert(Tasks.count(inputSourceName),
                            "Task with name \"%s\" is not presented, but its result is used as input!", 
                            inputSourceName.c_str());
+                Edges[inputSourceName].push_back(taskName);
                 ReverseEdges[taskName].push_back(inputSourceName);
                 ++InputDegree[taskName];
                 ++OutputDegree[inputSourceName];
@@ -98,6 +99,7 @@ void TasksGraph::RemakeGraph(const vector<shared_ptr<Task>>& tasks) {
     XBT_INFO("Remaking graph...");
 
     Tasks.clear();
+    Edges.clear();
     ReverseEdges.clear();
     OutputDegree.clear();
     InputDegree.clear();
