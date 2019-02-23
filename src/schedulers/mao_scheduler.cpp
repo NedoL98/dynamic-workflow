@@ -208,6 +208,11 @@ map<string, pair<double, double>> MaoScheduler::CalculateDeadlines(const vector<
     }
     xbt_assert(deadlines.size() == Workflow.Tasks.size(), "Something went wrong, not all tasks have deadlines assigned!");
 
+    for (auto& [taskName, deadline]: deadlines) {
+        deadline.first *= Workflow.Deadline / totalDeadline;
+        deadline.second *= Workflow.Deadline / totalDeadline;
+    }
+
     return deadlines;
 }
 
