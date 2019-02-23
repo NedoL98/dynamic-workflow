@@ -115,24 +115,19 @@ map<string, double> MaoScheduler::CalculateTasksEndTimes(const vector<shared_ptr
     return tasksEndTimes;
 }
 
-map<string, vector<pair<string, double>>> MaoScheduler::GetEndTimeAncestorList(const map<string, double>& tasksEndTimes) const {
-    map<string, vector<pair<string, double>>> endTimeAncestorList;
-
-    for (const auto& [taskName, task]: Workflow.Tasks) {
-        for (const auto& input: task->GetInputs()) {
-            endTimeAncestorList[taskName].push_back({Workflow.Tasks.at(input)->GetName(), tasksEndTimes.at(input)});
-        }
-    }
-
-    return endTimeAncestorList;
-}
-
 map<string, pair<double, double>> MaoScheduler::CalculateDeadlines(const vector<shared_ptr<Task>>& taskOrder,
                                                                    const map<string, VMDescription>& taskVM) const {
     map<string, double> tasksEndTimes = CalculateTasksEndTimes(taskOrder, taskVM);
-    map<string, vector<pair<string, double>>> endTimeAncestorList = GetEndTimeAncestorList(tasksEndTimes);
+    // for each time we construct a sorted list of all parents end times
+    map<string, vector<pair<string, double>>> endTimeParentList;
+    
+    for (const auto& [taskName, task]: Workflow.Tasks) {
+        for (const auto& input: task->GetInputs()) {
+            endTimeParentList[taskName].push_back({Workflow.Tasks.at(input)->GetName(), tasksEndTimes.at(input)});
+        }
+    }
 
-    for (auto& [taskName, ancestorList]: endTimeAncestorList) {
+    for (auto& [taskName, ancestorList]: endTimeParentList) {
         sort(ancestorList.begin(), ancestorList.end(), [](const auto& a, const auto& b) {
             return a.second < b.second;
         });
@@ -156,22 +151,24 @@ map<string, pair<double, double>> MaoScheduler::CalculateDeadlines(const vector<
             break;
         }
 
-        while (!endTimeAncestorList[endTaskName].empty()) {
+        while (!endTimeParentList[endTaskName].empty()) {
+            // constructing new critical path
             vector<string> currentPath;
             string currentTaskName = endTaskName;
             double totalRuntime = 0;
 
+            // last node is included in path iff its deadline is not calculated yet
             if (deadlines.count(currentTaskName) == 0) {
                 currentPath.push_back(currentTaskName);
                 totalRuntime += Workflow.Tasks.at(currentTaskName)->GetSize() / taskVM.at(currentTaskName).GetFlops();
             }
 
             do {
-                if (endTimeAncestorList[currentTaskName].empty()) {
+                if (endTimeParentList[currentTaskName].empty()) {
                     break;
                 }
-                string newTaskName = endTimeAncestorList[currentTaskName].back().first;
-                endTimeAncestorList[currentTaskName].pop_back();
+                string newTaskName = endTimeParentList[currentTaskName].back().first;
+                endTimeParentList[currentTaskName].pop_back();
 
                 currentTaskName = newTaskName;
 
@@ -180,7 +177,7 @@ map<string, pair<double, double>> MaoScheduler::CalculateDeadlines(const vector<
                 currentPath.push_back(currentTaskName);
             } while (deadlines.count(currentTaskName) == 0);
 
-            if (currentPath.size() > 1) {
+            if (!currentPath.empty()) {
                 double endTime = totalDeadline;
                 if (deadlines.count(endTaskName) != 0) {
                     endTime = deadlines[endTaskName].first;

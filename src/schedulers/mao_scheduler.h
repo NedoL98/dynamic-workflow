@@ -18,8 +18,6 @@ public:
     std::map<std::string, double> CalculateTasksEndTimes(
                         const std::vector<std::shared_ptr<Task>>& taskOrder,
                         const std::map<std::string, VMDescription>& taskVM) const;
-    std::map<std::string, std::vector<std::pair<std::string, double>>> GetEndTimeAncestorList(
-                        const std::map<std::string, double>& tasksEndTimes) const;
 
     std::map<std::string, std::pair<double, double>> CalculateDeadlines(
                         const std::vector<std::shared_ptr<Task>>& taskOrder,
