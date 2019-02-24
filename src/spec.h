@@ -12,7 +12,7 @@ struct TaskSpec {
 class VMDescription {
 public:
     VMDescription() = default;
-    VMDescription(int cores, double memory, double flops, int price);
+    VMDescription(int id, int cores, double memory, double flops, int price);
 
     int GetCores() const;
     double GetMemory() const;
@@ -27,13 +27,9 @@ public:
     bool operator >=(const VMDescription& other) const;
 
 private:
+    int Id;
     int Cores;
     double Memory;
     double Flops;
     int Price;
-};
-
-struct VMSpec {
-    VMDescription properties;
-    int id;
 };
