@@ -17,6 +17,10 @@ VMDescription::VMDescription(int id, int cores, double memory, double flops, int
     Price(price)
 {}
 
+int VMDescription::GetId() const {
+    return Id;
+}
+
 int VMDescription::GetCores() const {
     return Cores;
 }

@@ -15,6 +15,8 @@ public:
     std::vector<VMDescription>::const_iterator begin() const { return VMs.begin(); };
     std::vector<VMDescription>::const_iterator end() const { return VMs.end(); };
 
+    int Size() { return VMs.size(); };
+
 private:
     std::vector<VMDescription> VMs;
 };

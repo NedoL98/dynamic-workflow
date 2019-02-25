@@ -14,6 +14,7 @@ public:
     VMDescription() = default;
     VMDescription(int id, int cores, double memory, double flops, int price);
 
+    int GetId() const;
     int GetCores() const;
     double GetMemory() const;
     double GetFlops() const;

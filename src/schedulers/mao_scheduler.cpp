@@ -216,14 +216,23 @@ map<string, pair<double, double>> MaoScheduler::CalculateDeadlines(const vector<
     return deadlines;
 }
 
+vector<vector<LoadVectorEvent>> MaoScheduler::GetLoadVector(const map<string, pair<double, double>>& deadlines,
+                                                            const map<string, VMDescription>& taskVM) {
+    vector<vector<LoadVectorEvent>> loadVector(vmList.Size());
+    for (const auto& [taskName, deadline]: deadlines) {
+        double runTime = Workflow.Tasks.at(taskName)->GetSize() / taskVM.at(taskName).GetFlops();
+        double consumptionRatio = runTime / (deadline.second - deadline.first);
+        loadVector[taskVM.at(taskName).GetId()].push_back({consumptionRatio, deadline.first, deadline.second});
+    }
+    return loadVector;
+}
+
 void MaoScheduler::ProcessTasksGraph() {
     map<string, VMDescription> taskVM = Workflow.GetCheapestVMs(vmList);
 
     TasksBundling(taskVM);
 
     vector<shared_ptr<Task>> taskOrder = Workflow.MakeTasksOrder();
-
-    map<string, pair<double, double>> deadlines = CalculateDeadlines(taskOrder, taskVM);
 
     while (true) {
         double makespan = CalculateMakespan(taskVM, taskOrder);
@@ -236,4 +245,7 @@ void MaoScheduler::ProcessTasksGraph() {
         ReduceMakespan(taskVM, taskOrder, makespan);
         XBT_INFO("New makespan: %f", CalculateMakespan(taskVM, taskOrder));
     }
-}
+
+    map<string, pair<double, double>> deadlines = CalculateDeadlines(taskOrder, taskVM);
+
+    vector<vector<LoadVectorEvent>> loadVector = GetLoadVector(deadlines, taskVM);
