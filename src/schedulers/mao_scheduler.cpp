@@ -249,3 +249,4 @@ void MaoScheduler::ProcessTasksGraph() {
     map<string, pair<double, double>> deadlines = CalculateDeadlines(taskOrder, taskVM);
 
     vector<vector<LoadVectorEvent>> loadVector = GetLoadVector(deadlines, taskVM);
+}
