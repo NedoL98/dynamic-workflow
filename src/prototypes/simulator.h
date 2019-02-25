@@ -13,11 +13,14 @@ class CloudSimulator : public SimulatorInterface {
     VMList AvailiableVMs;
     CloudPlatform Platform;
     AbstractScheduler* Scheduler;
+    Schedule Assignments;
+
 public:
     CloudSimulator(const std::string& platformConf, const std::string& workflowConf, const std::string& VMListConf):
         AvailiableVMs(VMListConf),
         Platform(platformConf),
-        Scheduler(nullptr)
+        Scheduler(nullptr),
+        Assignments(0)
         {}
     
     void RegisterScheduler(AbstractScheduler* s) {
@@ -29,5 +32,5 @@ public:
     }
 
     void Run(double timeout=0);   
-    friend class Viewer;
+    friend class View::Viewer;
 };

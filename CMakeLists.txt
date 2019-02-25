@@ -29,7 +29,7 @@ add_executable(
     src/schedulers/scheduler_base.cpp
     src/task.cpp
     src/tasks_graph.cpp
-    src/viewer.cpp
+    src/view/viewer.cpp
     src/vm_list.cpp
 )
 
