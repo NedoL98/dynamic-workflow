@@ -36,8 +36,8 @@ public:
 };
 
 class BuyVMAction : AbstractAction {
-    VMSpec Spec;
-    BuyVMAction(VMSpec s):
+    VMDescription Spec;
+    BuyVMAction(VMDescription s):
         Spec(s)
         {}
 

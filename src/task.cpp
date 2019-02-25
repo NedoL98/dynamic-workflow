@@ -7,6 +7,8 @@
 #include <map>
 #include <string>
 #include <vector>
+
+using std::find;
 using std::map;
 using std::string;
 using std::vector;
@@ -119,7 +121,9 @@ void Task::AppendRawInput(const string& name, const string& source) {
 }
 
 void Task::AppendInput(const string& name) {
-    Inputs.push_back(name);
+    if (find(Inputs.begin(), Inputs.end(), name) == Inputs.end()) {
+        Inputs.push_back(name);
+    }
 }
 
 void Task::AppendOutput(const string& name, const string& size) {

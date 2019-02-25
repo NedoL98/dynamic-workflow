@@ -9,12 +9,17 @@ using std::vector;
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(vm_list, "VM list log");
 
-VMDescription::VMDescription(int cores, double memory, double flops, int price):
+VMDescription::VMDescription(int id, int cores, double memory, double flops, int price):
+    Id(id),
     Cores(cores),
     Memory(memory),
     Flops(flops),
     Price(price)
 {}
+
+int VMDescription::GetId() const {
+    return Id;
+}
 
 int VMDescription::GetCores() const {
     return Cores;
@@ -63,12 +68,14 @@ VMList::VMList(const string& vmConfig) {
     XBT_INFO("Loading VM list from %s", vmConfig.c_str());
     YAML::Node vmList = YAML::LoadFile(vmConfig);
 
+    int id = 0;
     for (const YAML::Node& vmDescription: vmList) {
         int cores = vmDescription["cpu"].as<int>();
         double memory = ParseSize(vmDescription["memory"].as<string>(), SizeSuffixes);
         double flops = ParseSize(vmDescription["speed"].as<string>(), PerformanceSuffixes);
         int price = vmDescription["price"].as<int>();
-        VMs.push_back(VMDescription(cores, memory, flops, price));
+        VMs.push_back(VMDescription(id, cores, memory, flops, price));
+        ++id;
         XBT_INFO("VM %s loaded!", vmDescription["name"].as<string>().c_str());
     }
 }
