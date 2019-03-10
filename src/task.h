@@ -26,8 +26,13 @@ public:
     void AppendInput(const std::string& name);
     void AppendOutput(const std::string& name, const std::string& size);
 
-    static void DoExecute(double flops, std::string name);
-    simgrid::s4u::ActorPtr Execute(simgrid::s4u::VirtualMachine* vm);
+    static void DoExecute(double flops, 
+                          std::string name,
+                          const std::function<void(int, void*)>& actorFinishFunction,
+                          void* context);
+    simgrid::s4u::ActorPtr Execute(simgrid::s4u::VirtualMachine* vm, 
+                                   const std::function<void(int, void*)>& actorFinishFunction,
+                                   void* context);
 
     bool CanExecute(const simgrid::s4u::Host* host) const;
     bool CanExecute(const VMDescription& vmDescr) const;

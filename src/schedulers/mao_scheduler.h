@@ -5,6 +5,8 @@ struct LoadVectorEvent {
     double ConsumptionRatio;
     double Begin;
     double End;
+    std::string TaskName;
+    int VMId;
 };
 
 class MaoScheduler: public BaseScheduler {
@@ -32,4 +34,7 @@ public:
     std::vector<std::vector<LoadVectorEvent>> GetLoadVector(
                         const std::map<std::string, std::pair<double, double>>& deadlines,
                         const std::map<std::string, VMDescription>& taskVM);
+    
+    void ActorFinish(void* data);
+    static void ActorFinishCallback(int, void* this_pointer);
 };

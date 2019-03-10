@@ -140,7 +140,12 @@ void Task::AppendOutput(const string& name, const string& size) {
     }
 }
 
-void Task::DoExecute(double flops, string name) {
+void Task::DoExecute(double flops, 
+                     string name,
+                     const std::function<void(int, void*)>& actorFinishFunction,
+                     void* context) {
+    simgrid::s4u::this_actor::on_exit(actorFinishFunction, context);
+
     simgrid::s4u::Host* host = simgrid::s4u::this_actor::get_host();
 
     double timeStart = simgrid::s4u::Engine::get_clock();
@@ -153,8 +158,10 @@ void Task::DoExecute(double flops, string name) {
     simgrid::s4u::this_actor::exit();
 }
 
-simgrid::s4u::ActorPtr Task::Execute(simgrid::s4u::VirtualMachine* vm) {
-    simgrid::s4u::ActorPtr actor = simgrid::s4u::Actor::create("compute", vm, DoExecute, Flops, Name);
+simgrid::s4u::ActorPtr Task::Execute(simgrid::s4u::VirtualMachine* vm,
+                                     const std::function<void(int, void*)>& actorFinishFunction,
+                                     void* context) {
+    simgrid::s4u::ActorPtr actor = simgrid::s4u::Actor::create("compute", vm, DoExecute, Flops, Name, actorFinishFunction, context);
     actor->set_property("size", std::to_string(Flops));
     return actor;
 }

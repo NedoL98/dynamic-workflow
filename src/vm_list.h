@@ -1,9 +1,9 @@
 #pragma once
 
+#include <simgrid/s4u.hpp>
 #include <string>
 #include <vector>
 #include "spec.h"
-
 
 class VMList {
 public:
@@ -16,6 +16,8 @@ public:
     std::vector<VMDescription>::const_iterator end() const { return VMs.end(); };
 
     int Size() { return VMs.size(); };
+
+    simgrid::s4u::VirtualMachine* GetVMInstance(const std::string& taskName, int vmId) const;
 
 private:
     std::vector<VMDescription> VMs;

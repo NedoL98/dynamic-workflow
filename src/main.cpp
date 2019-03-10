@@ -13,6 +13,7 @@
 
 #include "argument_parser.h"
 #include "platform_generator.h"
+#include "schedulers/naive_scheduler.h"
 #include "schedulers/mao_scheduler.h"
 #include "vm_list.h"
 

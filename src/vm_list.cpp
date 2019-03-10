@@ -1,7 +1,7 @@
 #include "vm_list.h"
 
 #include "common/common.h"
-#include <simgrid/s4u.hpp>
+#include <simgrid/s4u/VirtualMachine.hpp>
 #include <yaml-cpp/yaml.h>
 
 using std::string;
@@ -62,6 +62,20 @@ bool VMDescription::operator <=(const VMDescription& other) const {
 
 bool VMDescription::operator >=(const VMDescription& other) const {
     return !(*this < other);
+}
+
+simgrid::s4u::VirtualMachine* VMList::GetVMInstance(const string& taskName, int vmId) const {
+    VMDescription currentVM = VMs[vmId];
+    int cores = currentVM.GetCores();
+    double memory = currentVM.GetMemory();
+
+    static int hostId = 0;
+    simgrid::s4u::Engine *e = simgrid::s4u::Engine::get_instance();
+    simgrid::s4u::Host* host = e->get_all_hosts()[hostId];
+    ++hostId;
+
+    simgrid::s4u::VirtualMachine* vm = new simgrid::s4u::VirtualMachine(taskName + "_VM", host, cores, memory);
+    return vm;
 }
 
 VMList::VMList(const string& vmConfig) {

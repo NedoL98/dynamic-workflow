@@ -222,9 +222,19 @@ vector<vector<LoadVectorEvent>> MaoScheduler::GetLoadVector(const map<string, pa
     for (const auto& [taskName, deadline]: deadlines) {
         double runTime = Workflow.Tasks.at(taskName)->GetSize() / taskVM.at(taskName).GetFlops();
         double consumptionRatio = runTime / (deadline.second - deadline.first);
-        loadVector[taskVM.at(taskName).GetId()].push_back({consumptionRatio, deadline.first, deadline.second});
+        int vmId = taskVM.at(taskName).GetId();
+        loadVector[vmId].push_back({consumptionRatio, deadline.first, deadline.second, taskName, vmId});
     }
     return loadVector;
+}
+
+void MaoScheduler::ActorFinish(void* data) {
+    XBT_INFO("It works!");
+}
+
+void MaoScheduler::ActorFinishCallback(int, void* this_pointer) {
+    MaoScheduler* self = static_cast<MaoScheduler*>(this_pointer);
+    self->ActorFinish(self);
 }
 
 void MaoScheduler::ProcessTasksGraph() {
@@ -249,4 +259,27 @@ void MaoScheduler::ProcessTasksGraph() {
     map<string, pair<double, double>> deadlines = CalculateDeadlines(taskOrder, taskVM);
 
     vector<vector<LoadVectorEvent>> loadVector = GetLoadVector(deadlines, taskVM);
+
+    vector<LoadVectorEvent> sortedEvents;
+    for (const auto& vmLoadVector: loadVector) {
+        sortedEvents.insert(sortedEvents.end(), vmLoadVector.begin(), vmLoadVector.end());
+    }
+    std::sort(sortedEvents.begin(), sortedEvents.end(), [](const auto& a, const auto& b) {
+        return a.End < b.End;
+    });
+    
+    for (const auto& event: sortedEvents) {
+        std::cout << event.Begin << " " << event.End << " " << event.VMId << std::endl;
+    }
+
+    map<string, simgrid::s4u::ActorPtr> actorPointers;
+
+    double time = 0;
+
+    for (int i = 0; i < 5; ++i) {
+        VMDescription currentVMDescription = taskVM.at(sortedEvents[i].TaskName);
+        simgrid::s4u::VirtualMachine* currentVMInstance = vmList.GetVMInstance(sortedEvents[i].TaskName, currentVMDescription.GetId());
+        Workflow.Tasks.at(sortedEvents[i].TaskName)->Execute(currentVMInstance, ActorFinishCallback, this);
+        XBT_INFO("%d task finished!", i);
+    }
 }

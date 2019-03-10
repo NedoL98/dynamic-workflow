@@ -30,7 +30,8 @@ void NaiveScheduler::ProcessTasksGraph() {
             for (simgrid::s4u::Host* host: hosts) {
                 if (task->CanExecute(host)) {
                     vmPointers[task->GetName()] = task->MakeVirtualMachine(host);
-                    actorPointers[task->GetName()] = task->Execute(vmPointers[task->GetName()]);
+                    auto dummy = [](int, void*){};
+                    actorPointers[task->GetName()] = task->Execute(vmPointers[task->GetName()], dummy, nullptr);
                     processingTasks.insert(task->GetName());       
                     break;
                 }
