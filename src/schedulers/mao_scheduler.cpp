@@ -6,6 +6,7 @@ using std::map;
 using std::max;
 using std::pair;
 using std::queue;
+using std::set;
 using std::shared_ptr;
 using std::string;
 using std::vector;
@@ -229,7 +230,7 @@ vector<vector<LoadVectorEvent>> MaoScheduler::GetLoadVector(const map<string, pa
 }
 
 void MaoScheduler::ActorFinish(void* data) {
-    XBT_INFO("It works!");
+    // XBT_INFO("It works!");
 }
 
 void MaoScheduler::ActorFinishCallback(int, void* this_pointer) {
@@ -267,19 +268,26 @@ void MaoScheduler::ProcessTasksGraph() {
     std::sort(sortedEvents.begin(), sortedEvents.end(), [](const auto& a, const auto& b) {
         return a.End < b.End;
     });
-    
-    for (const auto& event: sortedEvents) {
-        std::cout << event.Begin << " " << event.End << " " << event.VMId << std::endl;
-    }
 
     map<string, simgrid::s4u::ActorPtr> actorPointers;
+    set<string> processingTasks;
 
-    double time = 0;
+    for (const LoadVectorEvent& event: sortedEvents) {
+        shared_ptr<Task> task = Workflow.Tasks.at(event.TaskName);
 
-    for (int i = 0; i < 5; ++i) {
-        VMDescription currentVMDescription = taskVM.at(sortedEvents[i].TaskName);
-        simgrid::s4u::VirtualMachine* currentVMInstance = vmList.GetVMInstance(sortedEvents[i].TaskName, currentVMDescription.GetId());
-        Workflow.Tasks.at(sortedEvents[i].TaskName)->Execute(currentVMInstance, ActorFinishCallback, this);
-        XBT_INFO("%d task finished!", i);
+        for (string input: task->GetInputs()) {
+            Workflow.Tasks[input]->Finish(actorPointers[input]);
+            processingTasks.erase(input);
+        }
+
+        XBT_INFO("Scheduling task %s", task->GetName().c_str());
+
+        // we should reshedule task if its deadline can't be reached
+        VMDescription currentVMDescription = taskVM.at(task->GetName());
+        simgrid::s4u::VirtualMachine* currentVMInstance = vmList.GetVMInstance(task->GetName(), currentVMDescription.GetId());
+        actorPointers[task->GetName()] = task->Execute(currentVMInstance, ActorFinishCallback, this);
+        processingTasks.insert(task->GetName());
     }
+
+    XBT_INFO("Workflow processed!");
 }
