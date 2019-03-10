@@ -19,6 +19,9 @@ public:
 
     simgrid::s4u::VirtualMachine* GetVMInstance(const std::string& taskName, int vmId) const;
 
+    int MaxCores() const;
+    double MaxMemory() const;
+
 private:
     std::vector<VMDescription> VMs;
 };

@@ -78,6 +78,20 @@ simgrid::s4u::VirtualMachine* VMList::GetVMInstance(const string& taskName, int 
     return vm;
 }
 
+int VMList::MaxCores() const {
+    return std::max_element(VMs.begin(), VMs.end(), 
+        [] (const auto& lhs, const auto& rhs) {
+            return lhs.GetCores() < rhs.GetCores();
+        })->GetCores();
+}
+
+double VMList::MaxMemory() const {
+    return std::max_element(VMs.begin(), VMs.end(), 
+        [] (const auto& lhs, const auto& rhs) {
+            return lhs.GetMemory() < rhs.GetMemory();
+        })->GetMemory();
+}
+
 VMList::VMList(const string& vmConfig) {
     XBT_INFO("Loading VM list from %s", vmConfig.c_str());
     YAML::Node vmList = YAML::LoadFile(vmConfig);

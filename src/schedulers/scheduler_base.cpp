@@ -4,6 +4,7 @@
 
 #include "scheduler_base.h"
 
+using std::max;
 using std::string;
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(scheduler, "Scheduler log");
@@ -20,8 +21,8 @@ BaseScheduler::BaseScheduler(const string& workflowPath, const string& vmListPat
 
 void BaseScheduler::GetMaxParams(int& hostCnt, int& maxCoresCnt, double& maxMemory) {
     hostCnt = Workflow.Size();
-    maxCoresCnt = Workflow.MaxCores();
-    maxMemory = Workflow.MaxMemory();
+    maxCoresCnt = max(Workflow.MaxCores(), vmList.MaxCores());
+    maxMemory = max(Workflow.MaxMemory(), vmList.MaxMemory());
 }
 
 void BaseScheduler::operator()() {
