@@ -70,9 +70,22 @@ simgrid::s4u::VirtualMachine* VMList::GetVMInstance(const string& taskName, int 
     double memory = currentVM.GetMemory();
 
     static int hostId = 0;
+    string hostIdStr = std::to_string(hostId);
+
     simgrid::s4u::Engine *e = simgrid::s4u::Engine::get_instance();
-    simgrid::s4u::Host* host = e->get_all_hosts()[hostId];
+    simgrid::s4u::Host* host = nullptr;
+    std::vector<simgrid::s4u::Host*> allHosts = e->get_all_hosts();
+    
+    for (simgrid::s4u::Host* curHost: allHosts) {
+        if (curHost->get_name() == "host" + hostIdStr) {
+            host = curHost;
+            break;
+        }
+    }
+    xbt_assert(host != nullptr, "Appropriate host for running the task not found!");
     ++hostId;
+
+    XBT_INFO("Host found: %s", host->get_cname());
 
     simgrid::s4u::VirtualMachine* vm = new simgrid::s4u::VirtualMachine(taskName + "_VM", host, cores, memory);
     return vm;
