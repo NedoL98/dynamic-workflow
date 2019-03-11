@@ -200,15 +200,14 @@ void Task::ConsolidateTask(const Task& other) {
 }
 
 void Task::Finish(simgrid::s4u::ActorPtr vmPtr) {
-    if (Host == nullptr) {
-        if (!Done) {
-            XBT_WARN("Trying to finish task %s, but it is not computing on any host!", Name.c_str());
-        }
+    if (Done) {
         return;
     }
     vmPtr->join();
-    Host->set_property("cores", std::to_string(std::stoi(Host->get_property("cores")) + Cores));
-    Host->set_property("memory", std::to_string(std::stod(Host->get_property("memory")) + Memory));
-    Host = nullptr;
+    if (Host) {
+        Host->set_property("cores", std::to_string(std::stoi(Host->get_property("cores")) + Cores));
+        Host->set_property("memory", std::to_string(std::stod(Host->get_property("memory")) + Memory));
+        Host = nullptr;
+    }
     Done = true;
 }

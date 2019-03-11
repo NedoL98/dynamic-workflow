@@ -276,8 +276,10 @@ void MaoScheduler::ProcessTasksGraph() {
         shared_ptr<Task> task = Workflow.Tasks.at(event.TaskName);
 
         for (string input: task->GetInputs()) {
-            Workflow.Tasks[input]->Finish(actorPointers[input]);
-            processingTasks.erase(input);
+            if (processingTasks.count(input)) {
+                Workflow.Tasks[input]->Finish(actorPointers[input]);
+                processingTasks.erase(input);
+            }
         }
 
         XBT_INFO("Scheduling task %s", task->GetName().c_str());
