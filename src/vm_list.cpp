@@ -107,10 +107,10 @@ double VMList::MaxMemory() const {
 
 VMList::VMList(const string& vmConfig) {
     XBT_INFO("Loading VM list from %s", vmConfig.c_str());
-    YAML::Node vmList = YAML::LoadFile(vmConfig);
+    YAML::Node VMList_ = YAML::LoadFile(vmConfig);
 
     int id = 0;
-    for (const YAML::Node& vmDescription: vmList) {
+    for (const YAML::Node& vmDescription: VMList_) {
         int cores = vmDescription["cpu"].as<int>();
         double memory = ParseSize(vmDescription["memory"].as<string>(), SizeSuffixes);
         double flops = ParseSize(vmDescription["speed"].as<string>(), PerformanceSuffixes);

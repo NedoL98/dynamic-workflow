@@ -17,6 +17,6 @@ public:
     void operator()();
 
 protected:
-    VMList vmList;
+    VMList VMList_;
     TasksGraph Workflow;
 };

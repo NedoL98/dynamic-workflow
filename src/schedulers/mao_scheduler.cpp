@@ -70,7 +70,7 @@ void MaoScheduler::ReduceMakespan(map<string, VMDescription>& taskVM,
         shared_ptr<Task> task = elem.second;
         VMDescription oldVM = taskVM.at(taskName); 
         VMDescription newVM = taskVM.at(taskName);
-        for (const auto& vm: vmList) {
+        for (const auto& vm: VMList_) {
             if (task->CanExecute(vm) && vm > oldVM && (newVM == oldVM || vm.GetPrice() <= newVM.GetPrice())) {
                 newVM = vm;
             }
@@ -219,7 +219,7 @@ map<string, pair<double, double>> MaoScheduler::CalculateDeadlines(const vector<
 
 vector<vector<LoadVectorEvent>> MaoScheduler::GetLoadVector(const map<string, pair<double, double>>& deadlines,
                                                             const map<string, VMDescription>& taskVM) {
-    vector<vector<LoadVectorEvent>> loadVector(vmList.Size());
+    vector<vector<LoadVectorEvent>> loadVector(VMList_.Size());
     for (const auto& [taskName, deadline]: deadlines) {
         double runTime = Workflow.Tasks.at(taskName)->GetSize() / taskVM.at(taskName).GetFlops();
         double consumptionRatio = runTime / (deadline.second - deadline.first);
@@ -239,7 +239,7 @@ void MaoScheduler::ActorFinishCallback(int, void* this_pointer) {
 }
 
 void MaoScheduler::ProcessTasksGraph() {
-    map<string, VMDescription> taskVM = Workflow.GetCheapestVMs(vmList);
+    map<string, VMDescription> taskVM = Workflow.GetCheapestVMs(VMList_);
 
     TasksBundling(taskVM);
 
@@ -286,7 +286,7 @@ void MaoScheduler::ProcessTasksGraph() {
 
         // we should reshedule task if its deadline can't be reached
         VMDescription currentVMDescription = taskVM.at(task->GetName());
-        simgrid::s4u::VirtualMachine* currentVMInstance = vmList.GetVMInstance(task->GetName(), currentVMDescription.GetId());
+        simgrid::s4u::VirtualMachine* currentVMInstance = VMList_.GetVMInstance(task->GetName(), currentVMDescription.GetId());
         actorPointers[task->GetName()] = task->Execute(currentVMInstance, ActorFinishCallback, this);
         processingTasks.insert(task->GetName());
     }

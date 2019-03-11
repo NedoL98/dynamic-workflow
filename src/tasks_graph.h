@@ -30,7 +30,7 @@ public:
     int MaxCores() const;
     double MaxMemory() const;
 
-    std::map<std::string, VMDescription> GetCheapestVMs(const VMList& vmList) const;
+    std::map<std::string, VMDescription> GetCheapestVMs(const VMList& VMList_) const;
 
     int GetInputDegree(const std::string& taskName) const;
     int GetOutputDegree(const std::string& taskName) const;

@@ -165,11 +165,11 @@ double TasksGraph::MaxMemory() const {
         })->second->GetMemory();
 }
 
-std::map<std::string, VMDescription> TasksGraph::GetCheapestVMs(const VMList& vmList) const {
+std::map<std::string, VMDescription> TasksGraph::GetCheapestVMs(const VMList& VMList_) const {
     std::map<std::string, VMDescription> cheapestVM;
     for (const auto& elem: Tasks) {
         int bestPrice = -1;
-        for (VMDescription vmDescr: vmList) {
+        for (VMDescription vmDescr: VMList_) {
             if (elem.second->CanExecute(vmDescr) && (bestPrice == -1 || vmDescr.GetPrice() < bestPrice)) {
                 bestPrice = vmDescr.GetPrice();
                 cheapestVM.insert({elem.first, vmDescr});

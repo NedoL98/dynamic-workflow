@@ -15,14 +15,14 @@ BaseScheduler::BaseScheduler(const string& workflowPath, const string& vmListPat
     XBT_INFO("Tasks graph loaded");
 
     XBT_INFO("Loading VM list...");
-    vmList = VMList(vmListPath);
+    VMList_ = VMList(vmListPath);
     XBT_INFO("VM list loaded");
 }
 
 void BaseScheduler::GetMaxParams(int& hostCnt, int& maxCoresCnt, double& maxMemory) {
     hostCnt = Workflow.Size();
-    maxCoresCnt = max(Workflow.MaxCores(), vmList.MaxCores());
-    maxMemory = max(Workflow.MaxMemory(), vmList.MaxMemory());
+    maxCoresCnt = max(Workflow.MaxCores(), VMList_.MaxCores());
+    maxMemory = max(Workflow.MaxMemory(), VMList_.MaxMemory());
 }
 
 void BaseScheduler::operator()() {
