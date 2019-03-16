@@ -15,4 +15,3 @@ AbstractPlatform::AbstractPlatform(const std::string& platformConfig) {
         HostsList.emplace_back(h, spec);
     }
 }
-

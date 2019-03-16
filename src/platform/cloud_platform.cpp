@@ -14,22 +14,31 @@ namespace {
     }
 }
 
-bool CloudPlatform::CreateVM(int hostId, const ComputeSpec& s, int& id) {
-    if (HostsList[hostId].CreateVM(s) == -1) {
+bool CloudPlatform::CreateVM(int hostId, const ComputeSpec& s, int id) {
+    if (VirtualMachines.count(id)) {
         return false;
     }
-    id = VirtualMachines.size();
-    VirtualMachines.push_back(HostsList[hostId].VirtualMachines.back());
-    VirtualMachineSpecs.push_back(s);
+    if (HostsList[hostId].CreateVM(s, id) == -1) {
+        return false;
+    }
+    VirtualMachines[id] = HostsList[hostId].VirtualMachines[id];
+    VirtualMachineSpecs[id] = s;
+    return true;
+}
+
+bool CloudPlatform::CheckTask(int vmId, const TaskSpec& requirements) {
+    if (!VirtualMachines.count(vmId)) {
+        return false; 
+    }
+    if (VirtualMachineSpecs[vmId].Cores < requirements.Cores || 
+        VirtualMachineSpecs[vmId].Memory < requirements.Memory) {
+        return false;
+    }
     return true;
 }
 
 simgrid::s4u::ActorPtr CloudPlatform::AssignTask(int vmId, const TaskSpec& requirements) {
-    if (vmId < 0 || vmId >= VirtualMachines.size()) {
-        return nullptr;
-    }
-    if (VirtualMachineSpecs[vmId].Cores < requirements.Cores || 
-        VirtualMachineSpecs[vmId].Memory < requirements.Memory) {
+    if (!CheckTask(vmId, requirements)) {
         return nullptr;
     }
     simgrid::s4u::ActorPtr result = simgrid::s4u::Actor::create("compute", VirtualMachines[vmId], DoExecute, requirements.Cost);
@@ -38,3 +47,11 @@ simgrid::s4u::ActorPtr CloudPlatform::AssignTask(int vmId, const TaskSpec& requi
     return result;
 }
 
+int CloudPlatform::GetEmptyHost(const ComputeSpec& s) {
+    for (const auto& host : HostsList) {
+        if (host.VirtualMachines.empty() && host.Spec == s) {
+            return host.Id;
+        }
+    }
+    return -1;
+}

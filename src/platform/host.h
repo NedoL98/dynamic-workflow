@@ -9,8 +9,8 @@
 #include <simgrid/s4u/VirtualMachine.hpp>
 
 struct Host {
-    typedef std::vector<simgrid::s4u::VirtualMachine* > VMs;
-    typedef std::vector<simgrid::s4u::ActorPtr> ActorPointers;
+    typedef std::map<int, simgrid::s4u::VirtualMachine* > VMs;
+    typedef std::map<int, simgrid::s4u::ActorPtr> ActorPointers;
 
     VMs VirtualMachines;
     ActorPointers Actors;
@@ -22,5 +22,5 @@ struct Host {
 
     Host(simgrid::s4u::Host *host, const ComputeSpec& c);
     
-    int CreateVM(const ComputeSpec& c);
+    bool CreateVM(const ComputeSpec& c, int CustomId);
 };

@@ -2,6 +2,9 @@
 struct ComputeSpec {
     long long Memory, Speed;
     int Cores;
+    bool operator ==(const ComputeSpec& other) const {
+        return Memory == other.Memory && Speed == other.Speed && Cores == other.Cores;
+    }
 };
 
 struct TaskSpec {
@@ -19,6 +22,7 @@ public:
     double GetMemory() const;
     double GetFlops() const;
     int GetPrice() const;
+    ComputeSpec GetSpec() const;
 
     bool operator ==(const VMDescription& other) const;
     bool operator !=(const VMDescription& other) const;

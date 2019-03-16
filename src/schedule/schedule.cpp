@@ -70,8 +70,7 @@ bool HostSchedule::IsEmpty() const {
 }
 
 
-Schedule::Schedule(int hostsCount):
-    TimeTable(hostsCount)
+Schedule::Schedule()
     {}
 
 void Schedule::AddItem(int host, const ScheduleItem& item) {

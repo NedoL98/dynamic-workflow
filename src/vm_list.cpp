@@ -37,6 +37,10 @@ int VMDescription::GetPrice() const {
     return Price;
 }
 
+ComputeSpec VMDescription::GetSpec() const {
+    return ComputeSpec({Memory, Flops, Cores});
+}
+
 bool VMDescription::operator ==(const VMDescription& other) const {
     return Cores == other.Cores &&
            Memory == other.Memory &&

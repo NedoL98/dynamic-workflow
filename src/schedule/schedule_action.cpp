@@ -26,7 +26,7 @@ ActionType ResetScheduleAction::GetActionType() const {
 }
 
 void BuyVMAction::MakeAction(SimulatorInterface& interface) {
-    interface.RegisterVirtualMachine(Spec);
+    interface.RegisterVirtualMachine(Spec, CustomId);
 }
 
 ActionType BuyVMAction::GetActionType() const {

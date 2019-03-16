@@ -13,13 +13,17 @@ Host::Host(simgrid::s4u::Host *host, const ComputeSpec& c):
     Id = GetUniqueHostId();
 }
 
-int Host::CreateVM(const ComputeSpec& c) {
+bool Host::CreateVM(const ComputeSpec& c, int CustomId) {
+    if (VirtualMachines.count(CustomId)) {
+        return false;
+    }
     if (AvailiableCores < c.Cores || AvailiableMemory < c.Memory) {
-        return -1;
+        return false;
     }
     simgrid::s4u::VirtualMachine* vm = new simgrid::s4u::VirtualMachine(std::to_string(Id) + std::to_string(VirtualMachines.size()) + "_VM", Unit, c.Cores, c.Memory);
+    vm->set_property("VM_ID", std::to_string(CustomId));
     AvailiableCores -= c.Cores;
     AvailiableMemory -= c.Memory;
-    VirtualMachines.emplace_back(vm);
-    return VirtualMachines.size() - 1;
+    VirtualMachines[CustomId] = vm;
+    return true;
 }

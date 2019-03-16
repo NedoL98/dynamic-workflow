@@ -20,7 +20,7 @@ public:
         AvailiableVMs(VMListConf),
         Platform(platformConf),
         Scheduler(nullptr),
-        Assignments(0)
+        Assignments()
         {}
     
     void RegisterScheduler(AbstractScheduler* s) {
@@ -30,7 +30,19 @@ public:
     void ProcessAction(std::shared_ptr<AbstractAction> a) {
         a->MakeAction(*this);
     }
+    
+    void SendEvent(AbstractEvent *event) {
+        if ((TaskFinishedEvent *)event) {
+            Scheduler->OnTaskComplete(*(TaskFinishedEvent *)event);
+        } else if ((ActionCompletedEvent *)event) {
+            Scheduler->OnActionComplete(*(ActionCompletedEvent *)event);
+        }
+    }
 
     void Run(double timeout=0);   
+    virtual bool RegisterVirtualMachine(const VMDescription &stats, int customId) override;
+    virtual bool AssignTask(int hostId, const ScheduleItem &item) override;
+    virtual bool CancelTask(int hostId, const ScheduleItem &item) override;
+    virtual bool ResetSchedule(const Schedule& s) override;
     friend class View::Viewer;
 };

@@ -37,6 +37,9 @@ public:
 
 class BuyVMAction : AbstractAction {
     VMDescription Spec;
+    int CustomId;
+
+public:
     BuyVMAction(VMDescription s):
         Spec(s)
         {}

@@ -1,9 +1,9 @@
 #pragma once
 
 #include <queue>
-#include <vector>
+#include <map>
 using std::queue;
-using std::vector;
+using std::map;
 
 
 class ScheduleItem {
@@ -35,10 +35,10 @@ public:
 };
 
 class Schedule {
-    vector<HostSchedule> TimeTable;
+    map<int, HostSchedule> TimeTable;
 
 public:
-    Schedule(int hostsCount);
+    Schedule();
     void AddItem(int host, const ScheduleItem& item);
     ScheduleItem GetItem(int host);
     ScheduleItem PopItem(int host);
