@@ -5,7 +5,7 @@
 
 void CloudSimulator::Run(double timeout) {
     View::Viewer v(*this);
-    std::vector<std::shared_ptr<AbstractAction>> actions = Scheduler->PrepareForRun(&v);
+    std::vector<std::shared_ptr<AbstractAction>> actions = Scheduler->PrepareForRun(v);
     for (auto a : actions) {
         ProcessAction(a);
     }

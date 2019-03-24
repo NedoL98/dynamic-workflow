@@ -10,10 +10,11 @@ namespace View {
 }
 
 class AbstractScheduler {
+protected:
     std::shared_ptr<View::Viewer> viewer;
 public:
     typedef std::vector<std::shared_ptr<AbstractAction> > Actions;
-    virtual Actions PrepareForRun(View::Viewer *v) = 0;
+    virtual Actions PrepareForRun(View::Viewer& v) = 0;
     virtual Actions OnTaskComplete(const TaskFinishedEvent &e) = 0;
     virtual Actions OnTaskFail(const TaskFinishedEvent &e) = 0;
     virtual Actions OnActionComplete(const ActionCompletedEvent &event) = 0;

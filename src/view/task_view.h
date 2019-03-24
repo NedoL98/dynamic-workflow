@@ -19,6 +19,10 @@ namespace View {
             id = GetUniqueTaskId();
         }
 
+        const int GetId() const {
+            return id;
+        }
+
         const std::vector<Task>& GetDependencies() const {
             return Dependencies;
         }
