@@ -1,5 +1,3 @@
 #include "schedulers/scheduler_base.h"
 
-using std::string;
-
-string GeneratePlatform(BaseScheduler& scheduler);
+std::string GeneratePlatform(const std::string& workflowPath, const std::string& vmListPath);

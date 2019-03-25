@@ -16,10 +16,13 @@ class CloudSimulator : public SimulatorInterface {
     Schedule Assignments;
 
 public:
-    CloudSimulator(const std::string& platformConf, const std::string& workflowConf, const std::string& VMListConf):
+    CloudSimulator(const std::string& platformConf, 
+                   const std::string& workflowConf, 
+                   const std::string& VMListConf,
+                   AbstractScheduler* scheduler):
         AvailiableVMs(VMListConf),
         Platform(platformConf),
-        Scheduler(nullptr),
+        Scheduler(scheduler),
         Assignments()
         {}
     

@@ -13,28 +13,39 @@
 
 #include "argument_parser.h"
 #include "platform_generator.h"
-#include "schedulers/naive_scheduler.h"
+#include "prototypes/simulator.h"
 #include "schedulers/mao_scheduler.h"
 #include "vm_list.h"
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(main, "Main log");
 
+using std::string;
+
 int main(int argc, char* argv[]) {
     cxxopts::ParseResult parseResult = ParseArguments(argc, argv);
-
-    // Load tasks graph description
-    MaoScheduler scheduler = MaoScheduler(parseResult["workflow"].as<string>(), parseResult["vm_list"].as<string>());
 
     // Make suitable platform for workflow
     string platformPath;
     if (!parseResult.count("platform")) {
-        platformPath = GeneratePlatform(scheduler);
+        platformPath = GeneratePlatform(parseResult["workflow"].as<string>(), parseResult["vm_list"].as<string>());
     } else {
         platformPath = parseResult["platform"].as<string>();
     }
 
+    // Load tasks graph description
+    // MaoScheduler scheduler = MaoScheduler(parseResult["workflow"].as<string>(), parseResult["vm_list"].as<string>());
+
     simgrid::s4u::Engine e(&argc, argv);
 
+    MaoScheduler dummy;
+
+    CloudSimulator cloudSim(platformPath,
+                            parseResult["workflow"].as<string>(),
+                            parseResult["vm_list"].as<string>(),
+                            &dummy);
+
+    cloudSim.Run();
+    /*
     // Load the platform description
     e.load_platform(platformPath);
     XBT_INFO("Platform file loaded");
@@ -54,4 +65,5 @@ int main(int argc, char* argv[]) {
     if (!parseResult.count("platform") && parseResult["save_platform"].as<bool>() == false) {
         remove(platformPath.c_str());
     }
+    */
 }

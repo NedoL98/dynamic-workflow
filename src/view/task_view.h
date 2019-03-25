@@ -19,7 +19,7 @@ namespace View {
             id = GetUniqueTaskId();
         }
 
-        const int GetId() const {
+        int GetId() const {
             return id;
         }
 

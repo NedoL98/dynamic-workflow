@@ -1,0 +1,818 @@
+<?xml version='1.0'?>
+<!DOCTYPE platform SYSTEM "http://simgrid.gforge.inria.fr/simgrid/simgrid.dtd">
+<platform version="4.1">
+  <AS id="AS0" routing="Floyd">
+  <host id="master" core="1" speed="1.000000Gf"/>
+  <host id="host0" core="2" speed="1.000000Gf"/>
+  <host id="host1" core="2" speed="1.000000Gf"/>
+  <host id="host2" core="2" speed="1.000000Gf"/>
+  <host id="host3" core="2" speed="1.000000Gf"/>
+  <host id="host4" core="2" speed="1.000000Gf"/>
+  <host id="host5" core="2" speed="1.000000Gf"/>
+  <host id="host6" core="2" speed="1.000000Gf"/>
+  <host id="host7" core="2" speed="1.000000Gf"/>
+  <host id="host8" core="2" speed="1.000000Gf"/>
+  <host id="host9" core="2" speed="1.000000Gf"/>
+  <host id="host10" core="2" speed="1.000000Gf"/>
+  <host id="host11" core="2" speed="1.000000Gf"/>
+  <host id="host12" core="2" speed="1.000000Gf"/>
+  <host id="host13" core="2" speed="1.000000Gf"/>
+  <host id="host14" core="2" speed="1.000000Gf"/>
+  <host id="host15" core="2" speed="1.000000Gf"/>
+  <host id="host16" core="2" speed="1.000000Gf"/>
+  <host id="host17" core="2" speed="1.000000Gf"/>
+  <host id="host18" core="2" speed="1.000000Gf"/>
+  <host id="host19" core="2" speed="1.000000Gf"/>
+  <host id="host20" core="2" speed="1.000000Gf"/>
+  <host id="host21" core="2" speed="1.000000Gf"/>
+  <host id="host22" core="2" speed="1.000000Gf"/>
+  <host id="host23" core="2" speed="1.000000Gf"/>
+  <host id="host24" core="2" speed="1.000000Gf"/>
+  <host id="host25" core="2" speed="1.000000Gf"/>
+  <host id="host26" core="2" speed="1.000000Gf"/>
+  <host id="host27" core="2" speed="1.000000Gf"/>
+  <host id="host28" core="2" speed="1.000000Gf"/>
+  <host id="host29" core="2" speed="1.000000Gf"/>
+  <host id="host30" core="2" speed="1.000000Gf"/>
+  <host id="host31" core="2" speed="1.000000Gf"/>
+  <host id="host32" core="2" speed="1.000000Gf"/>
+  <host id="host33" core="2" speed="1.000000Gf"/>
+  <host id="host34" core="2" speed="1.000000Gf"/>
+  <host id="host35" core="2" speed="1.000000Gf"/>
+  <host id="host36" core="2" speed="1.000000Gf"/>
+  <host id="host37" core="2" speed="1.000000Gf"/>
+  <host id="host38" core="2" speed="1.000000Gf"/>
+  <host id="host39" core="2" speed="1.000000Gf"/>
+  <host id="host40" core="2" speed="1.000000Gf"/>
+  <host id="host41" core="2" speed="1.000000Gf"/>
+  <host id="host42" core="2" speed="1.000000Gf"/>
+  <host id="host43" core="2" speed="1.000000Gf"/>
+  <host id="host44" core="2" speed="1.000000Gf"/>
+  <host id="host45" core="2" speed="1.000000Gf"/>
+  <host id="host46" core="2" speed="1.000000Gf"/>
+  <host id="host47" core="2" speed="1.000000Gf"/>
+  <host id="host48" core="2" speed="1.000000Gf"/>
+  <host id="host49" core="2" speed="1.000000Gf"/>
+  <host id="host50" core="2" speed="1.000000Gf"/>
+  <host id="host51" core="2" speed="1.000000Gf"/>
+  <host id="host52" core="2" speed="1.000000Gf"/>
+  <host id="host53" core="2" speed="1.000000Gf"/>
+  <host id="host54" core="2" speed="1.000000Gf"/>
+  <host id="host55" core="2" speed="1.000000Gf"/>
+  <host id="host56" core="2" speed="1.000000Gf"/>
+  <host id="host57" core="2" speed="1.000000Gf"/>
+  <host id="host58" core="2" speed="1.000000Gf"/>
+  <host id="host59" core="2" speed="1.000000Gf"/>
+  <host id="host60" core="2" speed="1.000000Gf"/>
+  <host id="host61" core="2" speed="1.000000Gf"/>
+  <host id="host62" core="2" speed="1.000000Gf"/>
+  <host id="host63" core="2" speed="1.000000Gf"/>
+  <host id="host64" core="2" speed="1.000000Gf"/>
+  <host id="host65" core="2" speed="1.000000Gf"/>
+  <host id="host66" core="2" speed="1.000000Gf"/>
+  <host id="host67" core="2" speed="1.000000Gf"/>
+  <host id="host68" core="2" speed="1.000000Gf"/>
+  <host id="host69" core="2" speed="1.000000Gf"/>
+  <host id="host70" core="2" speed="1.000000Gf"/>
+  <host id="host71" core="2" speed="1.000000Gf"/>
+  <host id="host72" core="2" speed="1.000000Gf"/>
+  <host id="host73" core="2" speed="1.000000Gf"/>
+  <host id="host74" core="2" speed="1.000000Gf"/>
+  <host id="host75" core="2" speed="1.000000Gf"/>
+  <host id="host76" core="2" speed="1.000000Gf"/>
+  <host id="host77" core="2" speed="1.000000Gf"/>
+  <host id="host78" core="2" speed="1.000000Gf"/>
+  <host id="host79" core="2" speed="1.000000Gf"/>
+  <host id="host80" core="2" speed="1.000000Gf"/>
+  <host id="host81" core="2" speed="1.000000Gf"/>
+  <host id="host82" core="2" speed="1.000000Gf"/>
+  <host id="host83" core="2" speed="1.000000Gf"/>
+  <host id="host84" core="2" speed="1.000000Gf"/>
+  <host id="host85" core="2" speed="1.000000Gf"/>
+  <host id="host86" core="2" speed="1.000000Gf"/>
+  <host id="host87" core="2" speed="1.000000Gf"/>
+  <host id="host88" core="2" speed="1.000000Gf"/>
+  <host id="host89" core="2" speed="1.000000Gf"/>
+  <host id="host90" core="2" speed="1.000000Gf"/>
+  <host id="host91" core="2" speed="1.000000Gf"/>
+  <host id="host92" core="2" speed="1.000000Gf"/>
+  <host id="host93" core="2" speed="1.000000Gf"/>
+  <host id="host94" core="2" speed="1.000000Gf"/>
+  <host id="host95" core="2" speed="1.000000Gf"/>
+  <host id="host96" core="2" speed="1.000000Gf"/>
+  <host id="host97" core="2" speed="1.000000Gf"/>
+  <host id="host98" core="2" speed="1.000000Gf"/>
+  <host id="host99" core="2" speed="1.000000Gf"/>
+
+  <link id="link_loopback" bandwidth="5000.000000MBps" latency="1.000000us" sharing_policy="FATPIPE"/>
+  <link id="link_master" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link0" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link1" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link2" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link3" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link4" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link5" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link6" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link7" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link8" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link9" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link10" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link11" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link12" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link13" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link14" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link15" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link16" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link17" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link18" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link19" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link20" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link21" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link22" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link23" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link24" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link25" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link26" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link27" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link28" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link29" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link30" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link31" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link32" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link33" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link34" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link35" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link36" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link37" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link38" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link39" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link40" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link41" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link42" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link43" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link44" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link45" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link46" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link47" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link48" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link49" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link50" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link51" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link52" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link53" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link54" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link55" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link56" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link57" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link58" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link59" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link60" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link61" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link62" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link63" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link64" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link65" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link66" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link67" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link68" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link69" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link70" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link71" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link72" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link73" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link74" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link75" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link76" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link77" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link78" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link79" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link80" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link81" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link82" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link83" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link84" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link85" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link86" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link87" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link88" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link89" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link90" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link91" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link92" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link93" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link94" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link95" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link96" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link97" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link98" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+  <link id="link99" bandwidth="1.000000MBps" latency="1.000000us" sharing_policy="SHARED"/>
+
+  <router id="router"/>
+  <route src="master" dst="router" symmetrical="YES">
+    <link_ctn id="link_master"/>
+  </route>
+  <route src="master" dst="master" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host0" dst="router" symmetrical="YES">
+    <link_ctn id="link0"/>
+  </route>
+  <route src="host0" dst="host0" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host1" dst="router" symmetrical="YES">
+    <link_ctn id="link1"/>
+  </route>
+  <route src="host1" dst="host1" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host2" dst="router" symmetrical="YES">
+    <link_ctn id="link2"/>
+  </route>
+  <route src="host2" dst="host2" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host3" dst="router" symmetrical="YES">
+    <link_ctn id="link3"/>
+  </route>
+  <route src="host3" dst="host3" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host4" dst="router" symmetrical="YES">
+    <link_ctn id="link4"/>
+  </route>
+  <route src="host4" dst="host4" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host5" dst="router" symmetrical="YES">
+    <link_ctn id="link5"/>
+  </route>
+  <route src="host5" dst="host5" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host6" dst="router" symmetrical="YES">
+    <link_ctn id="link6"/>
+  </route>
+  <route src="host6" dst="host6" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host7" dst="router" symmetrical="YES">
+    <link_ctn id="link7"/>
+  </route>
+  <route src="host7" dst="host7" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host8" dst="router" symmetrical="YES">
+    <link_ctn id="link8"/>
+  </route>
+  <route src="host8" dst="host8" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host9" dst="router" symmetrical="YES">
+    <link_ctn id="link9"/>
+  </route>
+  <route src="host9" dst="host9" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host10" dst="router" symmetrical="YES">
+    <link_ctn id="link10"/>
+  </route>
+  <route src="host10" dst="host10" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host11" dst="router" symmetrical="YES">
+    <link_ctn id="link11"/>
+  </route>
+  <route src="host11" dst="host11" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host12" dst="router" symmetrical="YES">
+    <link_ctn id="link12"/>
+  </route>
+  <route src="host12" dst="host12" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host13" dst="router" symmetrical="YES">
+    <link_ctn id="link13"/>
+  </route>
+  <route src="host13" dst="host13" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host14" dst="router" symmetrical="YES">
+    <link_ctn id="link14"/>
+  </route>
+  <route src="host14" dst="host14" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host15" dst="router" symmetrical="YES">
+    <link_ctn id="link15"/>
+  </route>
+  <route src="host15" dst="host15" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host16" dst="router" symmetrical="YES">
+    <link_ctn id="link16"/>
+  </route>
+  <route src="host16" dst="host16" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host17" dst="router" symmetrical="YES">
+    <link_ctn id="link17"/>
+  </route>
+  <route src="host17" dst="host17" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host18" dst="router" symmetrical="YES">
+    <link_ctn id="link18"/>
+  </route>
+  <route src="host18" dst="host18" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host19" dst="router" symmetrical="YES">
+    <link_ctn id="link19"/>
+  </route>
+  <route src="host19" dst="host19" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host20" dst="router" symmetrical="YES">
+    <link_ctn id="link20"/>
+  </route>
+  <route src="host20" dst="host20" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host21" dst="router" symmetrical="YES">
+    <link_ctn id="link21"/>
+  </route>
+  <route src="host21" dst="host21" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host22" dst="router" symmetrical="YES">
+    <link_ctn id="link22"/>
+  </route>
+  <route src="host22" dst="host22" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host23" dst="router" symmetrical="YES">
+    <link_ctn id="link23"/>
+  </route>
+  <route src="host23" dst="host23" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host24" dst="router" symmetrical="YES">
+    <link_ctn id="link24"/>
+  </route>
+  <route src="host24" dst="host24" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host25" dst="router" symmetrical="YES">
+    <link_ctn id="link25"/>
+  </route>
+  <route src="host25" dst="host25" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host26" dst="router" symmetrical="YES">
+    <link_ctn id="link26"/>
+  </route>
+  <route src="host26" dst="host26" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host27" dst="router" symmetrical="YES">
+    <link_ctn id="link27"/>
+  </route>
+  <route src="host27" dst="host27" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host28" dst="router" symmetrical="YES">
+    <link_ctn id="link28"/>
+  </route>
+  <route src="host28" dst="host28" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host29" dst="router" symmetrical="YES">
+    <link_ctn id="link29"/>
+  </route>
+  <route src="host29" dst="host29" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host30" dst="router" symmetrical="YES">
+    <link_ctn id="link30"/>
+  </route>
+  <route src="host30" dst="host30" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host31" dst="router" symmetrical="YES">
+    <link_ctn id="link31"/>
+  </route>
+  <route src="host31" dst="host31" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host32" dst="router" symmetrical="YES">
+    <link_ctn id="link32"/>
+  </route>
+  <route src="host32" dst="host32" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host33" dst="router" symmetrical="YES">
+    <link_ctn id="link33"/>
+  </route>
+  <route src="host33" dst="host33" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host34" dst="router" symmetrical="YES">
+    <link_ctn id="link34"/>
+  </route>
+  <route src="host34" dst="host34" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host35" dst="router" symmetrical="YES">
+    <link_ctn id="link35"/>
+  </route>
+  <route src="host35" dst="host35" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host36" dst="router" symmetrical="YES">
+    <link_ctn id="link36"/>
+  </route>
+  <route src="host36" dst="host36" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host37" dst="router" symmetrical="YES">
+    <link_ctn id="link37"/>
+  </route>
+  <route src="host37" dst="host37" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host38" dst="router" symmetrical="YES">
+    <link_ctn id="link38"/>
+  </route>
+  <route src="host38" dst="host38" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host39" dst="router" symmetrical="YES">
+    <link_ctn id="link39"/>
+  </route>
+  <route src="host39" dst="host39" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host40" dst="router" symmetrical="YES">
+    <link_ctn id="link40"/>
+  </route>
+  <route src="host40" dst="host40" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host41" dst="router" symmetrical="YES">
+    <link_ctn id="link41"/>
+  </route>
+  <route src="host41" dst="host41" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host42" dst="router" symmetrical="YES">
+    <link_ctn id="link42"/>
+  </route>
+  <route src="host42" dst="host42" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host43" dst="router" symmetrical="YES">
+    <link_ctn id="link43"/>
+  </route>
+  <route src="host43" dst="host43" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host44" dst="router" symmetrical="YES">
+    <link_ctn id="link44"/>
+  </route>
+  <route src="host44" dst="host44" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host45" dst="router" symmetrical="YES">
+    <link_ctn id="link45"/>
+  </route>
+  <route src="host45" dst="host45" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host46" dst="router" symmetrical="YES">
+    <link_ctn id="link46"/>
+  </route>
+  <route src="host46" dst="host46" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host47" dst="router" symmetrical="YES">
+    <link_ctn id="link47"/>
+  </route>
+  <route src="host47" dst="host47" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host48" dst="router" symmetrical="YES">
+    <link_ctn id="link48"/>
+  </route>
+  <route src="host48" dst="host48" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host49" dst="router" symmetrical="YES">
+    <link_ctn id="link49"/>
+  </route>
+  <route src="host49" dst="host49" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host50" dst="router" symmetrical="YES">
+    <link_ctn id="link50"/>
+  </route>
+  <route src="host50" dst="host50" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host51" dst="router" symmetrical="YES">
+    <link_ctn id="link51"/>
+  </route>
+  <route src="host51" dst="host51" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host52" dst="router" symmetrical="YES">
+    <link_ctn id="link52"/>
+  </route>
+  <route src="host52" dst="host52" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host53" dst="router" symmetrical="YES">
+    <link_ctn id="link53"/>
+  </route>
+  <route src="host53" dst="host53" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host54" dst="router" symmetrical="YES">
+    <link_ctn id="link54"/>
+  </route>
+  <route src="host54" dst="host54" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host55" dst="router" symmetrical="YES">
+    <link_ctn id="link55"/>
+  </route>
+  <route src="host55" dst="host55" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host56" dst="router" symmetrical="YES">
+    <link_ctn id="link56"/>
+  </route>
+  <route src="host56" dst="host56" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host57" dst="router" symmetrical="YES">
+    <link_ctn id="link57"/>
+  </route>
+  <route src="host57" dst="host57" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host58" dst="router" symmetrical="YES">
+    <link_ctn id="link58"/>
+  </route>
+  <route src="host58" dst="host58" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host59" dst="router" symmetrical="YES">
+    <link_ctn id="link59"/>
+  </route>
+  <route src="host59" dst="host59" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host60" dst="router" symmetrical="YES">
+    <link_ctn id="link60"/>
+  </route>
+  <route src="host60" dst="host60" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host61" dst="router" symmetrical="YES">
+    <link_ctn id="link61"/>
+  </route>
+  <route src="host61" dst="host61" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host62" dst="router" symmetrical="YES">
+    <link_ctn id="link62"/>
+  </route>
+  <route src="host62" dst="host62" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host63" dst="router" symmetrical="YES">
+    <link_ctn id="link63"/>
+  </route>
+  <route src="host63" dst="host63" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host64" dst="router" symmetrical="YES">
+    <link_ctn id="link64"/>
+  </route>
+  <route src="host64" dst="host64" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host65" dst="router" symmetrical="YES">
+    <link_ctn id="link65"/>
+  </route>
+  <route src="host65" dst="host65" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host66" dst="router" symmetrical="YES">
+    <link_ctn id="link66"/>
+  </route>
+  <route src="host66" dst="host66" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host67" dst="router" symmetrical="YES">
+    <link_ctn id="link67"/>
+  </route>
+  <route src="host67" dst="host67" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host68" dst="router" symmetrical="YES">
+    <link_ctn id="link68"/>
+  </route>
+  <route src="host68" dst="host68" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host69" dst="router" symmetrical="YES">
+    <link_ctn id="link69"/>
+  </route>
+  <route src="host69" dst="host69" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host70" dst="router" symmetrical="YES">
+    <link_ctn id="link70"/>
+  </route>
+  <route src="host70" dst="host70" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host71" dst="router" symmetrical="YES">
+    <link_ctn id="link71"/>
+  </route>
+  <route src="host71" dst="host71" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host72" dst="router" symmetrical="YES">
+    <link_ctn id="link72"/>
+  </route>
+  <route src="host72" dst="host72" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host73" dst="router" symmetrical="YES">
+    <link_ctn id="link73"/>
+  </route>
+  <route src="host73" dst="host73" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host74" dst="router" symmetrical="YES">
+    <link_ctn id="link74"/>
+  </route>
+  <route src="host74" dst="host74" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host75" dst="router" symmetrical="YES">
+    <link_ctn id="link75"/>
+  </route>
+  <route src="host75" dst="host75" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host76" dst="router" symmetrical="YES">
+    <link_ctn id="link76"/>
+  </route>
+  <route src="host76" dst="host76" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host77" dst="router" symmetrical="YES">
+    <link_ctn id="link77"/>
+  </route>
+  <route src="host77" dst="host77" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host78" dst="router" symmetrical="YES">
+    <link_ctn id="link78"/>
+  </route>
+  <route src="host78" dst="host78" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host79" dst="router" symmetrical="YES">
+    <link_ctn id="link79"/>
+  </route>
+  <route src="host79" dst="host79" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host80" dst="router" symmetrical="YES">
+    <link_ctn id="link80"/>
+  </route>
+  <route src="host80" dst="host80" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host81" dst="router" symmetrical="YES">
+    <link_ctn id="link81"/>
+  </route>
+  <route src="host81" dst="host81" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host82" dst="router" symmetrical="YES">
+    <link_ctn id="link82"/>
+  </route>
+  <route src="host82" dst="host82" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host83" dst="router" symmetrical="YES">
+    <link_ctn id="link83"/>
+  </route>
+  <route src="host83" dst="host83" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host84" dst="router" symmetrical="YES">
+    <link_ctn id="link84"/>
+  </route>
+  <route src="host84" dst="host84" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host85" dst="router" symmetrical="YES">
+    <link_ctn id="link85"/>
+  </route>
+  <route src="host85" dst="host85" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host86" dst="router" symmetrical="YES">
+    <link_ctn id="link86"/>
+  </route>
+  <route src="host86" dst="host86" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host87" dst="router" symmetrical="YES">
+    <link_ctn id="link87"/>
+  </route>
+  <route src="host87" dst="host87" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host88" dst="router" symmetrical="YES">
+    <link_ctn id="link88"/>
+  </route>
+  <route src="host88" dst="host88" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host89" dst="router" symmetrical="YES">
+    <link_ctn id="link89"/>
+  </route>
+  <route src="host89" dst="host89" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host90" dst="router" symmetrical="YES">
+    <link_ctn id="link90"/>
+  </route>
+  <route src="host90" dst="host90" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host91" dst="router" symmetrical="YES">
+    <link_ctn id="link91"/>
+  </route>
+  <route src="host91" dst="host91" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host92" dst="router" symmetrical="YES">
+    <link_ctn id="link92"/>
+  </route>
+  <route src="host92" dst="host92" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host93" dst="router" symmetrical="YES">
+    <link_ctn id="link93"/>
+  </route>
+  <route src="host93" dst="host93" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host94" dst="router" symmetrical="YES">
+    <link_ctn id="link94"/>
+  </route>
+  <route src="host94" dst="host94" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host95" dst="router" symmetrical="YES">
+    <link_ctn id="link95"/>
+  </route>
+  <route src="host95" dst="host95" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host96" dst="router" symmetrical="YES">
+    <link_ctn id="link96"/>
+  </route>
+  <route src="host96" dst="host96" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host97" dst="router" symmetrical="YES">
+    <link_ctn id="link97"/>
+  </route>
+  <route src="host97" dst="host97" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host98" dst="router" symmetrical="YES">
+    <link_ctn id="link98"/>
+  </route>
+  <route src="host98" dst="host98" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  <route src="host99" dst="router" symmetrical="YES">
+    <link_ctn id="link99"/>
+  </route>
+  <route src="host99" dst="host99" symmetrical="NO">
+    <link_ctn id="link_loopback"/>
+  </route>
+  </AS>
+</platform>

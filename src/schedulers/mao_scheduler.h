@@ -1,40 +1,32 @@
 #pragma once
-#include "scheduler_base.h"
+#include "prototypes/scheduler.h"
+#include "view/viewer.h"
 
 struct LoadVectorEvent {
     double ConsumptionRatio;
     double Begin;
     double End;
-    std::string TaskName;
+    int TaskId;
     int VMId;
 };
 
-class MaoScheduler: public BaseScheduler {
+class MaoScheduler: public StaticScheduler {
 public:
-    MaoScheduler(const std::string& workflowPath, const std::string& vmListPath);
+    virtual Actions PrepareForRun(View::Viewer& v) override;
 
-    void ProcessTasksGraph() override;
+    void MakeOrderDFS(int vertex, std::vector<View::Task>& order, std::vector<bool>& used);
+    std::vector<View::Task> MakeTasksOrder();
 
-    double CalculateMakespan(const std::map<std::string, VMDescription>& taskVM, const std::vector<std::shared_ptr<Task>>& taskOrder);
+    void ReduceMakespan(std::vector<VMDescription>& taskVM, const std::vector<View::Task>& taskOrder, double currentMakespan);
 
-    void ReduceMakespan(std::map<std::string, VMDescription>& taskVM, 
-                        const std::vector<std::shared_ptr<Task>>& taskOrder,
-                        double currentMakespan);
 
-    void TasksBundling(const std::map<std::string, VMDescription>& taskVM);
+    std::vector<double> CalculateTasksEndTimes(const std::vector<View::Task>& taskOrder,
+                                               const std::vector<VMDescription>& taskVM);
+    std::vector<std::pair<double, double>> CalculateDeadlines(const std::vector<View::Task>& taskOrder,
+                                                              const std::vector<VMDescription>& taskVM);
 
-    std::map<std::string, double> CalculateTasksEndTimes(
-                        const std::vector<std::shared_ptr<Task>>& taskOrder,
-                        const std::map<std::string, VMDescription>& taskVM) const;
+    std::vector<std::vector<LoadVectorEvent>> GetLoadVector(const std::vector<std::pair<double, double>>& deadlines,
+                                                            const std::vector<VMDescription>& taskVM);
 
-    std::map<std::string, std::pair<double, double>> CalculateDeadlines(
-                        const std::vector<std::shared_ptr<Task>>& taskOrder,
-                        const std::map<std::string, VMDescription>& taskVM) const;
-
-    std::vector<std::vector<LoadVectorEvent>> GetLoadVector(
-                        const std::map<std::string, std::pair<double, double>>& deadlines,
-                        const std::map<std::string, VMDescription>& taskVM);
-    
-    void ActorFinish(void* data);
-    static void ActorFinishCallback(int, void* this_pointer);
+    std::vector<VMDescription> GetCheapestVMs();
 };

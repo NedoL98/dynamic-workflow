@@ -3,14 +3,21 @@
 #include <iostream>
 #include <sys/wait.h>
 
+using std::string;
 using std::stringstream;
 
-string GeneratePlatform(BaseScheduler& scheduler) {
+string GeneratePlatform(const string& workflowPath, const string& vmListPath) {
     int hostCnt;
     int maxCoresCnt;
-    double maxMemoryCnt;
+    // TODO: use this parameter while generating platform
+    double maxMemory;
 
-    scheduler.GetMaxParams(hostCnt, maxCoresCnt, maxMemoryCnt);
+    TasksGraph tasksGraph(workflowPath);
+    VMList vmList(vmListPath);
+
+    hostCnt = tasksGraph.Size();
+    maxCoresCnt = vmList.MaxCores();
+    maxMemory = vmList.MaxMemory();
 
     int pid = fork();
     if (pid > 0) {
