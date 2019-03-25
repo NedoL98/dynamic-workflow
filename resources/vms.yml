@@ -3,8 +3,10 @@
   memory: 4GB
   speed: 10GF
   price: 100
+  pstate_id: 0
 - name: VM2
   cpu: 2
   memory: 8GB
   speed: 20GF
   price: 180
+  pstate_id: 1

@@ -9,12 +9,13 @@ using std::vector;
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(vm_list, "VM list log");
 
-VMDescription::VMDescription(int id, int cores, double memory, double flops, int price):
+VMDescription::VMDescription(int id, int cores, double memory, double flops, int price, int pStateId):
     Id(id),
     Cores(cores),
     Memory(memory),
     Flops(flops),
-    Price(price)
+    Price(price),
+    PStateId(pStateId)
 {}
 
 int VMDescription::GetId() const {
@@ -37,6 +38,10 @@ int VMDescription::GetPrice() const {
     return Price;
 }
 
+int VMDescription::GetPStateId() const {
+    return PStateId;
+}
+
 ComputeSpec VMDescription::GetSpec() const {
     return ComputeSpec({Memory, Flops, Cores});
 }
@@ -45,7 +50,8 @@ bool VMDescription::operator ==(const VMDescription& other) const {
     return Cores == other.Cores &&
            Memory == other.Memory &&
            Flops == other.Flops &&
-           Price == other.Price;           
+           Price == other.Price &&
+           PStateId == other.PStateId;           
 }
 
 bool VMDescription::operator !=(const VMDescription& other) const {
@@ -119,7 +125,9 @@ VMList::VMList(const string& vmConfig) {
         double memory = ParseSize(vmDescription["memory"].as<string>(), SizeSuffixes);
         double flops = ParseSize(vmDescription["speed"].as<string>(), PerformanceSuffixes);
         int price = vmDescription["price"].as<int>();
-        VMs.push_back(VMDescription(id, cores, memory, flops, price));
+        int pStateId = vmDescription["pstate_id"].as<int>();
+
+        VMs.push_back(VMDescription(id, cores, memory, flops, price, pStateId));
         ++id;
         XBT_INFO("VM %s loaded!", vmDescription["name"].as<string>().c_str());
     }

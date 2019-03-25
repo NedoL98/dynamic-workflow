@@ -3,14 +3,17 @@
 #include <iostream>
 #include <sys/wait.h>
 
+using std::pair;
 using std::string;
 using std::stringstream;
 using std::vector;
 
-string GetHostSpeeds(const vector<double>& vmSpeeds) {
+XBT_LOG_NEW_DEFAULT_CATEGORY(platform_generator, "Platform generator log");
+
+string GetHostSpeeds(const vector<pair<int, double>>& vmSpeeds) {
     string result = "";
 
-    for (double vmSpeed: vmSpeeds) {
+    for (const auto& [pStateId, vmSpeed]: vmSpeeds) {
         if (!result.empty()) {
             result += ",";
         }
@@ -29,10 +32,15 @@ string GeneratePlatform(const string& workflowPath, const string& vmListPath) {
     TasksGraph tasksGraph(workflowPath);
     VMList vmList(vmListPath);
 
-    vector<double> vmSpeeds;
+    vector<pair<int, double>> vmSpeeds;
+    vector<bool> usedPstateId(vmList.Size());
     for (const VMDescription& vmDescription: vmList) {
-        vmSpeeds.push_back(vmDescription.GetFlops() / (1000 * 1000 * 1000));
+        xbt_assert(vmDescription.GetPStateId() < vmList.Size(), "PStateId %d is not in bounds [0,%d)!", vmDescription.GetPStateId(), vmList.Size());
+        xbt_assert(!usedPstateId[vmDescription.GetPStateId()], "PStateId %d is used twice!", vmDescription.GetPStateId());
+        vmSpeeds.push_back({vmDescription.GetPStateId(), vmDescription.GetFlops() / (1000 * 1000 * 1000)});
+        usedPstateId[vmDescription.GetPStateId()] = true;
     }
+    std::sort(vmSpeeds.begin(), vmSpeeds.end());
 
     string hostSpeeds = GetHostSpeeds(vmSpeeds);
 
