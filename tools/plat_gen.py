@@ -28,7 +28,7 @@ thus sending all the workflow inputs and collecting all the outputs.
 Usage::
 
     python -m pysimgrid.tools.plat_gen output_dir num_systems seed system_type
-                                       num_hosts host_speed
+                                       num_hosts host_speeds
                                        link_bandwidth link_latency
                                        [--loopback_bandwidth] [--loopback_latency]
                                        [--include_master]
@@ -40,7 +40,7 @@ Usage::
       system_type       system type (only 'cluster' is supported in current version)
 
       num_hosts         number of hosts (excluding optional master host)
-      host_speed        host speed in GFLOPS (e.g. '1', '1-10')
+      host_speeds       list of available host speeds in GFLOPS (e.g. '1, 2, 10')
       core_count        number of cores (e.g. '1', '5')
       link_bandwidth    link bandwidth in MBps as 'bandwidth[:master_bandwidth]'
                         (e.g. '125', '10-100:100')
@@ -61,7 +61,7 @@ import os
 import random
 
 
-def generate_cluster(include_master, num_hosts, host_speed, core_count, host_bandwidth, host_latency,
+def generate_cluster(include_master, num_hosts, host_speeds, core_count, host_bandwidth, host_latency,
                      master_bandwidth, master_latency, loopback_bandwidth, loopback_latency):
     hosts = []
     links = []
@@ -81,7 +81,7 @@ def generate_cluster(include_master, num_hosts, host_speed, core_count, host_ban
         hosts.append({
             "id": "master",
             "core": 1,
-            "speed": 1
+            "speed": host_speeds
         })
         master_link = {
             "id": "link_master",
@@ -106,16 +106,17 @@ def generate_cluster(include_master, num_hosts, host_speed, core_count, host_ban
         })
 
     # worker hosts
-    host_speeds = generate_values(host_speed, num_hosts)
+    # host_speeds = generate_values(host_speed, num_hosts)
     core_counts = generate_values(core_count, num_hosts)
     link_bandwidths = generate_values(host_bandwidth, num_hosts)
     link_latencies = generate_values(host_latency, num_hosts)
     for i in range(0, num_hosts):
         host = {
             "id": "host%d" % i,
-            "speed": host_speeds[i],
+            "speed": host_speeds,
             "core": core_counts[i]
         }
+
         hosts.append(host)
         link = {
             "id": "link%d" % i,
@@ -171,7 +172,12 @@ def save_as_xml_file(system, output_path):
         f.write('  <AS id="AS0" routing="Floyd">\n')
 
         for host in system["hosts"]:
-            f.write('  <host id="%s" core="%d" speed="%fGf"/>\n' % (host["id"], host["core"], host["speed"]))
+            # f.write('  <host id="%s" core="%d" speed="%fGf"/>\n' % (host["id"], host["core"], host["speed"]))
+            f.write('  <host id="%s" core="%d" speed="' % (host["id"], host["core"]))
+            for ind, host_speed in enumerate(host["speed"]):
+                if ind != 0: f.write(',')
+                f.write('%fGf' % float(host_speed))
+            f.write('"/>\n')
         f.write("\n")
 
         for link in system["links"]:
@@ -191,8 +197,16 @@ def save_as_xml_file(system, output_path):
         f.write("</platform>\n")
 
 
-def main(output_dir, num_systems, seed, system_type, num_hosts, host_speed, core_count, link_bandwidth, link_latency,
+def main(output_dir, num_systems, seed, system_type, num_hosts, host_speeds, core_count, link_bandwidth, link_latency,
          loopback_bandwidth, loopback_latency, include_master):
+    host_speeds = list(host_speeds.split(','))
+    for host_speed in host_speeds:
+        try:
+            float(host_speed)
+        except:
+            print('Host speed %s is not a number!', host_speed)
+            exit(1)
+
     random.seed(seed)
 
     if system_type != 'cluster':
@@ -220,11 +234,11 @@ def main(output_dir, num_systems, seed, system_type, num_hosts, host_speed, core
             master_latency = link_latency
 
         # generate cluster
-        system = generate_cluster(include_master, num_hosts, host_speed, core_count,
+        system = generate_cluster(include_master, num_hosts, host_speeds, core_count,
                                   host_bandwidth, host_latency, master_bandwidth, master_latency,
                                   loopback_bandwidth, loopback_latency)
-        file_name = "cluster_%d_%s_%s_%s_%s_%d.xml" % (
-            num_hosts, host_speed, core_count, link_bandwidth, link_latency, i)
+        file_name = "cluster_%d_%s_%s_%s_%d.xml" % (
+            num_hosts, core_count, link_bandwidth, link_latency, i)
 
         file_path = output_dir + "/" + file_name
         save_as_xml_file(system, file_path)
@@ -244,7 +258,7 @@ def _cli():
     # cluster
     parser_cluster = subparsers.add_parser("cluster", help="collection of hosts with a flat topology")
     parser_cluster.add_argument("num_hosts", type=int, help="number of hosts (excluding optional master host)")
-    parser_cluster.add_argument("host_speed", type=str, help="host speed in GFLOPS (e.g. '1', '1-10')")
+    parser_cluster.add_argument("host_speeds", type=str, help="list of available host speeds in GFLOPS (e.g. '1, 2, 10')")
     parser_cluster.add_argument("core_count", type=str, help="host number of cores (e.g. '1', '5')")
     parser_cluster.add_argument("link_bandwidth", type=str,
                                 help="link bandwidth in MBps as 'bandwidth[:master_bandwidth]' "
