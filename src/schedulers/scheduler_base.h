@@ -3,8 +3,8 @@
 #include <string>
 #include <vector>
 
-#include "../tasks_graph.h"
-#include "../vm_list.h"
+#include "tasks_graph.h"
+#include "vm_list.h"
 
 class BaseScheduler {
 public:
