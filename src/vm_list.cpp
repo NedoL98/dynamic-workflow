@@ -98,6 +98,7 @@ simgrid::s4u::VirtualMachine* VMList::GetVMInstance(const string& taskName, int 
     XBT_INFO("Host found: %s", host->get_cname());
 
     simgrid::s4u::VirtualMachine* vm = new simgrid::s4u::VirtualMachine(taskName + "_VM", host, cores, memory);
+    vm->set_pstate(currentVM.GetPStateId());
     return vm;
 }
 
