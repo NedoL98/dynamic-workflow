@@ -13,7 +13,6 @@ public:
     Task(const YAML::Node& taskDescription);
 
     const std::string& GetName() const;
-    const std::map<std::string, std::string>& GetRawInputs() const;
     const std::vector<std::string>& GetInputs() const;
     const std::map<std::string, double>& GetOutputs() const;
     int GetCores() const;

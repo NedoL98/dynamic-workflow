@@ -15,7 +15,7 @@ def GetPreYaml(node, task_inputs, task_outputs, file_size, output_yaml):
         task["outputs"] = []
         task["size"] = node.attrib["runtime"] + "GF"
         for child in node:
-            filename = child.attrib["file"].replace(".", "_")
+            filename = child.attrib["file"]
             if child.attrib["link"] == "input":
                 task["inputs"].append({"name": filename})
                 task_inputs.add(filename)
@@ -32,10 +32,9 @@ def GetTaskSources(workflow_inputs, task_outputs, output_yaml):
     for task in output_yaml["tasks"]:
         for input in task["inputs"]:
             if input["name"] not in task_outputs:
-                input["source"] = input["name"]
                 workflow_inputs.add(input["name"])
             else:
-                input["source"] = task_outputs[input["name"]] + "." + input["name"]
+                input["source"] = task_outputs[input["name"]]
 
 def InsertWorkflowInputs(workflow_inputs, file_size, output_yaml):
     output_yaml.insert(1, "inputs", [])
@@ -48,7 +47,7 @@ def InsertWorkflowOutputs(workflow_inputs, task_outputs, output_yaml):
         for output in task["outputs"]:
             output_name = output["name"]
             if output_name not in workflow_inputs:
-                source = task_outputs[output_name] + "." + output_name
+                source = task_outputs[output_name]
                 output_yaml["outputs"].append({"name": output_name, "source": source})
 
 def MakeYaml(xml_filename, output_dir):

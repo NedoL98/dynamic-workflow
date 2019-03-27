@@ -25,14 +25,8 @@ Task::Task(const YAML::Node& taskDescription) {
         xbt_assert(inputDescription["name"], "Input name is not specified!");
         string inputName = inputDescription["name"].as<string>();
 
-        xbt_assert(inputDescription["source"], "Source for input is not specified!");
-        string sourceName = inputDescription["source"].as<string>();
-
-        AppendRawInput(inputName, sourceName);
-
-        size_t delimPosition = sourceName.find('.');
-        if (delimPosition != string::npos) {
-            AppendInput(sourceName.substr(0, delimPosition));
+        if (inputDescription["source"]) {
+            AppendInput(inputDescription["source"].as<string>());
         }
     }
 
@@ -82,10 +76,6 @@ Task::Task(const YAML::Node& taskDescription) {
 
 const string& Task::GetName() const {
     return Name;
-}
-
-const map<string, string>& Task::GetRawInputs() const {
-    return RawInputs;
 }
 
 const vector<string>& Task::GetInputs() const {

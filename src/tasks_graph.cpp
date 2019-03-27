@@ -71,19 +71,14 @@ void TasksGraph::MakeGraph() {
     for (const auto& item: Tasks) {
         string taskName = item.first;
         shared_ptr<Task> task = item.second;
-        for (const auto& input: task->GetRawInputs()) {
-            string inputSource = input.second;
-            size_t delimeterPos = inputSource.find('.');
-            if (delimeterPos != string::npos) {
-                string inputSourceName = inputSource.substr(0, delimeterPos);
-                xbt_assert(Tasks.count(inputSourceName),
-                           "Task with name \"%s\" is not presented, but its result is used as input!", 
-                           inputSourceName.c_str());
-                Edges[inputSourceName].push_back(taskName);
-                ReverseEdges[taskName].push_back(inputSourceName);
-                ++InputDegree[taskName];
-                ++OutputDegree[inputSourceName];
-            }
+        for (const string& inputSourceName: task->GetInputs()) {
+            xbt_assert(Tasks.count(inputSourceName),
+                       "Task with name \"%s\" is not presented, but its result is used as input!", 
+                       inputSourceName.c_str());
+            Edges[inputSourceName].push_back(taskName);
+            ReverseEdges[taskName].push_back(inputSourceName);
+            ++InputDegree[taskName];
+            ++OutputDegree[inputSourceName];
         }
         if (!OutputDegree.count(taskName)) {
             OutputDegree[taskName] = 0;
@@ -200,9 +195,8 @@ void TasksGraph::PrintGraph() const {
             cout << "Output size: " << output.second << endl;
         }
 
-        for (const auto& input: item.second->GetRawInputs()) {
-            cout << "Input name: " << input.first << endl;
-            cout << "Input source: " << input.second << endl; 
+        for (const auto& input: item.second->GetInputs()) {
+            cout << "Input source: " << input << endl; 
         }
     }
 
