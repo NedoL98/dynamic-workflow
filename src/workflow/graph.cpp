@@ -52,6 +52,9 @@ namespace Workflow {
 
         xbt_assert(tasksGraph["tasks"], "No tasks are specified in input file!");
         for (const YAML::Node& taskDescription: tasksGraph["tasks"]) {
+            xbt_assert(taskDescription["name"], "Task name is not specified!");
+            TaskName2Id[taskDescription["name"].as<string>()] = Nodes.size();
+
             for (const YAML::Node& inputDescription: taskDescription["inputs"]) {
                 xbt_assert(inputDescription["name"], "Input name is not specified!");
                 string inputName = inputDescription["name"].as<string>();
@@ -79,5 +82,25 @@ namespace Workflow {
         }
 
         XBT_INFO("Done!");
+        BuildDependencies();
     }
+
+    void Graph::BuildDependencies() {
+        map<int, int> FileId2Owner;
+        for (int nodeId = 0; nodeId < Nodes.size(); nodeId++) {
+            for (int fileId : Nodes[nodeId]->Outputs) {
+                FileId2Owner[fileId] = nodeId;
+            }
+        }
+        for (int nodeId = 0; nodeId < Nodes.size(); nodeId++) {
+            for (int fileId : Nodes[nodeId]->Inputs) {
+                auto fileOwner = FileId2Owner.find(fileId);
+                if (fileOwner != FileId2Owner.end()) {
+                    Nodes[nodeId]->Dependencies.push_back(fileOwner->second);
+                    Nodes[fileOwner->second]->Successors.push_back(nodeId);
+                }
+            }
+        }
+    }
+
 }

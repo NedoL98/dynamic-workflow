@@ -10,7 +10,7 @@ namespace Workflow {
     struct Task {
         std::string Name;
         std::vector<int> Inputs, Outputs;
-        std::vector<int> Ancestors, Successors;
+        std::vector<int> Dependencies, Successors;
         TaskSpec Requirements;
 
         EState state;

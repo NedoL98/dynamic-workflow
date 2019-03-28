@@ -14,14 +14,11 @@ XBT_LOG_NEW_DEFAULT_CATEGORY(workflow_task_cpp, "task log");
 
 namespace Workflow {
     Task::Task(const YAML::Node& taskDescription, const FileRegistry& registry) {
-        xbt_assert(taskDescription["name"], "Task name is not specified!");
         Name = taskDescription["name"].as<string>();
-
         for (const YAML::Node& inputDescription: taskDescription["inputs"]) {
             string inputName = inputDescription["name"].as<string>();
             Inputs.push_back(registry.find(inputName)->second.Id);
         }
-
         for (const YAML::Node& outputDescription: taskDescription["outputs"]) {
             string outputName = outputDescription["name"].as<string>();
             Outputs.push_back(registry.find(outputName)->second.Id);

@@ -10,12 +10,10 @@
 namespace View {
     class Viewer {
         const CloudSimulator& Simulator;
-        std::vector<Task> Pumpkin;
+        std::vector<Task> Tasks;
 
     public:
-        Viewer(const CloudSimulator& s):
-            Simulator(s)
-            {}
+        Viewer(const CloudSimulator& s);
         
         const Task& GetTaskByName(const std::string& s) const;
         const Task& GetTaskById(int id) const;

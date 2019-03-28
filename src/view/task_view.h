@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <spec.h>
+#include <workflow/task.h>
 
 namespace {
     int GetUniqueTaskId() {
@@ -11,22 +12,24 @@ namespace {
 
 namespace View {
     class Task {
-        std::vector<Task> Dependencies, Successors;
+        std::vector<int> Dependencies, Successors;
         ComputeSpec Spec;
-        int id;
+        int Id;
     public:
-        Task() {
-            id = GetUniqueTaskId();
+        Task(int id, const Workflow::Task& task):
+            Id(id),
+            Dependencies(task.Dependencies), 
+            Successors(task.Successors) {
         }
 
         int GetId() const {
-            return id;
+            return Id;
         }
 
-        const std::vector<Task>& GetDependencies() const {
+        const std::vector<int>& GetDependencies() const {
             return Dependencies;
         }
-        const std::vector<Task>& GetSuccessors() const {
+        const std::vector<int>& GetSuccessors() const {
             return Successors;
         }
         const ComputeSpec& GetComputeSpec() const {

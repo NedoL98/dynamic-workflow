@@ -67,9 +67,9 @@ double CalculateMakespan(const vector<VMDescription>& taskVM, const vector<View:
 
     for (const View::Task& task: taskOrder) {
         double earliestBegin = 0;
-        for (const View::Task& dependency: task.GetDependencies()) {
-            xbt_assert(endTime[dependency.GetId()] != -1, "Something went wrong, task order is inconsistent!");
-            earliestBegin = max(earliestBegin, endTime[dependency.GetId()]);
+        for (int dependencyId : task.GetDependencies()) {
+            xbt_assert(endTime[dependencyId] != -1, "Something went wrong, task order is inconsistent!");
+            earliestBegin = max(earliestBegin, endTime[dependencyId]);
         }
         ComputeSpec taskSpec = task.GetComputeSpec();
         endTime[task.GetId()] = earliestBegin + (taskSpec.Speed / taskVM[task.GetId()].GetFlops());
@@ -84,7 +84,7 @@ void MaoScheduler::ReduceMakespan(vector<VMDescription>& taskVM,
                                   double currentMakespan) {
     XBT_INFO("Reducing makespan...");
     double maxSpeedup = 0;
-    View::Task taskToSpeedup;
+    int taskToSpeedupId = -1;
     VMDescription vmToBuy;
 
     for (const View::Task& task: taskOrder) {
@@ -111,7 +111,7 @@ void MaoScheduler::ReduceMakespan(vector<VMDescription>& taskVM,
 
             if (curSpeedup > maxSpeedup) {
                 maxSpeedup = curSpeedup;
-                taskToSpeedup = task;
+                taskToSpeedupId = task.GetId();
                 vmToBuy = newVM;
             }
 
@@ -119,8 +119,8 @@ void MaoScheduler::ReduceMakespan(vector<VMDescription>& taskVM,
         }
     }
 
-    xbt_assert(maxSpeedup != 0, "Can't speedup current plan!");
-    taskVM[taskToSpeedup.GetId()] = vmToBuy;
+    xbt_assert(taskToSpeedupId, "Can't speedup current plan!");
+    taskVM[taskToSpeedupId] = vmToBuy;
     
     XBT_INFO("Done!");
 }
@@ -132,9 +132,9 @@ vector<double> MaoScheduler::CalculateTasksEndTimes(const vector<View::Task>& ta
     for (const View::Task& task: taskOrder) {
         double earliestBegin = 0;
 
-        for (const View::Task& dependency: task.GetDependencies()) {
-            xbt_assert(tasksEndTimes[dependency.GetId()] != -1, "Something went wrong, task order is inconsistent!");
-            earliestBegin = max(earliestBegin, tasksEndTimes[dependency.GetId()]);
+        for (int dependencyId : task.GetDependencies()) {
+            xbt_assert(tasksEndTimes[dependencyId] != -1, "Something went wrong, task order is inconsistent!");
+            earliestBegin = max(earliestBegin, tasksEndTimes[dependencyId]);
         }
         tasksEndTimes[task.GetId()] = earliestBegin + (task.GetComputeSpec().Speed / taskVM[task.GetId()].GetFlops());
     }
@@ -150,8 +150,8 @@ vector<pair<double, double>> MaoScheduler::CalculateDeadlines(const vector<View:
     vector<vector<pair<int, double>>> endTimeParentList;
     
     for (const View::Task& task: taskOrder) {
-        for (const View::Task& dependency: task.GetDependencies()) {
-            endTimeParentList[task.GetId()].push_back({dependency.GetId(), tasksEndTimes[dependency.GetId()]});
+        for (int dependencyId : task.GetDependencies()) {
+            endTimeParentList[task.GetId()].push_back({dependencyId, tasksEndTimes[dependencyId]});
         }
     }
 
@@ -300,8 +300,8 @@ MaoScheduler::Actions MaoScheduler::PrepareForRun(View::Viewer& v) {
     for (const LoadVectorEvent& event: sortedEvents) {
         const View::Task task = viewer->GetTaskById(event.TaskId);
 
-        for (const View::Task& dependency: task.GetDependencies()) {
-            if (processingTasks[dependency.GetId()]) {
+        for (int dependencyId: task.GetDependencies()) {
+            if (processingTasks[dependencyId]) {
                 /*
                 Workflow.Tasks[input]->Finish(actorPointers[input]);
                 processingTasks.erase(input);
