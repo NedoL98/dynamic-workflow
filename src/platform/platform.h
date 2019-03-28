@@ -21,8 +21,8 @@ public:
 
 
 class CloudPlatform : public AbstractPlatform {
-public:
 
+public:
     CloudPlatform(const std::string& platformConfig): AbstractPlatform(platformConfig) {}
     virtual bool CreateVM(int hostId, const ComputeSpec& s, int id) override;
     bool CheckTask(int vmId, const TaskSpec& s);

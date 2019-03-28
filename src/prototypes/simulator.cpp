@@ -21,7 +21,7 @@ bool CloudSimulator::RegisterVirtualMachine(const VMDescription &stats, int cust
 }
 
 bool CloudSimulator::AssignTask(int VMId, const ScheduleItem &item) {
-    if (!Platform.CheckTask(VMId, TaskSpec())) { // FIXME Get Task Spec
+    if (!Platform.CheckTask(VMId, TaskGraph.Nodes[item.GetTaskId()]->GetTaskSpec())) {
         return false;
     }
     Assignments.AddItem(VMId, item);
@@ -33,7 +33,6 @@ bool CloudSimulator::CancelTask(int hostId, const ScheduleItem &item) {
 }
 
 bool CloudSimulator::ResetSchedule(const Schedule& s) {
-    Assignments = s;
+    Assignments = s; // FIXME Check
     return true;
 }
-    

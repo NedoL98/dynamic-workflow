@@ -11,15 +11,19 @@ namespace {
 }
 
 namespace View {
+    /*
     class Task {
+        std::string Name;
         std::vector<int> Dependencies, Successors;
-        ComputeSpec Spec;
+        TaskSpec Spec;
         int Id;
     public:
         Task(int id, const Workflow::Task& task):
-            Id(id),
+            Name(task.Name),
             Dependencies(task.Dependencies), 
-            Successors(task.Successors) {
+            Successors(task.Successors),
+            Spec(task.Requirements),
+            Id(id) {
         }
 
         int GetId() const {
@@ -32,8 +36,10 @@ namespace View {
         const std::vector<int>& GetSuccessors() const {
             return Successors;
         }
-        const ComputeSpec& GetComputeSpec() const {
+        const TaskSpec& TaskSpec() const {
             return Spec;
         }
     };
+    */
+    typedef Workflow::Task Task;
 }

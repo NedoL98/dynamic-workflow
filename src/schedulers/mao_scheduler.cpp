@@ -10,6 +10,7 @@ using std::pair;
 using std::queue;
 using std::set;
 using std::shared_ptr;
+using std::unique_ptr;
 using std::string;
 using std::vector;
 
@@ -17,9 +18,10 @@ XBT_LOG_NEW_DEFAULT_CATEGORY(mao_scheduler, "Mao scheduler log");
 
 vector<VMDescription> MaoScheduler::GetCheapestVMs() {
     vector<VMDescription> cheapestVM;
-    for (const View::Task& task: viewer->GetTaskList()) {
+    for (const unique_ptr<View::Task>& taskPtr : viewer->GetTaskList()) {
+        auto task = *taskPtr;
         int bestPrice = -1;
-        ComputeSpec curSpec = task.GetComputeSpec();
+        TaskSpec curSpec = task.GetTaskSpec();
         for (VMDescription vmDescr: viewer->GetAvailiableVMTaxes()) {
             // we probably want to reconsider choosing most efficient vm type for a task
             if (curSpec.Cores >= vmDescr.GetCores() &&
@@ -71,8 +73,8 @@ double CalculateMakespan(const vector<VMDescription>& taskVM, const vector<View:
             xbt_assert(endTime[dependencyId] != -1, "Something went wrong, task order is inconsistent!");
             earliestBegin = max(earliestBegin, endTime[dependencyId]);
         }
-        ComputeSpec taskSpec = task.GetComputeSpec();
-        endTime[task.GetId()] = earliestBegin + (taskSpec.Speed / taskVM[task.GetId()].GetFlops());
+        TaskSpec taskSpec = task.GetTaskSpec();
+        endTime[task.GetId()] = earliestBegin + (taskSpec.Cost / taskVM[task.GetId()].GetFlops());
         makespan = max(makespan, endTime[task.GetId()]);
     }
 
@@ -93,7 +95,7 @@ void MaoScheduler::ReduceMakespan(vector<VMDescription>& taskVM,
         VMDescription oldVM = taskVM[task.GetId()]; 
         VMDescription newVM = oldVM;
         for (const VMDescription& vm: viewer->GetAvailiableVMTaxes()) {
-            ComputeSpec taskSpec = task.GetComputeSpec();
+            TaskSpec taskSpec = task.GetTaskSpec();
             if (taskSpec.Cores >= vm.GetCores() &&
                 taskSpec.Memory >= vm.GetMemory() &&
                 vm > oldVM && 
@@ -136,7 +138,7 @@ vector<double> MaoScheduler::CalculateTasksEndTimes(const vector<View::Task>& ta
             xbt_assert(tasksEndTimes[dependencyId] != -1, "Something went wrong, task order is inconsistent!");
             earliestBegin = max(earliestBegin, tasksEndTimes[dependencyId]);
         }
-        tasksEndTimes[task.GetId()] = earliestBegin + (task.GetComputeSpec().Speed / taskVM[task.GetId()].GetFlops());
+        tasksEndTimes[task.GetId()] = earliestBegin + (task.GetTaskSpec().Cost / taskVM[task.GetId()].GetFlops());
     }
 
     return tasksEndTimes;
@@ -186,7 +188,7 @@ vector<pair<double, double>> MaoScheduler::CalculateDeadlines(const vector<View:
             // last node is included in path iff its deadline is not calculated yet
             if (deadlines[currentTaskId] != EMPTY_PAIR) {
                 currentPath.push_back(currentTaskId);
-                totalRuntime += viewer->GetTaskById(currentTaskId).GetComputeSpec().Speed / taskVM[currentTaskId].GetFlops();
+                totalRuntime += viewer->GetTaskById(currentTaskId).GetTaskSpec().Cost / taskVM[currentTaskId].GetFlops();
             }
 
             do {
@@ -198,7 +200,7 @@ vector<pair<double, double>> MaoScheduler::CalculateDeadlines(const vector<View:
 
                 currentTaskId = newTaskId;
 
-                totalRuntime += viewer->GetTaskById(currentTaskId).GetComputeSpec().Speed / taskVM[currentTaskId].GetFlops();
+                totalRuntime += viewer->GetTaskById(currentTaskId).GetTaskSpec().Cost / taskVM[currentTaskId].GetFlops();
 
                 currentPath.push_back(currentTaskId);
             } while (deadlines[currentTaskId] == EMPTY_PAIR);
@@ -212,7 +214,7 @@ vector<pair<double, double>> MaoScheduler::CalculateDeadlines(const vector<View:
                 double beginTime = 0;
                 if (deadlines[currentPath.back()] != EMPTY_PAIR) {
                     beginTime = deadlines[currentPath.back()].second;
-                    totalRuntime -= viewer->GetTaskById(currentTaskId).GetComputeSpec().Speed / taskVM.at(currentPath.back()).GetFlops();
+                    totalRuntime -= viewer->GetTaskById(currentTaskId).GetTaskSpec().Cost / taskVM.at(currentPath.back()).GetFlops();
                     currentPath.pop_back();
                 }
 
@@ -222,7 +224,7 @@ vector<pair<double, double>> MaoScheduler::CalculateDeadlines(const vector<View:
                 for (const int& taskId: currentPath) {
                     xbt_assert(deadlines[taskId] == EMPTY_PAIR, "Task %d already has a deadline!", taskId);
 
-                    double taskRuntime = viewer->GetTaskById(taskId).GetComputeSpec().Speed / taskVM[taskId].GetFlops(); 
+                    double taskRuntime = viewer->GetTaskById(taskId).GetTaskSpec().Cost / taskVM[taskId].GetFlops(); 
                     double taskRuntimeNorm = taskRuntime / totalRuntime;
                     
                     deadlines[taskId].first = cumulativeTime;
@@ -249,7 +251,7 @@ vector<vector<LoadVectorEvent>> MaoScheduler::GetLoadVector(const vector<pair<do
                                                             const vector<VMDescription>& taskVM) {
     vector<vector<LoadVectorEvent>> loadVector(viewer->GetAvailiableVMTaxes().Size());
     for (int taskId = 0; taskId < deadlines.size(); ++taskId) {
-        double runTime = viewer->GetTaskById(taskId).GetComputeSpec().Speed / taskVM[taskId].GetFlops();
+        double runTime = viewer->GetTaskById(taskId).GetTaskSpec().Cost / taskVM[taskId].GetFlops();
         double consumptionRatio = runTime / (deadlines[taskId].second - deadlines[taskId].first);
         int vmId = taskVM[taskId].GetId();
         loadVector[vmId].push_back({consumptionRatio, deadlines[taskId].first, deadlines[taskId].second, taskId, vmId});
