@@ -20,29 +20,32 @@ vector<VMDescription> MaoScheduler::GetCheapestVMs() {
     for (const View::Task& task: viewer->GetTaskList()) {
         int bestPrice = -1;
         ComputeSpec curSpec = task.GetComputeSpec();
+        VMDescription bestVM;
         for (VMDescription vmDescr: viewer->GetAvailiableVMTaxes()) {
-            // we probably want to reconsider choosing most efficient vm type for a task
-            if (curSpec.Cores >= vmDescr.GetCores() &&
-                curSpec.Memory >= vmDescr.GetMemory() &&
+            // we probably want to reconsider way of choosing most efficient vm type for a task
+            if (curSpec.Cores <= vmDescr.GetCores() &&
+                curSpec.Memory <= vmDescr.GetMemory() &&
                 (bestPrice == -1 || vmDescr.GetPrice() < bestPrice)) {
                 bestPrice = vmDescr.GetPrice();
-                cheapestVM.push_back(vmDescr);
+                bestVM = vmDescr;
             }
         }
+        xbt_assert(bestPrice != -1, "No suitable VM for task %d found!", task.GetId());
+        cheapestVM.push_back(bestVM);
     }
     return cheapestVM;
 }
 
-void MaoScheduler::MakeOrderDFS(int vertex, 
+void MaoScheduler::MakeOrderDFS(int v, 
                                 vector<View::Task>& order, 
                                 vector<bool>& used) {
-    used[vertex] = true;
-    for (int i = 0; i < viewer->GetTaskById(vertex).GetSuccessors().size(); ++i) {
-        if (!used[i]) {
-            MakeOrderDFS(i, order, used);
+    used[v] = true;
+    for (int u: viewer->GetTaskById(v).GetSuccessors()) {
+        if (!used[u]) {
+            MakeOrderDFS(u, order, used);
         }
     }
-    order.push_back(viewer->GetTaskById(vertex));
+    order.push_back(viewer->GetTaskById(v));
 }
 
 vector<View::Task> MaoScheduler::MakeTasksOrder() {
@@ -50,12 +53,14 @@ vector<View::Task> MaoScheduler::MakeTasksOrder() {
 
     vector<bool> used(viewer->GetTaskList().size());
     for (int i = 0; i < viewer->GetTaskList().size(); ++i) {
-        if (!used[i] && viewer->GetTaskById(i).GetSuccessors().size() == 0) {
+        if (!used[i] && viewer->GetTaskById(i).GetDependencies().size() == 0) {
             MakeOrderDFS(i, order, used);
         }
     }
     xbt_assert(order.size() == viewer->GetTaskList().size(), "Something went wrong, not all tasks are included in tasks order!");
     
+    std::reverse(order.begin(), order.end());
+
     return order;
 }
 
@@ -67,11 +72,12 @@ double CalculateMakespan(const vector<VMDescription>& taskVM, const vector<View:
 
     for (const View::Task& task: taskOrder) {
         double earliestBegin = 0;
-        for (int dependencyId : task.GetDependencies()) {
+        for (int dependencyId: task.GetDependencies()) {
             xbt_assert(endTime[dependencyId] != -1, "Something went wrong, task order is inconsistent!");
             earliestBegin = max(earliestBegin, endTime[dependencyId]);
         }
         ComputeSpec taskSpec = task.GetComputeSpec();
+        std::cout << taskSpec.Speed << " " << taskVM[task.GetId()].GetFlops() << std::endl;
         endTime[task.GetId()] = earliestBegin + (taskSpec.Speed / taskVM[task.GetId()].GetFlops());
         makespan = max(makespan, endTime[task.GetId()]);
     }
@@ -83,13 +89,11 @@ void MaoScheduler::ReduceMakespan(vector<VMDescription>& taskVM,
                                   const vector<View::Task>& taskOrder, 
                                   double currentMakespan) {
     XBT_INFO("Reducing makespan...");
-    double maxSpeedup = 0;
+    double maxSpeedup = -1;
     int taskToSpeedupId = -1;
     VMDescription vmToBuy;
 
     for (const View::Task& task: taskOrder) {
-        // const string taskName = elem.first;
-        // shared_ptr<Task> task = elem.second;
         VMDescription oldVM = taskVM[task.GetId()]; 
         VMDescription newVM = oldVM;
         for (const VMDescription& vm: viewer->GetAvailiableVMTaxes()) {
@@ -119,7 +123,7 @@ void MaoScheduler::ReduceMakespan(vector<VMDescription>& taskVM,
         }
     }
 
-    xbt_assert(taskToSpeedupId, "Can't speedup current plan!");
+    xbt_assert(taskToSpeedupId != -1, "Can't speedup current plan!");
     taskVM[taskToSpeedupId] = vmToBuy;
     
     XBT_INFO("Done!");
@@ -269,9 +273,8 @@ MaoScheduler::Actions MaoScheduler::PrepareForRun(View::Viewer& v) {
     while (true) {
         double makespan = CalculateMakespan(taskVM, taskOrder);
 
-        // // FIXME when deadline can be get from viewer
-        /*        
-        if (makespan <= ...) {
+        /*
+        if (makespan <= v.) {
             break;
         }
         */

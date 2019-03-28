@@ -14,7 +14,7 @@ class MaoScheduler: public StaticScheduler {
 public:
     virtual Actions PrepareForRun(View::Viewer& v) override;
 
-    void MakeOrderDFS(int vertex, std::vector<View::Task>& order, std::vector<bool>& used);
+    void MakeOrderDFS(int v, std::vector<View::Task>& order, std::vector<bool>& used);
     std::vector<View::Task> MakeTasksOrder();
 
     void ReduceMakespan(std::vector<VMDescription>& taskVM, const std::vector<View::Task>& taskOrder, double currentMakespan);
