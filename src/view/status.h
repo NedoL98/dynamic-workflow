@@ -1,14 +1,7 @@
 #pragma once
 #include "platform/host.h"
+#include "spec.h"
 
-
-enum EState {
-    NotScheduled,
-    Scheduled,
-    Ready,
-    Running,
-    Done
-};
 
 struct Status {
     Host* Assignment;

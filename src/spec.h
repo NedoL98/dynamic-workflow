@@ -12,6 +12,14 @@ struct TaskSpec {
     int Cores;
 };
 
+enum EState {
+    NotScheduled,
+    Scheduled,
+    Ready,
+    Running,
+    Done
+};
+
 class VMDescription {
 public:
     VMDescription() = default;

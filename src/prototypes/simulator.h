@@ -3,6 +3,7 @@
 #include "prototypes/scheduler.h"
 #include "platform/platform.h"
 #include "schedule/schedule_action.h"
+#include "workflow/graph.h"
 #include "vm_list.h"
 #include <vector>
 #include <map>
@@ -14,6 +15,7 @@ class CloudSimulator : public SimulatorInterface {
     CloudPlatform Platform;
     AbstractScheduler* Scheduler;
     Schedule Assignments;
+    WorkflowGraph Workflow;
 
 public:
     CloudSimulator(const std::string& platformConf, 
@@ -23,7 +25,8 @@ public:
         AvailiableVMs(VMListConf),
         Platform(platformConf),
         Scheduler(scheduler),
-        Assignments()
+        Assignments(),
+        Workflow(workflowConf)
         {}
     
     void RegisterScheduler(AbstractScheduler* s) {

@@ -30,6 +30,9 @@ set(SOURCE_LIST
     "src/tasks_graph.cpp"
     "src/view/viewer.cpp"
     "src/vm_list.cpp"
+    "src/workflow/graph.cpp"
+    "src/workflow/file.cpp"
+    "src/workflow/node.cpp"
 )
 
 
