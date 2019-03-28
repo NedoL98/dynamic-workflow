@@ -9,73 +9,75 @@ using std::string;
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(workflow_graph_cpp, "Tasks graph log");
 
-WorkflowGraph::WorkflowGraph(const string& filename) {
-    XBT_INFO("Loading workflow graph from %s", filename.c_str());
-    YAML::Node tasksGraph = YAML::LoadFile(filename);
-    xbt_assert(tasksGraph["name"], "Workflow name is not specified!");
-    Name = tasksGraph["name"].as<string>();
-    xbt_assert(tasksGraph["deadline"], "Task deadline is not specified!");
-    Deadline = tasksGraph["deadline"].as<double>();
-    xbt_assert(tasksGraph["inputs"], "Tasks inputs are not specified!");
-    for (const YAML::Node& inputDescription: tasksGraph["inputs"]) {
-        xbt_assert(inputDescription["name"], "Input name is not specified!");
-        string inputName = inputDescription["name"].as<string>(); 
-        if (Files.count(inputName) > 0) {
-            XBT_WARN("Input name is not unique! Previous input will be deleted!");
-        }
-        xbt_assert(inputDescription["size"], "Input size is not specified!");
-        Node::FileRegistry::iterator insertionResult;
-        try {
-            insertionResult = Files.insert({inputName, FileDescription(inputName, ParseSize(inputDescription["size"].as<string>(), SizeSuffixes))}).first;
-        } catch (std::exception& e) {
-            XBT_ERROR("Can't parse input size: %s", e.what());
-            XBT_WARN("Input size will be set to 0");
-            insertionResult = Files.insert({inputName, FileDescription(inputName, 0)}).first;
-        }
-        FileIdMapping.insert({insertionResult->second.Id, insertionResult->second});
-        Inputs.push_back(insertionResult->second.Id);
-    }
-
-    xbt_assert(tasksGraph["outputs"], "Tasks outputs are not specified!");
-    for (const YAML::Node& outputDescription: tasksGraph["outputs"]) {
-        xbt_assert(outputDescription["name"], "Output name is not specified!");
-        string outputName = outputDescription["name"].as<string>(); 
-        xbt_assert(outputDescription["source"], "Output source is not specified!");
-        if (Files.count(outputName) > 0) {
-            XBT_WARN("Output name is not unique! Previous output will be deleted!");
-        }
-        auto fileIterator = Files.insert({outputName, FileDescription(outputName, 0)}).first;
-        FileIdMapping.insert({fileIterator->second.Id, fileIterator->second});
-        Outputs.push_back(fileIterator->second.Id);
-    }
-
-    xbt_assert(tasksGraph["tasks"], "No tasks are specified in input file!");
-    for (const YAML::Node& taskDescription: tasksGraph["tasks"]) {
-        for (const YAML::Node& inputDescription: taskDescription["inputs"]) {
+namespace Workflow {
+    Graph::Graph(const string& filename) {
+        XBT_INFO("Loading workflow graph from %s", filename.c_str());
+        YAML::Node tasksGraph = YAML::LoadFile(filename);
+        xbt_assert(tasksGraph["name"], "Workflow name is not specified!");
+        Name = tasksGraph["name"].as<string>();
+        xbt_assert(tasksGraph["deadline"], "Task deadline is not specified!");
+        Deadline = tasksGraph["deadline"].as<double>();
+        xbt_assert(tasksGraph["inputs"], "Tasks inputs are not specified!");
+        for (const YAML::Node& inputDescription: tasksGraph["inputs"]) {
             xbt_assert(inputDescription["name"], "Input name is not specified!");
-            string inputName = inputDescription["name"].as<string>();
-            if (!Files.count(inputName)) {
-                auto fileIterator = Files.insert({inputName, FileDescription(inputName, 0)}).first;
-                FileIdMapping.insert({fileIterator->second.Id, fileIterator->second});
+            string inputName = inputDescription["name"].as<string>(); 
+            if (Files.count(inputName) > 0) {
+                XBT_WARN("Input name is not unique! Previous input will be deleted!");
             }
+            xbt_assert(inputDescription["size"], "Input size is not specified!");
+            Workflow::FileRegistry::iterator insertionResult;
+            try {
+                insertionResult = Files.insert({inputName, FileDescription(inputName, ParseSize(inputDescription["size"].as<string>(), SizeSuffixes))}).first;
+            } catch (std::exception& e) {
+                XBT_ERROR("Can't parse input size: %s", e.what());
+                XBT_WARN("Input size will be set to 0");
+                insertionResult = Files.insert({inputName, FileDescription(inputName, 0)}).first;
+            }
+            FileIdMapping.insert({insertionResult->second.Id, insertionResult->second});
+            Inputs.push_back(insertionResult->second.Id);
         }
-        for (const YAML::Node& outputDescription: taskDescription["outputs"]) {
+
+        xbt_assert(tasksGraph["outputs"], "Tasks outputs are not specified!");
+        for (const YAML::Node& outputDescription: tasksGraph["outputs"]) {
             xbt_assert(outputDescription["name"], "Output name is not specified!");
-            string outputName = outputDescription["name"].as<string>();
-
-            xbt_assert(outputDescription["size"], "Output size is not specified!");
-            long long outputSize = ParseSize(outputDescription["size"].as<string>(), SizeSuffixes);
-            
-            auto fileIterator = Files.find(outputName);
-            if (fileIterator == Files.end()) {
-                fileIterator = Files.insert({outputName, FileDescription(outputName, outputSize)}).first;
-                FileIdMapping.insert({fileIterator->second.Id, fileIterator->second});
-            } else {
-                fileIterator->second.Size = outputSize;
+            string outputName = outputDescription["name"].as<string>(); 
+            xbt_assert(outputDescription["source"], "Output source is not specified!");
+            if (Files.count(outputName) > 0) {
+                XBT_WARN("Output name is not unique! Previous output will be deleted!");
             }
+            auto fileIterator = Files.insert({outputName, FileDescription(outputName, 0)}).first;
+            FileIdMapping.insert({fileIterator->second.Id, fileIterator->second});
+            Outputs.push_back(fileIterator->second.Id);
         }
-        Nodes.push_back(std::make_unique<Node>(taskDescription, Files));
-    }
 
-    XBT_INFO("Done!");
+        xbt_assert(tasksGraph["tasks"], "No tasks are specified in input file!");
+        for (const YAML::Node& taskDescription: tasksGraph["tasks"]) {
+            for (const YAML::Node& inputDescription: taskDescription["inputs"]) {
+                xbt_assert(inputDescription["name"], "Input name is not specified!");
+                string inputName = inputDescription["name"].as<string>();
+                if (!Files.count(inputName)) {
+                    auto fileIterator = Files.insert({inputName, FileDescription(inputName, 0)}).first;
+                    FileIdMapping.insert({fileIterator->second.Id, fileIterator->second});
+                }
+            }
+            for (const YAML::Node& outputDescription: taskDescription["outputs"]) {
+                xbt_assert(outputDescription["name"], "Output name is not specified!");
+                string outputName = outputDescription["name"].as<string>();
+
+                xbt_assert(outputDescription["size"], "Output size is not specified!");
+                long long outputSize = ParseSize(outputDescription["size"].as<string>(), SizeSuffixes);
+                
+                auto fileIterator = Files.find(outputName);
+                if (fileIterator == Files.end()) {
+                    fileIterator = Files.insert({outputName, FileDescription(outputName, outputSize)}).first;
+                    FileIdMapping.insert({fileIterator->second.Id, fileIterator->second});
+                } else {
+                    fileIterator->second.Size = outputSize;
+                }
+            }
+            Nodes.push_back(std::make_unique<Task>(taskDescription, Files));
+        }
+
+        XBT_INFO("Done!");
+    }
 }

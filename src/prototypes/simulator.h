@@ -15,7 +15,7 @@ class CloudSimulator : public SimulatorInterface {
     CloudPlatform Platform;
     AbstractScheduler* Scheduler;
     Schedule Assignments;
-    WorkflowGraph Workflow;
+    Workflow::Graph TaskGraph;
 
 public:
     CloudSimulator(const std::string& platformConf, 
@@ -26,7 +26,7 @@ public:
         Platform(platformConf),
         Scheduler(scheduler),
         Assignments(),
-        Workflow(workflowConf)
+        TaskGraph(workflowConf)
         {}
     
     void RegisterScheduler(AbstractScheduler* s) {

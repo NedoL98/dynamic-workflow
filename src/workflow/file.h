@@ -1,10 +1,14 @@
 #pragma once
 #include <string>
+#include <map>
 
-struct FileDescription {
-    std::string Name;
-    size_t Size;
-    int Id;
+namespace Workflow {
+    struct FileDescription {
+        std::string Name;
+        size_t Size;
+        int Id;
 
-    FileDescription(const std::string& name, size_t size);
-};
+        FileDescription(const std::string& name, size_t size);
+    };
+    typedef std::map<std::string, FileDescription> FileRegistry;
+}

@@ -32,7 +32,7 @@ set(SOURCE_LIST
     "src/vm_list.cpp"
     "src/workflow/graph.cpp"
     "src/workflow/file.cpp"
-    "src/workflow/node.cpp"
+    "src/workflow/task.cpp"
 )
 
 
