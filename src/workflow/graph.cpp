@@ -78,7 +78,7 @@ namespace Workflow {
                     fileIterator->second.Size = outputSize;
                 }
             }
-            Nodes.push_back(std::make_unique<Task>(taskDescription, Files));
+            Nodes.push_back(std::make_unique<Task>(taskDescription, Files, Nodes.size()));
         }
 
         XBT_INFO("Done!");

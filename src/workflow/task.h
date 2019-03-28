@@ -7,13 +7,34 @@
 #include <spec.h>
 
 namespace Workflow {
-    struct Task {
+    class Graph;
+    class Task {
         std::string Name;
         std::vector<int> Inputs, Outputs;
         std::vector<int> Dependencies, Successors;
         TaskSpec Requirements;
 
         EState state;
-        Task(const YAML::Node& taskDescription, const FileRegistry& registry);
+        int Id;
+    public:
+        Task(const YAML::Node& taskDescription, const FileRegistry& registry, int Id);
+
+        int GetId() const {
+            return Id;
+        }
+        const std::vector<int>& GetDependencies() const {
+            return Dependencies;
+        }
+        const std::vector<int>& GetSuccessors() const {
+            return Successors;
+        }
+        const TaskSpec& GetTaskSpec() const {
+            return Requirements;
+        }
+        
+        const std::string& GetName() const {
+            return Name;
+        }
+        friend class Workflow::Graph;
     };
 }
