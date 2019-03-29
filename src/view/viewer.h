@@ -21,5 +21,6 @@ namespace View {
         const VMList& GetAvailiableVMTaxes() const;
         const Schedule& GetCurrentAssignments() const;
         Status GetTaskStatus(int id) const;
+        double GetDeadline() const;
     };
 }

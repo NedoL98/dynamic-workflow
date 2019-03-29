@@ -22,7 +22,8 @@ public:
 
     std::vector<double> CalculateTasksEndTimes(const std::vector<View::Task>& taskOrder,
                                                const std::vector<VMDescription>& taskVM);
-    std::vector<std::pair<double, double>> CalculateDeadlines(const std::vector<View::Task>& taskOrder,
+    std::vector<std::pair<double, double>> CalculateDeadlines(View::Viewer& v,
+                                                              const std::vector<View::Task>& taskOrder,
                                                               const std::vector<VMDescription>& taskVM);
 
     std::vector<std::vector<LoadVectorEvent>> GetLoadVector(const std::vector<std::pair<double, double>>& deadlines,

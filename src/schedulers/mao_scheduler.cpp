@@ -99,8 +99,8 @@ void MaoScheduler::ReduceMakespan(vector<VMDescription>& taskVM,
         VMDescription newVM = oldVM;
         for (const VMDescription& vm: viewer->GetAvailiableVMTaxes()) {
             TaskSpec taskSpec = task.GetTaskSpec();
-            if (taskSpec.Cores >= vm.GetCores() &&
-                taskSpec.Memory >= vm.GetMemory() &&
+            if (taskSpec.Cores <= vm.GetCores() &&
+                taskSpec.Memory <= vm.GetMemory() &&
                 vm > oldVM && 
                 (newVM == oldVM || vm.GetPrice() <= newVM.GetPrice())) {
                 newVM = vm;
@@ -147,12 +147,13 @@ vector<double> MaoScheduler::CalculateTasksEndTimes(const vector<View::Task>& ta
     return tasksEndTimes;
 }
 
-vector<pair<double, double>> MaoScheduler::CalculateDeadlines(const vector<View::Task>& taskOrder,
+vector<pair<double, double>> MaoScheduler::CalculateDeadlines(View::Viewer& v,
+                                                              const vector<View::Task>& taskOrder,
                                                               const vector<VMDescription>& taskVM) {
     vector<double> tasksEndTimes = CalculateTasksEndTimes(taskOrder, taskVM);
     // for each time we construct a sorted list of all parents end times
 
-    vector<vector<pair<int, double>>> endTimeParentList;
+    vector<vector<pair<int, double>>> endTimeParentList(taskOrder.size());
     
     for (const View::Task& task: taskOrder) {
         for (int dependencyId : task.GetDependencies()) {
@@ -240,11 +241,8 @@ vector<pair<double, double>> MaoScheduler::CalculateDeadlines(const vector<View:
     xbt_assert(deadlines.size() == viewer->GetTaskList().size(), "Something went wrong, not all tasks have deadlines assigned!");
 
     for (pair<double, double>& deadline: deadlines) {
-        // FIXME when deadline can be get from viewer
-        /*
-        deadline.first *= Workflow.Deadline / totalDeadline;
-        deadline.second *= Workflow.Deadline / totalDeadline;
-        */
+        deadline.first *= v.GetDeadline() / totalDeadline;
+        deadline.second *= v.GetDeadline() / totalDeadline;
     }
 
     return deadlines;
@@ -274,18 +272,16 @@ MaoScheduler::Actions MaoScheduler::PrepareForRun(View::Viewer& v) {
     while (true) {
         double makespan = CalculateMakespan(taskVM, taskOrder);
 
-        /*
-        if (makespan <= v.) {
+        if (makespan <= v.GetDeadline()) {
             break;
         }
-        */
 
         XBT_INFO("Old makespan: %f", makespan);
         ReduceMakespan(taskVM, taskOrder, makespan);
         XBT_INFO("New makespan: %f", CalculateMakespan(taskVM, taskOrder));
     }
 
-    vector<pair<double, double>> deadlines = CalculateDeadlines(taskOrder, taskVM);
+    vector<pair<double, double>> deadlines = CalculateDeadlines(v, taskOrder, taskVM);
 
     vector<vector<LoadVectorEvent>> loadVector = GetLoadVector(deadlines, taskVM);
 
@@ -297,34 +293,19 @@ MaoScheduler::Actions MaoScheduler::PrepareForRun(View::Viewer& v) {
         return a.End < b.End;
     });
 
-    // TODO: make GetWorkflowSize method
-    vector<simgrid::s4u::ActorPtr> actorPointers(viewer->GetTaskList().size());
-    vector<bool> processingTasks(viewer->GetTaskList().size());
+    MaoScheduler::Actions actions;
 
-    for (const LoadVectorEvent& event: sortedEvents) {
-        const View::Task task = viewer->GetTaskById(event.TaskId);
+    Schedule s;
 
-        for (int dependencyId: task.GetDependencies()) {
-            if (processingTasks[dependencyId]) {
-                /*
-                Workflow.Tasks[input]->Finish(actorPointers[input]);
-                processingTasks.erase(input);
-                */
-            }
-        }
-
-        XBT_INFO("Scheduling task %d", task.GetId());
-
-        // we should reshedule task if its deadline can't be reached
-        VMDescription currentVMDescription = taskVM[task.GetId()];
-        /*
-        simgrid::s4u::VirtualMachine* currentVMInstance = VMList_.GetVMInstance(task->GetName(), currentVMDescription.GetId());
-        actorPointers[task->GetName()] = task->Execute(currentVMInstance, ActorFinishCallback, this);
-        processingTasks.insert(task->GetName());
-        */
+    int vmId = 0;
+    for (const VMDescription& vmDescr: taskVM) {
+        actions.push_back(std::make_shared<BuyVMAction>(vmDescr, vmId));
+        // FIXME if item.Id is not equal to task position in taskList
+        s.AddItem(vmId, ScheduleItem(vmId));
+        ++vmId;
     }
 
     XBT_INFO("Workflow processed!");
 
-    return {};
+    return actions;
 }

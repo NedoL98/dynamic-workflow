@@ -35,13 +35,14 @@ public:
     virtual ActionType GetActionType() const override;
 };
 
-class BuyVMAction : AbstractAction {
+class BuyVMAction : public AbstractAction {
     VMDescription Spec;
     int CustomId;
 
 public:
-    BuyVMAction(VMDescription s):
-        Spec(s)
+    BuyVMAction(VMDescription s, int customId):
+        Spec(s),
+        CustomId(customId)
         {}
 
     virtual void MakeAction(SimulatorInterface& interface) override;

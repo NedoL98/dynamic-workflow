@@ -30,5 +30,9 @@ namespace View {
     const Schedule& Viewer::GetCurrentAssignments() const {
         return Simulator.Assignments;
     }
+
+    double Viewer::GetDeadline() const {
+        return Simulator.TaskGraph.Deadline;
+    }
 }
 

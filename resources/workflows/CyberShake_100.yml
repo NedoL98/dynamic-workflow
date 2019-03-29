@@ -1,4 +1,5 @@
 name: CyberShake_100.yml
+deadline: 22
 inputs:
   - name: FFI_0_1_fx.sgt
     size: 20250656767
