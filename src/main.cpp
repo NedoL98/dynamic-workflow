@@ -42,7 +42,8 @@ int main(int argc, char* argv[]) {
     CloudSimulator cloudSim(platformPath,
                             parseResult["workflow"].as<string>(),
                             parseResult["vm_list"].as<string>(),
-                            &dummy);
+                            &dummy,
+                            parseResult);
 
     cloudSim.Run();
     /*

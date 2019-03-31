@@ -3,6 +3,8 @@
 #include <simgrid/s4u.hpp>
 #include <memory>
 
+#include "graph.h"
+
 using std::vector;
 using std::map;
 using std::string;
@@ -10,13 +12,18 @@ using std::string;
 XBT_LOG_NEW_DEFAULT_CATEGORY(workflow_graph_cpp, "Tasks graph log");
 
 namespace Workflow {
-    Graph::Graph(const string& filename) {
+    Graph::Graph(const string& filename, cxxopts::ParseResult& options) {
         XBT_INFO("Loading workflow graph from %s", filename.c_str());
         YAML::Node tasksGraph = YAML::LoadFile(filename);
         xbt_assert(tasksGraph["name"], "Workflow name is not specified!");
         Name = tasksGraph["name"].as<string>();
-        xbt_assert(tasksGraph["deadline"], "Task deadline is not specified!");
-        Deadline = tasksGraph["deadline"].as<double>();
+        if (options.count("deadline")) {
+            Deadline = options["deadline"].as<double>();
+        } else if (tasksGraph["deadline"]) {
+            Deadline = tasksGraph["deadline"].as<double>();
+        } else {
+            xbt_die("Task deadline is not specified in workflow file nor as a command line argument!");    
+        }
         xbt_assert(tasksGraph["inputs"], "Tasks inputs are not specified!");
         for (const YAML::Node& inputDescription: tasksGraph["inputs"]) {
             xbt_assert(inputDescription["name"], "Input name is not specified!");

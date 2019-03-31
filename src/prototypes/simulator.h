@@ -1,4 +1,5 @@
 #pragma once
+#include "argument_parser.h"
 #include "prototypes/interface.h"
 #include "prototypes/scheduler.h"
 #include "platform/platform.h"
@@ -21,12 +22,13 @@ public:
     CloudSimulator(const std::string& platformConf, 
                    const std::string& workflowConf, 
                    const std::string& VMListConf,
-                   AbstractScheduler* scheduler):
+                   AbstractScheduler* scheduler,
+                   cxxopts::ParseResult& parseResult):
         AvailiableVMs(VMListConf),
         Platform(platformConf),
         Scheduler(scheduler),
         Assignments(),
-        TaskGraph(workflowConf)
+        TaskGraph(workflowConf, parseResult)
         {}
     
     void RegisterScheduler(AbstractScheduler* s) {

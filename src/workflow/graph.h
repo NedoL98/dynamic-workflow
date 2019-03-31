@@ -3,6 +3,7 @@
 #include <memory>
 #include <string>
 
+#include "argument_parser.h"
 #include <workflow/task.h>
 #include <workflow/file.h>
 
@@ -18,6 +19,6 @@ namespace Workflow {
         std::vector<int> Outputs;
         std::string Name;
         double Deadline;
-        Graph(const std::string& filename);
+        Graph(const std::string& filename, cxxopts::ParseResult& options);
     };
 }

@@ -29,7 +29,6 @@ string GeneratePlatform(const string& workflowPath, const string& vmListPath) {
     // TODO: use this parameter while generating platform
     double maxMemory;
 
-    TasksGraph tasksGraph(workflowPath);
     VMList vmList(vmListPath);
 
     vector<pair<int, double>> vmSpeeds;
@@ -44,7 +43,9 @@ string GeneratePlatform(const string& workflowPath, const string& vmListPath) {
 
     string hostSpeeds = GetHostSpeeds(vmSpeeds);
 
-    hostCnt = tasksGraph.Size();
+    YAML::Node tasksGraph = YAML::LoadFile(workflowPath);
+
+    hostCnt = tasksGraph["tasks"].size();
     maxCoresCnt = vmList.MaxCores();
     maxMemory = vmList.MaxMemory();
 
