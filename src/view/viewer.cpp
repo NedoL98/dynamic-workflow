@@ -34,5 +34,9 @@ namespace View {
     double Viewer::GetDeadline() const {
         return Simulator.TaskGraph.Deadline;
     }
+
+    vector<Task> Viewer::MakeTasksOrder() const {
+        return Simulator.TaskGraph.MakeTasksOrder();
+    }
 }
 

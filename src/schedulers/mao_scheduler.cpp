@@ -37,34 +37,6 @@ vector<VMDescription> MaoScheduler::GetCheapestVMs() {
     return cheapestVM;
 }
 
-void MaoScheduler::MakeOrderDFS(int v, 
-                                vector<View::Task>& order, 
-                                vector<bool>& used) {
-    used[v] = true;
-    for (int u: viewer->GetTaskById(v).GetSuccessors()) {
-        if (!used[u]) {
-            MakeOrderDFS(u, order, used);
-        }
-    }
-    order.push_back(viewer->GetTaskById(v));
-}
-
-vector<View::Task> MaoScheduler::MakeTasksOrder() {
-    vector<View::Task> order;
-
-    vector<bool> used(viewer->GetTaskList().size());
-    for (int i = 0; i < viewer->GetTaskList().size(); ++i) {
-        if (!used[i] && viewer->GetTaskById(i).GetDependencies().size() == 0) {
-            MakeOrderDFS(i, order, used);
-        }
-    }
-    xbt_assert(order.size() == viewer->GetTaskList().size(), "Something went wrong, not all tasks are included in tasks order!");
-    
-    std::reverse(order.begin(), order.end());
-
-    return order;
-}
-
 // we should enhance this in future so that data transer time is considered
 double CalculateMakespan(const vector<VMDescription>& taskVM, const vector<View::Task>& taskOrder) {
     double makespan = 0;
@@ -264,7 +236,7 @@ MaoScheduler::Actions MaoScheduler::PrepareForRun(View::Viewer& v) {
 
     // TasksBundling(taskVM);
     
-    vector<View::Task> taskOrder = MakeTasksOrder();
+    vector<View::Task> taskOrder = v.MakeTasksOrder();
 
     while (true) {
         double makespan = CalculateMakespan(taskVM, taskOrder);

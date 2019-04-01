@@ -22,5 +22,6 @@ namespace View {
         const Schedule& GetCurrentAssignments() const;
         Status GetTaskStatus(int id) const;
         double GetDeadline() const;
+        std::vector<Task> MakeTasksOrder() const;
     };
 }

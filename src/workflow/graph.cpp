@@ -110,4 +110,32 @@ namespace Workflow {
         }
     }
 
+    void Graph::MakeOrderDFS(int v, 
+                             vector<Task>& order, 
+                             vector<bool>& used) const {
+        used[v] = true;
+        for (int u: Nodes[v]->GetSuccessors()) {
+            if (!used[u]) {
+                MakeOrderDFS(u, order, used);
+            }
+        }
+        order.push_back(*Nodes[v]);
+    }
+
+    vector<Task> Graph::MakeTasksOrder() const {
+        vector<Task> order;
+
+        vector<bool> used(Nodes.size());
+        for (int i = 0; i < Nodes.size(); ++i) {
+            if (!used[i] && Nodes[i]->GetDependencies().size() == 0) {
+                MakeOrderDFS(i, order, used);
+            }
+        }
+        xbt_assert(order.size() == Nodes.size(), "Something went wrong, not all tasks are included in tasks order!");
+        
+        std::reverse(order.begin(), order.end());
+
+        return order;
+    }
+
 }

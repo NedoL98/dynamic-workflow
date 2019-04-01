@@ -20,5 +20,7 @@ namespace Workflow {
         std::string Name;
         double Deadline;
         Graph(const std::string& filename, cxxopts::ParseResult& options);
+        void MakeOrderDFS(int v, std::vector<Task>& order, std::vector<bool>& used) const;
+        std::vector<Task> MakeTasksOrder() const;
     };
 }
