@@ -35,6 +35,11 @@ namespace Workflow {
         const std::string& GetName() const {
             return Name;
         }
+
+        bool CanExecute(const VMDescription& vmDescr) const {
+            return Requirements.Cores <= vmDescr.GetCores() && Requirements.Memory <= vmDescr.GetMemory();
+        }
+
         friend class Workflow::Graph;
     };
 }

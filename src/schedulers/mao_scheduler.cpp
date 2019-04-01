@@ -25,8 +25,7 @@ vector<VMDescription> MaoScheduler::GetCheapestVMs() {
         VMDescription bestVM;
         for (VMDescription vmDescr: viewer->GetAvailiableVMTaxes()) {
             // we probably want to reconsider way of choosing most efficient vm type for a task
-            if (curSpec.Cores <= vmDescr.GetCores() &&
-                curSpec.Memory <= vmDescr.GetMemory() &&
+            if (taskPtr->CanExecute(vmDescr) &&
                 (bestPrice == -1 || vmDescr.GetPrice() < bestPrice)) {
                 bestPrice = vmDescr.GetPrice();
                 bestVM = vmDescr;
@@ -98,9 +97,7 @@ void MaoScheduler::ReduceMakespan(vector<VMDescription>& taskVM,
         VMDescription oldVM = taskVM[task.GetId()]; 
         VMDescription newVM = oldVM;
         for (const VMDescription& vm: viewer->GetAvailiableVMTaxes()) {
-            TaskSpec taskSpec = task.GetTaskSpec();
-            if (taskSpec.Cores <= vm.GetCores() &&
-                taskSpec.Memory <= vm.GetMemory() &&
+            if (task.CanExecute(vm) &&
                 vm > oldVM && 
                 (newVM == oldVM || vm.GetPrice() <= newVM.GetPrice())) {
                 newVM = vm;
