@@ -36,7 +36,7 @@ namespace Workflow {
             return Name;
         }
 
-        bool CanExecute(const VMDescription& vmDescr) const {
+        bool CanBeExecuted(const VMDescription& vmDescr) const {
             return Requirements.Cores <= vmDescr.GetCores() && Requirements.Memory <= vmDescr.GetMemory();
         }
 
