@@ -37,7 +37,7 @@ namespace Workflow {
                 insertionResult = Files.insert({inputName, FileDescription(inputName, ParseSize(inputDescription["size"].as<string>(), SizeSuffixes))}).first;
             } catch (std::exception& e) {
                 XBT_ERROR("Can't parse input size: %s", e.what());
-                XBT_WARN("Input size will be set to 0");
+                XBT_DEBUG("Input size will be set to 0");
                 insertionResult = Files.insert({inputName, FileDescription(inputName, 0)}).first;
             }
             FileIdMapping.insert({insertionResult->second.Id, insertionResult->second});

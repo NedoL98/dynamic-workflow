@@ -42,25 +42,25 @@ Task::Task(const YAML::Node& taskDescription) {
     }
 
     if (!taskDescription["requirements"]) {
-        XBT_WARN("Task requirements are not specified, they will be set to default!");
+        XBT_DEBUG("Task requirements are not specified, they will be set to default!");
         SetDefaultRequirements();
     } else {
         if (!taskDescription["requirements"]["cpu"]) {
-            XBT_WARN("CPU usage is not specified for task, it will be set to default!");
+            XBT_DEBUG("CPU usage is not specified for task, it will be set to default!");
             Cores = DefaultCores;
         } else {
             Cores = taskDescription["requirements"]["cpu"].as<int>();
         }
 
         if (!taskDescription["requirements"]["memory"]) {
-            XBT_WARN("Memory usage is not specified for task, it will be set to default!");
+            XBT_DEBUG("Memory usage is not specified for task, it will be set to default!");
             Memory = DefaultMemory;
         } else {
             try {
                 Memory = ParseSize(taskDescription["requirements"]["memory"].as<string>(), SizeSuffixes);
             } catch (std::exception& e) {
                 XBT_ERROR("Can't parse memory requirement: %s", e.what());
-                XBT_WARN("Memory requirement will be set to %d", DefaultMemory);
+                XBT_DEBUG("Memory requirement will be set to %d", DefaultMemory);
                 Memory = DefaultMemory;
             }
         }
@@ -125,7 +125,7 @@ void Task::AppendOutput(const string& name, const string& size) {
         Outputs[name] = ParseSize(size, SizeSuffixes);
     } catch (std::exception& e) {
         XBT_ERROR("Can't parse output size: %s", e.what());
-        XBT_WARN("Output size will be set to default value");
+        XBT_DEBUG("Output size will be set to default value");
         Outputs[name] = 0;
     }
 }

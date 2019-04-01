@@ -31,7 +31,7 @@ void TransformHostsProps() {
 
         unordered_map<string, string> hostProps = *(host->get_properties());
         if (!hostProps.count("memory")) {
-            XBT_WARN("No memory limit for host %s is specified, it will be set to default!", host->get_name().c_str());
+            XBT_DEBUG("No memory limit for host %s is specified, it will be set to default!", host->get_name().c_str());
             host->set_property("memory", std::to_string(DefaultMemory));
         } else {
             host->set_property("memory", std::to_string(ParseSize(hostProps["memory"], SizeSuffixes)));

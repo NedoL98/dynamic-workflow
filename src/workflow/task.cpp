@@ -26,26 +26,26 @@ namespace Workflow {
         }
 
         if (!taskDescription["requirements"]) {
-            XBT_WARN("Task requirements are not specified, they will be set to default!");
+            XBT_DEBUG("Task requirements are not specified, they will be set to default!");
             Requirements.Cores = DefaultCores;
             Requirements.Memory = DefaultMemory;
         } else {
             if (!taskDescription["requirements"]["cpu"]) {
-                XBT_WARN("CPU usage is not specified for task, it will be set to default!");
+                XBT_DEBUG("CPU usage is not specified for task, it will be set to default!");
                 Requirements.Cores = DefaultCores;
             } else {
                 Requirements.Cores = taskDescription["requirements"]["cpu"].as<int>();
             }
 
             if (!taskDescription["requirements"]["memory"]) {
-                XBT_WARN("Memory usage is not specified for task, it will be set to default!");
+                XBT_DEBUG("Memory usage is not specified for task, it will be set to default!");
                 Requirements.Memory = DefaultMemory;
             } else {
                 try {
                     Requirements.Memory = ParseSize(taskDescription["requirements"]["memory"].as<string>(), SizeSuffixes);
                 } catch (std::exception& e) {
                     XBT_ERROR("Can't parse memory requirement: %s", e.what());
-                    XBT_WARN("Memory requirement will be set to %d", DefaultMemory);
+                    XBT_DEBUG("Memory requirement will be set to %d", DefaultMemory);
                     Requirements.Memory = DefaultMemory;
                 }
             }

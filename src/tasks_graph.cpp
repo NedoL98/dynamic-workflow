@@ -34,7 +34,7 @@ TasksGraph::TasksGraph(string filepath) {
             Inputs[inputName] = ParseSize(inputDescription["size"].as<string>(), SizeSuffixes);
         } catch (std::exception& e) {
             XBT_ERROR("Can't parse input size: %s", e.what());
-            XBT_WARN("Input size will be set to 0");
+            XBT_DEBUG("Input size will be set to 0");
             Inputs[inputName] = 0;
         }
     }
