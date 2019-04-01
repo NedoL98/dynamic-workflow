@@ -16,7 +16,7 @@ public:
     }
 };
 
-class AssignTaskAction : AbstractAction {
+class AssignTaskAction : public AbstractAction {
     ScheduleItem Task;
     int HostId;
 
@@ -26,7 +26,7 @@ public:
     virtual ActionType GetActionType() const override;
 };
 
-class ResetScheduleAction : AbstractAction {
+class ResetScheduleAction : public AbstractAction {
     Schedule S;
 
 public:

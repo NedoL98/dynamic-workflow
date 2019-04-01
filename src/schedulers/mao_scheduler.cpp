@@ -274,6 +274,8 @@ MaoScheduler::Actions MaoScheduler::PrepareForRun(View::Viewer& v) {
         ++vmId;
     }
 
+    actions.push_back(std::make_shared<ResetScheduleAction>(s));
+
     XBT_INFO("Workflow processed!");
 
     return actions;
