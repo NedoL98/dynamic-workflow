@@ -16,6 +16,58 @@ using std::vector;
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(mao_scheduler, "Mao scheduler log");
 
+MaoScheduler::Actions MaoScheduler::PrepareForRun(View::Viewer& v) {
+    viewer = std::make_shared<View::Viewer>(v);
+
+    vector<VMDescription> taskVM = GetCheapestVMs();
+
+    // TasksBundling(taskVM);
+    
+    vector<View::Task> taskOrder = v.MakeTasksOrder();
+
+    while (true) {
+        double makespan = CalculateMakespan(taskVM, taskOrder);
+
+        if (makespan <= v.GetDeadline()) {
+            break;
+        }
+
+        XBT_INFO("Old makespan: %f", makespan);
+        ReduceMakespan(taskVM, taskOrder, makespan);
+        XBT_INFO("New makespan: %f", CalculateMakespan(taskVM, taskOrder));
+    }
+
+    vector<pair<double, double>> deadlines = CalculateDeadlines(v, taskOrder, taskVM);
+
+    vector<vector<LoadVectorEvent>> loadVector = GetLoadVector(deadlines, taskVM);
+
+    vector<LoadVectorEvent> sortedEvents;
+    for (const auto& vmLoadVector: loadVector) {
+        sortedEvents.insert(sortedEvents.end(), vmLoadVector.begin(), vmLoadVector.end());
+    }
+    std::sort(sortedEvents.begin(), sortedEvents.end(), [](const auto& a, const auto& b) {
+        return a.End < b.End;
+    });
+
+    MaoScheduler::Actions actions;
+
+    Schedule s;
+
+    int vmId = 0;
+    for (const VMDescription& vmDescr: taskVM) {
+        actions.push_back(std::make_shared<BuyVMAction>(vmDescr, vmId));
+        // FIXME if item.Id is not equal to task position in taskList
+        s.AddItem(vmId, ScheduleItem(vmId));
+        ++vmId;
+    }
+
+    actions.push_back(std::make_shared<ResetScheduleAction>(s));
+
+    XBT_INFO("Workflow processed!");
+
+    return actions;
+}
+
 vector<VMDescription> MaoScheduler::GetCheapestVMs() {
     vector<VMDescription> cheapestVM;
     for (const unique_ptr<View::Task>& taskPtr : viewer->GetTaskList()) {
@@ -38,7 +90,7 @@ vector<VMDescription> MaoScheduler::GetCheapestVMs() {
 }
 
 // we should enhance this in future so that data transer time is considered
-double CalculateMakespan(const vector<VMDescription>& taskVM, const vector<View::Task>& taskOrder) {
+double MaoScheduler::CalculateMakespan(const vector<VMDescription>& taskVM, const vector<View::Task>& taskOrder) {
     double makespan = 0;
 
     vector<double> endTime(taskOrder.size(), -1);
@@ -227,56 +279,4 @@ vector<vector<LoadVectorEvent>> MaoScheduler::GetLoadVector(const vector<pair<do
         loadVector[vmId].push_back({consumptionRatio, deadlines[taskId].first, deadlines[taskId].second, taskId, vmId});
     }
     return loadVector;
-}
-
-MaoScheduler::Actions MaoScheduler::PrepareForRun(View::Viewer& v) {
-    viewer = std::make_shared<View::Viewer>(v);
-
-    vector<VMDescription> taskVM = GetCheapestVMs();
-
-    // TasksBundling(taskVM);
-    
-    vector<View::Task> taskOrder = v.MakeTasksOrder();
-
-    while (true) {
-        double makespan = CalculateMakespan(taskVM, taskOrder);
-
-        if (makespan <= v.GetDeadline()) {
-            break;
-        }
-
-        XBT_INFO("Old makespan: %f", makespan);
-        ReduceMakespan(taskVM, taskOrder, makespan);
-        XBT_INFO("New makespan: %f", CalculateMakespan(taskVM, taskOrder));
-    }
-
-    vector<pair<double, double>> deadlines = CalculateDeadlines(v, taskOrder, taskVM);
-
-    vector<vector<LoadVectorEvent>> loadVector = GetLoadVector(deadlines, taskVM);
-
-    vector<LoadVectorEvent> sortedEvents;
-    for (const auto& vmLoadVector: loadVector) {
-        sortedEvents.insert(sortedEvents.end(), vmLoadVector.begin(), vmLoadVector.end());
-    }
-    std::sort(sortedEvents.begin(), sortedEvents.end(), [](const auto& a, const auto& b) {
-        return a.End < b.End;
-    });
-
-    MaoScheduler::Actions actions;
-
-    Schedule s;
-
-    int vmId = 0;
-    for (const VMDescription& vmDescr: taskVM) {
-        actions.push_back(std::make_shared<BuyVMAction>(vmDescr, vmId));
-        // FIXME if item.Id is not equal to task position in taskList
-        s.AddItem(vmId, ScheduleItem(vmId));
-        ++vmId;
-    }
-
-    actions.push_back(std::make_shared<ResetScheduleAction>(s));
-
-    XBT_INFO("Workflow processed!");
-
-    return actions;
 }

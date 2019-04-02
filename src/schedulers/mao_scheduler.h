@@ -14,8 +14,9 @@ class MaoScheduler: public StaticScheduler {
 public:
     virtual Actions PrepareForRun(View::Viewer& v) override;
 
+private:
+    double CalculateMakespan(const std::vector<VMDescription>& taskVM, const std::vector<View::Task>& taskOrder);
     void ReduceMakespan(std::vector<VMDescription>& taskVM, const std::vector<View::Task>& taskOrder, double currentMakespan);
-
 
     std::vector<double> CalculateTasksEndTimes(const std::vector<View::Task>& taskOrder,
                                                const std::vector<VMDescription>& taskVM);
