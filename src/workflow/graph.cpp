@@ -138,4 +138,15 @@ namespace Workflow {
         return order;
     }
 
+    bool Graph::IsFinished() const {
+        return FinishedTasks.size() == Nodes.size();
+    }
+
+    void Graph::FinishTask(int id) {
+        if (Nodes[id]->State == EState::Done) {
+            return;
+        }
+        Nodes[id]->State = EState::Done;
+        FinishedTasks.insert(id);
+    }
 }

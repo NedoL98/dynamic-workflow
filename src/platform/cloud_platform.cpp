@@ -1,5 +1,8 @@
 #include "platform/platform.h"
+#include <simgrid/s4u.hpp>
 #include "spec.h"
+
+XBT_LOG_NEW_DEFAULT_CATEGORY(platform_cloud_platform, "cloud platform log");
 
 namespace {
     void DoExecute(double flops) {
@@ -10,6 +13,8 @@ namespace {
         double timeFinish = simgrid::s4u::Engine::get_clock();
 
 
+        XBT_INFO("%s: actor %s executed %g seconds", host->get_cname(),
+                simgrid::s4u::this_actor::get_cname(), timeFinish - timeStart);
         simgrid::s4u::this_actor::exit();
     }
 }
@@ -18,7 +23,7 @@ bool CloudPlatform::CreateVM(int hostId, const ComputeSpec& s, int id) {
     if (VirtualMachines.count(id)) {
         return false;
     }
-    if (HostsList[hostId].CreateVM(s, id) == -1) {
+    if (!HostsList[hostId].CreateVM(s, id)) {
         return false;
     }
     VirtualMachines[id] = HostsList[hostId].VirtualMachines[id];
@@ -49,7 +54,8 @@ simgrid::s4u::ActorPtr CloudPlatform::AssignTask(int vmId, const TaskSpec& requi
 
 int CloudPlatform::GetEmptyHost(const ComputeSpec& s) {
     for (const auto& host : HostsList) {
-        if (host.VirtualMachines.empty() && host.Spec == s) {
+        //XBT_INFO("%d %d %d \/ %d %d %d", host.Spec.Cores, host.Spec.Memory, host.Spec.Speed, s.Cores, s.Memory, s.Speed);
+        if (host.VirtualMachines.empty()/*FIXME && host.Spec == s*/) {
             return host.Id;
         }
     }

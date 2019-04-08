@@ -17,9 +17,11 @@ bool Host::CreateVM(const ComputeSpec& c, int CustomId) {
     if (VirtualMachines.count(CustomId)) {
         return false;
     }
+    /*
     if (AvailiableCores < c.Cores || AvailiableMemory < c.Memory) {
         return false;
     }
+    */
     simgrid::s4u::VirtualMachine* vm = new simgrid::s4u::VirtualMachine(std::to_string(Id) + std::to_string(VirtualMachines.size()) + "_VM", Unit, c.Cores, c.Memory);
     vm->set_property("VM_ID", std::to_string(CustomId));
     AvailiableCores -= c.Cores;

@@ -3,7 +3,7 @@ struct ComputeSpec {
     long long Memory, Speed;
     int Cores;
     bool operator ==(const ComputeSpec& other) const {
-        return Memory == other.Memory && Speed == other.Speed && Cores == other.Cores;
+        return Speed == other.Speed && Cores == other.Cores;
     }
 };
 

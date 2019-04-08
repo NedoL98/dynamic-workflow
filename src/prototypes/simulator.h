@@ -18,6 +18,11 @@ class CloudSimulator : public SimulatorInterface {
     Schedule Assignments;
     Workflow::Graph TaskGraph;
 
+    static void MainLoop(CloudSimulator* s);
+    void DoMainLoop();
+    static int RefreshAfterTask(void*, void* s);
+    void DoRefreshAfterTask();
+
 public:
     CloudSimulator(const std::string& platformConf, 
                    const std::string& workflowConf, 

@@ -14,7 +14,7 @@ namespace Workflow {
         std::vector<int> Dependencies, Successors;
         TaskSpec Requirements;
 
-        EState state;
+        EState State;
         int Id;
     public:
         Task(const YAML::Node& taskDescription, const FileRegistry& registry, int Id);
@@ -34,6 +34,10 @@ namespace Workflow {
         
         const std::string& GetName() const {
             return Name;
+        }
+
+        const EState GetState() const {
+            return State;
         }
 
         bool CanBeExecuted(const VMDescription& vmDescr) const {

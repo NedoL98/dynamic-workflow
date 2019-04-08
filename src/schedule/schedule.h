@@ -30,6 +30,7 @@ public:
     HostSchedule();
     void AddItem(const ScheduleItem& item);
     ScheduleItem PopItem();
+    bool HasItem() const;
     ScheduleItem GetItem() const;
     bool IsEmpty() const; 
 };
@@ -41,5 +42,6 @@ public:
     Schedule();
     void AddItem(int host, const ScheduleItem& item);
     ScheduleItem GetItem(int host);
+    bool HasItem(int host);
     ScheduleItem PopItem(int host);
 };

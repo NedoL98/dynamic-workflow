@@ -1,4 +1,6 @@
+#include <simgrid/s4u.hpp>
 #include "schedule/schedule_action.h"
+XBT_LOG_NEW_DEFAULT_CATEGORY(schedule_action, "schedule actions log");
 
 AssignTaskAction::AssignTaskAction(int hostId, int taskId):
     Task(taskId),
@@ -26,7 +28,9 @@ ActionType ResetScheduleAction::GetActionType() const {
 }
 
 void BuyVMAction::MakeAction(SimulatorInterface& interface) {
-    interface.RegisterVirtualMachine(Spec, CustomId);
+    if (!interface.RegisterVirtualMachine(Spec, CustomId)) {
+        XBT_INFO("Action failed for vm %d", CustomId);
+    }
 }
 
 ActionType BuyVMAction::GetActionType() const {

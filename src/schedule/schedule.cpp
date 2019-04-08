@@ -53,13 +53,17 @@ void HostSchedule::AddItem(const ScheduleItem& item) {
     PlannedTasks.push(item);
 }
 
+bool HostSchedule::HasItem() const {
+    return PlannedTasks.size();
+}
+
 ScheduleItem HostSchedule::GetItem() const {
-    assert(PlannedTasks.empty());
+    assert(!PlannedTasks.empty());
     return PlannedTasks.front();    
 }
 
 ScheduleItem HostSchedule::PopItem() {
-    assert(PlannedTasks.empty());
+    assert(!PlannedTasks.empty());
     ScheduleItem result = PlannedTasks.front();
     PlannedTasks.pop();    
     return std::move(result);
@@ -75,6 +79,10 @@ Schedule::Schedule()
 
 void Schedule::AddItem(int host, const ScheduleItem& item) {
     TimeTable[host].AddItem(item);
+}
+
+bool Schedule::HasItem(int host) {
+    return !TimeTable[host].IsEmpty();
 }
 
 ScheduleItem Schedule::GetItem(int host) {
