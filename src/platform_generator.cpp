@@ -55,18 +55,18 @@ string GeneratePlatform(const string& workflowPath, const string& vmListPath) {
         waitpid(pid, &wstatus, 0);
     } else {
         execlp("python3", 
-                "python3",
-                (string(PROJECT_PATH) + "/tools/plat_gen.py").c_str(), 
-                (string(PROJECT_PATH) + "/resources").c_str(), 
-                "1", 
-                "0", 
-                "cluster", 
-                std::to_string(hostCnt).c_str(), 
-                hostSpeeds.c_str(),
-                std::to_string(maxCoresCnt).c_str(), 
-                "1", 
-                "1", 
-                nullptr);
+               "python3",
+               (string(PROJECT_PATH) + "/tools/plat_gen.py").c_str(), 
+               (string(PROJECT_PATH) + "/resources").c_str(), 
+               "1", 
+               "0", 
+               "cluster", 
+               std::to_string(hostCnt).c_str(), 
+               hostSpeeds.c_str(),
+               std::to_string(maxCoresCnt).c_str(), 
+               "100", 
+               "1", 
+               nullptr);
     }
 
     std::stringstream platformPathBuilder;
@@ -74,7 +74,7 @@ string GeneratePlatform(const string& workflowPath, const string& vmListPath) {
     platformPathBuilder << string(PROJECT_PATH) + "/resources/cluster"
                         << "_" << std::to_string(hostCnt)
                         << "_" << std::to_string(maxCoresCnt)
-                        << "_" << std::to_string(1)
+                        << "_" << std::to_string(100)
                         << "_" << std::to_string(1)
                         << "_0.xml";
     return platformPathBuilder.str(); 
