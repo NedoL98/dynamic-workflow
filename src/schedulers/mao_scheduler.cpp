@@ -63,7 +63,9 @@ MaoScheduler::Actions MaoScheduler::PrepareForRun(View::Viewer& v) {
 
     actions.push_back(std::make_shared<ResetScheduleAction>(s));
 
-    XBT_INFO("Workflow processed!");
+    XBT_INFO("Schedule created!");
+    XBT_INFO("Makespan: %f", CalculateMakespan(taskVM, taskOrder));
+    XBT_INFO("Cost: %f", CalculateCost(taskVM));
 
     return actions;
 }
@@ -87,6 +89,16 @@ vector<VMDescription> MaoScheduler::GetCheapestVMs() {
         cheapestVM.push_back(bestVM);
     }
     return cheapestVM;
+}
+
+double MaoScheduler::CalculateCost(const vector<VMDescription>& taskVM) const {
+    double cost = 0;
+    for (int taskId = 0; taskId < viewer->Size(); ++taskId) {
+        VMDescription vmDescr = taskVM[taskId];
+        View::Task task = viewer->GetTaskById(taskId);
+        cost += vmDescr.GetPrice() * (task.GetTaskSpec().Cost / vmDescr.GetFlops());
+    }
+    return cost;
 }
 
 // we should enhance this in future so that data transer time is considered

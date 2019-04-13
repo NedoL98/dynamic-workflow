@@ -15,6 +15,8 @@ public:
     virtual Actions PrepareForRun(View::Viewer& v) override;
 
 private:
+    double CalculateCost(const std::vector<VMDescription>& taskVM) const;
+
     double CalculateMakespan(const std::vector<VMDescription>& taskVM, const std::vector<View::Task>& taskOrder);
     void ReduceMakespan(std::vector<VMDescription>& taskVM, const std::vector<View::Task>& taskOrder, double currentMakespan);
 
