@@ -1,11 +1,16 @@
 #include "genetic_scheduler.h"
 
+using namespace std::placeholders;
+
+using std::bind;
+using std::function;
 using std::max;
 using std::min;
 using std::pair;
 using std::set;
 using std::sort;
 using std::swap;
+using std::upper_bound;
 using std::vector;
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(genetic_scheduler, "Genetic scheduler log");
@@ -14,7 +19,7 @@ GeneticScheduler::Actions GeneticScheduler::PrepareForRun(View::Viewer& v) {
     viewer = std::make_shared<View::Viewer>(v);
 
     for (VMDescription vmDecr: v.GetAvailiableVMTaxes()) {
-        for (int i = 0; i < 50; ++i) {
+        for (int i = 0; i < NUM_VMS; ++i) {
             AvailableVMs.push_back(vmDecr);
         }
     }
@@ -23,10 +28,12 @@ GeneticScheduler::Actions GeneticScheduler::PrepareForRun(View::Viewer& v) {
 
     FillAssignmentValues(assignments);
 
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < NUM_STEPS; ++i) {
         assignments = GetNewGeneration(assignments);
         FillAssignmentValues(assignments);
-        PrintEpochStatistics(assignments, i);
+        if (i % 100 == 0) {
+            PrintEpochStatistics(assignments, i);
+        }
     }
 }
 
@@ -210,7 +217,7 @@ pair<int, int> GeneticScheduler::GetRandomParents(const vector<Assignment>& pare
     return parentsIds;
 }
 
-Assignment GeneticScheduler::MatchingCrossover(const Assignment& mainParent, const Assignment& secondaryParent) const {
+Assignment GeneticScheduler::GetMatchingCrossover(const Assignment& mainParent, const Assignment& secondaryParent) const {
     Assignment offspring(mainParent);
 
     int cutoff = rand() % viewer->Size();
@@ -225,7 +232,7 @@ Assignment GeneticScheduler::MatchingCrossover(const Assignment& mainParent, con
     return offspring;
 }
 
-Assignment GeneticScheduler::SchedulingCrossover(const Assignment& mainParent, const Assignment& secondaryParent) const {
+Assignment GeneticScheduler::GetSchedulingCrossover(const Assignment& mainParent, const Assignment& secondaryParent) const {
     Assignment offspring(mainParent);
 
     vector<int> taskIdToPosition(viewer->Size());
@@ -240,6 +247,14 @@ Assignment GeneticScheduler::SchedulingCrossover(const Assignment& mainParent, c
     });
 
     return offspring;
+}
+
+void GeneticScheduler::MakeCrossover(Assignment& assignment1, 
+                                     Assignment& assignment2, 
+                                     function<Assignment(const Assignment&, const Assignment&)> crossover) const {
+    Assignment tmpAssignment = crossover(assignment1, assignment2);
+    assignment2 = crossover(assignment2, assignment1);
+    assignment1 = tmpAssignment;
 }
 
 void GeneticScheduler::MakeMatchingMutation(Assignment& assignment) const {
@@ -288,23 +303,37 @@ void GeneticScheduler::MakeSchedulingMutation(Assignment& assignment) const {
 }
 
 vector<Assignment> GeneticScheduler::GetNewGeneration(const vector<Assignment>& oldGeneration) const {
-    vector<Assignment> newGeneration;
-    while (newGeneration.size() < GENERATION_SIZE) {
-        pair<int, int> parentsIds = GetRandomParents(oldGeneration);
-        if ((rand() / static_cast<double>(RAND_MAX)) * (MatchingCrossoverProb + SchedulingCrossoverProb) <= MatchingCrossoverProb) {
-            newGeneration.push_back(MatchingCrossover(oldGeneration[parentsIds.first], oldGeneration[parentsIds.second]));
-        } else {
-            newGeneration.push_back(SchedulingCrossover(oldGeneration[parentsIds.first], oldGeneration[parentsIds.second]));
-        }
+    double totalInvFitness = 0;
+    vector<double> prefInvFitness;
+    for (const Assignment& assignment: oldGeneration) {
+        totalInvFitness += 1 / assignment.FitnessScore.value();
+        prefInvFitness.push_back(totalInvFitness);
     }
 
-    for (Assignment& assignment: newGeneration) {
-        double probTmp = rand() / static_cast<double>(RAND_MAX);
-        if (probTmp <= MatchingMutationProb) {
-            MakeMatchingMutation(assignment);
-        } else if (probTmp <= MatchingMutationProb + SchedulingMutationProb) {
-            MakeSchedulingMutation(assignment);
-        }
+    vector<Assignment> newGeneration;
+    while (newGeneration.size() != oldGeneration.size()) {
+        double randCutoff = (rand() / static_cast<double>(RAND_MAX)) * totalInvFitness;
+        double assignmentId = upper_bound(prefInvFitness.begin(), prefInvFitness.end(), randCutoff) - prefInvFitness.begin();
+        newGeneration.push_back(oldGeneration[assignmentId]);
+    }
+
+    int pairsCount = newGeneration.size() * (newGeneration.size() - 1) / 2;
+    for (int i = 0; i < pairsCount * MatchingCrossoverProb; ++i) {
+        MakeCrossover(newGeneration[rand() % newGeneration.size()], 
+                      newGeneration[rand() % newGeneration.size()], 
+                      bind(&GeneticScheduler::GetMatchingCrossover, *this, _1, _2));
+    }
+    for (int i = 0; i < pairsCount * SchedulingCrossoverProb; ++i) {
+        MakeCrossover(newGeneration[rand() % newGeneration.size()], 
+                      newGeneration[rand() % newGeneration.size()], 
+                      bind(&GeneticScheduler::GetSchedulingCrossover, *this, _1, _2));
+    }   
+
+    for (int i = 0; i < newGeneration.size() * MatchingMutationProb; ++i) {
+        MakeMatchingMutation(newGeneration[rand() % newGeneration.size()]);
+    }
+    for (int i = 0; i < newGeneration.size() * SchedulingMutationProb; ++i) {
+        MakeSchedulingMutation(newGeneration[rand() % newGeneration.size()]);
     }
 
     return newGeneration;
@@ -313,14 +342,24 @@ vector<Assignment> GeneticScheduler::GetNewGeneration(const vector<Assignment>& 
 void GeneticScheduler::PrintEpochStatistics(vector<Assignment>& assignments, int epochInd) const {
     double fitnessAvg = 0;
     double cheapestAssignment = -1;
+    double fitnessBest = -1;
+    double fitnessWorst = -1;
     for (Assignment& assignment: assignments) {
         fitnessAvg += assignment.FitnessScore.value();
-        if (cheapestAssignment == -1 || cheapestAssignment > assignment.Cost.value()) {
+        if ((cheapestAssignment == -1 || cheapestAssignment > assignment.Cost.value()) && assignment.Makespan <= viewer->GetDeadline()) {
             cheapestAssignment = assignment.Cost.value();
+        }
+        if (fitnessBest == -1 || fitnessBest > assignment.FitnessScore.value()) {
+            fitnessBest = assignment.FitnessScore.value();
+        }
+        if (fitnessWorst == -1 || fitnessWorst < assignment.FitnessScore.value()) {
+            fitnessWorst = assignment.FitnessScore.value();
         }
     }
     fitnessAvg /= assignments.size();
     XBT_INFO("Epoch %d: ", epochInd);
     XBT_INFO("Fitness score average: %f", fitnessAvg);
+    XBT_INFO("Fitness score best: %f", fitnessBest);
+    XBT_INFO("Fitness score worst: %f", fitnessWorst);
     XBT_INFO("Cheapest assignment: %f", cheapestAssignment);
 }

@@ -32,8 +32,11 @@ private:
     void FillAssignmentValues(std::vector<Assignment>& assignments) const;
 
     std::pair<int, int> GetRandomParents(const std::vector<Assignment>& parents) const;
-    Assignment MatchingCrossover(const Assignment& mainParent, const Assignment& secondaryParent) const;
-    Assignment SchedulingCrossover(const Assignment& mainParent, const Assignment& secondaryParent) const;
+    Assignment GetMatchingCrossover(const Assignment& mainParent, const Assignment& secondaryParent) const;
+    Assignment GetSchedulingCrossover(const Assignment& mainParent, const Assignment& secondaryParent) const;
+    void MakeCrossover(Assignment& assignment1, 
+                       Assignment& assignment2, 
+                       std::function<Assignment(const Assignment&, const Assignment&)> crossover) const;
 
     void MakeMatchingMutation(Assignment& assignment) const;
     void MakeSchedulingMutation(Assignment& assignment) const;
@@ -43,7 +46,10 @@ private:
     void PrintEpochStatistics(std::vector<Assignment>& assignments, int epochInd) const;
 
     std::vector<VMDescription> AvailableVMs;
-    const int GENERATION_SIZE = 10;
+    const int GENERATION_SIZE = 50;
+    const int NUM_VMS = 50;
+    const int NUM_STEPS = 10 * 1000;
+
     const double MatchingCrossoverProb = 0.5;
     const double SchedulingCrossoverProb = 0.5;
     const double MatchingMutationProb = 0.2;
