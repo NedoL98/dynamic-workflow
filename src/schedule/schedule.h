@@ -37,6 +37,7 @@ public:
 
 class Schedule {
     map<int, HostSchedule> TimeTable;
+    std::map<int, int> TaskIdToHostId;
 
 public:
     Schedule();
@@ -44,4 +45,5 @@ public:
     ScheduleItem GetItem(int host);
     bool HasItem(int host);
     ScheduleItem PopItem(int host);
+    int GetHostByTask(int taskId) const;
 };

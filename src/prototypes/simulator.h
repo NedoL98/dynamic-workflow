@@ -17,11 +17,18 @@ class CloudSimulator : public SimulatorInterface {
     AbstractScheduler* Scheduler;
     Schedule Assignments;
     Workflow::Graph TaskGraph;
+    std::vector<simgrid::s4u::ActorPtr> Actors;
+
+    struct CollbackData {
+        CloudSimulator* Simulator;
+        int TaskId;
+    };
 
     static void MainLoop(CloudSimulator* s);
     void DoMainLoop();
-    static int RefreshAfterTask(void*, void* s);
-    void DoRefreshAfterTask();
+    static int RefreshAfterTask(int, void* s);
+    void DoRefreshAfterTask(int taskId);
+    void CheckReadyJobs();
 
 public:
     CloudSimulator(const std::string& platformConf, 

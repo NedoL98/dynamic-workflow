@@ -12,38 +12,57 @@ void CloudSimulator::MainLoop(CloudSimulator* s) {
     s->DoMainLoop();    
 }
 
-int CloudSimulator::RefreshAfterTask(void* a, void* s) {
-    ((CloudSimulator*)s)->DoRefreshAfterTask();
+int CloudSimulator::RefreshAfterTask(int, void* s) {
+    CollbackData* args = (CollbackData* )s;
+    args->Simulator->DoRefreshAfterTask(args->TaskId);
+    delete args;
+    return 0;
 }
 
-void CloudSimulator::DoRefreshAfterTask() {
-    XBT_INFO("Refresh");
+void CloudSimulator::CheckReadyJobs() {
     vector<int> vmIds = Platform.GetVMIds();
     for (int vm : vmIds) {
         if (!Assignments.HasItem(vm)) {
             continue;
         }
         //XBT_INFO("%d task id, %d size", Assignments.GetItem(vm).GetTaskId(), TaskGraph.Nodes.size());
-        auto task = *TaskGraph.Nodes[Assignments.GetItem(vm).GetTaskId()];
+        int taskId = Assignments.GetItem(vm).GetTaskId();
+        if (TaskGraph.Nodes[taskId]->IsReady()) {
+            XBT_INFO("Task %d is ready to compute!", taskId);
+            if (!TaskGraph.Nodes[taskId]->StartExecuting()) {
+                XBT_INFO("Task %d isn't executing!", taskId);
+                continue;
+            }
+            Actors.push_back(Platform.AssignTask(vm, TaskGraph.Nodes[taskId]->GetTaskSpec()));
+            CollbackData* data = new CollbackData();
+            data->Simulator = this;
+            data->TaskId = taskId;
+            Actors.back()->on_exit(RefreshAfterTask, data);
+            XBT_INFO("Task %d started executing!", taskId);
+        }
     }
+}
+
+void CloudSimulator::DoRefreshAfterTask(int taskId) {
+    XBT_INFO("Refresh");
+
+    TaskGraph.FinishTask(taskId);
+    int hostId = Assignments.GetHostByTask(taskId);
+    if (Assignments.GetItem(hostId).GetTaskId() == taskId) {
+        Assignments.PopItem(hostId);
+    }
+    CheckReadyJobs();
+    XBT_INFO("Task %d finished executing!", taskId);
 }
 void CloudSimulator::DoMainLoop() {
     
     XBT_INFO("MainLoop begins");
-    vector<int> vmIds = Platform.GetVMIds();
-    vector<simgrid::s4u::ActorPtr> Actors;
-    for (int vm : vmIds) {
-        if (!Assignments.HasItem(vm)) {
-            continue;
-        }
-        auto task = *TaskGraph.Nodes[Assignments.GetItem(vm).GetTaskId()];
-        if (task.GetDependencies().empty()) {
-            Actors.push_back(Platform.AssignTask(vm, task.GetTaskSpec()));
-            Actors.back()->on_exit(RefreshAfterTask, this);
-        }
+    CheckReadyJobs();
+    XBT_INFO("%d vms, %d actors", Platform.GetVMIds().size(), Actors.size());
+    while (!TaskGraph.IsFinished()) {
+        Actors.back()->join();
+        CheckReadyJobs();
     }
-    XBT_INFO("%d vms, %d actors", vmIds.size(), Actors.size());
-    Actors[0]->join();
     
     XBT_INFO("MainLoop ends");
 }
@@ -60,6 +79,7 @@ void CloudSimulator::Run(double timeout) {
     XBT_INFO("initial actions processing Done");
     simgrid::s4u::Actor::create("scheduler", e->get_all_hosts()[0], MainLoop, this);
     e->run();
+    XBT_INFO("required timeout is %g", timeout);
 }
 
 
@@ -82,6 +102,8 @@ bool CloudSimulator::AssignTask(int VMId, const ScheduleItem &item) {
 }
 
 bool CloudSimulator::CancelTask(int hostId, const ScheduleItem &item) {
+    (void)hostId;
+    (void)item;
     return false; // Not implemented
 }
 

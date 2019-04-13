@@ -18,6 +18,7 @@ string GetHostSpeeds(const vector<pair<int, double>>& vmSpeeds) {
             result += ",";
         }
         result += std::to_string(vmSpeed);
+        (void)pStateId;
     }
 
     return result;
@@ -28,7 +29,6 @@ string GeneratePlatform(const string& workflowPath, const string& vmListPath) {
     int maxCoresCnt;
     // TODO: use this parameter while generating platform
     double maxMemory;
-
     VMList vmList(vmListPath);
 
     vector<pair<int, double>> vmSpeeds;
@@ -48,7 +48,7 @@ string GeneratePlatform(const string& workflowPath, const string& vmListPath) {
     hostCnt = tasksGraph["tasks"].size();
     maxCoresCnt = vmList.MaxCores();
     maxMemory = vmList.MaxMemory();
-
+    XBT_WARN("Memory restriction is %g but we haven't used it!", maxMemory);
     int pid = fork();
     if (pid > 0) {
         int wstatus;

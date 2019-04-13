@@ -27,5 +27,6 @@ bool Host::CreateVM(const ComputeSpec& c, int CustomId) {
     AvailiableCores -= c.Cores;
     AvailiableMemory -= c.Memory;
     VirtualMachines[CustomId] = vm;
+    vm->start();
     return true;
 }

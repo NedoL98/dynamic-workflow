@@ -94,12 +94,12 @@ namespace Workflow {
 
     void Graph::BuildDependencies() {
         map<int, int> FileId2Owner;
-        for (int nodeId = 0; nodeId < Nodes.size(); nodeId++) {
+        for (size_t nodeId = 0; nodeId < Nodes.size(); nodeId++) {
             for (int fileId : Nodes[nodeId]->Outputs) {
                 FileId2Owner[fileId] = nodeId;
             }
         }
-        for (int nodeId = 0; nodeId < Nodes.size(); nodeId++) {
+        for (size_t nodeId = 0; nodeId < Nodes.size(); nodeId++) {
             for (int fileId : Nodes[nodeId]->Inputs) {
                 auto fileOwner = FileId2Owner.find(fileId);
                 if (fileOwner != FileId2Owner.end()) {
@@ -126,7 +126,7 @@ namespace Workflow {
         vector<Task> order;
 
         vector<bool> used(Nodes.size());
-        for (int i = 0; i < Nodes.size(); ++i) {
+        for (size_t i = 0; i < Nodes.size(); ++i) {
             if (!used[i] && Nodes[i]->GetDependencies().size() == 0) {
                 MakeOrderDFS(i, order, used);
             }
@@ -148,5 +148,11 @@ namespace Workflow {
         }
         Nodes[id]->State = EState::Done;
         FinishedTasks.insert(id);
+        for (int suc : Nodes[id]->Successors) {
+            Nodes[suc]->FinishedDeps++;
+            if (Nodes[suc]->IsReady()) {
+                Nodes[suc]->State = EState::Ready;
+            }
+        }
     }
 }

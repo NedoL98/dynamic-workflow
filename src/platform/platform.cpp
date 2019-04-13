@@ -13,7 +13,7 @@ AbstractPlatform::AbstractPlatform(const std::string& platformConfig) {
     for (auto h : hosts) {
         // TODO: add "memory" property
         ComputeSpec spec = {0,
-                            h->get_speed(),
+                            (long long)h->get_speed(),
                             h->get_core_count()};
         HostsList.emplace_back(h, spec);
     }

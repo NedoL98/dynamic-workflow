@@ -78,6 +78,7 @@ Schedule::Schedule()
     {}
 
 void Schedule::AddItem(int host, const ScheduleItem& item) {
+    TaskIdToHostId[item.GetTaskId()] = host;
     TimeTable[host].AddItem(item);
 }
 
@@ -90,5 +91,15 @@ ScheduleItem Schedule::GetItem(int host) {
 }
 
 ScheduleItem Schedule::PopItem(int host) {
+    int taskId = GetItem(host).GetTaskId();
+    TaskIdToHostId.erase(taskId);
     return TimeTable[host].PopItem();
+}
+
+int Schedule::GetHostByTask(int taskId) const {
+    auto assignment = TaskIdToHostId.find(taskId);
+    if (assignment != TaskIdToHostId.end()) {
+        return assignment->second;
+    }
+    return -1;
 }

@@ -3,12 +3,14 @@
 #include <spec.h>
 #include <workflow/task.h>
 
+/*
 namespace {
     int GetUniqueTaskId() {
         static int id = 0;
         return id++;
     }
 }
+*/
 
 namespace View {
     /*
