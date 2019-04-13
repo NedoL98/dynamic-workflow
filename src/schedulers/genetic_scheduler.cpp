@@ -45,18 +45,18 @@ vector<Assignment> GeneticScheduler::GetInitialAssignments(int numAssignments) {
     vector<Assignment> initialAssignments;
     initialAssignments.resize(numAssignments);
     for (int i = 0; i < numAssignments; ++i) {
-        initialAssignments[i] = Assignment(viewer->GetTaskList().size());
+        initialAssignments[i] = Assignment(viewer->Size());
         
         transform(tasksOrder.begin(), tasksOrder.end(), initialAssignments[i].SchedulingString.begin(), 
                 [](const View::Task &task) { return task.GetId(); });
 
-        int ssMutationNumber = rand() % viewer->GetTaskList().size();
+        int ssMutationNumber = rand() % viewer->Size();
         while (ssMutationNumber) {
             MakeSchedulingMutation(initialAssignments[i]);
             --ssMutationNumber;
         }
 
-        for (int taskId = 0; taskId < viewer->GetTaskList().size(); ++taskId) {
+        for (int taskId = 0; taskId < viewer->Size(); ++taskId) {
             vector<int> suitableVMs;
             for (int i = 0; i < AvailableVMs.size(); ++i) {
                 if (viewer->GetTaskById(taskId).CanBeExecuted(AvailableVMs[i])) {
@@ -84,14 +84,14 @@ vector<vector<int>> GeneticScheduler::Get2DSchedule(const Assignment& assignment
 double GeneticScheduler::CalculateMakespan(const Assignment& assignment) const {
     double makespan = 0;
 
-    vector<double> endTime(viewer->GetTaskList().size(), -1);
+    vector<double> endTime(viewer->Size(), -1);
 
     vector<vector<int>> schedule = Get2DSchedule(assignment);
 
     int completedTasks = 0;
     vector<int> queueNextTask(AvailableVMs.size());
 
-    while (completedTasks != viewer->GetTaskList().size()) {
+    while (completedTasks != viewer->Size()) {
         bool taskProcessed = false;
         for (int queueId = 0; queueId < schedule.size(); ++queueId) {
             if (queueNextTask[queueId] < schedule[queueId].size()) {
@@ -130,7 +130,7 @@ double GeneticScheduler::CalculateMakespan(const Assignment& assignment) const {
 
 double GeneticScheduler::CalculateCost(const Assignment& assignment) const {
     double cost = 0;
-    for (int taskId = 0; taskId < viewer->GetTaskList().size(); ++taskId) {
+    for (int taskId = 0; taskId < viewer->Size(); ++taskId) {
         View::Task task = viewer->GetTaskById(taskId);
         int vmId = assignment.MatchingString[taskId];
         cost += AvailableVMs[vmId].GetPrice() * (task.GetTaskSpec().Cost / AvailableVMs[vmId].GetFlops());
@@ -213,8 +213,8 @@ pair<int, int> GeneticScheduler::GetRandomParents(const vector<Assignment>& pare
 Assignment GeneticScheduler::MatchingCrossover(const Assignment& mainParent, const Assignment& secondaryParent) const {
     Assignment offspring(mainParent);
 
-    int cutoff = rand() % viewer->GetTaskList().size();
-    for (int i = cutoff; i < viewer->GetTaskList().size(); ++i) {
+    int cutoff = rand() % viewer->Size();
+    for (int i = cutoff; i < viewer->Size(); ++i) {
         int taskId = offspring.SchedulingString[i];
         int newVMId = secondaryParent.MatchingString[taskId];
         if (viewer->GetTaskById(taskId).CanBeExecuted(AvailableVMs[newVMId])) {
@@ -228,12 +228,12 @@ Assignment GeneticScheduler::MatchingCrossover(const Assignment& mainParent, con
 Assignment GeneticScheduler::SchedulingCrossover(const Assignment& mainParent, const Assignment& secondaryParent) const {
     Assignment offspring(mainParent);
 
-    vector<int> taskIdToPosition(viewer->GetTaskList().size());
-    for (int i = 0; i < viewer->GetTaskList().size(); ++i) {
+    vector<int> taskIdToPosition(viewer->Size());
+    for (int i = 0; i < viewer->Size(); ++i) {
         taskIdToPosition[secondaryParent.SchedulingString[i]] = i;
     }
 
-    int cutoff = rand() % viewer->GetTaskList().size();
+    int cutoff = rand() % viewer->Size();
 
     sort(offspring.SchedulingString.begin() + cutoff, offspring.SchedulingString.end(), [&taskIdToPosition](int taskId1, int taskId2) {
         return taskIdToPosition[taskId1] < taskIdToPosition[taskId2];
@@ -243,7 +243,7 @@ Assignment GeneticScheduler::SchedulingCrossover(const Assignment& mainParent, c
 }
 
 void GeneticScheduler::MakeMatchingMutation(Assignment& assignment) const {
-    int taskId = rand() % viewer->GetTaskList().size();
+    int taskId = rand() % viewer->Size();
 
     vector<int> suitableVMs;
     for (int i = 0; i < AvailableVMs.size(); ++i) {
@@ -257,16 +257,16 @@ void GeneticScheduler::MakeMatchingMutation(Assignment& assignment) const {
 }
 
 void GeneticScheduler::MakeSchedulingMutation(Assignment& assignment) const {
-    int mutationTaskPosition = rand() % viewer->GetTaskList().size();
+    int mutationTaskPosition = rand() % viewer->Size();
     int mutationTaskId = assignment.SchedulingString[mutationTaskPosition];
 
-    int lowerBound = viewer->GetTaskList().size() - 1;
-    int upperBound = viewer->GetTaskList().size();
+    int lowerBound = viewer->Size() - 1;
+    int upperBound = viewer->Size();
 
     set<int> dependencies(viewer->GetTaskById(mutationTaskId).GetDependencies().begin(), viewer->GetTaskById(mutationTaskId).GetDependencies().end());
     set<int> successors(viewer->GetTaskById(mutationTaskId).GetSuccessors().begin(), viewer->GetTaskById(mutationTaskId).GetSuccessors().end());
 
-    for (int i = 0; i < viewer->GetTaskList().size(); ++i) {
+    for (int i = 0; i < viewer->Size(); ++i) {
         if (dependencies.empty()) {
             lowerBound = min(lowerBound, i);
         }

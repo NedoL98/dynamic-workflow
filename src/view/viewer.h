@@ -23,5 +23,6 @@ namespace View {
         Status GetTaskStatus(int id) const;
         double GetDeadline() const;
         std::vector<Task> MakeTasksOrder() const;
+        int Size() const;
     };
 }

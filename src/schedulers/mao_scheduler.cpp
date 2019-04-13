@@ -259,7 +259,7 @@ vector<pair<double, double>> MaoScheduler::CalculateDeadlines(View::Viewer& v,
             }
         }
     }
-    xbt_assert(deadlines.size() == viewer->GetTaskList().size(), "Something went wrong, not all tasks have deadlines assigned!");
+    xbt_assert(deadlines.size() == viewer->Size(), "Something went wrong, not all tasks have deadlines assigned!");
 
     for (pair<double, double>& deadline: deadlines) {
         deadline.first *= v.GetDeadline() / totalDeadline;

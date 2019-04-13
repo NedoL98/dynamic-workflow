@@ -38,5 +38,9 @@ namespace View {
     vector<Task> Viewer::MakeTasksOrder() const {
         return Simulator.TaskGraph.MakeTasksOrder();
     }
+
+    int Viewer::Size() const {
+        return Simulator.TaskGraph.Nodes.size();
+    }
 }
 
