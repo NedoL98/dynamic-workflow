@@ -10,7 +10,7 @@ using std::vector;
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(platform_generator, "Platform generator log");
 
-string GetHostSpeeds(const vector<pair<int, double>>& vmSpeeds) {
+string GetHostSpeeds(const vector<pair<int, long long>>& vmSpeeds) {
     string result = "";
 
     for (const auto& [pStateId, vmSpeed]: vmSpeeds) {
@@ -28,13 +28,13 @@ string GeneratePlatform(const string& workflowPath, const string& vmListPath) {
     int hostCnt;
     int maxCoresCnt;
     // TODO: use this parameter while generating platform
-    double maxMemory;
+    long long maxMemory;
     VMList vmList(vmListPath);
 
-    vector<pair<int, double>> vmSpeeds;
+    vector<pair<int, long long>> vmSpeeds;
     vector<bool> usedPstateId(vmList.Size());
     for (const VMDescription& vmDescription: vmList) {
-        xbt_assert(vmDescription.GetPStateId() < vmList.Size(), "PStateId %d is not in bounds [0,%d)!", vmDescription.GetPStateId(), vmList.Size());
+        xbt_assert(static_cast<size_t>(vmDescription.GetPStateId()) < vmList.Size(), "PStateId %d is not in bounds [0,%d)!", vmDescription.GetPStateId(), vmList.Size());
         xbt_assert(!usedPstateId[vmDescription.GetPStateId()], "PStateId %d is used twice!", vmDescription.GetPStateId());
         vmSpeeds.push_back({vmDescription.GetPStateId(), vmDescription.GetFlops() / (1000 * 1000 * 1000)});
         usedPstateId[vmDescription.GetPStateId()] = true;

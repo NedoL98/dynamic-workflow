@@ -153,7 +153,7 @@ int TasksGraph::MaxCores() const {
         })->second->GetCores();
 }
 
-double TasksGraph::MaxMemory() const {
+long long TasksGraph::MaxMemory() const {
     return std::max_element(Tasks.begin(), Tasks.end(), 
         [] (const auto& lhs, const auto& rhs) {
             return lhs.second->GetMemory() < rhs.second->GetMemory();

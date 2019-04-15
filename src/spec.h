@@ -23,11 +23,12 @@ enum EState {
 class VMDescription {
 public:
     VMDescription() = default;
-    VMDescription(int id, int cores, double memory, double flops, int price, int pStateId);
+    VMDescription(int id, int cores, long long memory,
+                    long long flops, int price, int pStateId);
 
     int GetId() const;
     int GetCores() const;
-    double GetMemory() const;
+    long long GetMemory() const;
     double GetFlops() const;
     int GetPrice() const;
     int GetPStateId() const;
@@ -44,8 +45,8 @@ public:
 private:
     int Id;
     int Cores;
-    double Memory;
-    double Flops;
+    long long Memory;
+    long long Flops;
     int Price;
     int PStateId;
 };

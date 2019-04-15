@@ -88,7 +88,7 @@ void CloudSimulator::Run(double timeout) {
 
 bool CloudSimulator::RegisterVirtualMachine(const VMDescription &stats, int customId) {
     int hostId = -1;
-    XBT_INFO("%d %f %f", stats.GetCores(), stats.GetFlops(), stats.GetMemory());
+    XBT_DEBUG("%d %f %f", stats.GetCores(), stats.GetFlops(), stats.GetMemory());
     if ((hostId = Platform.GetEmptyHost(stats.GetSpec())) == -1) {
         XBT_INFO("No empty hosts");
         return false;

@@ -10,17 +10,17 @@ using std::vector;
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(common, "Common log");
 
-double ParseSize(const string& size, const vector<string>& suffixes) {
+long long ParseSize(const string& size, const vector<string>& suffixes) {
     size_t suffixStart;
     double sizePrefix = std::stod(size, &suffixStart);
     if (suffixStart == size.size()) {
         return sizePrefix;
     } else {
-        auto itSizeSuffix = std::find(suffixes.begin(), suffixes.end(), size.substr(suffixStart));
-        if (itSizeSuffix == suffixes.end()) {
+        auto iterSizeSuffix = std::find(suffixes.begin(), suffixes.end(), size.substr(suffixStart));
+        if (iterSizeSuffix == suffixes.end()) {
             throw std::invalid_argument("Size suffix is incorrect!");
         }
-        return sizePrefix * pow(BASE, itSizeSuffix - suffixes.begin());
+        return sizePrefix * pow(BASE, iterSizeSuffix - suffixes.begin());
     }
 }
 

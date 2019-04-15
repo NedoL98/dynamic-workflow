@@ -28,7 +28,7 @@ public:
     double GetDeadline() const;
     int Size() const;
     int MaxCores() const;
-    double MaxMemory() const;
+    long long MaxMemory() const;
 
     std::map<std::string, VMDescription> GetCheapestVMs(const VMList& VMList_) const;
 

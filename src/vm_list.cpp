@@ -9,7 +9,7 @@ using std::vector;
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(vm_list, "VM list log");
 
-VMDescription::VMDescription(int id, int cores, double memory, double flops, int price, int pStateId):
+VMDescription::VMDescription(int id, int cores, long long memory, long long flops, int price, int pStateId):
     Id(id),
     Cores(cores),
     Memory(memory),
@@ -26,7 +26,7 @@ int VMDescription::GetCores() const {
     return Cores;
 }
 
-double VMDescription::GetMemory() const {
+long long VMDescription::GetMemory() const {
     return Memory;
 }
 
@@ -74,10 +74,11 @@ bool VMDescription::operator >=(const VMDescription& other) const {
     return !(*this < other);
 }
 
+/*
 simgrid::s4u::VirtualMachine* VMList::GetVMInstance(const string& taskName, int vmId) const {
     VMDescription currentVM = VMs[vmId];
     int cores = currentVM.GetCores();
-    double memory = currentVM.GetMemory();
+    long long memory = currentVM.GetMemory();
 
     static int hostId = 0;
     string hostIdStr = std::to_string(hostId);
@@ -101,6 +102,7 @@ simgrid::s4u::VirtualMachine* VMList::GetVMInstance(const string& taskName, int 
     vm->set_pstate(currentVM.GetPStateId());
     return vm;
 }
+*/
 
 int VMList::MaxCores() const {
     return std::max_element(VMs.begin(), VMs.end(), 
@@ -109,7 +111,7 @@ int VMList::MaxCores() const {
         })->GetCores();
 }
 
-double VMList::MaxMemory() const {
+long long VMList::MaxMemory() const {
     return std::max_element(VMs.begin(), VMs.end(), 
         [] (const auto& lhs, const auto& rhs) {
             return lhs.GetMemory() < rhs.GetMemory();
@@ -123,8 +125,8 @@ VMList::VMList(const string& vmConfig) {
     int id = 0;
     for (const YAML::Node& vmDescription: VMList_) {
         int cores = vmDescription["cpu"].as<int>();
-        double memory = ParseSize(vmDescription["memory"].as<string>(), SizeSuffixes);
-        double flops = ParseSize(vmDescription["speed"].as<string>(), PerformanceSuffixes);
+        long long memory = ParseSize(vmDescription["memory"].as<string>(), SizeSuffixes);
+        long long flops = ParseSize(vmDescription["speed"].as<string>(), PerformanceSuffixes);
         int price = vmDescription["price"].as<int>();
         int pStateId = vmDescription["pstate_id"].as<int>();
 

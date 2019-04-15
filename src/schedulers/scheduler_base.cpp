@@ -19,7 +19,7 @@ BaseScheduler::BaseScheduler(const string& workflowPath, const string& vmListPat
     XBT_INFO("VM list loaded");
 }
 
-void BaseScheduler::GetMaxParams(int& hostCnt, int& maxCoresCnt, double& maxMemory) {
+void BaseScheduler::GetMaxParams(int& hostCnt, int& maxCoresCnt, long long& maxMemory) {
     hostCnt = Workflow.Size();
     maxCoresCnt = max(Workflow.MaxCores(), VMList_.MaxCores());
     maxMemory = max(Workflow.MaxMemory(), VMList_.MaxMemory());

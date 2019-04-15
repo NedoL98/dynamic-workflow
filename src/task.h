@@ -16,8 +16,8 @@ public:
     const std::vector<std::string>& GetInputs() const;
     const std::map<std::string, double>& GetOutputs() const;
     int GetCores() const;
-    double GetMemory() const;
-    double GetSize() const;
+    long long GetMemory() const;
+    long long GetSize() const;
 
     void SetDefaultRequirements();
 
@@ -25,7 +25,7 @@ public:
     void AppendInput(const std::string& name);
     void AppendOutput(const std::string& name, const std::string& size);
 
-    static void DoExecute(double flops, 
+    static void DoExecute(long long flops, 
                           std::string name,
                           const std::function<void(int, void*)>& actorFinishFunction,
                           void* context);
@@ -47,8 +47,8 @@ private:
     std::vector<std::string> Inputs;
     std::map<std::string, double> Outputs;
     int Cores;
-    double Memory;
-    double Flops;
+    long long Memory;
+    long long Flops;
 
     simgrid::s4u::Host* Host = nullptr;
     bool Done = false;

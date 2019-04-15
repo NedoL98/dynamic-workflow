@@ -15,12 +15,14 @@ public:
     std::vector<VMDescription>::const_iterator begin() const { return VMs.begin(); };
     std::vector<VMDescription>::const_iterator end() const { return VMs.end(); };
 
-    int Size() const { return VMs.size(); };
+    size_t Size() const {
+        return VMs.size();
+    };
 
-    simgrid::s4u::VirtualMachine* GetVMInstance(const std::string& taskName, int vmId) const;
+    // simgrid::s4u::VirtualMachine* GetVMInstance(const std::string& taskName, int vmId) const;
 
     int MaxCores() const;
-    double MaxMemory() const;
+    long long MaxMemory() const;
 
 private:
     std::vector<VMDescription> VMs;

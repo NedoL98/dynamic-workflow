@@ -90,11 +90,11 @@ int Task::GetCores() const {
     return Cores;
 }
 
-double Task::GetMemory() const {
+long long Task::GetMemory() const {
     return Memory;
 }
 
-double Task::GetSize() const {
+long long Task::GetSize() const {
     return Flops;
 }
 
@@ -130,7 +130,7 @@ void Task::AppendOutput(const string& name, const string& size) {
     }
 }
 
-void Task::DoExecute(double flops, 
+void Task::DoExecute(long long flops, 
                      string name,
                      const std::function<void(int, void*)>& actorFinishFunction,
                      void* context) {
@@ -158,7 +158,7 @@ simgrid::s4u::ActorPtr Task::Execute(simgrid::s4u::VirtualMachine* vm,
 
 bool Task::CanExecute(const simgrid::s4u::Host* host) const {
     int availableCores = std::stoi(host->get_property("cores"));
-    double availableMemory = std::stod(host->get_property("memory"));
+    long long availableMemory = std::stod(host->get_property("memory"));
 
     return availableCores >= Cores && availableMemory >= Memory;
 }

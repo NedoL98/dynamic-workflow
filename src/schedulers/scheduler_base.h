@@ -12,7 +12,7 @@ public:
 
     virtual void ProcessTasksGraph() = 0;
 
-    void GetMaxParams(int& hostCnt, int& maxCoresCnt, double& maxMemory);
+    void GetMaxParams(int& hostCnt, int& maxCoresCnt, long long& maxMemory);
 
     void operator()();
 
