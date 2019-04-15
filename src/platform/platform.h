@@ -17,7 +17,7 @@ public:
     AbstractPlatform(const std::string& platformConfig);
     std::vector<int> GetVMIds() const; 
     virtual bool CreateVM(int hostId, const ComputeSpec& s, int id) = 0;
-    virtual simgrid::s4u::ActorPtr AssignTask(int vmId, const TaskSpec& s) = 0;
+    virtual simgrid::s4u::ActorPtr AssignTask(int vmId, const TaskSpec& s, const std::function<void(int, void*)>& onExit, void* arg) = 0;
 };
 
 
@@ -28,7 +28,7 @@ public:
 
     virtual bool CreateVM(int hostId, const ComputeSpec& s, int id) override;
     bool CheckTask(int vmId, const TaskSpec& s);
-    virtual simgrid::s4u::ActorPtr AssignTask(int vmId, const TaskSpec& s) override;
+    virtual simgrid::s4u::ActorPtr AssignTask(int vmId, const TaskSpec& s, const std::function<void(int, void*)>& onExit, void* arg) override;
     int GetEmptyHost(const ComputeSpec& s);
 };
 

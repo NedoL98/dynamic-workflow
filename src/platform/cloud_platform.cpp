@@ -5,8 +5,7 @@
 XBT_LOG_NEW_DEFAULT_CATEGORY(platform_cloud_platform, "cloud platform log");
 
 namespace {
-    void DoExecute(double flops) {
-        XBT_INFO("here");
+    void DoExecute(long long flops, const std::function<void(int, void*)>& onExit, void* arg) {
         simgrid::s4u::Host* host = simgrid::s4u::this_actor::get_host();
 
         double timeStart = simgrid::s4u::Engine::get_clock();
@@ -16,6 +15,7 @@ namespace {
 
         XBT_INFO("%s: actor %s executed %g seconds", host->get_cname(),
                 simgrid::s4u::this_actor::get_cname(), timeFinish - timeStart);
+        onExit(0, arg);
         simgrid::s4u::this_actor::exit();
     }
 }
@@ -43,18 +43,16 @@ bool CloudPlatform::CheckTask(int vmId, const TaskSpec& requirements) {
     return true;
 }
 
-simgrid::s4u::ActorPtr CloudPlatform::AssignTask(int vmId, const TaskSpec& requirements) {
+simgrid::s4u::ActorPtr CloudPlatform::AssignTask(int vmId, const TaskSpec& requirements, const std::function<void(int, void*)>& onExit, void* args) {
     static int i = 0;
     if (!CheckTask(vmId, requirements)) {
-        XBT_INFO("Doesn't run!");
+        XBT_INFO("Not satisfies requirements, doesn't run!");
         return nullptr;
     }
-    XBT_INFO("Actor creating on %d!", vmId);
-    simgrid::s4u::ActorPtr result = simgrid::s4u::Actor::create("compute" + std::to_string(i), VirtualMachines[vmId], DoExecute, requirements.Cost);
+    simgrid::s4u::ActorPtr result = simgrid::s4u::Actor::create("compute" + std::to_string(i), VirtualMachines[vmId], DoExecute, (long long)requirements.Cost, onExit, args);
     i++;
     VirtualMachineSpecs[vmId].Cores -= requirements.Cores;
     VirtualMachineSpecs[vmId].Memory -= requirements.Memory;
-    XBT_INFO("Actor creating done!");
     return result;
 }
 

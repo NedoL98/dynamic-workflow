@@ -19,7 +19,10 @@ int CloudSimulator::RefreshAfterTask(int, void* s) {
     return 0;
 }
 
+simgrid::s4u::MutexPtr mutex;
 void CloudSimulator::CheckReadyJobs() {
+    // mutex->lock();
+
     vector<int> vmIds = Platform.GetVMIds();
     for (int vm : vmIds) {
         if (!Assignments.HasItem(vm)) {
@@ -28,23 +31,22 @@ void CloudSimulator::CheckReadyJobs() {
         //XBT_INFO("%d task id, %d size", Assignments.GetItem(vm).GetTaskId(), TaskGraph.Nodes.size());
         int taskId = Assignments.GetItem(vm).GetTaskId();
         if (TaskGraph.Nodes[taskId]->IsReady()) {
-            XBT_INFO("Task %d is ready to compute!", taskId);
+            XBT_DEBUG("Task %d is ready to compute!", taskId);
             if (!TaskGraph.Nodes[taskId]->StartExecuting()) {
                 XBT_INFO("Task %d isn't executing!", taskId);
                 continue;
             }
-            Actors.push_back(Platform.AssignTask(vm, TaskGraph.Nodes[taskId]->GetTaskSpec()));
             CollbackData* data = new CollbackData();
             data->Simulator = this;
             data->TaskId = taskId;
-            Actors.back()->on_exit(RefreshAfterTask, data);
-            XBT_INFO("Task %d started executing!", taskId);
+            Actors.push_back(Platform.AssignTask(vm, TaskGraph.Nodes[taskId]->GetTaskSpec(), RefreshAfterTask, data));
+            XBT_DEBUG("Task %d started executing!", taskId);
         }
     }
+    // mutex->unlock();
 }
 
 void CloudSimulator::DoRefreshAfterTask(int taskId) {
-    XBT_INFO("Refresh");
 
     TaskGraph.FinishTask(taskId);
     int hostId = Assignments.GetHostByTask(taskId);
@@ -52,24 +54,25 @@ void CloudSimulator::DoRefreshAfterTask(int taskId) {
         Assignments.PopItem(hostId);
     }
     CheckReadyJobs();
-    XBT_INFO("Task %d finished executing!", taskId);
+    XBT_DEBUG("Task %d finished executing!", taskId);
 }
 void CloudSimulator::DoMainLoop() {
     
     XBT_INFO("MainLoop begins");
     CheckReadyJobs();
     XBT_INFO("%d vms, %d actors", Platform.GetVMIds().size(), Actors.size());
-    while (!TaskGraph.IsFinished()) {
-        Actors.back()->join();
-        CheckReadyJobs();
+    for (size_t i = 0; i < Actors.size(); i++) {
+        Actors[i]->join();
+        //CheckReadyJobs();
     }
+    xbt_assert(TaskGraph.IsFinished(), "All actors finished their work, but not all tasks done");
     
     XBT_INFO("MainLoop ends");
 }
 
 void CloudSimulator::Run(double timeout) {
     View::Viewer v(*this);
-    
+    mutex = simgrid::s4u::Mutex::create();   
     simgrid::s4u::Engine* e = simgrid::s4u::Engine::get_instance();
     std::vector<std::shared_ptr<AbstractAction>> actions = Scheduler->PrepareForRun(v);
     XBT_INFO("initial actions processing");
