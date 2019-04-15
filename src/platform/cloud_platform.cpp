@@ -20,7 +20,7 @@ namespace {
     }
 }
 
-bool CloudPlatform::CreateVM(int hostId, const ComputeSpec& s, int id) {
+bool CloudPlatform::CreateVM(int hostId, const VMDescription& s, int id) {
     if (VirtualMachines.count(id)) {
         return false;
     }
@@ -28,7 +28,7 @@ bool CloudPlatform::CreateVM(int hostId, const ComputeSpec& s, int id) {
         return false;
     }
     VirtualMachines[id] = HostsList[hostId].VirtualMachines[id];
-    VirtualMachineSpecs[id] = s;
+    VirtualMachineSpecs[id] = s.GetSpec();
     return true;
 }
 

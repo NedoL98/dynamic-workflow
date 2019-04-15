@@ -93,7 +93,7 @@ bool CloudSimulator::RegisterVirtualMachine(const VMDescription &stats, int cust
         XBT_INFO("No empty hosts");
         return false;
     }
-    return Platform.CreateVM(hostId, stats.GetSpec(), customId);
+    return Platform.CreateVM(hostId, stats, customId);
 }
 
 bool CloudSimulator::AssignTask(int VMId, const ScheduleItem &item) {

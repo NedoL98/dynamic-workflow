@@ -22,5 +22,5 @@ struct Host {
 
     Host(simgrid::s4u::Host *host, const ComputeSpec& c);
     
-    bool CreateVM(const ComputeSpec& c, int CustomId);
+    bool CreateVM(const VMDescription& c, int CustomId);
 };
