@@ -206,12 +206,13 @@ vector<pair<double, double>> MaoScheduler::CalculateDeadlines(View::Viewer& v,
     });
 
     const pair<double, double> EMPTY_PAIR = {-1, -1};
+    size_t calculatedDeadlines = 0;
     vector<pair<double, double>> deadlines(taskOrder.size(), EMPTY_PAIR);
     
     double totalDeadline = tasksEndTimes[tasksEndTimeSorted[0]];
     
     for (const int& endTaskId: tasksEndTimeSorted) {
-        if (deadlines.size() == taskOrder.size()) {
+        if (calculatedDeadlines == taskOrder.size()) {
             break;
         }
 
@@ -222,7 +223,7 @@ vector<pair<double, double>> MaoScheduler::CalculateDeadlines(View::Viewer& v,
             double totalRuntime = 0;
 
             // last node is included in path iff its deadline is not calculated yet
-            if (deadlines[currentTaskId] != EMPTY_PAIR) {
+            if (deadlines[currentTaskId] == EMPTY_PAIR) {
                 currentPath.push_back(currentTaskId);
                 totalRuntime += viewer->GetTaskById(currentTaskId).GetTaskSpec().Cost / taskVM[currentTaskId].GetFlops();
             }
@@ -266,6 +267,8 @@ vector<pair<double, double>> MaoScheduler::CalculateDeadlines(View::Viewer& v,
                     deadlines[taskId].first = cumulativeTime;
                     cumulativeTime += taskRuntimeNorm * (endTime - beginTime);
                     deadlines[taskId].second = cumulativeTime;
+
+                    ++calculatedDeadlines;
                 }
             }
         }
