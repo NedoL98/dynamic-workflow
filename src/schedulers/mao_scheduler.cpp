@@ -75,7 +75,6 @@ vector<VMDescription> MaoScheduler::GetCheapestVMs() {
     for (const unique_ptr<View::Task>& taskPtr : viewer->GetTaskList()) {
         auto task = *taskPtr;
         int bestPrice = -1;
-        TaskSpec curSpec = task.GetTaskSpec();
         VMDescription bestVM;
         for (VMDescription vmDescr: viewer->GetAvailiableVMTaxes()) {
             // we probably want to reconsider way of choosing most efficient vm type for a task
@@ -93,7 +92,7 @@ vector<VMDescription> MaoScheduler::GetCheapestVMs() {
 
 double MaoScheduler::CalculateCost(const vector<VMDescription>& taskVM) const {
     double cost = 0;
-    for (int taskId = 0; taskId < viewer->Size(); ++taskId) {
+    for (size_t taskId = 0; taskId < viewer->WorkflowSize(); ++taskId) {
         VMDescription vmDescr = taskVM[taskId];
         View::Task task = viewer->GetTaskById(taskId);
         cost += vmDescr.GetPrice() * (task.GetTaskSpec().Cost / vmDescr.GetFlops());
@@ -271,7 +270,7 @@ vector<pair<double, double>> MaoScheduler::CalculateDeadlines(View::Viewer& v,
             }
         }
     }
-    xbt_assert(deadlines.size() == viewer->Size(), "Something went wrong, not all tasks have deadlines assigned!");
+    xbt_assert(deadlines.size() == viewer->WorkflowSize(), "Something went wrong, not all tasks have deadlines assigned!");
 
     for (pair<double, double>& deadline: deadlines) {
         deadline.first *= v.GetDeadline() / totalDeadline;
@@ -284,7 +283,7 @@ vector<pair<double, double>> MaoScheduler::CalculateDeadlines(View::Viewer& v,
 vector<vector<LoadVectorEvent>> MaoScheduler::GetLoadVector(const vector<pair<double, double>>& deadlines,
                                                             const vector<VMDescription>& taskVM) {
     vector<vector<LoadVectorEvent>> loadVector(viewer->GetAvailiableVMTaxes().Size());
-    for (int taskId = 0; taskId < deadlines.size(); ++taskId) {
+    for (size_t taskId = 0; taskId < deadlines.size(); ++taskId) {
         double runTime = viewer->GetTaskById(taskId).GetTaskSpec().Cost / taskVM[taskId].GetFlops();
         double consumptionRatio = runTime / (deadlines[taskId].second - deadlines[taskId].first);
         int vmId = taskVM[taskId].GetId();

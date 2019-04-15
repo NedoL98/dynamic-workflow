@@ -107,7 +107,7 @@ bool CloudSimulator::AssignTask(int VMId, const ScheduleItem &item) {
 bool CloudSimulator::CancelTask(int hostId, const ScheduleItem &item) {
     (void)hostId;
     (void)item;
-    return false; // Not implemented
+    return false; // FIXME Not implemented
 }
 
 bool CloudSimulator::ResetSchedule(const Schedule& s) {

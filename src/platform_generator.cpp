@@ -13,12 +13,12 @@ XBT_LOG_NEW_DEFAULT_CATEGORY(platform_generator, "Platform generator log");
 string GetHostSpeeds(const vector<pair<int, long long>>& vmSpeeds) {
     string result = "";
 
-    for (const auto& [pStateId, vmSpeed]: vmSpeeds) {
+    for (const auto& [pstate, vmSpeed]: vmSpeeds) {
         if (!result.empty()) {
             result += ",";
         }
         result += std::to_string(vmSpeed);
-        (void)pStateId;
+        (void)pstate;
     }
 
     return result;

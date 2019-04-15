@@ -39,7 +39,7 @@ namespace View {
         return Simulator.TaskGraph.MakeTasksOrder();
     }
 
-    int Viewer::Size() const {
+    size_t Viewer::WorkflowSize() const {
         return Simulator.TaskGraph.Nodes.size();
     }
 }
