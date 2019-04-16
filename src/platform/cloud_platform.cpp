@@ -67,3 +67,8 @@ int CloudPlatform::GetEmptyHost(const ComputeSpec& s) {
     }
     return -1;
 }
+
+void CloudPlatform::FinishTask(int vmId, const TaskSpec& requirements) {
+    VirtualMachineSpecs[vmId].Cores += requirements.Cores;
+    VirtualMachineSpecs[vmId].Memory += requirements.Memory;
+}

@@ -50,6 +50,7 @@ void CloudSimulator::DoRefreshAfterTask(int taskId) {
 
     TaskGraph.FinishTask(taskId);
     int hostId = Assignments.GetHostByTask(taskId);
+    Platform.FinishTask(hostId, TaskGraph.Nodes[taskId]->GetTaskSpec());
     if (Assignments.GetItem(hostId).GetTaskId() == taskId) {
         Assignments.PopItem(hostId);
     }
