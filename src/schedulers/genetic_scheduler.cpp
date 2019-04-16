@@ -35,6 +35,34 @@ GeneticScheduler::Actions GeneticScheduler::PrepareForRun(View::Viewer& v) {
             PrintEpochStatistics(assignments, i);
         }
     }
+
+    Assignment bestAssignment;
+    for (const Assignment& assignment: assignments) {
+        if (!bestAssignment.FitnessScore.has_value() || assignment.FitnessScore.value() < bestAssignment.FitnessScore.value()) {
+            bestAssignment = assignment;
+        }
+    }
+
+    GeneticScheduler::Actions actions;
+
+    Schedule s;
+
+    int vmId = 0;
+    for (const VMDescription& vmDescr: AvailableVMs) {
+        actions.push_back(std::make_shared<BuyVMAction>(vmDescr, vmId));
+        ++vmId;
+    }
+    for (int taskId: bestAssignment.SchedulingString) {
+        s.AddItem(bestAssignment.MatchingString[taskId], ScheduleItem(taskId));
+    }
+
+    actions.push_back(std::make_shared<ResetScheduleAction>(s));
+
+    XBT_INFO("Schedule created!");
+    XBT_INFO("Makespan: %f", bestAssignment.Makespan.value());
+    XBT_INFO("Cost: %f", bestAssignment.Cost.value());
+
+    return actions;
 }
 
 Assignment::Assignment(int n) {

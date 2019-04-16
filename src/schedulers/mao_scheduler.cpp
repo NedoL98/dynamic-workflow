@@ -286,7 +286,7 @@ vector<pair<double, double>> MaoScheduler::CalculateDeadlines(View::Viewer& v,
 vector<vector<LoadVectorEvent>> MaoScheduler::GetLoadVector(const vector<pair<double, double>>& deadlines,
                                                             const vector<VMDescription>& taskVM) {
     vector<vector<LoadVectorEvent>> loadVector(viewer->GetAvailiableVMTaxes().Size());
-    for (size_t taskId = 0; taskId < deadlines.size(); ++taskId) {
+    for (int taskId = 0; taskId < static_cast<int>(deadlines.size()); ++taskId) {
         double runTime = viewer->GetTaskById(taskId).GetTaskSpec().Cost / taskVM[taskId].GetFlops();
         double consumptionRatio = runTime / (deadlines[taskId].second - deadlines[taskId].first);
         int vmId = taskVM[taskId].GetId();
