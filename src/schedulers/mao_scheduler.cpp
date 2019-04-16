@@ -206,12 +206,13 @@ vector<pair<double, double>> MaoScheduler::CalculateDeadlines(View::Viewer& v,
     });
 
     const pair<double, double> EMPTY_PAIR = {-1, -1};
+    size_t calculatedDeadlines = 0;
     vector<pair<double, double>> deadlines(taskOrder.size(), EMPTY_PAIR);
     
     double totalDeadline = tasksEndTimes[tasksEndTimeSorted[0]];
     
     for (const int& endTaskId: tasksEndTimeSorted) {
-        if (deadlines.size() == taskOrder.size()) {
+        if (calculatedDeadlines == taskOrder.size()) {
             break;
         }
 
@@ -222,7 +223,7 @@ vector<pair<double, double>> MaoScheduler::CalculateDeadlines(View::Viewer& v,
             double totalRuntime = 0;
 
             // last node is included in path iff its deadline is not calculated yet
-            if (deadlines[currentTaskId] != EMPTY_PAIR) {
+            if (deadlines[currentTaskId] == EMPTY_PAIR) {
                 currentPath.push_back(currentTaskId);
                 totalRuntime += viewer->GetTaskById(currentTaskId).GetTaskSpec().Cost / taskVM[currentTaskId].GetFlops();
             }
@@ -266,6 +267,8 @@ vector<pair<double, double>> MaoScheduler::CalculateDeadlines(View::Viewer& v,
                     deadlines[taskId].first = cumulativeTime;
                     cumulativeTime += taskRuntimeNorm * (endTime - beginTime);
                     deadlines[taskId].second = cumulativeTime;
+
+                    ++calculatedDeadlines;
                 }
             }
         }
@@ -283,7 +286,7 @@ vector<pair<double, double>> MaoScheduler::CalculateDeadlines(View::Viewer& v,
 vector<vector<LoadVectorEvent>> MaoScheduler::GetLoadVector(const vector<pair<double, double>>& deadlines,
                                                             const vector<VMDescription>& taskVM) {
     vector<vector<LoadVectorEvent>> loadVector(viewer->GetAvailiableVMTaxes().Size());
-    for (size_t taskId = 0; taskId < deadlines.size(); ++taskId) {
+    for (int taskId = 0; taskId < static_cast<int>(deadlines.size()); ++taskId) {
         double runTime = viewer->GetTaskById(taskId).GetTaskSpec().Cost / taskVM[taskId].GetFlops();
         double consumptionRatio = runTime / (deadlines[taskId].second - deadlines[taskId].first);
         int vmId = taskVM[taskId].GetId();
