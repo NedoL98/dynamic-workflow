@@ -65,6 +65,15 @@ namespace Workflow {
             return Requirements.Cores <= vmDescr.GetCores() && Requirements.Memory <= vmDescr.GetMemory();
         }
 
+        double GetExecutionTime(const VMDescription& vmDescr) const {
+            xbt_assert(CanBeExecuted(vmDescr));
+            return Requirements.Cost / static_cast<double>(vmDescr.GetFlops());
+        }
+
+        double GetExecutionCost(const VMDescription& vmDescr) const {
+            return vmDescr.GetPrice() * GetExecutionTime(vmDescr);
+        }
+
         friend class Workflow::Graph;
     };
 }

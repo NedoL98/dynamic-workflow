@@ -148,7 +148,7 @@ double GeneticScheduler::CalculateMakespan(const Assignment& assignment) const {
 
                 if (canProcessTask) {
                     // TODO: enhance this when we can calculate data transition time
-                    endTime[taskId] = startTime + (viewer->GetTaskById(taskId).GetTaskSpec().Cost / AvailableVMs[queueId].GetFlops());
+                    endTime[taskId] = startTime + viewer->GetTaskById(taskId).GetExecutionTime(AvailableVMs[queueId]);
                     makespan = max(endTime[taskId], makespan);
                     ++queueNextTask[queueId];
                     
@@ -168,7 +168,8 @@ double GeneticScheduler::CalculateCost(const Assignment& assignment) const {
     for (size_t taskId = 0; taskId < viewer->WorkflowSize(); ++taskId) {
         View::Task task = viewer->GetTaskById(taskId);
         int vmId = assignment.MatchingString[taskId];
-        cost += AvailableVMs[vmId].GetPrice() * (task.GetTaskSpec().Cost / AvailableVMs[vmId].GetFlops());
+        // FIXME when startup cost is added
+        cost += task.GetExecutionCost(AvailableVMs[vmId]);
     }
     return cost;
 }

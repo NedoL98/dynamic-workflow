@@ -30,7 +30,7 @@ long long VMDescription::GetMemory() const {
     return Memory;
 }
 
-double VMDescription::GetFlops() const {
+long long VMDescription::GetFlops() const {
     return Flops;
 }
 

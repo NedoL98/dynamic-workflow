@@ -29,7 +29,7 @@ public:
     int GetId() const;
     int GetCores() const;
     long long GetMemory() const;
-    double GetFlops() const;
+    long long GetFlops() const;
     int GetPrice() const;
     int GetPStateId() const;
 

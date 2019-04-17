@@ -37,7 +37,7 @@ string GeneratePlatform(const string& workflowPath, const string& vmListPath) {
     for (const VMDescription& vmDescription: vmList) {
         xbt_assert(static_cast<size_t>(vmDescription.GetPStateId()) < vmList.Size(), "PStateId %d is not in bounds [0,%d)!", vmDescription.GetPStateId(), vmList.Size());
         xbt_assert(!usedPstateId[vmDescription.GetPStateId()], "PStateId %d is used twice!", vmDescription.GetPStateId());
-        vmSpeeds.push_back({vmDescription.GetPStateId(), vmDescription.GetFlops() / (1000 * 1000 * 1000)});
+        vmSpeeds.push_back({vmDescription.GetPStateId(), static_cast<double>(vmDescription.GetFlops()) / (1000 * 1000 * 1000)});
         usedPstateId[vmDescription.GetPStateId()] = true;
     }
     std::sort(vmSpeeds.begin(), vmSpeeds.end());
