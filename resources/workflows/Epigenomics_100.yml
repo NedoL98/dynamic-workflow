@@ -1,4 +1,5 @@
 name: Epigenomics_100.yml
+deadline: 1600
 inputs:
   - name: chr210.sfq
     size: 234967975

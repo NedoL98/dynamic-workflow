@@ -1,4 +1,5 @@
 name: Inspiral_100.yml
+deadline: 80
 inputs:
   - name: H-CAL_REF_DARM_ERR_H1_S5_V1-858019967-8.gwf
     size: 902334
