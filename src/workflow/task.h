@@ -62,12 +62,12 @@ namespace Workflow {
             
 
         bool CanBeExecuted(const VMDescription& vmDescr) const {
-            return Requirements.Cores <= vmDescr.GetCores() && Requirements.Memory <= vmDescr.GetMemory();
+            return Requirements.GetCores() <= vmDescr.GetCores() && Requirements.GetMemory() <= vmDescr.GetMemory();
         }
 
         double GetExecutionTime(const VMDescription& vmDescr) const {
             xbt_assert(CanBeExecuted(vmDescr));
-            return Requirements.Cost / static_cast<double>(vmDescr.GetFlops());
+            return Requirements.GetCost() / static_cast<double>(vmDescr.GetFlops());
         }
 
         double GetExecutionCost(const VMDescription& vmDescr) const {

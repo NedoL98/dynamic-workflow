@@ -36,8 +36,8 @@ bool CloudPlatform::CheckTask(int vmId, const TaskSpec& requirements) {
     if (!VirtualMachines.count(vmId)) {
         return false; 
     }
-    if (VirtualMachineSpecs[vmId].Cores < requirements.Cores || 
-        VirtualMachineSpecs[vmId].Memory < requirements.Memory) {
+    if (VirtualMachineSpecs[vmId].Cores < requirements.GetCores() || 
+        VirtualMachineSpecs[vmId].Memory < requirements.GetMemory()) {
         return false;
     }
     return true;
@@ -49,10 +49,10 @@ simgrid::s4u::ActorPtr CloudPlatform::AssignTask(int vmId, const TaskSpec& requi
         XBT_INFO("Does not satisfy requirements, doesn't run!");
         return nullptr;
     }
-    simgrid::s4u::ActorPtr result = simgrid::s4u::Actor::create("compute" + std::to_string(i), VirtualMachines[vmId], DoExecute, (long long)requirements.Cost, onExit, args);
+    simgrid::s4u::ActorPtr result = simgrid::s4u::Actor::create("compute" + std::to_string(i), VirtualMachines[vmId], DoExecute, (long long)requirements.GetCost(), onExit, args);
     i++;
-    VirtualMachineSpecs[vmId].Cores -= requirements.Cores;
-    VirtualMachineSpecs[vmId].Memory -= requirements.Memory;
+    VirtualMachineSpecs[vmId].Cores -= requirements.GetCores();
+    VirtualMachineSpecs[vmId].Memory -= requirements.GetMemory();
     return result;
 }
 
@@ -66,6 +66,6 @@ int CloudPlatform::GetEmptyHost(const ComputeSpec& s) {
 }
 
 void CloudPlatform::FinishTask(int vmId, const TaskSpec& requirements) {
-    VirtualMachineSpecs[vmId].Cores += requirements.Cores;
-    VirtualMachineSpecs[vmId].Memory += requirements.Memory;
+    VirtualMachineSpecs[vmId].Cores += requirements.GetCores();
+    VirtualMachineSpecs[vmId].Memory += requirements.GetMemory();
 }

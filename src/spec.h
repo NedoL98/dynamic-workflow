@@ -1,4 +1,6 @@
 #pragma once
+#include <yaml-cpp/yaml.h>
+
 struct ComputeSpec {
     long long Memory, Speed;
     int Cores;
@@ -7,7 +9,17 @@ struct ComputeSpec {
     }
 };
 
-struct TaskSpec {
+class TaskSpec {
+friend class Task;
+public:
+    TaskSpec() = default;
+    TaskSpec(const YAML::Node& taskDescription);
+
+    long long GetMemory() const;
+    long long GetCost() const;
+    int GetCores() const;
+
+private:
     long long Memory, Cost;
     int Cores;
 };

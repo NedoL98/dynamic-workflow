@@ -18,6 +18,53 @@ VMDescription::VMDescription(int id, int cores, long long memory, long long flop
     PStateId(pStateId)
 {}
 
+TaskSpec::TaskSpec(const YAML::Node& taskDescription) {
+    if (!taskDescription["requirements"]) {
+        XBT_DEBUG("Task requirements are not specified, they will be set to default!");
+        Cores = DefaultCores;
+        Memory = DefaultMemory;
+    } else {
+        if (!taskDescription["requirements"]["cpu"]) {
+            XBT_DEBUG("CPU usage is not specified for task, it will be set to default!");
+            Cores = DefaultCores;
+        } else {
+            Cores = taskDescription["requirements"]["cpu"].as<int>();
+        }
+
+        if (!taskDescription["requirements"]["memory"]) {
+            XBT_DEBUG("Memory usage is not specified for task, it will be set to default!");
+            Memory = DefaultMemory;
+        } else {
+            try {
+                Memory = ParseSize(taskDescription["requirements"]["memory"].as<string>(), SizeSuffixes);
+            } catch (std::exception& e) {
+                XBT_ERROR("Can't parse memory requirement: %s", e.what());
+                XBT_DEBUG("Memory requirement will be set to %d", DefaultMemory);
+                Memory = DefaultMemory;
+            }
+        }
+    }
+
+    xbt_assert(taskDescription["size"], "Task size must be specified!");
+    try {
+        Cost = ParseSize(taskDescription["size"].as<string>(), PerformanceSuffixes);
+    } catch (std::exception& e) {
+        xbt_assert("Can't parse size requirement: %s", e.what());
+    }
+}
+
+long long TaskSpec::GetMemory() const {
+    return Memory;
+}
+
+long long TaskSpec::GetCost() const {
+    return Cost;
+}
+
+int TaskSpec::GetCores() const {
+    return Cores;
+}
+
 int VMDescription::GetId() const {
     return Id;
 }
