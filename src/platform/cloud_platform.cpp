@@ -46,7 +46,7 @@ bool CloudPlatform::CheckTask(int vmId, const TaskSpec& requirements) {
 simgrid::s4u::ActorPtr CloudPlatform::AssignTask(int vmId, const TaskSpec& requirements, const std::function<void(int, void*)>& onExit, void* args) {
     static int i = 0;
     if (!CheckTask(vmId, requirements)) {
-        XBT_INFO("Not satisfies requirements, doesn't run!");
+        XBT_INFO("Does not satisfy requirements, doesn't run!");
         return nullptr;
     }
     simgrid::s4u::ActorPtr result = simgrid::s4u::Actor::create("compute" + std::to_string(i), VirtualMachines[vmId], DoExecute, (long long)requirements.Cost, onExit, args);
@@ -57,11 +57,8 @@ simgrid::s4u::ActorPtr CloudPlatform::AssignTask(int vmId, const TaskSpec& requi
 }
 
 int CloudPlatform::GetEmptyHost(const ComputeSpec& s) {
-    XBT_WARN("We don't use restrictions!");
-    (void)s;
     for (const auto& host : HostsList) {
-        //XBT_INFO("%d %d %d \/ %d %d %d", host.Spec.Cores, host.Spec.Memory, host.Spec.Speed, s.Cores, s.Memory, s.Speed);
-        if (host.VirtualMachines.empty()/*FIXME && host.Spec == s*/) {
+        if (host.VirtualMachines.empty() && host.Spec.Memory >= s.Memory && host.Spec.Cores >= s.Cores) {
             return host.Id;
         }
     }

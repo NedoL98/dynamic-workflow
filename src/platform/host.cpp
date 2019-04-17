@@ -17,13 +17,11 @@ bool Host::CreateVM(const VMDescription& c, int CustomId) {
     if (VirtualMachines.count(CustomId)) {
         return false;
     }
-    /* FIXME
-    if (AvailiableCores < c.Cores || AvailiableMemory < c.Memory) {
+    if (AvailiableCores < c.GetCores() || AvailiableMemory < c.GetMemory()) {
         return false;
     }
-    */
     Unit->set_pstate(c.GetPStateId());
-    simgrid::s4u::VirtualMachine* vm = new simgrid::s4u::VirtualMachine(std::to_string(Id) + "_VM", Unit, c.GetCores()); // FIXME add memory
+    simgrid::s4u::VirtualMachine* vm = new simgrid::s4u::VirtualMachine(std::to_string(Id) + "_VM", Unit, c.GetCores(), c.GetMemory());
     vm->set_property("VM_ID", std::to_string(CustomId));
     AvailiableCores -= c.GetCores();
     AvailiableMemory -= c.GetMemory();

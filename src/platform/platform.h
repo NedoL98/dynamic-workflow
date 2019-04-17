@@ -14,7 +14,7 @@ protected:
     std::map<int, ComputeSpec> VirtualMachineSpecs;
     
 public:
-    AbstractPlatform(const std::string& platformConfig);
+    AbstractPlatform(const std::string& platformConfig, long long hostMaxMemory);
     std::vector<int> GetVMIds() const; 
     virtual bool CreateVM(int hostId, const VMDescription& s, int id) = 0;
     virtual simgrid::s4u::ActorPtr AssignTask(int vmId, const TaskSpec& s, const std::function<void(int, void*)>& onExit, void* arg) = 0;
@@ -25,7 +25,8 @@ public:
 class CloudPlatform : public AbstractPlatform {
 
 public:
-    CloudPlatform(const std::string& platformConfig): AbstractPlatform(platformConfig) {}
+    CloudPlatform(const std::string& platformConfig, long long hostMaxMemory):
+                            AbstractPlatform(platformConfig, hostMaxMemory) {}
 
     int GetEmptyHost(const ComputeSpec& s);
     bool CheckTask(int vmId, const TaskSpec& s);

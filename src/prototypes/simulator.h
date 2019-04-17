@@ -37,7 +37,7 @@ public:
                    AbstractScheduler* scheduler,
                    cxxopts::ParseResult& parseResult):
         AvailiableVMs(VMListConf),
-        Platform(platformConf),
+        Platform(platformConf, AvailiableVMs.MaxMemory()),
         Scheduler(scheduler),
         Assignments(),
         TaskGraph(workflowConf, parseResult)

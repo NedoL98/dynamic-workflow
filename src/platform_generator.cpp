@@ -28,6 +28,7 @@ string GeneratePlatform(const string& workflowPath, const string& vmListPath) {
     int hostCnt;
     int maxCoresCnt;
     // TODO: use this parameter while generating platform
+    // Then use this parameter instead of VmList.MaxMemory in simulator.cpp
     long long maxMemory;
     VMList vmList(vmListPath);
 

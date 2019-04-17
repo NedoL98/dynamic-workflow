@@ -21,14 +21,11 @@ int CloudSimulator::RefreshAfterTask(int, void* s) {
 
 simgrid::s4u::MutexPtr mutex;
 void CloudSimulator::CheckReadyJobs() {
-    // mutex->lock();
-
     vector<int> vmIds = Platform.GetVMIds();
     for (int vm : vmIds) {
         if (!Assignments.HasItem(vm)) {
             continue;
         }
-        //XBT_INFO("%d task id, %d size", Assignments.GetItem(vm).GetTaskId(), TaskGraph.Nodes.size());
         int taskId = Assignments.GetItem(vm).GetTaskId();
         if (TaskGraph.Nodes[taskId]->IsReady()) {
             XBT_DEBUG("Task %d is ready to compute!", taskId);
@@ -43,7 +40,6 @@ void CloudSimulator::CheckReadyJobs() {
             XBT_DEBUG("Task %d started executing!", taskId);
         }
     }
-    // mutex->unlock();
 }
 
 void CloudSimulator::DoRefreshAfterTask(int taskId) {
@@ -64,7 +60,6 @@ void CloudSimulator::DoMainLoop() {
     XBT_INFO("%d vms, %d actors", Platform.GetVMIds().size(), Actors.size());
     for (size_t i = 0; i < Actors.size(); i++) {
         Actors[i]->join();
-        //CheckReadyJobs();
     }
     xbt_assert(TaskGraph.IsFinished(), "All actors finished their work, but not all tasks done");
     
