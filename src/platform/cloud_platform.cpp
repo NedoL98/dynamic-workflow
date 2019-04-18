@@ -49,7 +49,7 @@ simgrid::s4u::ActorPtr CloudPlatform::AssignTask(int vmId, const TaskSpec& requi
         XBT_INFO("Does not satisfy requirements, doesn't run!");
         return nullptr;
     }
-    simgrid::s4u::ActorPtr result = simgrid::s4u::Actor::create("compute" + std::to_string(i), VirtualMachines[vmId], DoExecute, (long long)requirements.GetCost(), onExit, args);
+    simgrid::s4u::ActorPtr result = simgrid::s4u::Actor::create("compute" + std::to_string(i), VirtualMachines[vmId], DoExecute, requirements.GetSize(), onExit, args);
     i++;
     VirtualMachineSpecs[vmId].Cores -= requirements.GetCores();
     VirtualMachineSpecs[vmId].Memory -= requirements.GetMemory();

@@ -16,11 +16,11 @@ public:
     TaskSpec(const YAML::Node& taskDescription);
 
     long long GetMemory() const;
-    long long GetCost() const;
+    long long GetSize() const;
     int GetCores() const;
 
 private:
-    long long Memory, Cost;
+    long long Memory, Size;
     int Cores;
 };
 

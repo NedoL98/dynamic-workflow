@@ -67,7 +67,7 @@ namespace Workflow {
 
         double GetExecutionTime(const VMDescription& vmDescr) const {
             xbt_assert(CanBeExecuted(vmDescr));
-            return Requirements.GetCost() / static_cast<double>(vmDescr.GetFlops());
+            return Requirements.GetSize() / static_cast<double>(vmDescr.GetFlops());
         }
 
         double GetExecutionCost(const VMDescription& vmDescr) const {

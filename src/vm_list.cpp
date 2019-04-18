@@ -47,7 +47,7 @@ TaskSpec::TaskSpec(const YAML::Node& taskDescription) {
 
     xbt_assert(taskDescription["size"], "Task size must be specified!");
     try {
-        Cost = ParseSize(taskDescription["size"].as<string>(), PerformanceSuffixes);
+        Size = ParseSize(taskDescription["size"].as<string>(), PerformanceSuffixes);
     } catch (std::exception& e) {
         xbt_assert("Can't parse size requirement: %s", e.what());
     }
@@ -57,8 +57,8 @@ long long TaskSpec::GetMemory() const {
     return Memory;
 }
 
-long long TaskSpec::GetCost() const {
-    return Cost;
+long long TaskSpec::GetSize() const {
+    return Size;
 }
 
 int TaskSpec::GetCores() const {
