@@ -7,7 +7,6 @@ class GeneticScheduler;
 struct Assignment {
     Assignment() = default;
     Assignment(int n);
-    Assignment(const Assignment& other);
 
     std::vector<int> MatchingString;
     std::vector<int> SchedulingString;
@@ -41,6 +40,8 @@ private:
     void MakeMatchingMutation(Assignment& assignment) const;
     void MakeSchedulingMutation(Assignment& assignment) const;
 
+    std::vector<Assignment> GetBestChromosomes(const std::vector<Assignment>& generation) const;
+
     std::vector<Assignment> GetNewGeneration(const std::vector<Assignment>& oldGeneration) const;
 
     void PrintEpochStatistics(std::vector<Assignment>& assignments, int epochInd) const;
@@ -50,6 +51,7 @@ private:
     const int NUM_VMS = 50;
     const int NUM_STEPS = 10 * 1000;
 
+    const int BestChromosomesNumber = 5;
     const double MatchingCrossoverProb = 0.5;
     const double SchedulingCrossoverProb = 0.5;
     const double MatchingMutationProb = 0.2;

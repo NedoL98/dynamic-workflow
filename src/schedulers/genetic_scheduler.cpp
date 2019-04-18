@@ -70,11 +70,6 @@ Assignment::Assignment(int n) {
     SchedulingString.resize(n);
 }
 
-Assignment::Assignment(const Assignment& other) {
-    MatchingString = other.MatchingString;
-    SchedulingString = other.SchedulingString;
-}
-
 vector<Assignment> GeneticScheduler::GetInitialAssignments(int numAssignments) {
     vector<View::Task> tasksOrder = viewer->MakeTasksOrder();
     vector<Assignment> initialAssignments;
@@ -331,6 +326,15 @@ void GeneticScheduler::MakeSchedulingMutation(Assignment& assignment) const {
     assignment.SchedulingString.insert(assignment.SchedulingString.begin() + newTaskPosition, mutationTaskId);
 }
 
+vector<Assignment> GeneticScheduler::GetBestChromosomes(const vector<Assignment>& generation) const {
+    vector<Assignment> result(BestChromosomesNumber);
+    std::partial_sort_copy(generation.begin(), generation.end(), result.begin(), result.end(), [](const Assignment& a, const Assignment& b) {
+        xbt_assert(a.FitnessScore.has_value() && b.FitnessScore.has_value(), "Not every assignment has a calculated fitness value!");
+        return a.FitnessScore < b.FitnessScore;
+    });
+    return result;
+}
+
 vector<Assignment> GeneticScheduler::GetNewGeneration(const vector<Assignment>& oldGeneration) const {
     double totalInvFitness = 0;
     vector<double> prefInvFitness;
@@ -340,7 +344,8 @@ vector<Assignment> GeneticScheduler::GetNewGeneration(const vector<Assignment>& 
     }
 
     vector<Assignment> newGeneration;
-    while (newGeneration.size() != oldGeneration.size()) {
+
+    while (newGeneration.size() != oldGeneration.size() - BestChromosomesNumber) {
         double randCutoff = (rand() / static_cast<double>(RAND_MAX)) * totalInvFitness;
         double assignmentId = upper_bound(prefInvFitness.begin(), prefInvFitness.end(), randCutoff) - prefInvFitness.begin();
         newGeneration.push_back(oldGeneration[assignmentId]);
@@ -365,6 +370,9 @@ vector<Assignment> GeneticScheduler::GetNewGeneration(const vector<Assignment>& 
         MakeSchedulingMutation(newGeneration[rand() % newGeneration.size()]);
     }
 
+    vector<Assignment> bestOldAssignments = GetBestChromosomes(oldGeneration); 
+    newGeneration.insert(newGeneration.end(), bestOldAssignments.begin(), bestOldAssignments.end());
+    
     return newGeneration;
 }
 
