@@ -1,4 +1,4 @@
-tasks:
+vm_types:
   - name: VM1
     cpu: 1
     memory: 4GB

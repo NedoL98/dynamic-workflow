@@ -23,7 +23,7 @@ namespace View {
     const std::vector<std::unique_ptr<Task>>& Viewer::GetTaskList() const {
         return Simulator.TaskGraph.Nodes;
     }
-    const VMList& Viewer::GetAvailableVMTaxes() const {
+    const VMList& Viewer::GetVMList() const {
         return Simulator.AvailableVMs;
     }
 
@@ -41,14 +41,6 @@ namespace View {
 
     size_t Viewer::WorkflowSize() const {
         return Simulator.TaskGraph.Nodes.size();
-    }
-
-    double Viewer::GetMinLag() const {
-        return Simulator.AvailableVMs.GetMinLag();
-    }
-
-    double Viewer::GetMaxLag() const {
-        return Simulator.AvailableVMs.GetMaxLag();
     }
 }
 

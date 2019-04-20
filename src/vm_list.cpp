@@ -178,7 +178,7 @@ VMList::VMList(const string& vmConfig) {
     YAML::Node VMList_ = YAML::LoadFile(vmConfig);
     
     int id = 0;
-    for (const YAML::Node& vmDescription: VMList_["tasks"]) {
+    for (const YAML::Node& vmDescription: VMList_["vm_types"]) {
         int cores = vmDescription["cpu"].as<int>();
         long long memory = ParseSize(vmDescription["memory"].as<string>(), SizeSuffixes);
         long long flops = ParseSize(vmDescription["speed"].as<string>(), PerformanceSuffixes);

@@ -76,7 +76,7 @@ vector<VMDescription> MaoScheduler::GetCheapestVMs() {
         auto task = *taskPtr;
         int bestPrice = -1;
         VMDescription bestVM;
-        for (VMDescription vmDescr: viewer->GetAvailableVMTaxes()) {
+        for (VMDescription vmDescr: viewer->GetVMList()) {
             // we probably want to reconsider way of choosing most efficient vm type for a task
             if (taskPtr->CanBeExecuted(vmDescr) &&
                 (bestPrice == -1 || vmDescr.GetPrice() < bestPrice)) {
@@ -131,7 +131,7 @@ void MaoScheduler::ReduceMakespan(vector<VMDescription>& taskVM,
     for (const View::Task& task: taskOrder) {
         VMDescription oldVM = taskVM[task.GetId()]; 
         VMDescription newVM = oldVM;
-        for (const VMDescription& vm: viewer->GetAvailableVMTaxes()) {
+        for (const VMDescription& vm: viewer->GetVMList()) {
             if (task.CanBeExecuted(vm) &&
                 vm > oldVM && 
                 (newVM == oldVM || vm.GetPrice() <= newVM.GetPrice())) {
@@ -285,7 +285,7 @@ vector<pair<double, double>> MaoScheduler::CalculateDeadlines(View::Viewer& v,
 
 vector<vector<LoadVectorEvent>> MaoScheduler::GetLoadVector(const vector<pair<double, double>>& deadlines,
                                                             const vector<VMDescription>& taskVM) {
-    vector<vector<LoadVectorEvent>> loadVector(viewer->GetAvailableVMTaxes().Size());
+    vector<vector<LoadVectorEvent>> loadVector(viewer->GetVMList().Size());
     for (int taskId = 0; taskId < static_cast<int>(deadlines.size()); ++taskId) {
         double runTime = viewer->GetTaskById(taskId).GetExecutionTime(taskVM[taskId]);
         double consumptionRatio = runTime / (deadlines[taskId].second - deadlines[taskId].first);
