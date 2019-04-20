@@ -24,6 +24,11 @@ public:
     int MaxCores() const;
     long long MaxMemory() const;
 
+    double GetMinLag() const;
+    double GetMaxLag() const;
+
 private:
     std::vector<VMDescription> VMs;
+    double MinLag;
+    double MaxLag;
 };

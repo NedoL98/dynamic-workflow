@@ -165,12 +165,20 @@ long long VMList::MaxMemory() const {
         })->GetMemory();
 }
 
+double VMList::GetMinLag() const {
+    return MinLag;
+}
+
+double VMList::GetMaxLag() const {
+    return MaxLag;
+}
+
 VMList::VMList(const string& vmConfig) {
     XBT_INFO("Loading VM list from %s", vmConfig.c_str());
     YAML::Node VMList_ = YAML::LoadFile(vmConfig);
-
+    
     int id = 0;
-    for (const YAML::Node& vmDescription: VMList_) {
+    for (const YAML::Node& vmDescription: VMList_["tasks"]) {
         int cores = vmDescription["cpu"].as<int>();
         long long memory = ParseSize(vmDescription["memory"].as<string>(), SizeSuffixes);
         long long flops = ParseSize(vmDescription["speed"].as<string>(), PerformanceSuffixes);
@@ -181,4 +189,14 @@ VMList::VMList(const string& vmConfig) {
         ++id;
         XBT_INFO("VM %s loaded!", vmDescription["name"].as<string>().c_str());
     }
+
+    if (!VMList_["acquisition_lag"]) {
+        MinLag = 0;
+        MaxLag = 0;
+    } else {
+        MinLag = VMList_["acquisition_lag"]["min"].as<double>();
+        MaxLag = VMList_["acquisition_lag"]["max"].as<double>();
+    }
+
+    XBT_INFO("MinLag %f, MaxLag %f", MinLag, MaxLag);
 }

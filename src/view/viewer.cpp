@@ -42,5 +42,13 @@ namespace View {
     size_t Viewer::WorkflowSize() const {
         return Simulator.TaskGraph.Nodes.size();
     }
+
+    double Viewer::GetMinLag() const {
+        return Simulator.AvailiableVMs.GetMinLag();
+    }
+
+    double Viewer::GetMaxLag() const {
+        return Simulator.AvailiableVMs.GetMaxLag();
+    }
 }
 

@@ -24,5 +24,7 @@ namespace View {
         double GetDeadline() const;
         std::vector<Task> MakeTasksOrder() const;
         size_t WorkflowSize() const;
+        double GetMaxLag() const;
+        double GetMinLag() const;
     };
 }
