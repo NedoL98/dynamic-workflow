@@ -18,7 +18,7 @@ XBT_LOG_NEW_DEFAULT_CATEGORY(genetic_scheduler, "Genetic scheduler log");
 GeneticScheduler::Actions GeneticScheduler::PrepareForRun(View::Viewer& v) {
     viewer = std::make_shared<View::Viewer>(v);
 
-    for (VMDescription vmDecr: v.GetAvailiableVMTaxes()) {
+    for (VMDescription vmDecr: v.GetAvailableVMTaxes()) {
         for (int i = 0; i < NUM_VMS; ++i) {
             AvailableVMs.push_back(vmDecr);
         }

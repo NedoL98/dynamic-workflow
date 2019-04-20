@@ -18,7 +18,7 @@ namespace View {
         const Task& GetTaskByName(const std::string& s) const;
         const Task& GetTaskById(int id) const;
         const std::vector<std::unique_ptr<Task>>& GetTaskList() const;
-        const VMList& GetAvailiableVMTaxes() const;
+        const VMList& GetAvailableVMTaxes() const;
         const Schedule& GetCurrentAssignments() const;
         Status GetTaskStatus(int id) const;
         double GetDeadline() const;

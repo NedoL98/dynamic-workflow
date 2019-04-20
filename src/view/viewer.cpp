@@ -23,8 +23,8 @@ namespace View {
     const std::vector<std::unique_ptr<Task>>& Viewer::GetTaskList() const {
         return Simulator.TaskGraph.Nodes;
     }
-    const VMList& Viewer::GetAvailiableVMTaxes() const {
-        return Simulator.AvailiableVMs;
+    const VMList& Viewer::GetAvailableVMTaxes() const {
+        return Simulator.AvailableVMs;
     }
 
     const Schedule& Viewer::GetCurrentAssignments() const {
@@ -44,11 +44,11 @@ namespace View {
     }
 
     double Viewer::GetMinLag() const {
-        return Simulator.AvailiableVMs.GetMinLag();
+        return Simulator.AvailableVMs.GetMinLag();
     }
 
     double Viewer::GetMaxLag() const {
-        return Simulator.AvailiableVMs.GetMaxLag();
+        return Simulator.AvailableVMs.GetMaxLag();
     }
 }
 

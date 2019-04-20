@@ -12,7 +12,7 @@
 #include <memory>
 
 class CloudSimulator : public SimulatorInterface {
-    VMList AvailiableVMs;
+    VMList AvailableVMs;
     CloudPlatform Platform;
     AbstractScheduler* Scheduler;
     Schedule Assignments;
@@ -36,8 +36,8 @@ public:
                    const std::string& VMListConf,
                    AbstractScheduler* scheduler,
                    cxxopts::ParseResult& parseResult):
-        AvailiableVMs(VMListConf),
-        Platform(platformConf, AvailiableVMs.MaxMemory()),
+        AvailableVMs(VMListConf),
+        Platform(platformConf, AvailableVMs.MaxMemory()),
         Scheduler(scheduler),
         Assignments(),
         TaskGraph(workflowConf, parseResult)

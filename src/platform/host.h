@@ -16,8 +16,8 @@ struct Host {
     ActorPointers Actors;
     ComputeSpec Spec;
     simgrid::s4u::Host *Unit;
-    long long AvailiableMemory;
-    int AvailiableCores;
+    long long AvailableMemory;
+    int AvailableCores;
     int Id;
 
     Host(simgrid::s4u::Host *host, const ComputeSpec& c);
