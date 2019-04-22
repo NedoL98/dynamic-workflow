@@ -47,25 +47,10 @@ int main(int argc, char* argv[]) {
                             parseResult);
 
     cloudSim.Run();
-    /*
-    // Load the platform description
-    e.load_platform(platformPath);
-    XBT_INFO("Platform file loaded");
-
-    // Transform human-readable platform description
-    TransformHostsProps();
-
-    // Make scheduler actor
-    simgrid::s4u::Actor::create("scheduler", e.get_all_hosts()[0], scheduler);
-
-    XBT_INFO("Starting simulation");
-    // Run the simulation
-    e.run();
 
     XBT_INFO("Simulation is over");
 
     if (!parseResult.count("platform") && parseResult["save_platform"].as<bool>() == false) {
         remove(platformPath.c_str());
     }
-    */
 }
