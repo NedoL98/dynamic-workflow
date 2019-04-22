@@ -19,7 +19,6 @@ int CloudSimulator::RefreshAfterTask(int, void* s) {
     return 0;
 }
 
-simgrid::s4u::MutexPtr mutex;
 void CloudSimulator::CheckReadyJobs() {
     vector<int> vmIds = Platform.GetVMIds();
     for (int vm : vmIds) {
@@ -67,7 +66,6 @@ void CloudSimulator::DoMainLoop() {
 
 void CloudSimulator::Run(double timeout) {
     View::Viewer v(*this);
-    mutex = simgrid::s4u::Mutex::create();   
     simgrid::s4u::Engine* e = simgrid::s4u::Engine::get_instance();
     std::vector<std::shared_ptr<AbstractAction>> actions = Scheduler->PrepareForRun(v);
     XBT_INFO("initial actions processing");
