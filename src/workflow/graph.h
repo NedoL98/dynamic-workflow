@@ -6,7 +6,7 @@
 
 #include "argument_parser.h"
 #include <workflow/task.h>
-#include <workflow/file.h>
+#include <files/manager.h>
 
 namespace Workflow {
     class Graph {
@@ -14,12 +14,11 @@ namespace Workflow {
         std::set<int> FinishedTasks;
     public:
         std::vector<std::unique_ptr<Task> > Nodes;
-        std::map<std::string, FileDescription> Files;
-        std::map<int, FileDescription> FileIdMapping;
         std::map<std::string, int> TaskName2Id;
         std::vector<int> Inputs;
         std::vector<int> Outputs;
         std::string Name;
+        Manager FileManager;
         double Deadline;
 
         Graph(const std::string& filename, cxxopts::ParseResult& options);
@@ -29,5 +28,6 @@ namespace Workflow {
 
         bool IsFinished() const;
         void FinishTask(int id); 
+        void AssignTask(int TaskId, int hostId); 
     };
 }

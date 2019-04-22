@@ -43,9 +43,8 @@ void CloudSimulator::CheckReadyJobs() {
 }
 
 void CloudSimulator::DoRefreshAfterTask(int taskId) {
-
-    TaskGraph.FinishTask(taskId);
     int hostId = Assignments.GetHostByTask(taskId);
+    TaskGraph.FinishTask(taskId);
     Platform.FinishTask(hostId, TaskGraph.Nodes[taskId]->GetTaskSpec());
     if (Assignments.GetItem(hostId).GetTaskId() == taskId) {
         Assignments.PopItem(hostId);
@@ -81,7 +80,7 @@ void CloudSimulator::Run(double timeout) {
     XBT_INFO("required timeout is %g", timeout);
 }
 
-
+// Inherited from Interface
 bool CloudSimulator::RegisterVirtualMachine(const VMDescription &stats, int customId) {
     int hostId = -1;
     XBT_DEBUG("%d %lld %lld", stats.GetCores(), stats.GetFlops(), stats.GetMemory());
@@ -94,9 +93,11 @@ bool CloudSimulator::RegisterVirtualMachine(const VMDescription &stats, int cust
 
 bool CloudSimulator::AssignTask(int VMId, const ScheduleItem &item) {
     if (!Platform.CheckTask(VMId, TaskGraph.Nodes[item.GetTaskId()]->GetTaskSpec())) {
+        XBT_WARN("Schedule is invalid: %d task cannot be hosted on %d!", item.GetTaskId(), VMId);
         return false;
     }
     Assignments.AddItem(VMId, item);
+    TaskGraph.AssignTask(item.GetTaskId(), VMId);
     return true;
 }
 
@@ -107,6 +108,14 @@ bool CloudSimulator::CancelTask(int hostId, const ScheduleItem &item) {
 }
 
 bool CloudSimulator::ResetSchedule(const Schedule& s) {
-    Assignments = s; // FIXME Check
+    Schedule copy = s;
+    vector<int> vmIds = Platform.GetVMIds();
+    Assignments = Schedule();
+    for (int v : vmIds) {
+        while (copy.HasItem(v)) {
+            auto taskItem = copy.PopItem(v);
+            AssignTask(v, taskItem);
+        }
+    }
     return true;
 }
