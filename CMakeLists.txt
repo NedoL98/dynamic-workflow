@@ -90,5 +90,8 @@ add_custom_target(
     ${CMAKE_SOURCE_DIR}/resources/workflows/Epigenomics_100.xml
     ${CMAKE_SOURCE_DIR}/resources/workflows/Inspiral_100.xml
     ${CMAKE_SOURCE_DIR}/resources/workflows/Montage_100.xml
+    ${CMAKE_SOURCE_DIR}/resources/workflows/montage_1_5.dax
+    ${CMAKE_SOURCE_DIR}/resources/workflows/montage_2_0.dax
+    ${CMAKE_SOURCE_DIR}/resources/workflows/1000genome.dax
 )
 
