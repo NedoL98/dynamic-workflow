@@ -14,6 +14,8 @@ class MaoScheduler: public StaticScheduler {
 public:
     virtual Actions PrepareForRun(View::Viewer& v) override;
 
+    static AbstractScheduler* Create() { return new MaoScheduler(); };
+
 private:
     double CalculateCost(const std::vector<VMDescription>& taskVM) const;
 

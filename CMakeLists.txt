@@ -23,6 +23,7 @@ set(SOURCE_LIST
     "src/prototypes/simulator.cpp"
     "src/schedule/schedule.cpp"
     "src/schedule/schedule_action.cpp"
+    "src/scheduler_factory.cpp"
     "src/schedulers/genetic_scheduler.cpp"
     "src/schedulers/naive_scheduler.cpp"
     "src/schedulers/mao_scheduler.cpp"

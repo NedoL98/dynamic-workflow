@@ -14,6 +14,7 @@
 #include "argument_parser.h"
 #include "platform_generator.h"
 #include "prototypes/simulator.h"
+#include "scheduler_factory.h"
 #include "schedulers/genetic_scheduler.h"
 #include "schedulers/mao_scheduler.h"
 #include "vm_list.h"
@@ -38,12 +39,12 @@ int main(int argc, char* argv[]) {
 
     simgrid::s4u::Engine e(&argc, argv);
 
-    MaoScheduler dummy;
+    AbstractScheduler* scheduler = SchedulerFactory::GetInstance().GetScheduler(parseResult["scheduling_algortihm"].as<string>());
 
     CloudSimulator cloudSim(platformPath,
                             parseResult["workflow"].as<string>(),
                             parseResult["vm_list"].as<string>(),
-                            &dummy,
+                            scheduler,
                             parseResult);
 
     cloudSim.Run();

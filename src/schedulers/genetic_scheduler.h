@@ -19,6 +19,8 @@ class GeneticScheduler: public StaticScheduler {
 public:
     virtual Actions PrepareForRun(View::Viewer& v) override;
 
+    static AbstractScheduler* Create() { return new GeneticScheduler(); };
+
 private:
     std::vector<Assignment> GetInitialAssignments(int numAssignments);
 

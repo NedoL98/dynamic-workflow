@@ -19,6 +19,7 @@ cxxopts::ParseResult ParseArguments(int argc, char* argv[]) {
         ("p, platform", "Platform description file", cxxopts::value<string>(), "PLATFORM")
         ("s, save_platform", "Save platform description file", cxxopts::value<bool>()->default_value("false"), "SAVE PLATFORM")
         ("d, deadline", "Workflow deadline", cxxopts::value<double>(), "DEADLINE")
+        ("a, scheduling_algortihm", "Scheduling algorithm", cxxopts::value<string>()->default_value("genetic"), "SCHEDULING ALGORITHM")
         ("h, help", "Show help");
 
     vector<string> positionalArguments = {"workflow", "vm_list"};
