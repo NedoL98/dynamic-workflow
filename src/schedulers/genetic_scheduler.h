@@ -24,8 +24,7 @@ public:
 private:
     std::vector<Assignment> GetInitialAssignments(int numAssignments);
 
-    std::vector<std::vector<int>> Get2DSchedule(const Assignment& assignment) const;
-
+    std::vector<double> GetEndTimes(const Assignment& assignment) const;
     double CalculateMakespan(const Assignment& assignment) const;
     double CalculateCost(const Assignment& assignment) const;
     double CalculateFitnessFunction(const Assignment& assignment, double maxGenerationCost) const;
@@ -46,16 +45,22 @@ private:
 
     std::vector<Assignment> GetNewGeneration(const std::vector<Assignment>& oldGeneration) const;
 
+    double GetCheapestAssignment(std::vector<Assignment>& assignments) const;
+
     void PrintEpochStatistics(std::vector<Assignment>& assignments, int epochInd) const;
 
-    std::vector<VMDescription> AvailableVMs;
-    const int GENERATION_SIZE = 50;
-    const int NUM_VMS = 50;
-    const int NUM_STEPS = 10 * 1000;
+    void DoRefineAssignment(Assignment& assignment) const;
+    void DoRefineAssignments(std::vector<Assignment>& assignments) const;
 
-    const int BestChromosomesNumber = 5;
-    const double MatchingCrossoverProb = 0.5;
-    const double SchedulingCrossoverProb = 0.5;
-    const double MatchingMutationProb = 0.2;
-    const double SchedulingMutationProb = 0.2;
+    std::vector<VMDescription> AvailableVMs;
+    static constexpr int GenerationSize = 50;
+    static constexpr int VMsNumber = 50;
+    static constexpr int StepsNumber = 10 * 1000;
+    static constexpr int ConstantScoreStepsNumber = 300;
+
+    static constexpr int BestChromosomesNumber = 5;
+    static constexpr double MatchingCrossoverProb = 0.5;
+    static constexpr double SchedulingCrossoverProb = 0.5;
+    static constexpr double MatchingMutationProb = 0.2;
+    static constexpr double SchedulingMutationProb = 0.2;
 };

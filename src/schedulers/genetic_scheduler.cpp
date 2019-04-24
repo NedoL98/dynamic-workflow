@@ -5,7 +5,9 @@ using namespace std::placeholders;
 using std::bind;
 using std::function;
 using std::max;
+using std::max_element;
 using std::min;
+using std::min_element;
 using std::pair;
 using std::set;
 using std::sort;
@@ -19,20 +21,33 @@ GeneticScheduler::Actions GeneticScheduler::PrepareForRun(View::Viewer& v) {
     viewer = std::make_shared<View::Viewer>(v);
 
     for (VMDescription vmDecr: v.GetVMList()) {
-        for (int i = 0; i < NUM_VMS; ++i) {
+        for (int i = 0; i < VMsNumber; ++i) {
             AvailableVMs.push_back(vmDecr);
         }
     }
 
-    vector<Assignment> assignments = GetInitialAssignments(GENERATION_SIZE);
+    vector<Assignment> assignments = GetInitialAssignments(GenerationSize);
 
     FillAssignmentValues(assignments);
 
-    for (int i = 0; i < NUM_STEPS; ++i) {
+    int constantScoreSteps = 0;
+    double previousScore = -1;
+    for (int i = 0; i < StepsNumber; ++i) {
         assignments = GetNewGeneration(assignments);
         FillAssignmentValues(assignments);
         if (i % 100 == 0) {
             PrintEpochStatistics(assignments, i);
+        }
+        double currentScore = GetCheapestAssignment(assignments);
+        if (previousScore != currentScore) {
+            previousScore = currentScore;
+            constantScoreSteps = 0;
+        } else {
+            ++constantScoreSteps;
+        }
+
+        if (constantScoreSteps == ConstantScoreStepsNumber) {
+            break;
         }
     }
 
@@ -101,61 +116,25 @@ vector<Assignment> GeneticScheduler::GetInitialAssignments(int numAssignments) {
     return initialAssignments;
 }
 
-vector<vector<int>> GeneticScheduler::Get2DSchedule(const Assignment& assignment) const {
-    vector<vector<int>> schedule(AvailableVMs.size());
+vector<double> GeneticScheduler::GetEndTimes(const Assignment& assignment) const {
+    vector<double> endTimes(viewer->WorkflowSize(), -1);
 
     for (int taskId: assignment.SchedulingString) {
-        schedule[assignment.MatchingString[taskId]].push_back(taskId);
+        double earliestBegin = 0;
+        for (const int dependencyTaskId: viewer->GetTaskById(taskId).GetDependencies()) {
+            xbt_assert(endTimes[dependencyTaskId] != -1, "Can't process next task, task order is inconsistent!");
+            earliestBegin = max(earliestBegin, endTimes[dependencyTaskId]);
+        }
+        VMDescription vmDescr = AvailableVMs[assignment.MatchingString[taskId]];
+        endTimes[taskId] = earliestBegin + viewer->GetTaskById(taskId).GetExecutionTime(vmDescr);
     }
 
-    return schedule;
+    return endTimes;
 }
 
 double GeneticScheduler::CalculateMakespan(const Assignment& assignment) const {
-    double makespan = 0;
-
-    vector<double> endTime(viewer->WorkflowSize(), -1);
-
-    vector<vector<int>> schedule = Get2DSchedule(assignment);
-
-    size_t completedTasks = 0;
-    vector<int> queueNextTask(AvailableVMs.size());
-
-    while (completedTasks != viewer->WorkflowSize()) {
-        bool taskProcessed = false;
-        for (size_t queueId = 0; queueId < schedule.size(); ++queueId) {
-            if (queueNextTask[queueId] < static_cast<int>(schedule[queueId].size())) {
-                int taskId = schedule[queueId][queueNextTask[queueId]];
-                
-                bool canProcessTask = true;
-                double startTime = 0;
-                if (queueNextTask[queueId] != 0) {
-                    startTime = endTime[schedule[queueId][queueNextTask[queueId] - 1]];
-                }
-
-                for (const int dependencyTaskId: viewer->GetTaskById(taskId).GetDependencies()) {
-                    if (endTime[dependencyTaskId] == -1) {
-                        canProcessTask = false;
-                        break;
-                    }
-                    startTime = max(startTime, endTime[dependencyTaskId]);
-                }
-
-                if (canProcessTask) {
-                    // TODO: enhance this when we can calculate data transition time
-                    endTime[taskId] = startTime + viewer->GetTaskById(taskId).GetExecutionTime(AvailableVMs[queueId]);
-                    makespan = max(endTime[taskId], makespan);
-                    ++queueNextTask[queueId];
-                    
-                    ++completedTasks;
-                    taskProcessed = true;
-                }
-            }
-        }
-        xbt_assert(taskProcessed, "Can't process any task, task order is inconsistent!");
-    }
-
-    return makespan;
+    vector<double> endTimes = GetEndTimes(assignment);
+    return *max_element(endTimes.begin(), endTimes.end()); 
 }
 
 double GeneticScheduler::CalculateCost(const Assignment& assignment) const {
@@ -376,6 +355,17 @@ vector<Assignment> GeneticScheduler::GetNewGeneration(const vector<Assignment>& 
     return newGeneration;
 }
 
+double GeneticScheduler::GetCheapestAssignment(vector<Assignment>& assignments) const {
+    return min_element(assignments.begin(), assignments.end(), [](const Assignment& a, const Assignment& b) {
+        if (a.FitnessScore > 1) {
+            return false;
+        } else if (b.FitnessScore > 1) {
+            return true;
+        }
+        return a.Cost < b.Cost;
+    })->Cost.value();
+}
+
 void GeneticScheduler::PrintEpochStatistics(vector<Assignment>& assignments, int epochInd) const {
     double fitnessAvg = 0;
     double cheapestAssignment = -1;
@@ -399,4 +389,19 @@ void GeneticScheduler::PrintEpochStatistics(vector<Assignment>& assignments, int
     XBT_INFO("Fitness score best: %f", fitnessBest);
     XBT_INFO("Fitness score worst: %f", fitnessWorst);
     XBT_INFO("Cheapest assignment: %f", cheapestAssignment);
+}
+
+void GeneticScheduler::DoRefineAssignment(Assignment& assignment) const {
+    vector<double> endTimes = GetEndTimes(assignment);
+    
+    vector<int> taskIdToPosition(assignment.SchedulingString.size());
+    for (int i = assignment.SchedulingString.size() - 1; i >= 0; --i) {
+        
+    }
+}
+
+void GeneticScheduler::DoRefineAssignments(vector<Assignment>& assignments) const {
+    for (Assignment& assignment: assignments) {
+        DoRefineAssignment(assignment);
+    }
 }
