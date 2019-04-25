@@ -72,13 +72,14 @@ MaoScheduler::Actions MaoScheduler::PrepareForRun(View::Viewer& v) {
 
 vector<VMDescription> MaoScheduler::GetCheapestVMs() {
     vector<VMDescription> cheapestVM;
-    for (const unique_ptr<View::Task>& taskPtr : viewer->GetTaskList()) {
-        auto task = *taskPtr;
+    
+    for (auto taskIterator = viewer->GetGraphIterator(); *taskIterator; taskIterator->Next()) {
+        auto task = taskIterator->Get();
         int bestPrice = -1;
         VMDescription bestVM;
         for (VMDescription vmDescr: viewer->GetVMList()) {
             // we probably want to reconsider way of choosing most efficient vm type for a task
-            if (taskPtr->CanBeExecuted(vmDescr) &&
+            if (task.CanBeExecuted(vmDescr) &&
                 (bestPrice == -1 || vmDescr.GetPrice() < bestPrice)) {
                 bestPrice = vmDescr.GetPrice();
                 bestVM = vmDescr;

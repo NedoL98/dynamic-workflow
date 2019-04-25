@@ -54,19 +54,20 @@ namespace Workflow {
     void Graph::BuildDependencies() {
         map<int, int> FileId2Owner;
         for (size_t nodeId = 0; nodeId < Nodes.size(); nodeId++) {
-            for (int fileId : Nodes[nodeId]->Outputs) {
+            for (int fileId : Nodes[nodeId]->GetOutputs()) {
                 FileId2Owner[fileId] = nodeId;
             }
         }
         for (size_t nodeId = 0; nodeId < Nodes.size(); nodeId++) {
-            for (int fileId : Nodes[nodeId]->Inputs) {
-                FileManager.SetAuthor(fileId, nodeId);
+            for (int fileId : Nodes[nodeId]->GetInputs()) {
+                FileManager.SetReceiver(fileId, nodeId);
                 auto fileOwner = FileId2Owner.find(fileId);
                 if (fileOwner != FileId2Owner.end()) {
-                    XBT_INFO("Set receiver %d", fileOwner->second);
-                    Nodes[nodeId]->Dependencies.push_back(fileOwner->second);
-                    Nodes[fileOwner->second]->Successors.push_back(nodeId);
-                    FileManager.SetReceiver(fileId, fileOwner->second);
+                    Nodes[nodeId]->AddDependency(fileOwner->second);
+                    Nodes[fileOwner->second]->AddSuccessor(nodeId);
+                    FileManager.SetAuthor(fileId, fileOwner->second);
+                } else {
+                    Nodes[nodeId]->IncFinishedTransfers();
                 }
             }
         }
@@ -94,10 +95,35 @@ namespace Workflow {
             }
         }
         xbt_assert(order.size() == Nodes.size(), "Something went wrong, not all tasks are included in tasks order!");
-        
         std::reverse(order.begin(), order.end());
-
         return order;
+    }
+    Task& Graph::GetTask(int id) {
+        return *Nodes[id];
+    }
+
+    const Task& Graph::GetTask(int id) const {
+        return *Nodes[id];
+    }
+
+    Task& Graph::GetTaskByName(const std::string& name) {
+        return *Nodes[TaskName2Id.find(name)->second];
+    }
+
+    const Task& Graph::GetTaskByName(const std::string& name) const {
+        return *Nodes[TaskName2Id.find(name)->second];
+    }
+
+    size_t Graph::GetTaskNumber() const {
+        return Nodes.size();
+    }
+
+    double Graph::GetDeadline() const {
+        return Deadline;
+    }
+
+    AbstractGraph::GraphAbstractIterator* Graph::GetGraphIterator() {
+        return new Graph::GraphIterator(Nodes);
     }
 
     bool Graph::IsFinished() const {
@@ -106,17 +132,22 @@ namespace Workflow {
 
     void Graph::FinishTask(int id) {
         FileManager.FinishTask(id);
-        if (Nodes[id]->State == EState::Done) {
+        if (Nodes[id]->GetState() == EState::Done) {
             return;
         }
-        Nodes[id]->State = EState::Done;
+        Nodes[id]->SetState(EState::Done);
         FinishedTasks.insert(id);
-        for (int suc : Nodes[id]->Successors) {
-            Nodes[suc]->FinishedDeps++;
+        for (int suc : Nodes[id]->GetSuccessors()) {
+            Nodes[suc]->IncFinishedDeps();
             if (Nodes[suc]->IsReady()) {
-                Nodes[suc]->State = EState::Ready;
+                Nodes[suc]->SetState(EState::Ready);
             }
         }
+    }
+    
+    void Graph::FinishTransfer(const FileDescription& description) {
+        FileManager.FinishTransfer(description);
+        Nodes[description.Receiver]->IncFinishedTransfers();
     }
 
     void Graph::AssignTask(int taskId, int hostId) {

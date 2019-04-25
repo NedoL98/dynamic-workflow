@@ -15,13 +15,13 @@ namespace View {
         }*/
     }
     const Task& Viewer::GetTaskByName(const std::string& s) const {
-        return *Simulator.TaskGraph.Nodes[Simulator.TaskGraph.TaskName2Id.find(s)->second];
+        return Simulator.TaskGraph->GetTaskByName(s);
     }
     const Task& Viewer::GetTaskById(int id) const {
-        return *Simulator.TaskGraph.Nodes[id];
+        return Simulator.TaskGraph->GetTask(id);
     }
-    const std::vector<std::unique_ptr<Task>>& Viewer::GetTaskList() const {
-        return Simulator.TaskGraph.Nodes;
+    Workflow::AbstractGraph::GraphAbstractIterator* Viewer::GetGraphIterator() {
+        return Simulator.TaskGraph->GetGraphIterator();
     }
     const VMList& Viewer::GetVMList() const {
         return Simulator.AvailableVMs;
@@ -32,15 +32,15 @@ namespace View {
     }
 
     double Viewer::GetDeadline() const {
-        return Simulator.TaskGraph.Deadline;
+        return dynamic_cast<Workflow::Graph*>(Simulator.TaskGraph)->GetDeadline();
     }
 
     vector<Task> Viewer::MakeTasksOrder() const {
-        return Simulator.TaskGraph.MakeTasksOrder();
+        return dynamic_cast<Workflow::Graph*>(Simulator.TaskGraph)->MakeTasksOrder();
     }
 
     size_t Viewer::WorkflowSize() const {
-        return Simulator.TaskGraph.Nodes.size();
+        return Simulator.TaskGraph->GetTaskNumber();
     }
 }
 

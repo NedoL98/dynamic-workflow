@@ -1,5 +1,5 @@
 #pragma once
-#include <prototypes/simulator.h>
+#include <prototypes/cloud_simulator.h>
 #include <vector>
 #include <string>
 #include <spec.h>
@@ -17,7 +17,7 @@ namespace View {
         
         const Task& GetTaskByName(const std::string& s) const;
         const Task& GetTaskById(int id) const;
-        const std::vector<std::unique_ptr<Task>>& GetTaskList() const;
+        Workflow::AbstractGraph::GraphAbstractIterator* GetGraphIterator();
         const VMList& GetVMList() const;
         const Schedule& GetCurrentAssignments() const;
         Status GetTaskStatus(int id) const;

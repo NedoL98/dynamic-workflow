@@ -20,7 +20,7 @@ set(SOURCE_LIST
     "src/platform/platform.cpp"
     "src/platform/cloud_platform.cpp"
     "src/prototypes/scheduler.cpp"
-    "src/prototypes/simulator.cpp"
+    "src/prototypes/cloud_simulator.cpp"
     "src/schedule/schedule.cpp"
     "src/schedule/schedule_action.cpp"
     "src/schedulers/genetic_scheduler.cpp"
@@ -32,6 +32,7 @@ set(SOURCE_LIST
     "src/view/viewer.cpp"
     "src/vm_list.cpp"
     "src/workflow/graph.cpp"
+    "src/workflow/graph_iterator.cpp"
     "src/workflow/task.cpp"
     "src/files/manager.cpp"
 )
@@ -67,6 +68,9 @@ target_link_libraries(dynamic-workflow-debug ${SimGrid_LIBRARY} ${YAML_LIBRARY})
 
 add_custom_target(
     run_example
+    COMMAND echo dynamic-workflow
+    ${CMAKE_SOURCE_DIR}/resources/workflows/CyberShake_100.yml
+    ${CMAKE_SOURCE_DIR}/resources/vms.yml
     COMMAND dynamic-workflow 
     ${CMAKE_SOURCE_DIR}/resources/workflows/CyberShake_100.yml
     ${CMAKE_SOURCE_DIR}/resources/vms.yml

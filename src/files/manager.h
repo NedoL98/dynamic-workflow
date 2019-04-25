@@ -4,10 +4,7 @@
 #include <map>
 #include <yaml-cpp/yaml.h>
 #include <files/description.h>
-
-namespace Workflow {
-    class Graph;
-}
+#include <workflow/abstract_graph.h>
 
 class Manager {
     std::map<int, std::set<int>> TaskDerivatives;
@@ -17,11 +14,11 @@ class Manager {
     std::map<int, FileDescription> FileIdMapping;
     std::set<int> WorkflowOutputs, WorkflowInputs;
     int OutputProduced;
-    Workflow::Graph *Owner;
+    Workflow::AbstractGraph *Owner;
 
 public:
-    Manager(Workflow::Graph *owner):
-        OutputProduced(0), 
+    Manager(Workflow::AbstractGraph* owner):
+        OutputProduced(0),
         Owner(owner) {
     }
 
@@ -39,6 +36,7 @@ public:
     void SetReceiver(int fileId, int taskId);
 
     void FinishTask(int taskId);
+    void FinishTransfer(const FileDescription& description);
 
     void AssignTask(int taskId, int hostId);
 

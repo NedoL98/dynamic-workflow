@@ -13,7 +13,7 @@
 
 #include "argument_parser.h"
 #include "platform_generator.h"
-#include "prototypes/simulator.h"
+#include "prototypes/cloud_simulator.h"
 #include "schedulers/genetic_scheduler.h"
 #include "schedulers/mao_scheduler.h"
 #include "vm_list.h"

@@ -1,4 +1,4 @@
-#include "prototypes/simulator.h"
+#include "prototypes/cloud_simulator.h"
 #include "view/viewer.h"
 #include <simgrid/s4u.hpp>
 
@@ -20,22 +20,22 @@ int CloudSimulator::RefreshAfterTask(int, void* s) {
 }
 
 void CloudSimulator::CheckReadyJobs() {
-    vector<int> vmIds = Platform.GetVMIds();
+    vector<int> vmIds = Platform->GetVMIds();
     for (int vm : vmIds) {
         if (!Assignments.HasItem(vm)) {
             continue;
         }
         int taskId = Assignments.GetItem(vm).GetTaskId();
-        if (TaskGraph.Nodes[taskId]->IsReady()) {
+        if (TaskGraph->GetTask(taskId).IsReady()) {
             XBT_DEBUG("Task %d is ready to compute!", taskId);
-            if (!TaskGraph.Nodes[taskId]->StartExecuting()) {
+            if (!TaskGraph->GetTask(taskId).StartExecuting()) {
                 XBT_INFO("Task %d isn't executing!", taskId);
                 continue;
             }
             CollbackData* data = new CollbackData();
             data->Simulator = this;
             data->TaskId = taskId;
-            Actors.push_back(Platform.AssignTask(vm, TaskGraph.Nodes[taskId]->GetTaskSpec(), RefreshAfterTask, data));
+            Actors.push_back(Platform->AssignTask(vm, TaskGraph->GetTask(taskId).GetTaskSpec(), RefreshAfterTask, data));
             XBT_DEBUG("Task %d started executing!", taskId);
         }
     }
@@ -43,8 +43,8 @@ void CloudSimulator::CheckReadyJobs() {
 
 void CloudSimulator::DoRefreshAfterTask(int taskId) {
     int hostId = Assignments.GetHostByTask(taskId);
-    TaskGraph.FinishTask(taskId);
-    Platform.FinishTask(hostId, TaskGraph.Nodes[taskId]->GetTaskSpec());
+    TaskGraph->FinishTask(taskId);
+    Platform->FinishTask(hostId, TaskGraph->GetTask(taskId).GetTaskSpec());
     if (Assignments.GetItem(hostId).GetTaskId() == taskId) {
         Assignments.PopItem(hostId);
     }
@@ -55,11 +55,11 @@ void CloudSimulator::DoMainLoop() {
     
     XBT_INFO("MainLoop begins");
     CheckReadyJobs();
-    XBT_INFO("%d vms, %d actors", Platform.GetVMIds().size(), Actors.size());
+    XBT_INFO("%d vms, %d actors", Platform->GetVMIds().size(), Actors.size());
     for (size_t i = 0; i < Actors.size(); i++) {
         Actors[i]->join();
     }
-    xbt_assert(TaskGraph.IsFinished(), "All actors finished their work, but not all tasks done");
+    xbt_assert(TaskGraph->IsFinished(), "All actors finished their work, but not all tasks done");
     
     XBT_INFO("MainLoop ends");
 }
@@ -82,20 +82,20 @@ void CloudSimulator::Run(double timeout) {
 bool CloudSimulator::RegisterVirtualMachine(const VMDescription &stats, int customId) {
     int hostId = -1;
     XBT_DEBUG("%d %lld %lld", stats.GetCores(), stats.GetFlops(), stats.GetMemory());
-    if ((hostId = Platform.GetEmptyHost(stats.GetSpec())) == -1) {
+    if ((hostId = dynamic_cast<CloudPlatform* >(Platform)->GetEmptyHost(stats.GetSpec())) == -1) {
         XBT_INFO("No empty hosts");
         return false;
     }
-    return Platform.CreateVM(hostId, stats, customId);
+    return Platform->CreateVM(hostId, stats, customId);
 }
 
 bool CloudSimulator::AssignTask(int VMId, const ScheduleItem &item) {
-    if (!Platform.CheckTask(VMId, TaskGraph.Nodes[item.GetTaskId()]->GetTaskSpec())) {
+    if (!dynamic_cast<CloudPlatform* >(Platform)->CheckTask(VMId, TaskGraph->GetTask(item.GetTaskId()).GetTaskSpec())) {
         XBT_WARN("Schedule is invalid: %d task cannot be hosted on %d!", item.GetTaskId(), VMId);
         return false;
     }
     Assignments.AddItem(VMId, item);
-    TaskGraph.AssignTask(item.GetTaskId(), VMId);
+    TaskGraph->AssignTask(item.GetTaskId(), VMId);
     return true;
 }
 
@@ -107,7 +107,7 @@ bool CloudSimulator::CancelTask(int hostId, const ScheduleItem &item) {
 
 bool CloudSimulator::ResetSchedule(const Schedule& s) {
     Schedule copy = s;
-    vector<int> vmIds = Platform.GetVMIds();
+    vector<int> vmIds = Platform->GetVMIds();
     Assignments = Schedule();
     for (int v : vmIds) {
         while (copy.HasItem(v)) {

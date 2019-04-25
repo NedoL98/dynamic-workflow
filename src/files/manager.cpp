@@ -45,7 +45,7 @@ const FileDescription& Manager::GetFileByName(const string& s) const {
 }
 
 void Manager::RegisterTaskFiles(int taskId) {
-    auto task = *Owner->Nodes[taskId];
+    auto task = Owner->GetTask(taskId);
     if (!TaskDerivatives.count(taskId)) {
         TaskDerivatives[taskId] = set<int>(task.GetOutputs().cbegin(), task.GetOutputs().cend());
         TaskDependencies[taskId] = set<int>(task.GetInputs().cbegin(), task.GetInputs().cend());
@@ -70,7 +70,7 @@ void Manager::SetOutputs(const vector<int>& data) {
 
 void Manager::FinishTask(int taskId) {
     XBT_INFO("Try to transfer smth.. after finishing %d", taskId);
-    auto task = *Owner->Nodes[taskId];
+    auto task = Owner->GetTask(taskId);
     for (int file : task.GetOutputs()) {
         auto fileDesc = FileIdMapping.find(file)->second;
         int receiver = fileDesc.Receiver;
@@ -84,15 +84,17 @@ void Manager::FinishTask(int taskId) {
         }
     }
 }
+void Manager::FinishTransfer(const FileDescription& description) {
+}
 
 void Manager::AssignTask(int taskId, int hostId) {
     XBT_INFO("Try to transfer smth.. after scheduling %d", taskId);
     TaskToHost[taskId] = hostId;
-    auto task = *Owner->Nodes[taskId];
+    auto task = Owner->GetTask(taskId);
     for (int file : task.GetInputs()) {
         auto fileDesc = FileIdMapping.find(file)->second;
         int sender = fileDesc.Author;
-        if (Owner->Nodes[sender]->GetState() == EState::Done) {
+        if (sender != -1 && Owner->GetTask(sender).GetState() == EState::Done) {
             BeginTransfer(fileDesc);
         }
     }
