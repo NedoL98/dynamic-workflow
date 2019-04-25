@@ -23,6 +23,7 @@ set(SOURCE_LIST
     "src/prototypes/cloud_simulator.cpp"
     "src/schedule/schedule.cpp"
     "src/schedule/schedule_action.cpp"
+    "src/scheduler_factory.cpp"
     "src/schedulers/genetic_scheduler.cpp"
     "src/schedulers/naive_scheduler.cpp"
     "src/schedulers/mao_scheduler.cpp"
@@ -94,5 +95,8 @@ add_custom_target(
     ${CMAKE_SOURCE_DIR}/resources/workflows/Epigenomics_100.xml
     ${CMAKE_SOURCE_DIR}/resources/workflows/Inspiral_100.xml
     ${CMAKE_SOURCE_DIR}/resources/workflows/Montage_100.xml
+    ${CMAKE_SOURCE_DIR}/resources/workflows/montage_1_5.dax
+    ${CMAKE_SOURCE_DIR}/resources/workflows/montage_2_0.dax
+    ${CMAKE_SOURCE_DIR}/resources/workflows/1000genome.dax
 )
 

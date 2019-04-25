@@ -14,6 +14,7 @@
 #include "argument_parser.h"
 #include "platform_generator.h"
 #include "prototypes/cloud_simulator.h"
+#include "scheduler_factory.h"
 #include "schedulers/genetic_scheduler.h"
 #include "schedulers/mao_scheduler.h"
 #include "vm_list.h"
@@ -38,34 +39,19 @@ int main(int argc, char* argv[]) {
 
     simgrid::s4u::Engine e(&argc, argv);
 
-    MaoScheduler dummy;
+    AbstractScheduler* scheduler = SchedulerFactory::GetInstance().GetScheduler(parseResult["scheduling_algortihm"].as<string>());
 
     CloudSimulator cloudSim(platformPath,
                             parseResult["workflow"].as<string>(),
                             parseResult["vm_list"].as<string>(),
-                            &dummy,
+                            scheduler,
                             parseResult);
 
     cloudSim.Run();
-    /*
-    // Load the platform description
-    e.load_platform(platformPath);
-    XBT_INFO("Platform file loaded");
-
-    // Transform human-readable platform description
-    TransformHostsProps();
-
-    // Make scheduler actor
-    simgrid::s4u::Actor::create("scheduler", e.get_all_hosts()[0], scheduler);
-
-    XBT_INFO("Starting simulation");
-    // Run the simulation
-    e.run();
 
     XBT_INFO("Simulation is over");
 
     if (!parseResult.count("platform") && parseResult["save_platform"].as<bool>() == false) {
         remove(platformPath.c_str());
     }
-    */
 }

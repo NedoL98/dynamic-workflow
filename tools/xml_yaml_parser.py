@@ -54,7 +54,7 @@ def MakeYaml(xml_filename, output_dir):
     tree = ElementTree.parse(xml_filename)
 
     output_yaml = CommentedMap()
-    output_yaml["name"] = xml_filename.split('/')[-1].replace("xml", "yml")
+    output_yaml["name"] = xml_filename.split('/')[-1].replace("xml", "yml").replace("dax", "yml")
     output_yaml["tasks"] = []
 
     task_inputs = CommentedSet()
