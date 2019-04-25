@@ -1,14 +1,15 @@
-#include "platform/platform.h"
+#include "platform/cloud_platform.h"
 #include <simgrid/s4u.hpp>
 #include "spec.h"
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(platform_cloud_platform, "cloud platform log");
 
 namespace {
-    void DoExecute(long long flops, const std::function<void(int, void*)>& onExit, void* arg) {
+    void DoExecute(long long flops, const std::function<void(int, void*)>& onExit, void* arg, double lag = 0) {
         simgrid::s4u::Host* host = simgrid::s4u::this_actor::get_host();
 
         double timeStart = simgrid::s4u::Engine::get_clock();
+        simgrid::s4u::this_actor::sleep_for(lag);
         host->execute(flops);
         double timeFinish = simgrid::s4u::Engine::get_clock();
 
@@ -49,7 +50,28 @@ simgrid::s4u::ActorPtr CloudPlatform::AssignTask(int vmId, const TaskSpec& requi
         XBT_INFO("Does not satisfy requirements, doesn't run!");
         return nullptr;
     }
-    simgrid::s4u::ActorPtr result = simgrid::s4u::Actor::create("compute" + std::to_string(i), VirtualMachines[vmId], DoExecute, requirements.GetSize(), onExit, args);
+    simgrid::s4u::ActorPtr result = nullptr;
+    if (VirtualMachines[vmId]->getState() == simgrid::s4u::VirtualMachine::state::CREATED) {
+        double timeStart = simgrid::s4u::Engine::get_clock();
+        double startupCost = (MinStartupTime + MaxStartupTime) / 2;
+        VirtualMachines[vmId]->start();
+        XBT_INFO("Turning on vm #%d in %.6g", vmId, timeStart);
+        result = simgrid::s4u::Actor::create("compute" + std::to_string(i),
+                                            VirtualMachines[vmId],
+                                            DoExecute,
+                                            requirements.GetSize(),
+                                            onExit,
+                                            args, startupCost);
+        XBT_INFO("VM %d was sleeping and started at %.6g", vmId, timeStart);
+    } else {
+        result = simgrid::s4u::Actor::create("compute" + std::to_string(i),
+                                            VirtualMachines[vmId],
+                                            DoExecute,
+                                            requirements.GetSize(),
+                                            onExit,
+                                            args, 0);
+    }
+        
     i++;
     VirtualMachineSpecs[vmId].Cores -= requirements.GetCores();
     VirtualMachineSpecs[vmId].Memory -= requirements.GetMemory();

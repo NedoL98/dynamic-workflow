@@ -20,20 +20,3 @@ public:
     virtual simgrid::s4u::ActorPtr AssignTask(int vmId, const TaskSpec& s, const std::function<void(int, void*)>& onExit, void* arg) = 0;
     virtual void FinishTask(int hostId, const TaskSpec& spec) = 0;
 };
-
-
-class CloudPlatform : public AbstractPlatform {
-
-public:
-    CloudPlatform(const std::string& platformConfig, long long hostMaxMemory):
-                            AbstractPlatform(platformConfig, hostMaxMemory) {}
-
-    int GetEmptyHost(const ComputeSpec& s);
-    bool CheckTask(int vmId, const TaskSpec& s);
-
-// AbstractPlatform
-    virtual bool CreateVM(int hostId, const VMDescription& s, int id) override;
-    virtual simgrid::s4u::ActorPtr AssignTask(int vmId, const TaskSpec& s, const std::function<void(int, void*)>& onExit, void* arg) override;
-    virtual void FinishTask(int hostId, const TaskSpec& spec) override;
-};
-

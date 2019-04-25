@@ -2,7 +2,7 @@
 #include "argument_parser.h"
 #include "prototypes/interface.h"
 #include "prototypes/scheduler.h"
-#include "platform/platform.h"
+#include "platform/cloud_platform.h"
 #include "schedule/schedule_action.h"
 #include "workflow/graph.h"
 #include "vm_list.h"
@@ -33,7 +33,9 @@ public:
                    const std::string& VMListConf,
                    AbstractScheduler* scheduler,
                    cxxopts::ParseResult& parseResult)
-        : AbstractSimulator(scheduler, new Workflow::Graph(workflowConf, parseResult), new CloudPlatform(platformConf, VMList(VMListConf).MaxMemory()))
+        : AbstractSimulator(scheduler,
+                            new Workflow::Graph(workflowConf, parseResult),
+                            new CloudPlatform(platformConf, VMList(VMListConf)))
         , AvailableVMs(VMListConf)
         {}
     
