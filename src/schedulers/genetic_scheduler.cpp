@@ -21,7 +21,7 @@ GeneticScheduler::Actions GeneticScheduler::PrepareForRun(View::Viewer& v) {
     viewer = std::make_shared<View::Viewer>(v);
 
     for (VMDescription vmDecr: v.GetVMList()) {
-        for (int i = 0; i < VMsNumber; ++i) {
+        for (size_t i = 0; i < v.WorkflowSize(); ++i) {
             AvailableVMs.push_back(vmDecr);
         }
     }
@@ -58,17 +58,27 @@ GeneticScheduler::Actions GeneticScheduler::PrepareForRun(View::Viewer& v) {
         }
     }
 
+    vector<bool> nonEmptyVMs(AvailableVMs.size(), false);
+    for (int vmId: bestAssignment.MatchingString) {
+        nonEmptyVMs[vmId] = true;
+    }
+
     GeneticScheduler::Actions actions;
 
     Schedule s;
 
-    int vmId = 0;
-    for (const VMDescription& vmDescr: AvailableVMs) {
-        actions.push_back(std::make_shared<BuyVMAction>(vmDescr, vmId));
-        ++vmId;
+    vector<int> idOldToNew(AvailableVMs.size(), -1);
+    int vmNewId = 0;
+    for (size_t vmOldId = 0; vmOldId < AvailableVMs.size(); ++vmOldId) {
+        if (nonEmptyVMs[vmOldId]) {
+            VMDescription vmDescr = AvailableVMs[vmOldId];
+            idOldToNew[vmOldId] = vmNewId;
+            actions.push_back(std::make_shared<BuyVMAction>(vmDescr, vmNewId));
+            ++vmNewId;
+        }
     }
     for (int taskId: bestAssignment.SchedulingString) {
-        s.AddItem(bestAssignment.MatchingString[taskId], ScheduleItem(taskId));
+        s.AddItem(idOldToNew[bestAssignment.MatchingString[taskId]], ScheduleItem(taskId));
     }
 
     actions.push_back(std::make_shared<ResetScheduleAction>(s));
@@ -85,13 +95,13 @@ Assignment::Assignment(int n) {
     SchedulingString.resize(n);
 }
 
-vector<Assignment> GeneticScheduler::GetInitialAssignments(int numAssignments) {
+vector<Assignment> GeneticScheduler::GetInitialAssignments(int numAssignments) const {
     vector<View::Task> tasksOrder = viewer->MakeTasksOrder();
     vector<Assignment> initialAssignments;
     initialAssignments.resize(numAssignments);
     for (int i = 0; i < numAssignments; ++i) {
         initialAssignments[i] = Assignment(viewer->WorkflowSize());
-        
+
         transform(tasksOrder.begin(), tasksOrder.end(), initialAssignments[i].SchedulingString.begin(), 
                 [](const View::Task &task) { return task.GetId(); });
 
@@ -100,12 +110,20 @@ vector<Assignment> GeneticScheduler::GetInitialAssignments(int numAssignments) {
             MakeSchedulingMutation(initialAssignments[i]);
             --ssMutationNumber;
         }
-
+        
         for (size_t taskId = 0; taskId < viewer->WorkflowSize(); ++taskId) {
             vector<int> suitableVMs;
             for (size_t vmId = 0; vmId < AvailableVMs.size(); ++vmId) {
                 if (viewer->GetTaskById(taskId).CanBeExecuted(AvailableVMs[vmId])) {
-                    suitableVMs.push_back(vmId);
+                    // explicitly adding a fastest possible task allocation
+                    if (i >= InitFastestAssignmentsNum) {
+                        suitableVMs.push_back(vmId);                        
+                    } else if (suitableVMs.empty() || AvailableVMs[suitableVMs.front()] <= AvailableVMs[vmId]) {
+                        if (!suitableVMs.empty() && AvailableVMs[suitableVMs.front()] < AvailableVMs[vmId]) {
+                            suitableVMs.clear();
+                        }
+                        suitableVMs.push_back(vmId);
+                    }
                 }
             }
             xbt_assert(!suitableVMs.empty(), "No suitable VM found for task %s", viewer->GetTaskById(taskId).GetName().c_str());
@@ -118,15 +136,22 @@ vector<Assignment> GeneticScheduler::GetInitialAssignments(int numAssignments) {
 
 vector<double> GeneticScheduler::GetEndTimes(const Assignment& assignment) const {
     vector<double> endTimes(viewer->WorkflowSize(), -1);
+    vector<int> prevTaskInd(AvailableVMs.size(), -1);
 
-    for (int taskId: assignment.SchedulingString) {
+    for (size_t i = 0; i < assignment.SchedulingString.size(); ++i) {
+        int taskId = assignment.SchedulingString[i];
+        int vmId = assignment.MatchingString[taskId];
         double earliestBegin = 0;
+        if (prevTaskInd[vmId] != -1) {
+            earliestBegin = endTimes[prevTaskInd[vmId]];
+        }
         for (const int dependencyTaskId: viewer->GetTaskById(taskId).GetDependencies()) {
             xbt_assert(endTimes[dependencyTaskId] != -1, "Can't process next task, task order is inconsistent!");
             earliestBegin = max(earliestBegin, endTimes[dependencyTaskId]);
         }
         VMDescription vmDescr = AvailableVMs[assignment.MatchingString[taskId]];
         endTimes[taskId] = earliestBegin + viewer->GetTaskById(taskId).GetExecutionTime(vmDescr);
+        prevTaskInd[vmId] = taskId;
     }
 
     return endTimes;
@@ -392,12 +417,7 @@ void GeneticScheduler::PrintEpochStatistics(vector<Assignment>& assignments, int
 }
 
 void GeneticScheduler::DoRefineAssignment(Assignment& assignment) const {
-    vector<double> endTimes = GetEndTimes(assignment);
-    
-    vector<int> taskIdToPosition(assignment.SchedulingString.size());
-    for (int i = assignment.SchedulingString.size() - 1; i >= 0; --i) {
-        
-    }
+    (void)assignment;
 }
 
 void GeneticScheduler::DoRefineAssignments(vector<Assignment>& assignments) const {

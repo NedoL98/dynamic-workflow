@@ -22,7 +22,7 @@ public:
     static AbstractScheduler* Create() { return new GeneticScheduler(); };
 
 private:
-    std::vector<Assignment> GetInitialAssignments(int numAssignments);
+    std::vector<Assignment> GetInitialAssignments(int numAssignments) const;
 
     std::vector<double> GetEndTimes(const Assignment& assignment) const;
     double CalculateMakespan(const Assignment& assignment) const;
@@ -53,8 +53,8 @@ private:
     void DoRefineAssignments(std::vector<Assignment>& assignments) const;
 
     std::vector<VMDescription> AvailableVMs;
+    static constexpr int InitFastestAssignmentsNum = 5;
     static constexpr int GenerationSize = 50;
-    static constexpr int VMsNumber = 50;
     static constexpr int StepsNumber = 10 * 1000;
     static constexpr int ConstantScoreStepsNumber = 300;
 
