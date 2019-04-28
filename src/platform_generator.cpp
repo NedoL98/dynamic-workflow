@@ -49,7 +49,7 @@ string GeneratePlatform(const string& workflowPath, const string& vmListPath) {
     hostCnt = tasksGraph["tasks"].size();
     maxCoresCnt = vmList.MaxCores();
     maxMemory = vmList.MaxMemory();
-    XBT_WARN("Memory restriction is %g but we haven't used it!", maxMemory);
+    XBT_WARN("Memory restriction is %lld but we haven't used it!", maxMemory);
     int pid = fork();
     if (pid > 0) {
         int wstatus;
