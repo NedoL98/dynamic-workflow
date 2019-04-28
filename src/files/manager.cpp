@@ -104,7 +104,7 @@ void Manager::AssignTask(int taskId, int hostId) {
     for (int file : task.GetInputs()) {
         auto fileDesc = FileIdMapping.find(file)->second;
         int sender = fileDesc.Author;
-        if (sender != -1 && Owner->GetTask(sender).GetState() == EState::Done && fileDesc.State == EFileState::NOT_STARTED) {
+        if (sender != -1 && Owner->GetTask(sender).GetState() == EState::DONE && fileDesc.State == EFileState::NOT_STARTED) {
             FileIdMapping.find(file)->second.State = EFileState::READY;
             ReadyFiles.insert(FileIdMapping.find(file)->second);
         }

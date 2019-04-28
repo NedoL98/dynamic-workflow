@@ -137,15 +137,15 @@ namespace Workflow {
 
     void Graph::FinishTask(int id) {
         FileManager.FinishTask(id);
-        if (Nodes[id]->GetState() == EState::Done) {
+        if (Nodes[id]->GetState() == EState::DONE) {
             return;
         }
-        Nodes[id]->SetState(EState::Done);
+        Nodes[id]->SetState(EState::DONE);
         FinishedTasks.insert(id);
         for (int suc : Nodes[id]->GetSuccessors()) {
             Nodes[suc]->IncFinishedDeps();
             if (Nodes[suc]->IsReady()) {
-                Nodes[suc]->SetState(EState::Ready);
+                Nodes[suc]->SetState(EState::READY);
             }
         }
     }

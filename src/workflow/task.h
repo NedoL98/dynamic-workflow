@@ -80,7 +80,7 @@ namespace Workflow {
         }
         
         bool IsReady() const {
-            if (State == EState::Running || State == EState::Done) {
+            if (State == EState::RUNNING || State == EState::DONE) {
                 return false;
             }
             return FinishedDeps == static_cast<int>(Dependencies.size());// &&
@@ -91,7 +91,7 @@ namespace Workflow {
             if (!IsReady()) {
                 return false;
             }
-            State = EState::Running;
+            State = EState::RUNNING;
             return true;
         }
             

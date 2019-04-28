@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <set>
-enum EFileState {
+enum class EFileState {
     NOT_STARTED,
     READY,
     TRANSFERING,

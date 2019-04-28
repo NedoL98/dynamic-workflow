@@ -24,12 +24,12 @@ private:
     int Cores;
 };
 
-enum EState {
-    NotScheduled,
-    Scheduled,
-    Ready,
-    Running,
-    Done
+enum class EState {
+    NOT_SCHEDULED,
+    SCHEDULED,
+    READY,
+    RUNNING,
+    DONE
 };
 
 class VMDescription {

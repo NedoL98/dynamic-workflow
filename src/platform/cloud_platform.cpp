@@ -51,7 +51,7 @@ simgrid::s4u::ActorPtr CloudPlatform::AssignTask(int vmId, const TaskSpec& requi
         return nullptr;
     }
     simgrid::s4u::ActorPtr result = nullptr;
-    if (VirtualMachines[vmId]->getState() == simgrid::s4u::VirtualMachine::state::CREATED) {
+    if (VirtualMachines[vmId]->get_state() == simgrid::s4u::VirtualMachine::state::CREATED) {
         double timeStart = simgrid::s4u::Engine::get_clock();
         double startupCost = (MinStartupTime + MaxStartupTime) / 2;
         VirtualMachines[vmId]->start();

@@ -12,10 +12,10 @@ using std::string;
 XBT_LOG_NEW_DEFAULT_CATEGORY(workflow_task_cpp, "task log");
 
 namespace Workflow {
-    Task::Task(const YAML::Node& taskDescription, const Manager& registry, int id):
-        Requirements(taskDescription),
-        Id(id),
-        State(EState::NOT_STARTED) {
+    Task::Task(const YAML::Node& taskDescription, const Manager& registry, int id)
+        : Requirements(taskDescription)
+        , State(EState::NOT_SCHEDULED)
+        , Id(id) {
         Name = taskDescription["name"].as<string>();
         for (const YAML::Node& inputDescription: taskDescription["inputs"]) {
             string inputName = inputDescription["name"].as<string>();
