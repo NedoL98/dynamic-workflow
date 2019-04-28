@@ -44,8 +44,9 @@ void CloudSimulator::CheckReadyJobs() {
 void CloudSimulator::CheckReadyFiles() {
     auto iterator = TaskGraph->GetReadyFilesIterator();
     while (iterator) {
-        XBT_INFO("File %s is ready",  iterator->Name.c_str());
-        TaskGraph->StartTransfer(*iterator);
+        auto file = *iterator;
+        XBT_INFO("File %s is ready",  file.Name.c_str());
+        TaskGraph->StartTransfer(file);
         iterator++;
     }
 }
