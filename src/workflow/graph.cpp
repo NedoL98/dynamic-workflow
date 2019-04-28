@@ -126,6 +126,11 @@ namespace Workflow {
         return new Graph::GraphIterator(Nodes);
     }
 
+
+    FileDescription::FileIterator Graph::GetReadyFilesIterator() const {
+        return FileManager.GetReadyFilesIterator();
+    }
+
     bool Graph::IsFinished() const {
         return FinishedTasks.size() == Nodes.size() && FileManager.IsFinished();
     }
@@ -145,6 +150,10 @@ namespace Workflow {
         }
     }
     
+    void Graph::StartTransfer(const FileDescription& description) {
+        FileManager.StartTransfer(description);
+    }
+
     void Graph::FinishTransfer(const FileDescription& description) {
         FileManager.FinishTransfer(description);
         Nodes[description.Receiver]->IncFinishedTransfers();

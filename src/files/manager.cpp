@@ -75,14 +75,24 @@ void Manager::FinishTask(int taskId) {
         auto fileDesc = FileIdMapping.find(file)->second;
         int receiver = fileDesc.Receiver;
         if (receiver != -1) {
-            if (TaskToHost.count(receiver)) {
-                BeginTransfer(fileDesc);
+            if (TaskToHost.count(receiver) && fileDesc.State == EFileState::NOT_STARTED) {
+                FileIdMapping.find(file)->second.State = EFileState::READY;
+                ReadyFiles.insert(FileIdMapping.find(file)->second);
             }
         } 
         if (WorkflowOutputs.count(fileDesc.Id)) {
             OutputProduced++;
         }
     }
+}
+
+FileDescription::FileIterator Manager::GetReadyFilesIterator() const {
+    return FileDescription::FileIterator(ReadyFiles.begin(), ReadyFiles.end());
+}
+
+void Manager::StartTransfer(const FileDescription& description) {
+    ReadyFiles.erase(description);
+    FileIdMapping.find(description.Id)->second.State = EFileState::TRANSFERING;
 }
 void Manager::FinishTransfer(const FileDescription& description) {
 }
@@ -94,15 +104,12 @@ void Manager::AssignTask(int taskId, int hostId) {
     for (int file : task.GetInputs()) {
         auto fileDesc = FileIdMapping.find(file)->second;
         int sender = fileDesc.Author;
-        if (sender != -1 && Owner->GetTask(sender).GetState() == EState::Done) {
-            BeginTransfer(fileDesc);
+        if (sender != -1 && Owner->GetTask(sender).GetState() == EState::Done && fileDesc.State == EFileState::NOT_STARTED) {
+            FileIdMapping.find(file)->second.State = EFileState::READY;
+            ReadyFiles.insert(FileIdMapping.find(file)->second);
         }
     }
 }
-
-void Manager::BeginTransfer(const FileDescription& file) {
-    XBT_INFO("Transferring file %s from %d to %d\n", file.Name.c_str(), TaskToHost[file.Author], TaskToHost[file.Receiver]);
-};
 
 bool Manager::IsFinished() const {
     XBT_INFO("%d ?=? %d", OutputProduced, static_cast<int>(WorkflowOutputs.size()));

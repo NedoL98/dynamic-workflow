@@ -43,10 +43,14 @@ namespace Workflow {
         virtual Task& GetTaskByName(const std::string& name) override; 
         virtual const Task& GetTaskByName(const std::string& name) const override;
         virtual size_t GetTaskNumber() const override;
-        double GetDeadline() const;
         virtual GraphAbstractIterator* GetGraphIterator() override; 
+        virtual FileDescription::FileIterator GetReadyFilesIterator() const override;
+
+        double GetDeadline() const;
+
         virtual bool IsFinished() const override;
         virtual void FinishTask(int id) override; 
+        virtual void StartTransfer(const FileDescription& d) override;
         virtual void FinishTransfer(const FileDescription& d) override; 
         virtual void AssignTask(int TaskId, int hostId) override;
     };

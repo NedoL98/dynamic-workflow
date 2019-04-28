@@ -26,6 +26,7 @@ class CloudSimulator : public AbstractSimulator {
     static int RefreshAfterTask(int, void* s);
     void DoRefreshAfterTask(int taskId);
     void CheckReadyJobs();
+    void CheckReadyFiles();
 
 public:
     CloudSimulator(const std::string& platformConf, 

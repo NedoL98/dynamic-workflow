@@ -41,6 +41,16 @@ void CloudSimulator::CheckReadyJobs() {
     }
 }
 
+void CloudSimulator::CheckReadyFiles() {
+    auto iterator = TaskGraph->GetReadyFilesIterator();
+    while (iterator) {
+        XBT_INFO("File %s is ready",  iterator->Name.c_str());
+        TaskGraph->StartTransfer(*iterator);
+        iterator++;
+    }
+}
+
+
 void CloudSimulator::DoRefreshAfterTask(int taskId) {
     int hostId = Assignments.GetHostByTask(taskId);
     TaskGraph->FinishTask(taskId);
@@ -49,6 +59,7 @@ void CloudSimulator::DoRefreshAfterTask(int taskId) {
         Assignments.PopItem(hostId);
     }
     CheckReadyJobs();
+    CheckReadyFiles();
     XBT_DEBUG("Task %d finished executing!", taskId);
 }
 void CloudSimulator::DoMainLoop() {

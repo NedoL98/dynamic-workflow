@@ -28,10 +28,12 @@ namespace Workflow {
         virtual Task& GetTaskByName(const std::string& name) = 0; 
         virtual const Task& GetTaskByName(const std::string& name) const = 0;
         virtual GraphAbstractIterator* GetGraphIterator() = 0;
+        virtual FileDescription::FileIterator GetReadyFilesIterator() const = 0;
         virtual size_t GetTaskNumber() const = 0;
 
         virtual bool IsFinished() const = 0;
         virtual void FinishTask(int id) = 0; 
+        virtual void StartTransfer(const FileDescription& d) = 0;
         virtual void FinishTransfer(const FileDescription& d) = 0; 
         virtual void AssignTask(int TaskId, int hostId) = 0; 
     };

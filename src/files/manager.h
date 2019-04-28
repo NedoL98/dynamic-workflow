@@ -13,8 +13,10 @@ class Manager {
     std::map<std::string, FileDescription> Files;
     std::map<int, FileDescription> FileIdMapping;
     std::set<int> WorkflowOutputs, WorkflowInputs;
+    std::set<FileDescription> ReadyFiles;
     int OutputProduced;
     Workflow::AbstractGraph *Owner;
+
 
 public:
     Manager(Workflow::AbstractGraph* owner):
@@ -34,8 +36,10 @@ public:
     void SetOutputs(const std::vector<int>& data);
     void SetAuthor(int fileId, int taskId);
     void SetReceiver(int fileId, int taskId);
+    FileDescription::FileIterator GetReadyFilesIterator() const;
 
     void FinishTask(int taskId);
+    void StartTransfer(const FileDescription& description);
     void FinishTransfer(const FileDescription& description);
 
     void AssignTask(int taskId, int hostId);
