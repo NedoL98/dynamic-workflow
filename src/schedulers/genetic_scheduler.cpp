@@ -147,7 +147,9 @@ vector<double> GeneticScheduler::GetEndTimes(const Assignment& assignment) const
         }
         for (const int dependencyTaskId: viewer->GetTaskById(taskId).GetDependencies()) {
             xbt_assert(endTimes[dependencyTaskId] != -1, "Can't process next task, task order is inconsistent!");
-            earliestBegin = max(earliestBegin, endTimes[dependencyTaskId]);
+            if (!prevTaskInd.empty() && dependencyTaskId != prevTaskInd[vmId]) {
+                earliestBegin = max(earliestBegin, endTimes[dependencyTaskId]);
+            }
         }
         VMDescription vmDescr = AvailableVMs[assignment.MatchingString[taskId]];
         endTimes[taskId] = earliestBegin + viewer->GetTaskById(taskId).GetExecutionTime(vmDescr);
@@ -165,7 +167,7 @@ double GeneticScheduler::CalculateMakespan(const Assignment& assignment) const {
 double GeneticScheduler::CalculateCost(const Assignment& assignment) const {
     double cost = 0;
     for (size_t taskId = 0; taskId < viewer->WorkflowSize(); ++taskId) {
-        View::Task task = viewer->GetTaskById(taskId);
+        const View::Task& task = viewer->GetTaskById(taskId);
         int vmId = assignment.MatchingString[taskId];
         // FIXME when startup cost is added
         cost += task.GetExecutionCost(AvailableVMs[vmId]);
@@ -216,7 +218,7 @@ pair<int, int> GeneticScheduler::GetRandomParents(const vector<Assignment>& pare
 
         double threshold = (rand() / static_cast<double>(RAND_MAX)) * totalInvFitnessLocal;
         double prefixFitness = 0;
-        // binary search here may worth it
+        // FIXME: binary search here may worth it
         for (size_t j = 0; j < parents.size(); ++j) {
             if (!isPicked[j]) {
                 if (prefixFitness + (1 / parents[j].FitnessScore.value()) >= threshold) {
