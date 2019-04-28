@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.8.8)
 project(DynamicWorkflow)
 
 add_definitions(-DPROJECT_PATH="${CMAKE_SOURCE_DIR}")
+set(CMAKE_CXX_COMPILER "/usr/bin/g++-7")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -Wextra -Wshadow")
 
 set(DEBUG_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g")

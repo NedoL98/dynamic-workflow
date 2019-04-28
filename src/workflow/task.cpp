@@ -14,7 +14,8 @@ XBT_LOG_NEW_DEFAULT_CATEGORY(workflow_task_cpp, "task log");
 namespace Workflow {
     Task::Task(const YAML::Node& taskDescription, const Manager& registry, int id):
         Requirements(taskDescription),
-        Id(id) {
+        Id(id),
+        State(EState::NOT_STARTED) {
         Name = taskDescription["name"].as<string>();
         for (const YAML::Node& inputDescription: taskDescription["inputs"]) {
             string inputName = inputDescription["name"].as<string>();
