@@ -60,7 +60,7 @@ namespace Workflow {
         }
         for (size_t nodeId = 0; nodeId < Nodes.size(); nodeId++) {
             for (int fileId : Nodes[nodeId]->GetInputs()) {
-                FileManager.SetReceiver(fileId, nodeId);
+                FileManager.AddReceiver(fileId, nodeId);
                 auto fileOwner = FileId2Owner.find(fileId);
                 if (fileOwner != FileId2Owner.end()) {
                     Nodes[nodeId]->AddDependency(fileOwner->second);
@@ -98,6 +98,11 @@ namespace Workflow {
         std::reverse(order.begin(), order.end());
         return order;
     }
+
+    const FileDescription& Graph::GetFile(int id) const {
+        return FileManager.GetFileById(id);
+    }
+
     Task& Graph::GetTask(int id) {
         return *Nodes[id];
     }
@@ -151,13 +156,12 @@ namespace Workflow {
     }
     
     void Graph::StartTransfer(int fileId) {
-        FileManager.StartTransfer(FileManager.GetFileById(fileId));
+        FileManager.StartTransfer(fileId);
     }
 
-    void Graph::FinishTransfer(int fileId) {
-        auto description = FileManager.GetFileById(fileId);
-        FileManager.FinishTransfer(description);
-        Nodes[description.Receiver]->IncFinishedTransfers();
+    void Graph::FinishTransfer(TransferSpec spec) {
+        FileManager.FinishTransfer(spec);
+        Nodes[spec.ReceiverTask]->IncFinishedTransfers();
     }
 
     void Graph::AssignTask(int taskId, int hostId) {

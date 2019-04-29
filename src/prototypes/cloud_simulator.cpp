@@ -19,44 +19,71 @@ int CloudSimulator::RefreshAfterTask(int, void* s) {
     return 0;
 }
 
+void CloudSimulator::DoRefreshAfterTransfer(TransferSpec* spec) {
+    if (!spec) {
+        XBT_WARN("Something went wrong!");
+    }
+    if (Transfers.count(spec)) {
+        Transfers.erase(spec);
+        TaskGraph->FinishTransfer(*spec);
+        CheckReadyJobOnVM(spec->Receiver);
+        delete spec;
+    } else if (spec->Sender == spec->Receiver) {
+        TaskGraph->FinishTransfer(*spec);
+        CheckReadyJobOnVM(spec->Receiver);
+    } else {
+        Transfers.insert(spec);
+    }
+}
+
 void CloudSimulator::CheckReadyJobs() {
     vector<int> vmIds = Platform->GetVMIds();
     for (int vm : vmIds) {
-        if (!Assignments.HasItem(vm)) {
-            continue;
-        }
-        int taskId = Assignments.GetItem(vm).GetTaskId();
-        if (TaskGraph->GetTask(taskId).IsReady()) {
-            XBT_DEBUG("Task %d is ready to compute!", taskId);
-            if (!TaskGraph->GetTask(taskId).StartExecuting()) {
-                XBT_INFO("Task %d isn't executing!", taskId);
-                continue;
-            }
-            CollbackData* data = new CollbackData();
-            data->Simulator = this;
-            data->TaskId = taskId;
-            Actors.push_back(Platform->AssignTask(vm, TaskGraph->GetTask(taskId).GetTaskSpec(), RefreshAfterTask, data));
-            XBT_DEBUG("Task %d started executing!", taskId);
-        }
+        CheckReadyJobOnVM(vm);
     }
 }
 
 void CloudSimulator::CheckReadyFiles() {
+    static simgrid::s4u::MutexPtr mutex = simgrid::s4u::Mutex::create();
+    mutex->lock();
     auto iterator = TaskGraph->GetReadyFilesIterator();
     while (iterator) {
         auto file = *iterator;
-        XBT_INFO("File %s is ready", file.Name.c_str());
+        XBT_INFO("File %s is ready", file->Name.c_str());
         iterator++;
-        int hostSender = Assignments.GetHostByTask(file.Author);
-        int hostReceiver = Assignments.GetHostByTask(file.Receiver);
-        XBT_INFO("File sender: %d on host %d, receiver: %d on host %d", file.Author, hostSender, file.Receiver, hostReceiver);
+        for (int receiver : file->Receivers) {
+            if (receiver == -1) {
+                continue;
+            }
+            int hostSender = Assignments.GetHostByTask(file->Author);
+            int hostReceiver = Assignments.GetHostByTask(receiver);
+            XBT_INFO("File sender: %d on host %d, receiver: %d on host %d", file->Author, hostSender, receiver, hostReceiver);
 
-        TransferSpec spec({file.Size, hostSender, hostReceiver, file.Id});
-        Platform->StartTransfer(spec);
-        TaskGraph->StartTransfer(file.Id);
+            TransferSpec spec({file->Size, hostSender, hostReceiver, receiver, file->Id});
+            Platform->StartTransfer(spec);
+        }
+        TaskGraph->StartTransfer(file->Id);
+    }
+    mutex->unlock();
+}
+void CloudSimulator::CheckReadyJobOnVM(int vm) {
+    if (!Assignments.HasItem(vm)) {
+        return;
+    }
+    int taskId = Assignments.GetItem(vm).GetTaskId();
+    if (TaskGraph->GetTask(taskId).IsReady()) {
+        XBT_DEBUG("Task %d is ready to compute!", taskId);
+        if (!TaskGraph->GetTask(taskId).StartExecuting()) {
+            XBT_INFO("Task %d isn't executing!", taskId);
+            return;
+        }
+        CollbackData* data = new CollbackData();
+        data->Simulator = this;
+        data->TaskId = taskId;
+        Actors.push_back(Platform->AssignTask(vm, TaskGraph->GetTask(taskId).GetTaskSpec(), RefreshAfterTask, data));
+        XBT_DEBUG("Task %d started executing!", taskId);
     }
 }
-
 
 void CloudSimulator::DoRefreshAfterTask(int taskId) {
     int hostId = Assignments.GetHostByTask(taskId);
@@ -73,28 +100,16 @@ void CloudSimulator::DoMainLoop() {
     XBT_INFO("MainLoop begins");
     CheckReadyJobs();
     XBT_INFO("%d vms, %d actors", Platform->GetVMIds().size(), Actors.size());
-    for (size_t i = 0; i < Actors.size(); i++) {
-        Actors[i]->join();
+    while (!TaskGraph->IsFinished()) {
+        simgrid::s4u::this_actor::sleep_for(1);
+        for (size_t i = 0; i < Actors.size(); i++) {
+            Actors[i]->join();
+        }
     }
     xbt_assert(TaskGraph->IsFinished(), "All actors finished their work, but not all tasks done");
     
     XBT_INFO("MainLoop ends");
     delete (CloudPlatform*)Platform;
-}
-
-void CloudSimulator::DoRefreshAfterTransfer(TransferSpec* spec) {
-    if (!spec) {
-        XBT_WARN("Something went wrong!");
-    }
-    if (Transfers.count(spec)) {
-        Transfers.erase(spec);
-        TaskGraph->FinishTransfer(spec->FileId);
-        delete spec;
-    } else if (spec->Sender == spec->Receiver) {
-        TaskGraph->FinishTransfer(spec->FileId);
-    } else {
-        Transfers.insert(spec);
-    }
 }
 
 void CloudSimulator::Run(double timeout) {

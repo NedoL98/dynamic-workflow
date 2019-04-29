@@ -38,6 +38,7 @@ namespace Workflow {
         void MakeOrderDFS(int v, std::vector<Task>& order, std::vector<bool>& used) const;
         std::vector<Task> MakeTasksOrder() const;
 
+        virtual const FileDescription& GetFile(int id) const override;
         virtual Task& GetTask(int id) override; 
         virtual const Task& GetTask(int id) const override;
         virtual Task& GetTaskByName(const std::string& name) override; 
@@ -51,7 +52,7 @@ namespace Workflow {
         virtual bool IsFinished() const override;
         virtual void FinishTask(int id) override; 
         virtual void StartTransfer(int fileId) override;
-        virtual void FinishTransfer(int fileId) override; 
+        virtual void FinishTransfer(TransferSpec spec) override; 
         virtual void AssignTask(int TaskId, int hostId) override;
     };
 }

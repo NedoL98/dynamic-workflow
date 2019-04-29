@@ -4,6 +4,7 @@
 struct TransferSpec {
     long long Size;
     int Sender, Receiver;
+    int ReceiverTask;
     int FileId;
 };
 

@@ -30,6 +30,7 @@ class CloudSimulator : public AbstractSimulator {
     void DoRefreshAfterTask(int taskId);
     void DoRefreshAfterTransfer(TransferSpec* spec);
     void CheckReadyJobs();
+    void CheckReadyJobOnVM(int vm);
     void CheckReadyFiles();
 
 public:

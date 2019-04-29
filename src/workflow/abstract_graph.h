@@ -4,8 +4,9 @@
 #include <string>
 #include <set>
 
-#include <files/description.h>
+#include "files/description.h"
 #include "argument_parser.h"
+#include "spec.h"
 namespace Workflow {
     class Task;
     class AbstractGraph {
@@ -23,6 +24,7 @@ namespace Workflow {
         AbstractGraph()
         {}
 
+        virtual const FileDescription& GetFile(int id) const = 0; 
         virtual Task& GetTask(int id) = 0; 
         virtual const Task& GetTask(int id) const = 0; 
         virtual Task& GetTaskByName(const std::string& name) = 0; 
@@ -34,7 +36,7 @@ namespace Workflow {
         virtual bool IsFinished() const = 0;
         virtual void FinishTask(int id) = 0; 
         virtual void StartTransfer(int fileId) = 0;
-        virtual void FinishTransfer(int fileId) = 0; 
+        virtual void FinishTransfer(TransferSpec spec) = 0; 
         virtual void AssignTask(int TaskId, int hostId) = 0; 
     };
 }

@@ -56,8 +56,9 @@ void Manager::SetAuthor(int fileId, int taskId) {
     FileIdMapping.find(fileId)->second->Author = taskId;
 }
 
-void Manager::SetReceiver(int fileId, int taskId) {
-    FileIdMapping.find(fileId)->second->Receiver = taskId;
+void Manager::AddReceiver(int fileId, int taskId) {
+    XBT_INFO("taskId %d", taskId);
+    FileIdMapping.find(fileId)->second->Receivers.insert(taskId);
 }
 
 void Manager::SetInputs(const vector<int>& data) {
@@ -73,32 +74,33 @@ void Manager::FinishTask(int taskId) {
     auto task = Owner->GetTask(taskId);
     for (int file : task.GetOutputs()) {
         auto fileDesc = FileIdMapping.find(file)->second;
-        int receiver = fileDesc->Receiver;
         if (fileDesc->Author == -1) {
             FileIdMapping.find(file)->second->State = EFileState::DONE;
         }
-        if (receiver != -1) {
-            if (TaskToHost.count(receiver) && fileDesc->State == EFileState::NOT_STARTED) {
-                fileDesc->State = EFileState::READY;
-                ReadyFiles.insert(*fileDesc);
-            }
-        } 
         if (WorkflowOutputs.count(fileDesc->Id)) {
             OutputProduced++;
+        }
+        for (int receiver : fileDesc->Receivers) {
+            if (receiver != -1) {
+                if (TaskToHost.count(receiver) && fileDesc->State == EFileState::NOT_STARTED) {
+                    fileDesc->State = EFileState::READY;
+                    ReadyFiles.insert(fileDesc);
+                }
+            } 
         }
     }
 }
 
 FileDescription::FileIterator Manager::GetReadyFilesIterator() const {
     XBT_INFO("%d files", ReadyFiles.size());
-    return FileDescription::FileIterator(ReadyFiles.begin(), ReadyFiles.end());
+    return FileDescription::FileIterator(ReadyFiles.cbegin(), ReadyFiles.cend());
 }
 
-void Manager::StartTransfer(const FileDescription& description) {
-    ReadyFiles.erase(description);
-    FileIdMapping.find(description.Id)->second->State = EFileState::TRANSFERING;
+void Manager::StartTransfer(int fileId) {
+    ReadyFiles.erase(FileIdMapping[fileId]);
+    FileIdMapping.find(fileId)->second->State = EFileState::TRANSFERING;
 }
-void Manager::FinishTransfer(const FileDescription& description) {
+void Manager::FinishTransfer(TransferSpec spec) {
 }
 
 void Manager::AssignTask(int taskId, int hostId) {
@@ -110,7 +112,7 @@ void Manager::AssignTask(int taskId, int hostId) {
         int sender = fileDesc->Author;
         if (sender != -1 && Owner->GetTask(sender).GetState() == EState::DONE && fileDesc->State == EFileState::NOT_STARTED) {
             fileDesc->State = EFileState::READY;
-            ReadyFiles.insert(*fileDesc);
+            ReadyFiles.insert(fileDesc);
         }
     }
 }

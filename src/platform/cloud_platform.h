@@ -12,7 +12,7 @@
 class CloudPlatform : public AbstractPlatform {
     double MinStartupTime, MaxStartupTime;
     std::function<void(TransferSpec*)> OnTransferFinish;
-    std::vector<simgrid::s4u::ActorPtr> Mailers; // only for one purpose - not letting simgrid destroy our actor
+    std::map<int, simgrid::s4u::ActorPtr> Mailers; // only for one purpose - not letting simgrid destroy our actor
 public:
     CloudPlatform(const std::string& platformConfig, const VMList& vmList, std::function<void(TransferSpec*)> onTransferFinish)
                             : AbstractPlatform(platformConfig, vmList.MaxMemory())

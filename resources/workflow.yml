@@ -10,6 +10,8 @@ inputs:
 outputs:
   - name: result
     source: D.result
+  - name: result2
+    source: B.result2
 tasks:
   - name: A
     inputs:

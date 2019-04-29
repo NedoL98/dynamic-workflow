@@ -39,10 +39,11 @@ namespace {
                 activeTransfers.pop_back();
             }
 
-            try {
-                buffer = nullptr;
-                buffer = (TransferSpec*)coordinator->get(1);
-            } catch (...) {
+            buffer = nullptr;
+            if (!coordinator->empty()) {
+                buffer = (TransferSpec *)coordinator->get();
+            } else {
+                simgrid::s4u::this_actor::sleep_for(1);
             }
             if (!buffer) { // exit by timeout
                 continue;
@@ -78,10 +79,11 @@ namespace {
 }
 
 CloudPlatform::~CloudPlatform() {
+    TransferSpec spec({-1, -1, -1, -1, -1});
     for (const auto& [id, ptr] : VirtualMachines) {
         auto senderMailbox = simgrid::s4u::Mailbox::by_name("coordinate_" + std::to_string(id));
-        TransferSpec spec({-1, -1, -1, -1});
         senderMailbox->put((void*)&spec, 0);
+        Mailers[id]->join();
     }
 }
         
@@ -97,7 +99,7 @@ bool CloudPlatform::CreateVM(int hostId, const VMDescription& s, int id) {
     auto mailer = simgrid::s4u::Actor::create("transfer_" + std::to_string(id),
                                             VirtualMachines[id],
                                             DoTransfer, id, OnTransferFinish);
-    Mailers.push_back(mailer);
+    Mailers[id] = mailer;
     return true;
 }
 

@@ -9,21 +9,23 @@ enum class EFileState {
 };
 
 struct FileDescription {
-    struct FileIterator : std::set<FileDescription>::const_iterator {
-        FileIterator(std::set<FileDescription>::const_iterator me, std::set<FileDescription>::const_iterator end)
-            : std::set<FileDescription>::const_iterator(me)
+
+    struct FileIterator : std::set<FileDescription*>::const_iterator {
+        FileIterator(std::set<FileDescription*>::const_iterator me, std::set<FileDescription*>::const_iterator end)
+            : std::set<FileDescription*>::const_iterator(me)
             , End(end)
             {}
 
         operator bool() {
-            return End != *this;
+            return *this != End;
         }
-        std::set<FileDescription>::const_iterator End;
 
+        std::set<FileDescription*>::const_iterator End;
     };
     std::string Name;
     long long Size;
-    int Author, Receiver;
+    int Author;
+    std::set<int> Receivers;
     EFileState State;
     int Id;
 
@@ -31,7 +33,7 @@ struct FileDescription {
         : Name(name)
         , Size(size)
         , Author(-1)
-        , Receiver(-1)
+        , Receivers()
         , State(EFileState::NOT_STARTED) {
         static int counter = 0;
         Id = counter++;

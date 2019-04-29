@@ -83,8 +83,8 @@ namespace Workflow {
             if (State == EState::RUNNING || State == EState::DONE) {
                 return false;
             }
-            return FinishedDeps == static_cast<int>(Dependencies.size());// &&
-                   //FinishedTransfers == static_cast<int>(Inputs.size());
+            return FinishedDeps == static_cast<int>(Dependencies.size()) &&
+                   FinishedTransfers == static_cast<int>(Inputs.size());
         }
 
         bool StartExecuting() {
