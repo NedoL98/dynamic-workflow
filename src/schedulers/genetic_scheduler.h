@@ -10,6 +10,7 @@ struct Assignment {
 
     std::vector<int> MatchingString;
     std::vector<int> SchedulingString;
+    std::vector<bool> KeepVMStandbyString;
     std::optional<double> Cost;
     std::optional<double> Makespan;
     std::optional<double> FitnessScore;
@@ -41,18 +42,18 @@ private:
 
     std::vector<Assignment> GetInitialAssignments(int numAssignments) const;
 
-    std::vector<double> GetEndTimes(const Assignment& assignment) const;
-    double CalculateMakespan(const Assignment& assignment) const;
-    double CalculateCost(const Assignment& assignment) const;
-    double CalculateFitnessFunction(const Assignment& assignment, double maxGenerationCost) const;
+    void DoCalculateCostAndMakespan(Assignment& assignment) const;
+    void DoCalculateFitnessFunction(Assignment& assignment, double maxGenerationCost) const;
 
     void FillAssignmentValues(std::vector<Assignment>& assignments) const;
 
     std::pair<int, int> GetRandomParents(const std::vector<Assignment>& parents) const;
     Assignment GetMatchingCrossover(const Assignment& mainParent, const Assignment& secondaryParent) const;
     Assignment GetSchedulingCrossover(const Assignment& mainParent, const Assignment& secondaryParent) const;
+    Assignment GetKeepVMStandbyCrossover(const Assignment& mainParent, const Assignment& secondaryParent) const;
     void MakeMatchingMutation(Assignment& assignment) const;
     void MakeSchedulingMutation(Assignment& assignment) const;
+    void MakeKeepVMStandbyMutation(Assignment& assignment) const;
     void MakeCrossover(std::function<Assignment(const Assignment&, const Assignment&)> crossover,
                        Assignment& assignment1, 
                        Assignment& assignment2) const;
@@ -82,6 +83,8 @@ private:
     static constexpr int BestChromosomesNumber = 5;
     static constexpr double MatchingCrossoverProb = 0.5;
     static constexpr double SchedulingCrossoverProb = 0.5;
+    static constexpr double KeepVMStandbyCrossoverProb = 0.5;
     static constexpr double MatchingMutationProb = 0.2;
     static constexpr double SchedulingMutationProb = 0.2;
+    static constexpr double KeepVMStandbyMutationProb = 0.2;
 };
