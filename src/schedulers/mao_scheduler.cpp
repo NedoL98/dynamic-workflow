@@ -95,7 +95,7 @@ double MaoScheduler::CalculateCost(const vector<VMDescription>& taskVM) const {
     double cost = 0;
     for (size_t taskId = 0; taskId < viewer->WorkflowSize(); ++taskId) {
         VMDescription vmDescr = taskVM[taskId];
-        View::Task task = viewer->GetTaskById(taskId);
+        const View::Task& task = viewer->GetTaskById(taskId);
         // FIXME when startup cost is added
         cost += task.GetExecutionCost(vmDescr);
     }

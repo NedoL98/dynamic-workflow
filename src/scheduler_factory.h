@@ -11,7 +11,7 @@ private:
     std::map<std::string, std::function<AbstractScheduler*()>> FactoryMap;
 public:
     SchedulerFactory(const SchedulerFactory&) = delete;
-    void operator = (const SchedulerFactory&) = delete;
+    SchedulerFactory& operator = (const SchedulerFactory&) = delete;
 
     static SchedulerFactory& GetInstance();
 

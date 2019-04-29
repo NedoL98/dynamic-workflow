@@ -42,7 +42,7 @@ GeneticScheduler::Actions GeneticScheduler::PrepareForRun(View::Viewer& v) {
         if (previousScore != currentScore) {
             previousScore = currentScore;
             constantScoreSteps = 0;
-        } else {
+        } else if (previousScore != -1) {
             ++constantScoreSteps;
         }
 
@@ -93,6 +93,24 @@ GeneticScheduler::Actions GeneticScheduler::PrepareForRun(View::Viewer& v) {
 Assignment::Assignment(int n) {
     MatchingString.resize(n);
     SchedulingString.resize(n);
+    KeepVMStandbyString.resize(n);
+}
+
+GeneticScheduler::GeneticScheduler() {
+    RegisterCrossover({bind(&GeneticScheduler::GetSchedulingCrossover, this, _1, _2), SchedulingCrossoverProb});
+    RegisterCrossover({bind(&GeneticScheduler::GetMatchingCrossover, this, _1, _2), MatchingCrossoverProb});
+    RegisterCrossover({bind(&GeneticScheduler::GetKeepVMStandbyCrossover, this, _1, _2), KeepVMStandbyCrossoverProb});
+    RegisterMutation({bind(&GeneticScheduler::MakeSchedulingMutation, this, _1), SchedulingMutationProb});
+    RegisterMutation({bind(&GeneticScheduler::MakeMatchingMutation, this, _1), MatchingMutationProb});
+    RegisterMutation({bind(&GeneticScheduler::MakeKeepVMStandbyMutation, this, _1), KeepVMStandbyMutationProb});
+}
+
+void GeneticScheduler::RegisterMutation(Mutation mutation) {
+    Mutations.push_back(std::move(mutation));
+}
+
+void GeneticScheduler::RegisterCrossover(Crossover crossover) {
+    Crossovers.push_back(std::move(crossover));
 }
 
 vector<Assignment> GeneticScheduler::GetInitialAssignments(int numAssignments) const {
@@ -129,70 +147,77 @@ vector<Assignment> GeneticScheduler::GetInitialAssignments(int numAssignments) c
             xbt_assert(!suitableVMs.empty(), "No suitable VM found for task %s", viewer->GetTaskById(taskId).GetName().c_str());
             int randomVMId = rand() % suitableVMs.size();
             initialAssignments[i].MatchingString[taskId] = suitableVMs[randomVMId];
+
+            if (i >= InitFastestAssignmentsNum) {
+                initialAssignments[i].KeepVMStandbyString[taskId] = rand() % 2;
+            } else {
+                initialAssignments[i].KeepVMStandbyString[taskId] = true;
+            }
         }
     }
     return initialAssignments;
 }
 
-vector<double> GeneticScheduler::GetEndTimes(const Assignment& assignment) const {
+void GeneticScheduler::DoCalculateCostAndMakespan(Assignment& assignment) const {
     vector<double> endTimes(viewer->WorkflowSize(), -1);
-    vector<int> prevTaskInd(AvailableVMs.size(), -1);
+    vector<int> prevTaskId(AvailableVMs.size(), -1);
+
+    double avgLag = static_cast<double>(viewer->GetVMList().GetMinLag() + viewer->GetVMList().GetMaxLag()) / 2;
+    
+    assignment.Makespan = 0;
+    assignment.Cost = 0;
 
     for (size_t i = 0; i < assignment.SchedulingString.size(); ++i) {
         int taskId = assignment.SchedulingString[i];
         int vmId = assignment.MatchingString[taskId];
+        int prevVMTaskId = prevTaskId[vmId];
+
         double earliestBegin = 0;
-        if (prevTaskInd[vmId] != -1) {
-            earliestBegin = endTimes[prevTaskInd[vmId]];
+        if (prevVMTaskId != -1) {
+            earliestBegin = endTimes[prevVMTaskId];
         }
         for (const int dependencyTaskId: viewer->GetTaskById(taskId).GetDependencies()) {
             xbt_assert(endTimes[dependencyTaskId] != -1, "Can't process next task, task order is inconsistent!");
-            earliestBegin = max(earliestBegin, endTimes[dependencyTaskId]);
+            if (dependencyTaskId != prevVMTaskId) {
+                earliestBegin = max(earliestBegin, endTimes[dependencyTaskId]);
+            }
+        }
+        if (prevVMTaskId == -1 || !assignment.KeepVMStandbyString[prevVMTaskId]) {
+            earliestBegin += avgLag;
         }
         VMDescription vmDescr = AvailableVMs[assignment.MatchingString[taskId]];
         endTimes[taskId] = earliestBegin + viewer->GetTaskById(taskId).GetExecutionTime(vmDescr);
-        prevTaskInd[vmId] = taskId;
+
+        assignment.Makespan = max(assignment.Makespan.value(), endTimes[taskId]);
+        assignment.Cost = assignment.Cost.value() + viewer->GetTaskById(taskId).GetExecutionCost(AvailableVMs[vmId]);
+        if (prevVMTaskId != -1 && assignment.KeepVMStandbyString[prevVMTaskId]) {
+            assignment.Cost = assignment.Cost.value() + AvailableVMs[vmId].GetPrice() * (earliestBegin - endTimes[prevVMTaskId]);
+        }
+
+        prevTaskId[vmId] = taskId;
     }
-
-    return endTimes;
 }
 
-double GeneticScheduler::CalculateMakespan(const Assignment& assignment) const {
-    vector<double> endTimes = GetEndTimes(assignment);
-    return *max_element(endTimes.begin(), endTimes.end()); 
-}
-
-double GeneticScheduler::CalculateCost(const Assignment& assignment) const {
-    double cost = 0;
-    for (size_t taskId = 0; taskId < viewer->WorkflowSize(); ++taskId) {
-        View::Task task = viewer->GetTaskById(taskId);
-        int vmId = assignment.MatchingString[taskId];
-        // FIXME when startup cost is added
-        cost += task.GetExecutionCost(AvailableVMs[vmId]);
-    }
-    return cost;
-}
-
-double GeneticScheduler::CalculateFitnessFunction(const Assignment& assignment, double maxGenerationCost) const {
+void GeneticScheduler::DoCalculateFitnessFunction(Assignment& assignment, double maxGenerationCost) const {
     if (!assignment.Cost || !assignment.Makespan) {
         xbt_assert("Fitness function can't be calculated without cost and makespan calculated!");
     }
-    if (assignment.Makespan > viewer->GetDeadline()) {
-        return (assignment.Makespan.value() / viewer->GetDeadline()) + 1;
+    if (assignment.Makespan.value() > viewer->GetDeadline()) {
+        assignment.FitnessScore = (assignment.Makespan.value() / viewer->GetDeadline()) + 1;
+    } else {
+        assignment.FitnessScore = assignment.Cost.value() / maxGenerationCost;
     }
-    return assignment.Cost.value() / maxGenerationCost;
 }
 
 void GeneticScheduler::FillAssignmentValues(vector<Assignment>& assignments) const {
     double maxCost = 0;
     for (Assignment& assignment: assignments) {
-        assignment.Cost = CalculateCost(assignment);
+        DoCalculateCostAndMakespan(assignment);
         maxCost = max(maxCost, assignment.Cost.value());
-        assignment.Makespan = CalculateMakespan(assignment);
     }
 
     for (Assignment& assignment: assignments) {
-        assignment.FitnessScore = CalculateFitnessFunction(assignment, maxCost);
+        DoCalculateFitnessFunction(assignment, maxCost);
     }
 }
 
@@ -216,7 +241,7 @@ pair<int, int> GeneticScheduler::GetRandomParents(const vector<Assignment>& pare
 
         double threshold = (rand() / static_cast<double>(RAND_MAX)) * totalInvFitnessLocal;
         double prefixFitness = 0;
-        // binary search here may worth it
+        // FIXME: binary search here may worth it
         for (size_t j = 0; j < parents.size(); ++j) {
             if (!isPicked[j]) {
                 if (prefixFitness + (1 / parents[j].FitnessScore.value()) >= threshold) {
@@ -277,12 +302,16 @@ Assignment GeneticScheduler::GetSchedulingCrossover(const Assignment& mainParent
     return offspring;
 }
 
-void GeneticScheduler::MakeCrossover(Assignment& assignment1, 
-                                     Assignment& assignment2, 
-                                     function<Assignment(const Assignment&, const Assignment&)> crossover) const {
-    Assignment tmpAssignment = crossover(assignment1, assignment2);
-    assignment2 = crossover(assignment2, assignment1);
-    assignment1 = tmpAssignment;
+Assignment GeneticScheduler::GetKeepVMStandbyCrossover(const Assignment& mainParent, const Assignment& secondaryParent) const {
+    Assignment offspring(mainParent);
+
+    for (size_t taskId = 0; taskId < viewer->WorkflowSize(); ++taskId) {
+        if (rand() % 10 == 0) {
+            offspring.KeepVMStandbyString[taskId] = secondaryParent.KeepVMStandbyString[taskId];
+        }
+    }
+    
+    return offspring;
 }
 
 void GeneticScheduler::MakeMatchingMutation(Assignment& assignment) const {
@@ -330,6 +359,24 @@ void GeneticScheduler::MakeSchedulingMutation(Assignment& assignment) const {
     assignment.SchedulingString.insert(assignment.SchedulingString.begin() + newTaskPosition, mutationTaskId);
 }
 
+void GeneticScheduler::MakeKeepVMStandbyMutation(Assignment& assignment) const {
+    int taskId = rand() % viewer->WorkflowSize();
+    assignment.KeepVMStandbyString[taskId] = 1 - assignment.KeepVMStandbyString[taskId];
+}
+
+void GeneticScheduler::MakeCrossover(function<Assignment(const Assignment&, const Assignment&)> crossover,
+                                     Assignment& assignment1, 
+                                     Assignment& assignment2) const {
+    Assignment tmpAssignment = crossover(assignment1, assignment2);
+    assignment2 = crossover(assignment2, assignment1);
+    assignment1 = tmpAssignment;
+}
+
+void GeneticScheduler::MakeMutation(function<void(Assignment&)> mutation,
+                                    Assignment& assignment) const {
+    mutation(assignment);
+}
+
 vector<Assignment> GeneticScheduler::GetBestChromosomes(const vector<Assignment>& generation) const {
     vector<Assignment> result(BestChromosomesNumber);
     std::partial_sort_copy(generation.begin(), generation.end(), result.begin(), result.end(), [](const Assignment& a, const Assignment& b) {
@@ -337,6 +384,21 @@ vector<Assignment> GeneticScheduler::GetBestChromosomes(const vector<Assignment>
         return a.FitnessScore < b.FitnessScore;
     });
     return result;
+}
+
+void GeneticScheduler::DoModifyGeneration(vector<Assignment>& generation) const {
+    for (const Crossover& crossover: Crossovers) {
+        int pairsCount = generation.size() * (generation.size() - 1) / 2;
+        for (int i = 0; i < pairsCount * crossover.CrossoverProb; ++i) {
+            MakeCrossover(crossover.CrossoverFunc, generation[rand() % generation.size()], generation[rand() % generation.size()]);
+        }
+    }
+
+    for (const Mutation& mutation: Mutations) {
+        for (int i = 0; i < generation.size() * mutation.MutationProb; ++i) {
+            MakeMutation(mutation.MutationFunc, generation[rand() % generation.size()]);
+        }
+    }
 }
 
 vector<Assignment> GeneticScheduler::GetNewGeneration(const vector<Assignment>& oldGeneration) const {
@@ -355,24 +417,7 @@ vector<Assignment> GeneticScheduler::GetNewGeneration(const vector<Assignment>& 
         newGeneration.push_back(oldGeneration[assignmentId]);
     }
 
-    int pairsCount = newGeneration.size() * (newGeneration.size() - 1) / 2;
-    for (int i = 0; i < pairsCount * MatchingCrossoverProb; ++i) {
-        MakeCrossover(newGeneration[rand() % newGeneration.size()], 
-                      newGeneration[rand() % newGeneration.size()], 
-                      bind(&GeneticScheduler::GetMatchingCrossover, *this, _1, _2));
-    }
-    for (int i = 0; i < pairsCount * SchedulingCrossoverProb; ++i) {
-        MakeCrossover(newGeneration[rand() % newGeneration.size()], 
-                      newGeneration[rand() % newGeneration.size()], 
-                      bind(&GeneticScheduler::GetSchedulingCrossover, *this, _1, _2));
-    }   
-
-    for (size_t i = 0; i < newGeneration.size() * MatchingMutationProb; ++i) {
-        MakeMatchingMutation(newGeneration[rand() % newGeneration.size()]);
-    }
-    for (size_t i = 0; i < newGeneration.size() * SchedulingMutationProb; ++i) {
-        MakeSchedulingMutation(newGeneration[rand() % newGeneration.size()]);
-    }
+    DoModifyGeneration(newGeneration);
 
     vector<Assignment> bestOldAssignments = GetBestChromosomes(oldGeneration); 
     newGeneration.insert(newGeneration.end(), bestOldAssignments.begin(), bestOldAssignments.end());
@@ -381,14 +426,19 @@ vector<Assignment> GeneticScheduler::GetNewGeneration(const vector<Assignment>& 
 }
 
 double GeneticScheduler::GetCheapestAssignment(vector<Assignment>& assignments) const {
-    return min_element(assignments.begin(), assignments.end(), [](const Assignment& a, const Assignment& b) {
+    auto minElemPtr = min_element(assignments.begin(), assignments.end(), [](const Assignment& a, const Assignment& b) {
         if (a.FitnessScore > 1) {
             return false;
         } else if (b.FitnessScore > 1) {
             return true;
         }
         return a.Cost < b.Cost;
-    })->Cost.value();
+    });
+
+    if (minElemPtr->Makespan.value() >= viewer->GetDeadline()) {
+        return -1;
+    }
+    return minElemPtr->Cost.value();
 }
 
 void GeneticScheduler::PrintEpochStatistics(vector<Assignment>& assignments, int epochInd) const {
