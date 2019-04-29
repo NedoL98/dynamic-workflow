@@ -1,6 +1,12 @@
 #pragma once
 #include <yaml-cpp/yaml.h>
 
+struct TransferSpec {
+    long long Size;
+    int Sender, Receiver;
+    int FileId;
+};
+
 struct ComputeSpec {
     long long Memory, Speed;
     int Cores;

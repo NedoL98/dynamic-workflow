@@ -19,4 +19,5 @@ public:
     virtual bool CreateVM(int hostId, const VMDescription& s, int id) = 0;
     virtual simgrid::s4u::ActorPtr AssignTask(int vmId, const TaskSpec& s, const std::function<void(int, void*)>& onExit, void* arg) = 0;
     virtual void FinishTask(int hostId, const TaskSpec& spec) = 0;
+    virtual void StartTransfer(const TransferSpec& file) = 0;
 };

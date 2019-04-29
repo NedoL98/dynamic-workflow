@@ -5,12 +5,8 @@
 #   D
 name: Diamond
 inputs:
-  - name: data1
+  - name: input
     size: 100MB
-  - name: data2
-    size: 10MB
-  - name: data3
-    size: 20MB
 outputs:
   - name: result
     source: D.result
@@ -20,20 +16,18 @@ tasks:
       - name: input
         source: data1
     outputs:
-      - name: result
-        size: 10MB
+      - name: result1
+        size: 1000MB
     requirements:
-      cpu: 4
-      memory: 4GB
+      cpu: 1
+      memory: 1GB
     size: 500GF
   - name: B
     inputs:
-      - name: input1
+      - name: result1
         source: data2
-      - name: input2
-        source: A.result
     outputs:
-      - name: result
+      - name: result2
         size: 5MB
     requirements:
       cpu: 1
@@ -41,12 +35,10 @@ tasks:
     size: 200GF
   - name: C
     inputs:
-      - name: input1
+      - name: result1
         source: data3
-      - name: input2
-        source: A.result
     outputs:
-      - name: result
+      - name: result3
         size: 1MB
     requirements:
       cpu: 2
@@ -54,9 +46,9 @@ tasks:
     size: 300GF
   - name: D
     inputs:
-      - name: input1
+      - name: result3
         source: B.result
-      - name: input2
+      - name: result2
         source: C.result
     outputs:
       - name: result

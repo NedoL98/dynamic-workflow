@@ -28,14 +28,14 @@ int Manager::TryAddFile(const YAML::Node& description) {
         XBT_DEBUG("File size will be set to 0");
         insertionResult = Files.insert({name, FileDescription(name, 0)}).first;
     }
-    FileIdMapping.insert({insertionResult->second.Id, insertionResult->second});
+    FileIdMapping.insert({insertionResult->second.Id, &insertionResult->second});
     return insertionResult->second.Id;
 }
 
 const FileDescription& Manager::GetFileById(int id) const {
     auto result = FileIdMapping.find(id);
     xbt_assert(result != FileIdMapping.end(), "no file with such id");
-    return result->second;
+    return *result->second;
 }
 
 const FileDescription& Manager::GetFileByName(const string& s) const {
@@ -53,11 +53,11 @@ void Manager::RegisterTaskFiles(int taskId) {
 }
 
 void Manager::SetAuthor(int fileId, int taskId) {
-    FileIdMapping.find(fileId)->second.Author = taskId;
+    FileIdMapping.find(fileId)->second->Author = taskId;
 }
 
 void Manager::SetReceiver(int fileId, int taskId) {
-    FileIdMapping.find(fileId)->second.Receiver = taskId;
+    FileIdMapping.find(fileId)->second->Receiver = taskId;
 }
 
 void Manager::SetInputs(const vector<int>& data) {
@@ -73,26 +73,30 @@ void Manager::FinishTask(int taskId) {
     auto task = Owner->GetTask(taskId);
     for (int file : task.GetOutputs()) {
         auto fileDesc = FileIdMapping.find(file)->second;
-        int receiver = fileDesc.Receiver;
+        int receiver = fileDesc->Receiver;
+        if (fileDesc->Author == -1) {
+            FileIdMapping.find(file)->second->State = EFileState::DONE;
+        }
         if (receiver != -1) {
-            if (TaskToHost.count(receiver) && fileDesc.State == EFileState::NOT_STARTED) {
-                FileIdMapping.find(file)->second.State = EFileState::READY;
-                ReadyFiles.insert(FileIdMapping.find(file)->second);
+            if (TaskToHost.count(receiver) && fileDesc->State == EFileState::NOT_STARTED) {
+                fileDesc->State = EFileState::READY;
+                ReadyFiles.insert(*fileDesc);
             }
         } 
-        if (WorkflowOutputs.count(fileDesc.Id)) {
+        if (WorkflowOutputs.count(fileDesc->Id)) {
             OutputProduced++;
         }
     }
 }
 
 FileDescription::FileIterator Manager::GetReadyFilesIterator() const {
+    XBT_INFO("%d files", ReadyFiles.size());
     return FileDescription::FileIterator(ReadyFiles.begin(), ReadyFiles.end());
 }
 
 void Manager::StartTransfer(const FileDescription& description) {
     ReadyFiles.erase(description);
-    FileIdMapping.find(description.Id)->second.State = EFileState::TRANSFERING;
+    FileIdMapping.find(description.Id)->second->State = EFileState::TRANSFERING;
 }
 void Manager::FinishTransfer(const FileDescription& description) {
 }
@@ -103,10 +107,10 @@ void Manager::AssignTask(int taskId, int hostId) {
     auto task = Owner->GetTask(taskId);
     for (int file : task.GetInputs()) {
         auto fileDesc = FileIdMapping.find(file)->second;
-        int sender = fileDesc.Author;
-        if (sender != -1 && Owner->GetTask(sender).GetState() == EState::DONE && fileDesc.State == EFileState::NOT_STARTED) {
-            FileIdMapping.find(file)->second.State = EFileState::READY;
-            ReadyFiles.insert(FileIdMapping.find(file)->second);
+        int sender = fileDesc->Author;
+        if (sender != -1 && Owner->GetTask(sender).GetState() == EState::DONE && fileDesc->State == EFileState::NOT_STARTED) {
+            fileDesc->State = EFileState::READY;
+            ReadyFiles.insert(*fileDesc);
         }
     }
 }

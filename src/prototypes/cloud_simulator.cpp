@@ -45,9 +45,15 @@ void CloudSimulator::CheckReadyFiles() {
     auto iterator = TaskGraph->GetReadyFilesIterator();
     while (iterator) {
         auto file = *iterator;
-        XBT_INFO("File %s is ready",  file.Name.c_str());
+        XBT_INFO("File %s is ready", file.Name.c_str());
         iterator++;
-        TaskGraph->StartTransfer(file);
+        int hostSender = Assignments.GetHostByTask(file.Author);
+        int hostReceiver = Assignments.GetHostByTask(file.Receiver);
+        XBT_INFO("File sender: %d on host %d, receiver: %d on host %d", file.Author, hostSender, file.Receiver, hostReceiver);
+
+        TransferSpec spec({file.Size, hostSender, hostReceiver, file.Id});
+        Platform->StartTransfer(spec);
+        TaskGraph->StartTransfer(file.Id);
     }
 }
 
@@ -64,7 +70,6 @@ void CloudSimulator::DoRefreshAfterTask(int taskId) {
     XBT_DEBUG("Task %d finished executing!", taskId);
 }
 void CloudSimulator::DoMainLoop() {
-    
     XBT_INFO("MainLoop begins");
     CheckReadyJobs();
     XBT_INFO("%d vms, %d actors", Platform->GetVMIds().size(), Actors.size());
@@ -74,6 +79,22 @@ void CloudSimulator::DoMainLoop() {
     xbt_assert(TaskGraph->IsFinished(), "All actors finished their work, but not all tasks done");
     
     XBT_INFO("MainLoop ends");
+    delete (CloudPlatform*)Platform;
+}
+
+void CloudSimulator::DoRefreshAfterTransfer(TransferSpec* spec) {
+    if (!spec) {
+        XBT_WARN("Something went wrong!");
+    }
+    if (Transfers.count(spec)) {
+        Transfers.erase(spec);
+        TaskGraph->FinishTransfer(spec->FileId);
+        delete spec;
+    } else if (spec->Sender == spec->Receiver) {
+        TaskGraph->FinishTransfer(spec->FileId);
+    } else {
+        Transfers.insert(spec);
+    }
 }
 
 void CloudSimulator::Run(double timeout) {

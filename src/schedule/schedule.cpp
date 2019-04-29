@@ -92,7 +92,6 @@ ScheduleItem Schedule::GetItem(int host) {
 
 ScheduleItem Schedule::PopItem(int host) {
     int taskId = GetItem(host).GetTaskId();
-    TaskIdToHostId.erase(taskId);
     return TimeTable[host].PopItem();
 }
 

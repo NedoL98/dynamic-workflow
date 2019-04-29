@@ -39,5 +39,8 @@ struct FileDescription {
     bool operator<(const FileDescription& other) const {
         return Id < other.Id;
     }
+    bool operator=(const FileDescription& other) const {
+        return Id == other.Id;
+    }
 };
 

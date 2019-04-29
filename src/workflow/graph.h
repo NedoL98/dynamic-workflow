@@ -50,8 +50,8 @@ namespace Workflow {
 
         virtual bool IsFinished() const override;
         virtual void FinishTask(int id) override; 
-        virtual void StartTransfer(const FileDescription& d) override;
-        virtual void FinishTransfer(const FileDescription& d) override; 
+        virtual void StartTransfer(int fileId) override;
+        virtual void FinishTransfer(int fileId) override; 
         virtual void AssignTask(int TaskId, int hostId) override;
     };
 }

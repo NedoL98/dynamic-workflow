@@ -150,11 +150,12 @@ namespace Workflow {
         }
     }
     
-    void Graph::StartTransfer(const FileDescription& description) {
-        FileManager.StartTransfer(description);
+    void Graph::StartTransfer(int fileId) {
+        FileManager.StartTransfer(FileManager.GetFileById(fileId));
     }
 
-    void Graph::FinishTransfer(const FileDescription& description) {
+    void Graph::FinishTransfer(int fileId) {
+        auto description = FileManager.GetFileById(fileId);
         FileManager.FinishTransfer(description);
         Nodes[description.Receiver]->IncFinishedTransfers();
     }

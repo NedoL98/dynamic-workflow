@@ -1,6 +1,7 @@
 #include "platform/cloud_platform.h"
 #include <simgrid/s4u.hpp>
 #include "spec.h"
+#include <vector>
 
 XBT_LOG_NEW_DEFAULT_CATEGORY(platform_cloud_platform, "cloud platform log");
 
@@ -19,8 +20,71 @@ namespace {
         onExit(0, arg);
         simgrid::s4u::this_actor::exit();
     }
+
+    void DoTransfer(int i, const std::function<void(TransferSpec*)>& onTransferSuccess) {
+        XBT_INFO("Transfer action started");
+        auto coordinator = simgrid::s4u::Mailbox::by_name("coordinate_" + std::to_string(i));
+        bool isKilled = false;
+        TransferSpec* buffer = nullptr;
+        void *dataBuffer = nullptr;
+        std::vector<simgrid::s4u::CommPtr> activeTransfers;
+        std::map<simgrid::s4u::CommPtr, TransferSpec*> transferBuffers;
+        while (!isKilled) {
+            int finishedTransfer = 0;
+            while ((finishedTransfer = simgrid::s4u::Comm::test_any(&activeTransfers)) != -1) {
+                XBT_INFO("Downloading is finished on host %d", i);
+                auto finishedSpec = transferBuffers[activeTransfers[finishedTransfer]];
+                onTransferSuccess(finishedSpec);
+                std::swap(activeTransfers[finishedTransfer], activeTransfers.back());
+                activeTransfers.pop_back();
+            }
+
+            try {
+                buffer = nullptr;
+                buffer = (TransferSpec*)coordinator->get(1);
+            } catch (...) {
+            }
+            if (!buffer) { // exit by timeout
+                continue;
+            } else if (buffer->Receiver == -1) { // Terminating messages
+                isKilled = true;
+                XBT_INFO("Transfer manager %d is killed", i);
+            } else if (buffer->Sender == buffer->Receiver) { // File is already where it should be
+                onTransferSuccess(buffer);
+                coordinator->put(buffer, 0);
+            } else if (buffer->Receiver == i) { // We are receiving file
+                XBT_INFO("Downloading is started on host %d", i);
+                std::string name = "transfer_" + std::to_string(buffer->Receiver);
+                auto sender = simgrid::s4u::Mailbox::by_name(name);
+                activeTransfers.push_back(sender->get_init());
+                transferBuffers[activeTransfers.back()] = nullptr;
+                activeTransfers.back()->set_dst_data((void**)&transferBuffers[activeTransfers.back()], sizeof(transferBuffers[activeTransfers.back()]));
+                activeTransfers.back()->start();
+                coordinator->put(&sender, 0);
+            } else { // We are sending file
+                std::string name = "transfer_" + std::to_string(buffer->Receiver);
+                auto receiver = simgrid::s4u::Mailbox::by_name(name);
+                TransferSpec* bufferSpec = new TransferSpec(*buffer);
+                activeTransfers.push_back(receiver->put_init(bufferSpec, buffer->Size));
+                transferBuffers[activeTransfers.back()] = bufferSpec;
+                activeTransfers.back()->start();
+                coordinator->put(&receiver, 0);
+            }
+        }
+        for (const auto& comm : activeTransfers) {
+            comm->wait();
+        }
+    }
 }
 
+CloudPlatform::~CloudPlatform() {
+    for (const auto& [id, ptr] : VirtualMachines) {
+        auto senderMailbox = simgrid::s4u::Mailbox::by_name("coordinate_" + std::to_string(id));
+        TransferSpec spec({-1, -1, -1, -1});
+        senderMailbox->put((void*)&spec, 0);
+    }
+}
+        
 bool CloudPlatform::CreateVM(int hostId, const VMDescription& s, int id) {
     if (VirtualMachines.count(id)) {
         return false;
@@ -30,6 +94,10 @@ bool CloudPlatform::CreateVM(int hostId, const VMDescription& s, int id) {
     }
     VirtualMachines[id] = HostsList[hostId].VirtualMachines[id];
     VirtualMachineSpecs[id] = s.GetSpec();
+    auto mailer = simgrid::s4u::Actor::create("transfer_" + std::to_string(id),
+                                            VirtualMachines[id],
+                                            DoTransfer, id, OnTransferFinish);
+    Mailers.push_back(mailer);
     return true;
 }
 
@@ -91,3 +159,24 @@ void CloudPlatform::FinishTask(int vmId, const TaskSpec& requirements) {
     VirtualMachineSpecs[vmId].Cores += requirements.GetCores();
     VirtualMachineSpecs[vmId].Memory += requirements.GetMemory();
 }
+
+void CloudPlatform::StartTransfer(const TransferSpec& file) {
+    XBT_INFO("transferSpec: %d %d %lld", file.Sender, file.Receiver, file.Size);
+    auto senderMailbox = simgrid::s4u::Mailbox::by_name("coordinate_" + std::to_string(file.Sender));
+    auto receiverMailbox = simgrid::s4u::Mailbox::by_name("coordinate_" + std::to_string(file.Receiver));
+    void *reply = this;
+    if (file.Sender == file.Receiver) {
+        simgrid::s4u::CommPtr senderMessage = senderMailbox->put_async((void*)&file, 0);
+        senderMessage->wait();
+        reply = senderMailbox->get();
+    } else {
+        simgrid::s4u::CommPtr senderMessage = senderMailbox->put_async((void*)&file, 0);
+        simgrid::s4u::CommPtr receiverMessage = receiverMailbox->put_async((void*)&file, 0);
+        senderMessage->wait();
+        receiverMessage->wait();
+        reply = senderMailbox->get();
+        reply = receiverMailbox->get();
+    }
+    (void)reply;
+}
+

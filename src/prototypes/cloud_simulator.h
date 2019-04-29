@@ -6,15 +6,18 @@
 #include "schedule/schedule_action.h"
 #include "workflow/graph.h"
 #include "vm_list.h"
+#include "prototypes/simulator.h"
+
 #include <vector>
 #include <map>
 #include <string>
 #include <memory>
-#include "prototypes/simulator.h"
+#include <functional>
 
 class CloudSimulator : public AbstractSimulator {
     VMList AvailableVMs;
     std::vector<simgrid::s4u::ActorPtr> Actors;
+    std::set<TransferSpec*> Transfers;
 
     struct CollbackData {
         CloudSimulator* Simulator;
@@ -25,6 +28,7 @@ class CloudSimulator : public AbstractSimulator {
     void DoMainLoop();
     static int RefreshAfterTask(int, void* s);
     void DoRefreshAfterTask(int taskId);
+    void DoRefreshAfterTransfer(TransferSpec* spec);
     void CheckReadyJobs();
     void CheckReadyFiles();
 
@@ -36,7 +40,7 @@ public:
                    cxxopts::ParseResult& parseResult)
         : AbstractSimulator(scheduler,
                             new Workflow::Graph(workflowConf, parseResult),
-                            new CloudPlatform(platformConf, VMList(VMListConf)))
+                            new CloudPlatform(platformConf, VMList(VMListConf), std::bind(&CloudSimulator::DoRefreshAfterTransfer, this, std::placeholders::_1)))
         , AvailableVMs(VMListConf)
         {}
     

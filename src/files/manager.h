@@ -11,7 +11,7 @@ class Manager {
     std::map<int, std::set<int>> TaskDependencies;
     std::map<int, int> TaskToHost;
     std::map<std::string, FileDescription> Files;
-    std::map<int, FileDescription> FileIdMapping;
+    std::map<int, FileDescription*> FileIdMapping;
     std::set<int> WorkflowOutputs, WorkflowInputs;
     std::set<FileDescription> ReadyFiles;
     int OutputProduced;

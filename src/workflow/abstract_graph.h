@@ -33,8 +33,8 @@ namespace Workflow {
 
         virtual bool IsFinished() const = 0;
         virtual void FinishTask(int id) = 0; 
-        virtual void StartTransfer(const FileDescription& d) = 0;
-        virtual void FinishTransfer(const FileDescription& d) = 0; 
+        virtual void StartTransfer(int fileId) = 0;
+        virtual void FinishTransfer(int fileId) = 0; 
         virtual void AssignTask(int TaskId, int hostId) = 0; 
     };
 }
