@@ -95,6 +95,21 @@ Assignment::Assignment(int n) {
     SchedulingString.resize(n);
 }
 
+GeneticScheduler::GeneticScheduler() {
+    RegisterCrossover({bind(&GeneticScheduler::GetSchedulingCrossover, this, _1, _2), SchedulingCrossoverProb});
+    RegisterCrossover({bind(&GeneticScheduler::GetMatchingCrossover, this, _1, _2), MatchingCrossoverProb});
+    RegisterMutation({bind(&GeneticScheduler::MakeSchedulingMutation, this, _1), SchedulingMutationProb});
+    RegisterMutation({bind(&GeneticScheduler::MakeMatchingMutation, this, _1), MatchingMutationProb});
+}
+
+void GeneticScheduler::RegisterMutation(Mutation mutation) {
+    Mutations.push_back(std::move(mutation));
+}
+
+void GeneticScheduler::RegisterCrossover(Crossover crossover) {
+    Crossovers.push_back(std::move(crossover));
+}
+
 vector<Assignment> GeneticScheduler::GetInitialAssignments(int numAssignments) const {
     vector<View::Task> tasksOrder = viewer->MakeTasksOrder();
     vector<Assignment> initialAssignments;
@@ -279,14 +294,6 @@ Assignment GeneticScheduler::GetSchedulingCrossover(const Assignment& mainParent
     return offspring;
 }
 
-void GeneticScheduler::MakeCrossover(Assignment& assignment1, 
-                                     Assignment& assignment2, 
-                                     function<Assignment(const Assignment&, const Assignment&)> crossover) const {
-    Assignment tmpAssignment = crossover(assignment1, assignment2);
-    assignment2 = crossover(assignment2, assignment1);
-    assignment1 = tmpAssignment;
-}
-
 void GeneticScheduler::MakeMatchingMutation(Assignment& assignment) const {
     int taskId = rand() % viewer->WorkflowSize();
 
@@ -332,6 +339,19 @@ void GeneticScheduler::MakeSchedulingMutation(Assignment& assignment) const {
     assignment.SchedulingString.insert(assignment.SchedulingString.begin() + newTaskPosition, mutationTaskId);
 }
 
+void GeneticScheduler::MakeCrossover(function<Assignment(const Assignment&, const Assignment&)> crossover,
+                                     Assignment& assignment1, 
+                                     Assignment& assignment2) const {
+    Assignment tmpAssignment = crossover(assignment1, assignment2);
+    assignment2 = crossover(assignment2, assignment1);
+    assignment1 = tmpAssignment;
+}
+
+void GeneticScheduler::MakeMutation(function<void(Assignment&)> mutation,
+                                    Assignment& assignment) const {
+    mutation(assignment);
+}
+
 vector<Assignment> GeneticScheduler::GetBestChromosomes(const vector<Assignment>& generation) const {
     vector<Assignment> result(BestChromosomesNumber);
     std::partial_sort_copy(generation.begin(), generation.end(), result.begin(), result.end(), [](const Assignment& a, const Assignment& b) {
@@ -339,6 +359,21 @@ vector<Assignment> GeneticScheduler::GetBestChromosomes(const vector<Assignment>
         return a.FitnessScore < b.FitnessScore;
     });
     return result;
+}
+
+void GeneticScheduler::DoModifyGeneration(vector<Assignment>& generation) const {
+    for (const Crossover& crossover: Crossovers) {
+        int pairsCount = generation.size() * (generation.size() - 1) / 2;
+        for (int i = 0; i < pairsCount * crossover.CrossoverProb; ++i) {
+            MakeCrossover(crossover.CrossoverFunc, generation[rand() % generation.size()], generation[rand() % generation.size()]);
+        }
+    }
+
+    for (const Mutation& mutation: Mutations) {
+        for (int i = 0; i < generation.size() * mutation.MutationProb; ++i) {
+            MakeMutation(mutation.MutationFunc, generation[rand() % generation.size()]);
+        }
+    }
 }
 
 vector<Assignment> GeneticScheduler::GetNewGeneration(const vector<Assignment>& oldGeneration) const {
@@ -357,24 +392,7 @@ vector<Assignment> GeneticScheduler::GetNewGeneration(const vector<Assignment>& 
         newGeneration.push_back(oldGeneration[assignmentId]);
     }
 
-    int pairsCount = newGeneration.size() * (newGeneration.size() - 1) / 2;
-    for (int i = 0; i < pairsCount * MatchingCrossoverProb; ++i) {
-        MakeCrossover(newGeneration[rand() % newGeneration.size()], 
-                      newGeneration[rand() % newGeneration.size()], 
-                      bind(&GeneticScheduler::GetMatchingCrossover, *this, _1, _2));
-    }
-    for (int i = 0; i < pairsCount * SchedulingCrossoverProb; ++i) {
-        MakeCrossover(newGeneration[rand() % newGeneration.size()], 
-                      newGeneration[rand() % newGeneration.size()], 
-                      bind(&GeneticScheduler::GetSchedulingCrossover, *this, _1, _2));
-    }   
-
-    for (size_t i = 0; i < newGeneration.size() * MatchingMutationProb; ++i) {
-        MakeMatchingMutation(newGeneration[rand() % newGeneration.size()]);
-    }
-    for (size_t i = 0; i < newGeneration.size() * SchedulingMutationProb; ++i) {
-        MakeSchedulingMutation(newGeneration[rand() % newGeneration.size()]);
-    }
+    DoModifyGeneration(newGeneration);
 
     vector<Assignment> bestOldAssignments = GetBestChromosomes(oldGeneration); 
     newGeneration.insert(newGeneration.end(), bestOldAssignments.begin(), bestOldAssignments.end());
