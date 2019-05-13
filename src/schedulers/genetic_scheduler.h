@@ -77,7 +77,7 @@ private:
     std::vector<Crossover> Crossovers;
     static constexpr int InitFastestAssignmentsNum = 5;
     static constexpr int GenerationSize = 50;
-    static constexpr int StepsNumber = 10;
+    static constexpr int StepsNumber = 10 * 1000;
     static constexpr int ConstantScoreStepsNumber = 300;
 
     static constexpr int BestChromosomesNumber = 5;
