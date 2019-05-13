@@ -9,6 +9,8 @@ class SchedulerFactory {
 private:
     SchedulerFactory();
     std::map<std::string, std::function<AbstractScheduler*()>> FactoryMap;
+    static const std::string DefaultScheduler; 
+
 public:
     SchedulerFactory(const SchedulerFactory&) = delete;
     SchedulerFactory& operator = (const SchedulerFactory&) = delete;
