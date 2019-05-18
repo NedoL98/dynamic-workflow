@@ -17,7 +17,7 @@ using std::vector;
 XBT_LOG_NEW_DEFAULT_CATEGORY(mao_scheduler, "Mao scheduler log");
 
 MaoScheduler::Actions MaoScheduler::PrepareForRun(View::Viewer& v) {
-    viewer = std::make_shared<View::Viewer>(v);
+    viewer.reset(&v);
 
     vector<VMDescription> taskVM = GetCheapestVMs();
 
@@ -169,7 +169,7 @@ vector<double> MaoScheduler::CalculateTasksEndTimes(const vector<View::Task>& ta
 
     for (const View::Task& task: taskOrder) {
         double earliestBegin = 0;
-
+;
         for (int dependencyId : task.GetDependencies()) {
             xbt_assert(tasksEndTimes[dependencyId] != -1, "Something went wrong, task order is inconsistent!");
             earliestBegin = max(earliestBegin, tasksEndTimes[dependencyId]);

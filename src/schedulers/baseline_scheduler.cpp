@@ -8,7 +8,7 @@ using std::vector;
 XBT_LOG_NEW_DEFAULT_CATEGORY(baseline_scheduler, "Baseline scheduler log");
 
 BaselineScheduler::Actions BaselineScheduler::PrepareForRun(View::Viewer& v) {
-    viewer = std::make_shared<View::Viewer>(v);
+    viewer.reset(&v);
 
     return MakeSchedule();
 }

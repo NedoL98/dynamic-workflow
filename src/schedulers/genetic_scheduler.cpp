@@ -18,7 +18,7 @@ using std::vector;
 XBT_LOG_NEW_DEFAULT_CATEGORY(genetic_scheduler, "Genetic scheduler log");
 
 GeneticScheduler::Actions GeneticScheduler::PrepareForRun(View::Viewer& v) {
-    viewer = std::make_shared<View::Viewer>(v);
+    viewer.reset(&v);
 
     for (VMDescription vmDecr: v.GetVMList()) {
         for (size_t i = 0; i < v.WorkflowSize(); ++i) {

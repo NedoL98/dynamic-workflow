@@ -14,6 +14,8 @@ namespace View {
 
     public:
         Viewer(const CloudSimulator& s);
+
+        Viewer(const Viewer& viewer) = delete;
         
         const Task& GetTaskByName(const std::string& s) const;
         const Task& GetTaskById(int id) const;
