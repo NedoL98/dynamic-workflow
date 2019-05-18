@@ -29,6 +29,7 @@ namespace {
         void *dataBuffer = nullptr;
         std::vector<simgrid::s4u::CommPtr> activeTransfers;
         std::map<simgrid::s4u::CommPtr, TransferSpec*> transferBuffers;
+        simgrid::s4u::CommPtr incoming = nullptr;
         while (!isKilled) {
             int finishedTransfer = 0;
             while ((finishedTransfer = simgrid::s4u::Comm::test_any(&activeTransfers)) != -1) {
@@ -39,13 +40,16 @@ namespace {
                 activeTransfers.pop_back();
             }
 
-            buffer = nullptr;
-            if (!coordinator->empty()) {
-                buffer = (TransferSpec *)coordinator->get();
-            } else {
-                simgrid::s4u::this_actor::sleep_for(1);
+            if (!incoming) {
+                incoming = coordinator->get_init();
+                buffer = nullptr;
+                incoming->set_dst_data((void**)&buffer, sizeof(buffer));
+                incoming->start();
             }
-            if (!buffer) { // exit by timeout
+            activeTransfers.push_back(incoming);
+            simgrid::s4u::Comm::wait_any(&activeTransfers);
+            activeTransfers.pop_back();
+            if (!incoming->test()) {
                 continue;
             } else if (buffer->Receiver == -1) { // Terminating messages
                 isKilled = true;
@@ -71,6 +75,7 @@ namespace {
                 activeTransfers.back()->start();
                 coordinator->put(&receiver, 0);
             }
+            incoming = nullptr;
         }
         for (const auto& comm : activeTransfers) {
             comm->wait();
