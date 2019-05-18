@@ -65,8 +65,8 @@ string GeneratePlatform(const string& workflowPath, const string& vmListPath) {
                std::to_string(hostCnt).c_str(), 
                hostSpeeds.c_str(),
                std::to_string(maxCoresCnt).c_str(), 
-               "100", 
-               "1", 
+               "1000", 
+               "0", 
                nullptr);
     }
 
@@ -75,8 +75,8 @@ string GeneratePlatform(const string& workflowPath, const string& vmListPath) {
     platformPathBuilder << string(PROJECT_PATH) + "/resources/cluster"
                         << "_" << std::to_string(hostCnt)
                         << "_" << std::to_string(maxCoresCnt)
-                        << "_" << std::to_string(100)
-                        << "_" << std::to_string(1)
+                        << "_" << std::to_string(1000)
+                        << "_" << std::to_string(0)
                         << "_0.xml";
     return platformPathBuilder.str(); 
 }

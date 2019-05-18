@@ -17,7 +17,7 @@ using std::vector;
 XBT_LOG_NEW_DEFAULT_CATEGORY(mao_scheduler, "Mao scheduler log");
 
 MaoScheduler::Actions MaoScheduler::PrepareForRun(View::Viewer& v) {
-    viewer = std::make_shared<View::Viewer>(v);
+    viewer.reset(&v);
 
     vector<VMDescription> taskVM = GetCheapestVMs();
 
