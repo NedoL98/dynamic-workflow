@@ -169,7 +169,7 @@ vector<double> MaoScheduler::CalculateTasksEndTimes(const vector<View::Task>& ta
 
     for (const View::Task& task: taskOrder) {
         double earliestBegin = 0;
-;
+
         for (int dependencyId : task.GetDependencies()) {
             xbt_assert(tasksEndTimes[dependencyId] != -1, "Something went wrong, task order is inconsistent!");
             earliestBegin = max(earliestBegin, tasksEndTimes[dependencyId]);
