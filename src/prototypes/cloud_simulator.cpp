@@ -26,6 +26,7 @@ void CloudSimulator::DoRefreshAfterTransfer(TransferSpec* spec) {
     if (Transfers.count(spec)) {
         Transfers.erase(spec);
         TaskGraph->FinishTransfer(*spec);
+        Scheduler->OnTransferFinished(GenerateEvent<TransferFinishedEvent>(EventStatus::Succeed, spec->FileId, spec->Sender, spec->Receiver));
         CheckReadyJobOnVM(spec->Receiver);
         delete spec;
     } else if (spec->Sender == spec->Receiver) {
@@ -61,6 +62,7 @@ void CloudSimulator::CheckReadyFiles() {
 
             TransferSpec spec({file->Size, hostSender, hostReceiver, receiver, file->Id});
             Platform->StartTransfer(spec);
+            Scheduler->OnTransferStarted(GenerateEvent<TransferStartedEvent>(EventStatus::Succeed, file->Id, hostSender, hostReceiver));
         }
         TaskGraph->StartTransfer(file->Id);
     }
@@ -81,12 +83,14 @@ void CloudSimulator::CheckReadyJobOnVM(int vm) {
         data->Simulator = this;
         data->TaskId = taskId;
         Actors.push_back(Platform->AssignTask(vm, TaskGraph->GetTask(taskId).GetTaskSpec(), RefreshAfterTask, data));
+        Scheduler->OnTaskStarted(GenerateEvent<TaskStartedEvent>(EventStatus::Succeed, taskId, vm));
         XBT_DEBUG("Task %d started executing!", taskId);
     }
 }
 
-void CloudSimulator::DoRefreshAfterTask(int taskId) {
+void CloudSimulator::DoRefreshAfterTask(int taskId) { // call on each task finishing
     int hostId = Assignments.GetHostByTask(taskId);
+    Scheduler->OnTaskComplete(GenerateEvent<TaskFinishedEvent>(EventStatus::Succeed, taskId, hostId));
     TaskGraph->FinishTask(taskId);
     Platform->FinishTask(hostId, TaskGraph->GetTask(taskId).GetTaskSpec());
     if (Assignments.GetItem(hostId).GetTaskId() == taskId) {

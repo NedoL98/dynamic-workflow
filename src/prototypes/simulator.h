@@ -10,19 +10,32 @@
 #include <map>
 #include <string>
 #include <memory>
+#include <fstream>
 
 class AbstractSimulator : public SimulatorInterface {
 protected:
+    std::ofstream log;
+    simgrid::s4u::MutexPtr logMutex;
     AbstractScheduler* Scheduler;
     Workflow::AbstractGraph* TaskGraph;
     Schedule Assignments;
     AbstractPlatform* Platform;
     AbstractSimulator(AbstractScheduler* s, Workflow::AbstractGraph* g, AbstractPlatform* p)
-        : Scheduler(s)
+        : log("event.log")
+        , logMutex(simgrid::s4u::Mutex::create())
+        , Scheduler(s)
         , TaskGraph(g)
         , Assignments()
         , Platform(p)
     {
+    }
+    template <typename T, typename... Args>
+    std::shared_ptr<T> GenerateEvent(EventStatus status, Args&... args) {
+        auto ret = std::make_shared<T>(T(status, args...));
+        logMutex->lock();
+        ret->Dump(log);
+        logMutex->unlock();
+        return ret;
     }
 
 public:
@@ -31,17 +44,11 @@ public:
     }
     
     void ProcessAction(std::shared_ptr<AbstractAction> a) {
+
         a->MakeAction(*this);
+        Scheduler->OnActionComplete(GenerateEvent<ActionCompletedEvent>(EventStatus::Succeed, a));
     }
     
-    virtual void SendEvent(AbstractEvent *event) {
-        if ((TaskFinishedEvent *)event) {
-            Scheduler->OnTaskComplete(*(TaskFinishedEvent *)event);
-        } else if ((ActionCompletedEvent *)event) {
-            Scheduler->OnActionComplete(*(ActionCompletedEvent *)event);
-        }
-    }
-
     virtual void Run(double timeout) = 0;
 };
 

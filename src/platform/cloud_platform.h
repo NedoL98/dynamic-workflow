@@ -21,7 +21,7 @@ public:
                             , OnTransferFinish(onTransferFinish) {
     }
 
-    ~CloudPlatform();
+    virtual ~CloudPlatform();
 
     int GetEmptyHost(const ComputeSpec& s);
     bool CheckTask(int vmId, const TaskSpec& s);
