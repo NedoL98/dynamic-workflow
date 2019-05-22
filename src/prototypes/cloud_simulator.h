@@ -37,11 +37,13 @@ public:
     CloudSimulator(const std::string& platformConf, 
                    const std::string& workflowConf, 
                    const std::string& VMListConf,
+                   const std::string& logPath,
                    AbstractScheduler* scheduler,
                    cxxopts::ParseResult& parseResult)
         : AbstractSimulator(scheduler,
                             new Workflow::Graph(workflowConf, parseResult),
-                            new CloudPlatform(platformConf, VMList(VMListConf), std::bind(&CloudSimulator::DoRefreshAfterTransfer, this, std::placeholders::_1)))
+                            new CloudPlatform(platformConf, VMList(VMListConf), std::bind(&CloudSimulator::DoRefreshAfterTransfer, this, std::placeholders::_1)),
+                            logPath)
         , AvailableVMs(VMListConf)
         {}
     

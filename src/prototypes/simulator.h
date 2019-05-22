@@ -20,8 +20,8 @@ protected:
     Workflow::AbstractGraph* TaskGraph;
     Schedule Assignments;
     AbstractPlatform* Platform;
-    AbstractSimulator(AbstractScheduler* s, Workflow::AbstractGraph* g, AbstractPlatform* p)
-        : log("event.log")
+    AbstractSimulator(AbstractScheduler* s, Workflow::AbstractGraph* g, AbstractPlatform* p, const std::string& logPath)
+        : log(logPath)
         , logMutex(simgrid::s4u::Mutex::create())
         , Scheduler(s)
         , TaskGraph(g)

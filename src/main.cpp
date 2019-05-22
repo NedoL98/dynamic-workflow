@@ -44,6 +44,7 @@ int main(int argc, char* argv[]) {
     CloudSimulator cloudSim(platformPath,
                             parseResult["workflow"].as<string>(),
                             parseResult["vm_list"].as<string>(),
+                            parseResult["log"].as<string>(),
                             scheduler,
                             parseResult);
 
