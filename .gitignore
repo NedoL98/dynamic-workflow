@@ -49,3 +49,6 @@ Makefile
 
 #yml swap files
 *.yml.swp
+
+#platform files
+resources/cluster_*
