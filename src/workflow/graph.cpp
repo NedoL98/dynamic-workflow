@@ -25,6 +25,7 @@ namespace Workflow {
         } else {
             xbt_die("Task deadline is not specified in workflow file nor as a command line argument!");    
         }
+        xbt_assert(Deadline != 0, "Workflow deadline can not be equal to zero!");
         xbt_assert(tasksGraph["inputs"], "Tasks inputs are not specified!");
         for (const YAML::Node& inputDescription: tasksGraph["inputs"]) {
             Inputs.push_back(FileManager.TryAddFile(inputDescription));
