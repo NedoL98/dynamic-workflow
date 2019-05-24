@@ -107,6 +107,7 @@ double MaoScheduler::CalculateMakespan(const vector<VMDescription>& taskVM, cons
     double makespan = 0;
 
     vector<double> endTime(taskOrder.size(), -1);
+    double avgLag = static_cast<double>(viewer->GetVMList().GetMinLag() + viewer->GetVMList().GetMaxLag()) / 2;
 
     for (const View::Task& task: taskOrder) {
         double earliestBegin = 0;
@@ -114,6 +115,7 @@ double MaoScheduler::CalculateMakespan(const vector<VMDescription>& taskVM, cons
             xbt_assert(endTime[dependencyId] != -1, "Something went wrong, task order is inconsistent!");
             earliestBegin = max(earliestBegin, endTime[dependencyId]);
         }
+        earliestBegin += avgLag;
         endTime[task.GetId()] = earliestBegin + task.GetExecutionTime(taskVM[task.GetId()]);
         makespan = max(makespan, endTime[task.GetId()]);
     }
