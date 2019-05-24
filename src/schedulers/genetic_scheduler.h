@@ -80,6 +80,7 @@ private:
     static constexpr int StepsNumber = 10 * 1000;
     static constexpr int ConstantScoreStepsNumber = 300;
 
+    static constexpr int EpochStatisticsFrequency = 100;
     static constexpr int BestChromosomesNumber = 5;
     static constexpr double MatchingCrossoverProb = 0.5;
     static constexpr double SchedulingCrossoverProb = 0.5;

@@ -35,7 +35,7 @@ GeneticScheduler::Actions GeneticScheduler::PrepareForRun(View::Viewer& v) {
     for (int i = 0; i < StepsNumber; ++i) {
         assignments = GetNewGeneration(assignments);
         FillAssignmentValues(assignments);
-        if (i % 100 == 0) {
+        if (i % EpochStatisticsFrequency == 0) {
             PrintEpochStatistics(assignments, i);
         }
         double currentScore = GetCheapestAssignment(assignments);
@@ -47,6 +47,9 @@ GeneticScheduler::Actions GeneticScheduler::PrepareForRun(View::Viewer& v) {
         }
 
         if (constantScoreSteps == ConstantScoreStepsNumber) {
+            if (i % EpochStatisticsFrequency != 0) {
+                PrintEpochStatistics(assignments, i);
+            }
             break;
         }
     }
@@ -86,6 +89,8 @@ GeneticScheduler::Actions GeneticScheduler::PrepareForRun(View::Viewer& v) {
     XBT_INFO("Schedule created!");
     XBT_INFO("Makespan: %f", bestAssignment.Makespan.value());
     XBT_INFO("Cost: %f", bestAssignment.Cost.value());
+
+    assert(false);
 
     return actions;
 }
@@ -446,6 +451,8 @@ void GeneticScheduler::PrintEpochStatistics(vector<Assignment>& assignments, int
     double cheapestAssignment = -1;
     double fitnessBest = -1;
     double fitnessWorst = -1;
+    double bestTime = -1;
+
     for (Assignment& assignment: assignments) {
         fitnessAvg += assignment.FitnessScore.value();
         if ((cheapestAssignment == -1 || cheapestAssignment > assignment.Cost.value()) && assignment.Makespan <= viewer->GetDeadline()) {
@@ -457,6 +464,9 @@ void GeneticScheduler::PrintEpochStatistics(vector<Assignment>& assignments, int
         if (fitnessWorst == -1 || fitnessWorst < assignment.FitnessScore.value()) {
             fitnessWorst = assignment.FitnessScore.value();
         }
+        if (bestTime == -1 || bestTime > assignment.Makespan.value()) {
+            bestTime = assignment.Makespan.value();
+        }
     }
     fitnessAvg /= assignments.size();
     XBT_INFO("Epoch %d: ", epochInd);
@@ -464,6 +474,7 @@ void GeneticScheduler::PrintEpochStatistics(vector<Assignment>& assignments, int
     XBT_INFO("Fitness score best: %f", fitnessBest);
     XBT_INFO("Fitness score worst: %f", fitnessWorst);
     XBT_INFO("Cheapest assignment: %f", cheapestAssignment);
+    XBT_INFO("Best time: %f", bestTime);
 }
 
 void GeneticScheduler::DoRefineAssignment(Assignment& assignment) const {
