@@ -150,8 +150,12 @@ vector<Assignment> GeneticScheduler::GetInitialAssignments(int numAssignments) c
                 }
             }
             xbt_assert(!suitableVMs.empty(), "No suitable VM found for task %s", viewer->GetTaskById(taskId).GetName().c_str());
-            int randomVMId = rand() % suitableVMs.size();
-            initialAssignments[i].MatchingString[taskId] = suitableVMs[randomVMId];
+            if (i >= InitFastestAssignmentsNum) {
+                int randomVMId = rand() % suitableVMs.size();
+                initialAssignments[i].MatchingString[taskId] = suitableVMs[randomVMId];
+            } else {
+                initialAssignments[i].MatchingString[taskId] = suitableVMs[taskId % suitableVMs.size()];
+            }
 
             if (i >= InitFastestAssignmentsNum) {
                 initialAssignments[i].KeepVMStandbyString[taskId] = rand() % 2;
