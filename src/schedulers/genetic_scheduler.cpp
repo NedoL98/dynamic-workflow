@@ -1,7 +1,10 @@
 #include "genetic_scheduler.h"
 
+#include <numeric>
+
 using namespace std::placeholders;
 
+using std::accumulate;
 using std::bind;
 using std::function;
 using std::max;
@@ -90,7 +93,29 @@ GeneticScheduler::Actions GeneticScheduler::PrepareForRun(View::Viewer& v) {
     XBT_INFO("Makespan: %f", bestAssignment.Makespan.value());
     XBT_INFO("Cost: %f", bestAssignment.Cost.value());
 
-    assert(false);
+    vector<int> sortedVMIndices = bestAssignment.MatchingString;
+    sort(sortedVMIndices.begin(), sortedVMIndices.end());
+    
+    int vmTypeNumber = 0;
+    int vmTypeIndex = 0;
+    int nextVMIndex = v.WorkflowSize();
+    for (int vmIndex: sortedVMIndices) {
+        while (vmIndex >= nextVMIndex) {
+            XBT_INFO("Number of VMs with index %d is %d", vmTypeIndex, vmTypeNumber);
+            ++vmTypeIndex;
+            vmTypeNumber = 0;
+            nextVMIndex += v.WorkflowSize();
+        }
+        ++vmTypeNumber;
+    }
+    while (nextVMIndex <= static_cast<int>(v.WorkflowSize() * v.GetVMList().Size())) {
+        XBT_INFO("Number of VMs with index %d is %d", vmTypeIndex, vmTypeNumber);
+        ++vmTypeIndex;
+        vmTypeNumber = 0;
+        nextVMIndex += v.WorkflowSize();
+    }
+
+    XBT_INFO("Number of VMs kept on after processing a task: %d", accumulate(bestAssignment.KeepVMStandbyString.begin(), bestAssignment.KeepVMStandbyString.end(), 0));
 
     return actions;
 }
