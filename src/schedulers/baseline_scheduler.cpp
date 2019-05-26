@@ -74,7 +74,17 @@ BaselineScheduler::Actions BaselineScheduler::MakeSchedule() const {
     XBT_INFO("Schedule created!");
     XBT_INFO("Makespan: %f", makespan);
     XBT_INFO("Cost: %f", cost);
-    XBT_INFO("Using %d virtual machines", availableVMs.size());
+    XBT_INFO("Using %d unique VMs", availableVMs.size());
+
+    vector<int> tasksVmTypesNumber(viewer->GetVMList().Size());
+    for (int vmId = 0; vmId < static_cast<int>(availableVMs.size()); ++vmId) {
+        int vmType = availableVMs[vmId].VMDescr.GetId();
+        int queueSize = availableVMs[vmId].TasksQueue.size();
+        tasksVmTypesNumber[vmType] += queueSize;
+    }
+    for (int vmType = 0; vmType < static_cast<int>(viewer->GetVMList().Size()); ++vmType) {
+        XBT_INFO("Tasks executing of VMs of type %d is %d", vmType, tasksVmTypesNumber[vmType]);
+    }
 
     return MakeActions(availableVMs);
 }

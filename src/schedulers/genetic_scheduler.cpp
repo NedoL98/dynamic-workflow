@@ -93,6 +93,9 @@ GeneticScheduler::Actions GeneticScheduler::PrepareForRun(View::Viewer& v) {
     XBT_INFO("Makespan: %f", bestAssignment.Makespan.value());
     XBT_INFO("Cost: %f", bestAssignment.Cost.value());
 
+    set<int> uniqueVMs(bestAssignment.MatchingString.begin(), bestAssignment.MatchingString.end());
+    XBT_INFO("Using %d unique VMs", uniqueVMs.size());
+
     vector<int> sortedVMIndices = bestAssignment.MatchingString;
     sort(sortedVMIndices.begin(), sortedVMIndices.end());
     
@@ -101,7 +104,7 @@ GeneticScheduler::Actions GeneticScheduler::PrepareForRun(View::Viewer& v) {
     int nextVMIndex = v.WorkflowSize();
     for (int vmIndex: sortedVMIndices) {
         while (vmIndex >= nextVMIndex) {
-            XBT_INFO("Number of VMs with index %d is %d", vmTypeIndex, vmTypeNumber);
+            XBT_INFO("Tasks executing of VMs of type %d is %d", vmTypeIndex, vmTypeNumber);
             ++vmTypeIndex;
             vmTypeNumber = 0;
             nextVMIndex += v.WorkflowSize();
@@ -109,7 +112,7 @@ GeneticScheduler::Actions GeneticScheduler::PrepareForRun(View::Viewer& v) {
         ++vmTypeNumber;
     }
     while (nextVMIndex <= static_cast<int>(v.WorkflowSize() * v.GetVMList().Size())) {
-        XBT_INFO("Number of VMs with index %d is %d", vmTypeIndex, vmTypeNumber);
+        XBT_INFO("Tasks executing of VMs of type %d is %d", vmTypeIndex, vmTypeNumber);
         ++vmTypeIndex;
         vmTypeNumber = 0;
         nextVMIndex += v.WorkflowSize();
