@@ -4,7 +4,7 @@
 #include "schedule/schedule.h"
 #include <memory>
 #include <string>
-#include <iostream>
+#include <fstream>
 
 enum class EventStatus {
     Succeed,
@@ -41,7 +41,6 @@ namespace YAML {
         }
 
         static bool decode(const Node& node, EventType& t) {
-
             if (node.as<std::string>() == "task_started") {
                 t = EventType::TaskStarted;
             } else if (node.as<std::string>() == "task_finished") {
@@ -53,7 +52,7 @@ namespace YAML {
             } else if (node.as<std::string>() == "action_completed") {
                 t = EventType::ActionCompleted;
             } else {
-                return false;
+                return true;
             }
             return true;
         }
@@ -79,14 +78,14 @@ public:
         dumpResult["type"] = GetType();
         dumpResult["time"] = simgrid::s4u::Engine::get_clock();
         auto host = simgrid::s4u::this_actor::get_host();
+        YAML::Node hostInfo;
         if (host) {
-            YAML::Node hostInfo;
             hostInfo["name"] = host->get_cname();
             hostInfo["vm_cost"] = host->get_property("vm_cost");
-            dumpResult["host"] = hostInfo;
         } else {
-            dumpResult["host"] = "";
+            hostInfo["name"] = "NONE";
         }
+        dumpResult["host"] = hostInfo;
         dumpResult["event"] = DoDump();      
         stream << dumpResult << "\n" << "\n";
         stream.flush();
@@ -228,7 +227,7 @@ public:
         return EventType::ActionCompleted;
     }
     virtual YAML::Node DoDump() override {
-        YAML::Node dumpResult;
+        YAML::Node dumpResult("nothing");
         return dumpResult;
     }
 };

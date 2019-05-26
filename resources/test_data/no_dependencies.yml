@@ -1,0 +1,20 @@
+#   A
+name: SingleTask
+inputs:
+  - name: input
+    size: 100MB
+outputs:
+  - name: result
+    source: A.result
+tasks:
+  - name: A
+    inputs:
+      - name: input
+        source: data1
+    outputs:
+      - name: result
+        size: 1000MB
+    requirements:
+      cpu: 1
+      memory: 1GB
+    size: 500GF

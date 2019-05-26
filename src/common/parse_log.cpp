@@ -2,6 +2,7 @@
 #include "events/event.h"
 #include <map>
 #include <fstream>
+#include <iostream>
 #include <vector>
 
 using std::string;
@@ -21,10 +22,12 @@ RunSpec ParseLogFile(const string& filename) {
     map<string, double> firstMention, lastMention;
     map<string, double> costs;
     YAML::Node previousEvent;
+    previousEvent["time"] = 0;
     while (std::getline(log, currentString)) {
         string currentEvent;
         while (!currentString.empty()) {
             currentEvent += currentString;
+            currentEvent.push_back('\n');
             std::getline(log, currentString);
         }
         YAML::Node eventNode = YAML::Load(currentEvent);
@@ -38,8 +41,9 @@ RunSpec ParseLogFile(const string& filename) {
                 executingTime[name] += previousEvent["time"].as<double>();
             }
         }
-        if (eventNode["host"]) {
-            string currentName = eventNode["host"]["name"].as<string>();
+        string currentName = eventNode["host"]["name"].as<string>();
+
+        if (currentName != "NONE") {
             EventType type = eventNode["type"].as<EventType>();
             if (type == EventType::TaskStarted || type == EventType::TransferStarted) {
                 isActive[currentName] = true;

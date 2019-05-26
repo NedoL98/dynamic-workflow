@@ -4,6 +4,7 @@ Requirements:
 
 * [yaml-cpp](https://github.com/jbeder/yaml-cpp) version 1.1 or above.
 * [SimGrid](http://simgrid.gforge.inria.fr) version 3.2 or above.
+* GTest
 
 Project is using [cxxopts](https://github.com/jarro2783/cxxopts) library for parsing command-line parameters. There is no need to download the library, it is explicitly included in this project. 
 

@@ -16,7 +16,6 @@ set(SOURCE_LIST
     "src/argument_parser.cpp"
     "src/common/common.cpp"
     "src/common/parse_log.cpp"
-    "src/main.cpp"
     "src/platform_generator.cpp"
     "src/platform/host.cpp"
     "src/platform/platform.cpp"
@@ -44,12 +43,14 @@ set(SOURCE_LIST
 
 find_library(YAML_LIBRARY NAMES yaml-cpp)
 find_package(SimGrid 3.20 REQUIRED) # This template requires SimGrid v3.20
+find_package(GTest QUIET)
 
-include_directories(${SimGrid_INCLUDE_DIR} src)
+include_directories(${SimGrid_INCLUDE_DIR} ${GTEST_INCLUDE_DIRS} src)
 
 add_executable(
     dynamic-workflow
     ${SOURCE_LIST}
+    src/main.cpp
 )
 set_target_properties(
     dynamic-workflow
@@ -59,6 +60,7 @@ set_target_properties(
 add_executable(
     dynamic-workflow-debug
     ${SOURCE_LIST}
+    src/main.cpp
 )
 
 set_target_properties(
@@ -66,8 +68,20 @@ set_target_properties(
     PROPERTIES COMPILE_FLAGS ${DEBUG_FLAGS}
 )
 
+add_executable(
+    dynamic-workflow-test
+    src/common/parse_log.cpp
+    src/tests/simple.cpp
+)
+
+set_target_properties(
+    dynamic-workflow-test
+    PROPERTIES COMPILE_FLAGS ${DEBUG_FLAGS}
+)
+
 target_link_libraries(dynamic-workflow ${SimGrid_LIBRARY} ${YAML_LIBRARY})
 target_link_libraries(dynamic-workflow-debug ${SimGrid_LIBRARY} ${YAML_LIBRARY})
+target_link_libraries(dynamic-workflow-test  ${SimGrid_LIBRARY} ${YAML_LIBRARY} ${GTEST_LIBRARIES} -lpthread)
 #target_link_libraries(dynamic-workflow-fsanitize ${SimGrid_LIBRARY} ${YAML_LIBRARY})
 
 add_custom_target(
@@ -91,6 +105,15 @@ add_custom_target(
 )
 
 add_custom_target(
+    run_test
+    COMMAND make dynamic-workflow-test -j5
+    COMMAND dynamic-workflow-test
+)
+
+add_dependencies(run_example release)
+add_dependencies(run_test   debug)
+
+add_custom_target(
     parse_all_workflows
     COMMAND python3 ${CMAKE_SOURCE_DIR}/tools/xml_yaml_parser.py
     ${CMAKE_SOURCE_DIR}/resources/workflows
@@ -102,4 +125,5 @@ add_custom_target(
     ${CMAKE_SOURCE_DIR}/resources/workflows/montage_2_0.dax
     ${CMAKE_SOURCE_DIR}/resources/workflows/1000genome.dax
 )
+
 

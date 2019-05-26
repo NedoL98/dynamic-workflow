@@ -1,0 +1,10 @@
+vm_types:
+  - name: VM1
+    cpu: 1
+    memory: 4GB
+    speed: 10GF
+    price: 100
+    pstate_id: 0
+acquisition_lag:
+  min: 0
+  max: 0
