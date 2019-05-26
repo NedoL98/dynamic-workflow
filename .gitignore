@@ -52,3 +52,5 @@ Makefile
 
 #platform files
 resources/cluster_*
+
+event.log
