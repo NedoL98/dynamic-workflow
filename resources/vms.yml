@@ -9,13 +9,13 @@ vm_types:
     cpu: 2
     memory: 8GB
     speed: 20GF
-    price: 200
+    price: 205
     pstate_id: 1
   - name: VM3
     cpu: 4
     memory: 16GB
     speed: 40GF
-    price: 400
+    price: 410
     pstate_id: 2
 acquisition_lag:
   min: 0.5
