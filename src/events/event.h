@@ -1,5 +1,6 @@
 #pragma once
 #include <simgrid/s4u.hpp>
+#include "schedule/schedule_action.h"
 #include "schedule/schedule.h"
 #include <memory>
 #include <string>
@@ -18,22 +19,46 @@ enum class EventType {
     ActionCompleted
 };
 
-namespace {
-    std::string ToString(EventType t) {
-        if (t == EventType::TaskStarted) {
-            return "task_started";
-        } else if (t == EventType::TaskFinished) {
-            return "task_finished";
-        } else if (t == EventType::TransferStarted) {
-            return "transfer_started";
-        } else if (t == EventType::TransferFinished) {
-            return "transfer_finished";
-        } else if (t == EventType::ActionCompleted) {
-            return "action_completed";
+namespace YAML {
+    template<>
+    struct convert<EventType> {
+        static Node encode(const EventType& t) {
+            Node node;
+            if (t == EventType::TaskStarted) {
+                node = ("task_started");
+            } else if (t == EventType::TaskFinished) {
+                node = ("task_finished");
+            } else if (t == EventType::TransferStarted) {
+                node = ("transfer_started");
+            } else if (t == EventType::TransferFinished) {
+                node = ("transfer_finished");
+            } else if (t == EventType::ActionCompleted) {
+                node = ("action_completed");
+            } else {
+                node = ("unknown");
+            }
+            return node;
         }
-        return "unknown";
-    }
-};
+
+        static bool decode(const Node& node, EventType& t) {
+
+            if (node.as<std::string>() == "task_started") {
+                t = EventType::TaskStarted;
+            } else if (node.as<std::string>() == "task_finished") {
+                t = EventType::TaskFinished;
+            } else if (node.as<std::string>() == "transfer_started") {
+                t = EventType::TransferStarted;
+            } else if (node.as<std::string>() == "transfer_finished") {
+                t = EventType::TransferFinished;
+            } else if (node.as<std::string>() == "action_completed") {
+                t = EventType::ActionCompleted;
+            } else {
+                return false;
+            }
+            return true;
+        }
+    };
+}
 
 class AbstractEvent {
     EventStatus Status;
@@ -51,11 +76,14 @@ public:
     virtual EventType GetType() const = 0;
     void Dump(std::ostream& stream) {
         YAML::Node dumpResult;
-        dumpResult["type"] = ToString(GetType());
+        dumpResult["type"] = GetType();
         dumpResult["time"] = simgrid::s4u::Engine::get_clock();
         auto host = simgrid::s4u::this_actor::get_host();
         if (host) {
-            dumpResult["host"] = host->get_cname();
+            YAML::Node hostInfo;
+            hostInfo["name"] = host->get_cname();
+            hostInfo["vm_cost"] = host->get_property("vm_cost");
+            dumpResult["host"] = hostInfo;
         } else {
             dumpResult["host"] = "";
         }

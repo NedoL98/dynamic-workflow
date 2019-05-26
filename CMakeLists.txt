@@ -15,6 +15,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build")
 set(SOURCE_LIST 
     "src/argument_parser.cpp"
     "src/common/common.cpp"
+    "src/common/parse_log.cpp"
     "src/main.cpp"
     "src/platform_generator.cpp"
     "src/platform/host.cpp"

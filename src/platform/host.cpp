@@ -23,6 +23,7 @@ bool Host::CreateVM(const VMDescription& c, int CustomId) {
     Unit->set_pstate(c.GetPStateId());
     simgrid::s4u::VirtualMachine* vm = new simgrid::s4u::VirtualMachine(std::to_string(Id) + "_VM", Unit, c.GetCores(), c.GetMemory());
     vm->set_property("VM_ID", std::to_string(CustomId));
+    vm->set_property("vm_cost", std::to_string(c.GetPStateId()));
     AvailableCores -= c.GetCores();
     AvailableMemory -= c.GetMemory();
     VirtualMachines[CustomId] = vm;

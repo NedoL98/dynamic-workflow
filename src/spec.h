@@ -1,5 +1,6 @@
 #pragma once
 #include <yaml-cpp/yaml.h>
+#include <vector>
 
 struct TransferSpec {
     long long Size;
@@ -14,6 +15,25 @@ struct ComputeSpec {
     bool operator ==(const ComputeSpec& other) const {
         return Speed == other.Speed && Cores == other.Cores;
     }
+};
+
+struct VMRunSpec {
+    std::string Name;
+    double Price;
+    double StartTime;
+    double FinishTime;
+    double ExecutingTime;
+    // TODO
+    // long long Uploaded;
+    // long long Downloaded;
+};
+
+struct RunSpec {
+    std::vector<VMRunSpec> VMRuns;
+    double Cost;
+    double Time;
+    // TODO
+    long long TotalTransfered;
 };
 
 class TaskSpec {
