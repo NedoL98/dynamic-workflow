@@ -1,0 +1,74 @@
+#   A
+#  ||||
+#   B |
+#   \ /
+#    C
+name: Transfers
+inputs:
+  - name: input
+    size: 100MB
+outputs:
+  - name: result
+    source: C.result
+tasks:
+  - name: A
+    inputs:
+      - name: input
+        source: data1
+    outputs:
+      - name: result1
+        size: 100MB
+      - name: result2
+        size: 100MB
+      - name: result3
+        size: 100MB
+      - name: result4
+        size: 1000MB
+      - name: result5
+        size: 1000MB
+      - name: result6
+        size: 1000MB
+      - name: result7
+        size: 1000MB
+      - name: result8
+        size: 10000MB
+    requirements:
+      cpu: 1
+      memory: 1GB
+    size: 0GF
+  - name: B
+    inputs:
+      - name: result1
+        source: 1000MB
+      - name: result2
+        source: 100MB
+      - name: result3
+        source: 1000MB
+      - name: result4
+        source: 1000MB
+      - name: result5
+        source: 100MB
+      - name: result6
+        source: 1000MB
+      - name: result7
+        source: 100MB
+    outputs:
+      - name: result9
+        size: 1MB
+    requirements:
+      cpu: 1
+      memory: 1GB
+    size: 0GF
+  - name: C
+    inputs:
+      - name: result8
+        source: data1
+      - name: result9
+        source: data1
+    outputs:
+      - name: result
+        size: 100MB
+    requirements:
+      cpu: 1
+      memory: 1GB
+    size: 0GF

@@ -33,12 +33,12 @@ RunSpec ParseLogFile(const string& filename) {
         YAML::Node eventNode = YAML::Load(currentEvent);
         for (const auto& [name, value] : isActive) {
             if (value) {
-                activeTime[name] += previousEvent["time"].as<double>();
+                activeTime[name] += eventNode["time"].as<double>() - previousEvent["time"].as<double>();
             }
         }
         for (const auto& [name, value] : isExecuting) {
             if (value) {
-                executingTime[name] += previousEvent["time"].as<double>();
+                executingTime[name] += eventNode["time"].as<double>() - previousEvent["time"].as<double>();
             }
         }
         string currentName = eventNode["host"]["name"].as<string>();
@@ -59,13 +59,13 @@ RunSpec ParseLogFile(const string& filename) {
             lastMention[currentName] = eventNode["time"].as<double>();
             costs[currentName] = eventNode["host"]["vm_cost"].as<double>();
         }
-        std::swap(eventNode, previousEvent);
+        previousEvent = YAML::Clone(eventNode);
     }
     RunSpec result = {};
+    result.Time = previousEvent["time"].as<double>();
     for (auto& [name, value] : activeTime) {
         value -= previousEvent["time"].as<double>() - lastMention[name];
         result.Cost += value * costs[name];
-        result.Time = std::max(result.Time, value);
         VMRunSpec currentHostSpec({
             name,
             costs[name],
